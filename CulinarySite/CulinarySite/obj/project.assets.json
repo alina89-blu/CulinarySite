@@ -174,11 +174,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ROG\\source\\repos\\CulinarySite\\CulinarySite\\CulinarySite.csproj",
+      "projectUniqueName": "C:\\GitProject\\CulinarySite\\CulinarySite\\CulinarySite\\CulinarySite.csproj",
       "projectName": "CulinarySite",
-      "projectPath": "C:\\Users\\ROG\\source\\repos\\CulinarySite\\CulinarySite\\CulinarySite.csproj",
+      "projectPath": "C:\\GitProject\\CulinarySite\\CulinarySite\\CulinarySite\\CulinarySite.csproj",
       "packagesPath": "C:\\Users\\ROG\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ROG\\source\\repos\\CulinarySite\\CulinarySite\\obj\\",
+      "outputPath": "C:\\GitProject\\CulinarySite\\CulinarySite\\CulinarySite\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
