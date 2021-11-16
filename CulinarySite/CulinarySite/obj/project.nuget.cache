@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "CILmHD9RfkJ+uEM73MoOX90oX+9Aai679zl6/nTN75KGM+Vs3MS0p8SzZsO+dyDdjPAwrk7kSP97BTep71DYCw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ROG\\source\\repos\\CulinarySite\\CulinarySite\\CulinarySite.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ROG\\.nuget\\packages\\microsoft.aspnetcore.spaservices.extensions\\5.0.0\\microsoft.aspnetcore.spaservices.extensions.5.0.0.nupkg.sha512",
+    "C:\\Users\\ROG\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\5.0.0\\microsoft.extensions.fileproviders.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\ROG\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\5.0.0\\microsoft.extensions.fileproviders.physical.5.0.0.nupkg.sha512",
+    "C:\\Users\\ROG\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\5.0.0\\microsoft.extensions.filesystemglobbing.5.0.0.nupkg.sha512",
+    "C:\\Users\\ROG\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
