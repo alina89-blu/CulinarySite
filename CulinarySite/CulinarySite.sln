@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CulinarySite", "CulinarySite\CulinarySite.csproj", "{55CC6784-55E3-4516-9ECD-902170C89A70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{4DAC08F7-1A83-40C1-A0B2-3FC9B15E2E3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{4DAC08F7-1A83-40C1-A0B2-3FC9B15E2E3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{70F55EF6-7A00-46C6-8F0E-26B31BF9606A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4DAC08F7-1A83-40C1-A0B2-3FC9B15E2E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DAC08F7-1A83-40C1-A0B2-3FC9B15E2E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DAC08F7-1A83-40C1-A0B2-3FC9B15E2E3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70F55EF6-7A00-46C6-8F0E-26B31BF9606A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70F55EF6-7A00-46C6-8F0E-26B31BF9606A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70F55EF6-7A00-46C6-8F0E-26B31BF9606A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70F55EF6-7A00-46C6-8F0E-26B31BF9606A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
