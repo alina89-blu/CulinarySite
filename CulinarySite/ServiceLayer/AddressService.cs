@@ -20,7 +20,6 @@ namespace ServiceLayer
             this.addressReadOnlyRepository = addressReadOnlyRepository;
             this.addressWriteRepository = addressWriteRepository;
         }
-
         public void CreateAddress(Address address)
         {
             this.addressWriteRepository.Create(address);
