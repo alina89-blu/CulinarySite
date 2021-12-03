@@ -6,14 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { AddressComponent } from './address/address.component';
-import { AddressEditComponent } from './address-edit/address-edit.component';
+import { AddressListComponent } from './address/address-list/address-list.component';
+
 
 
 const appRoutes: Routes = [
 
   
-  { path: '', component: AddressComponent }
+  { path: '', component: AddressListComponent }
   
         
 ];
@@ -22,8 +22,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    AddressComponent,
-    AddressEditComponent
+    AddressListComponent,
+   
    
   ],
   imports: [

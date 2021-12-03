@@ -1,50 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { Address } from '../classes/address';
-import { AddressService } from '../services/address.service';
-import { ActivatedRoute } from '@angular/router';
+import { Address } from '../../classes/address';
+import { AddressService } from '../../services/address.service';
 
 @Component({
   selector: 'app-address',
-  templateUrl: './address.component.html',
-  styleUrls: ['./address.component.css'],
+  templateUrl: './address-list.component.html',
+  styleUrls: ['./address-list.component.css'],
   providers:[AddressService]
 })
 
-export class AddressComponent  {
+export class AddressListComponent implements OnInit  {
 
   addresses:Address[]=[];
-  address:Address=new Address();
-  id:number;
-
-  load:boolean=true;
   
-  constructor(private addressService:AddressService,private activeRoute: ActivatedRoute) {
-    this.id=Number.parseInt(activeRoute.snapshot.params["id"]);
-   }
+   constructor(private addressService:AddressService) {}
   
 
-  /*ngOnInit(){
+  ngOnInit()
+  {
     this.GetAddressList();
-  }*/
-  GetAddressList(){
-   
-    this.addressService.GetAddressList().subscribe(data=>data=this.addresses);    
-}
+  }
+  GetAddressList()
+  {        
+    this.addressService.GetAddressList().subscribe((data:any)=>this.addresses=data);    
+  }
+  DeleteAddress(address:Address)
+  {
+    this.addressService.DeleteAddress(address).subscribe(data=>this.GetAddressList());
+  }
 
-GetAddress(){
-  if (this.id)
-      this.addressService.GetAddress(this.id).subscribe(data=>data=this.address);
-}
-CreateAddress(address:Address){
-this.addressService.CreateAddress(address).subscribe(data=>this.GetAddressList());
-}
 
-UpdateAddress(address:Address){
-this.addressService.UpdateAddress(address).subscribe(data=>this.GetAddressList());
-}
-DeleteAddress(id:number){
-this.addressService.DeleteAddress(id).subscribe(data=>this.GetAddressList());
-}
+
 
 
 }
