@@ -7,14 +7,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AddressListComponent } from './address/address-list/address-list.component';
-import { AddressCreateComponent } from './address-create/address-create.component';
+import { AddressEditComponent } from './address/address-edit/address-edit.component';
+import { AddressCreateComponent } from './address/address-create/address-create.component';
 
 
 
 const appRoutes: Routes = [
 
   
-  { path: '', component: AddressListComponent }
+  { path: '', component: AddressListComponent },
+  { path: 'editAddress/:id', component: AddressEditComponent },
+  { path: 'createAddress', component: AddressCreateComponent }
   
         
 ];
@@ -24,7 +27,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     AddressListComponent,
-    AddressCreateComponent,
+    AddressEditComponent,
+    AddressCreateComponent
    
    
   ],
