@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
+import { Address } from 'src/app/classes/address.class';
 import { AddressService } from 'src/app/services/address.service';
-import { Address } from 'src/app/classes/address';
 
 @Component({
   selector: 'app-address-edit',

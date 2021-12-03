@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Address } from '../../classes/address';
 import { AddressService } from '../../services/address.service';
+import { Address } from 'src/app/classes/address.class';
 
 @Component({
   selector: 'app-address',

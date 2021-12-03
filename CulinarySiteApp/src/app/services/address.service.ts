@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Address } from '../classes/address';
+import { Address } from '../classes/address.class';
 
 
 @Injectable()

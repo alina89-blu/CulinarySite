@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AddressService } from 'src/app/services/address.service';
-import { Address } from 'src/app/classes/address';
 import { Router } from '@angular/router';
+import { Address } from 'src/app/classes/address.class';
 
 @Component({
   selector: 'app-address-create',
