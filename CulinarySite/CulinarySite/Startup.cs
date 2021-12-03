@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Repositories;
-
+using ServiceLayer;
 
 namespace CulinarySite
 {
@@ -33,6 +33,9 @@ namespace CulinarySite
             });
             services.AddScoped(typeof(IWriteGenericRepository<>), typeof(EFWriteGenericRepository<>));
             services.AddScoped(typeof(IReadOnlyGenericRepository<>), typeof(EFReadOnlyGenericRepository<>));
+            services.AddScoped(typeof(IAddressService), typeof(AddressService));
+            //
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

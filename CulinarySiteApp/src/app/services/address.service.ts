@@ -6,7 +6,7 @@ import { Address } from '../classes/address';
 @Injectable()
 
 export class AddressService {
-url:string="/api/addresses";
+public url:string="/api/addresses";
 
   constructor(private http:HttpClient){}
    
@@ -22,8 +22,8 @@ url:string="/api/addresses";
    UpdateAddress(address:Address){
    return this.http.put(this.url,address);
    }
-   DeleteAddress(id:number){
-   return this.http.delete(this.url+'/'+id);
+   DeleteAddress(address:Address){
+   return this.http.delete(this.url+'/'+address.id);
    }
 
   }

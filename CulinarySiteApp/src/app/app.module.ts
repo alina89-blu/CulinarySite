@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AddressComponent } from './address/address.component';
+import { AddressEditComponent } from './address-edit/address-edit.component';
 
 
 const appRoutes: Routes = [
@@ -21,7 +22,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    AddressComponent
+    AddressComponent,
+    AddressEditComponent
    
   ],
   imports: [
