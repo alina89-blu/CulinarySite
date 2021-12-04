@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AddressListComponent } from './address/address-list/address-list.component';
 import { AddressEditComponent } from './address/address-edit/address-edit.component';
 import { AddressCreateComponent } from './address/address-create/address-create.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
 
 
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
     AppComponent,
     AddressListComponent,
     AddressEditComponent,
-    AddressCreateComponent
+    AddressCreateComponent,
+    NavMenuComponent
    
    
   ],
