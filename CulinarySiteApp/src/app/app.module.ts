@@ -17,7 +17,8 @@ import { HomeComponent } from './home/home.component';
 const appRoutes: Routes = [
 
   
-  { path: '', component: AddressListComponent },
+  { path: '', component: HomeComponent },
+  { path: 'address', component: AddressListComponent },
   { path: 'editAddress/:id', component: AddressEditComponent },
   { path: 'createAddress', component: AddressCreateComponent }
   
