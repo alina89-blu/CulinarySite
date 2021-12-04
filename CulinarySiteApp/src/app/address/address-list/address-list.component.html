@@ -1,3 +1,21 @@
-<p>address works!</p>
-
-<p>hellp</p>
+<div>
+    <a  [routerLink]="['/createAddress']" >Add</a>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>            
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let address of addresses">                      
+            <td>{{address?.id}}</td>
+            <td>{{address?.name}}</td>
+            <td>
+                <a [routerLink]="['/editAddress', address.id]" class="btn btn-outline-info">Edit</a>          
+                <button (click)="DeleteAddress(address)" class="btn btn-outline-info">Delete</button>                                
+            </td>
+        </tr>
+    </tbody>
+</table>
