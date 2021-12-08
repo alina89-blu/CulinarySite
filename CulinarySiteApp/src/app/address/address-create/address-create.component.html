@@ -4,7 +4,15 @@
     <input type="text" [(ngModel)]="address.name">
 </div>
 <div>
-    <button (click)="CreateAddress()">Create</button>
+    <button class="btn info"(click)="CreateAddress()">Create</button>
 </div>
 
-<a routerLink="/">Back to list</a>
+<p>
+   <a [routerLink]="['/address']">Back to address's list</a> 
+</p>
+
+<p>
+    <a routerLink="/">Home</a>
+</p>
+
+
