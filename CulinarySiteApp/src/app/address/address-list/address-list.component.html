@@ -1,7 +1,8 @@
 <div>
-    <a  [routerLink]="['/createAddress']" >Add</a>
+    <button class="btn info"><a  [routerLink]="['/createAddress']" >Add</a></button>
+    
 </div>
-<table class="table table-striped">
+<table class="table table-striped">   
     <thead>
         <tr>
             <td>Id</td>
@@ -11,10 +12,10 @@
     <tbody>
         <tr *ngFor="let address of addresses">                      
             <td>{{address?.id}}</td>
-            <td>{{address?.name}}</td>
+            <td>{{address?.name}}</td>     
             <td>
-                <a [routerLink]="['/editAddress', address.id]" class="btn btn-outline-info">Edit</a>          
-                <button (click)="DeleteAddress(address)" class="btn btn-outline-info">Delete</button>                                
+                <a class="btn info"[routerLink]="['/editAddress', address.id]" >Edit</a>          
+                <button class="btn info" (click)="DeleteAddress(address)" >Delete</button>                                
             </td>
         </tr>
     </tbody>
