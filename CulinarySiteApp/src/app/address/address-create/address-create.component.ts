@@ -16,7 +16,7 @@ export class AddressCreateComponent {
  
   CreateAddress()
   {
-   this.addressService.CreateAddress(this.address).subscribe(data=>this.router.navigateByUrl("/"));
+   this.addressService.CreateAddress(this.address).subscribe(data=>this.router.navigateByUrl("address"));
   }
 
 }
