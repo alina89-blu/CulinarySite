@@ -1,1 +1,10 @@
-<p>nav-menu works!</p>
+<div class="navbar">
+    <a bold [routerLink]="['/']">Home</a>    
+    <div class="dropdown">
+        <button class="dropbtn">Admin menu <i class="fa fa-caret-down"></i></button>        
+        <div class="dropdown-content">
+            <a bold [routerLink]="['/address']">Addresses</a>        
+            <a bold [routerLink]="['/createAddress']">New address</a>     
+        </div>
+    </div>
+</div>
