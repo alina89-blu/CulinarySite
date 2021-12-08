@@ -26,7 +26,7 @@ export class AddressEditComponent implements OnInit {
     }
   }
   UpdateAddress(){
-    this.addressService.UpdateAddress(this.address).subscribe(data => this.router.navigateByUrl("/"));
+    this.addressService.UpdateAddress(this.address).subscribe(data => this.router.navigateByUrl("address"));
   }
 
 
