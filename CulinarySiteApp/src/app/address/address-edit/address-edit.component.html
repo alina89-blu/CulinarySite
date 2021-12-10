@@ -1,16 +1,15 @@
 <div>
-    <label>Name</label>
-    <input type="text" [(ngModel)]="address.name">
+  <label>Name</label>
+  <input type="text" [(ngModel)]="address.name" />
 </div>
 <div>
-    <button class="btn info"(click)="UpdateAddress()">Update</button>
+  <button class="btn info" (click)="updateAddress()">Update</button>
 </div>
 
+<p>
+  <a [routerLink]="['/address']">Back to address's list</a>
+</p>
 
 <p>
-    <a [routerLink]="['/address']">Back to address's list</a> 
- </p>
- 
- <p>
-     <a routerLink="/">Home</a>
- </p>
+  <a routerLink="/">Home</a>
+</p>

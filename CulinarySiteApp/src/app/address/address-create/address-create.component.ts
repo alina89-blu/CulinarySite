@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AddressService } from 'src/app/services/address.service';
 import { Router } from '@angular/router';
-import { Address } from 'src/app/classes/address.class';
+import { Address } from 'src/app/viewmodels/address.class';
 
 @Component({
   selector: 'app-address-create',
+
   templateUrl: './address-create.component.html',
-  styleUrls: ['./address-create.component.css']
+  styleUrls: ['./address-create.component.css'],
 })
 export class AddressCreateComponent {
-  
-  address:Address=new Address();
-  constructor(private addressService:AddressService,private router: Router) { }
+  public address: Address = new Address();
 
- 
-  CreateAddress()
-  {
-   this.addressService.CreateAddress(this.address).subscribe(data=>this.router.navigateByUrl("address"));
+  constructor(private addressService: AddressService, private router: Router) {}
+
+  public createAddress(): void {
+    this.addressService
+      .createAddress(this.address)
+      .subscribe(() => this.router.navigateByUrl('address'));
   }
-
 }

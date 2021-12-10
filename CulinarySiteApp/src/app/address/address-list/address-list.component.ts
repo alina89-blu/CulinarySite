@@ -1,36 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { Address } from 'src/app/viewmodels/address.class';
+import { IAddress } from 'src/app/interfaces/address.interface';
 import { AddressService } from '../../services/address.service';
-import { Address } from 'src/app/classes/address.class';
 
 @Component({
   selector: 'app-address',
   templateUrl: './address-list.component.html',
   styleUrls: ['./address-list.component.css'],
-  providers:[AddressService]
+  providers: [AddressService],
 })
+export class AddressListComponent implements OnInit {
+  addresses: Address[] = [];
 
-export class AddressListComponent implements OnInit  {
+  constructor(private addressService: AddressService) {}
 
-  addresses:Address[]=[];
-  
-   constructor(private addressService:AddressService) {}
-  
-
-  ngOnInit()
-  {
-    this.GetAddressList();
-  }
-  GetAddressList()
-  {        
-    this.addressService.GetAddressList().subscribe((data:any)=>this.addresses=data);    
-  }
-  DeleteAddress(address:Address)
-  {
-    this.addressService.DeleteAddress(address).subscribe(data=>this.GetAddressList());
+  public ngOnInit(): void {
+    this.getAddressList();
   }
 
+  public getAddressList(): void {
+    this.addressService
+      .getAddressList()
+      .subscribe(
+        (data: IAddress[]) => (this.addresses = data.map((x) => new Address(x)))
+      );
+  }
 
-
-
-
+  public deleteAddress(id: number) {
+    this.addressService.delete(id).subscribe(() => this.getAddressList());
+  }
 }

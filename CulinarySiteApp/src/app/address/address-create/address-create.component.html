@@ -1,18 +1,16 @@
 <h2>Adding a new address</h2>
 <div>
-    <label>Name</label>
-    <input type="text" [(ngModel)]="address.name">
+  <label>Name</label>
+  <input type="text" [(ngModel)]="address.name" />
 </div>
 <div>
-    <button class="btn info"(click)="CreateAddress()">Create</button>
+  <button class="btn info" (click)="createAddress()">Create</button>
 </div>
 
 <p>
-   <a [routerLink]="['/address']">Back to address's list</a> 
+  <a [routerLink]="['/address']">Back to address's list</a>
 </p>
 
 <p>
-    <a routerLink="/">Home</a>
+  <a routerLink="/">Home</a>
 </p>
-
-
