@@ -1,15 +1,22 @@
 ﻿using ServiceLayer;
 using Database;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace CulinarySite.Controllers
 {
-    public class AuthorController:BaseController
+    public class AuthorController : BaseController
     {
         private readonly IAuthorService authorService;
         public AuthorController(IAuthorService authorService)
         {
             this.authorService = authorService;
+        }
+
+        [HttpGet]
+        public IEnumerable<Author> GetAuthorListWithInclude()
+        {
+            return this.authorService.GetAuthorListWithInclude();
         }
 
         [HttpGet("{id}")]

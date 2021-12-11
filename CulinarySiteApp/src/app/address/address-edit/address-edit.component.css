@@ -1,14 +1,19 @@
 .btn {
-    border: none; 
-    color: white; 
-    padding: 14px 20px; 
-    cursor: pointer; 
-    border-radius: 5px;
-  }
-    
-  .info {background-color:#2196F3;}
-  .info:hover {background:#0b7dda;}
+  border: none;
+  color: white;
+  padding: 14px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
 
-  input{
-      padding: 10px 20px;
-  }
+.info {
+  background-color: #2196f3;
+}
+.info:hover {
+  background: #0b7dda;
+}
+
+input {
+  padding: 10px 20px;
+  font-size: medium;
+}

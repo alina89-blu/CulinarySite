@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Repositories;
 using Database;
 
@@ -35,6 +31,10 @@ namespace ServiceLayer
         public Author GetAuthorWithInclude(int id)
         {
             return authorReadOnlyRepository.GetItemWithInclude(x => x.Id == id, x => x.Books);
+        }
+        public IEnumerable<Author> GetAuthorListWithInclude()
+        {
+            return this.authorReadOnlyRepository.GetItemListWithInclude(x => x.Books, x => x.Recipes);
         }
     }
 }

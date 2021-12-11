@@ -34,6 +34,7 @@ namespace CulinarySite
             services.AddScoped(typeof(IWriteGenericRepository<>), typeof(EFWriteGenericRepository<>));
             services.AddScoped(typeof(IReadOnlyGenericRepository<>), typeof(EFReadOnlyGenericRepository<>));
             services.AddScoped(typeof(IAddressService), typeof(AddressService));
+            services.AddScoped(typeof(IAuthorService), typeof(AuthorService));
             //
 
         }
