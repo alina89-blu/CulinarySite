@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,23 +9,14 @@ using ServiceLayer;
 namespace CulinarySite
 {
     public class Startup
-    {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        /*public void ConfigureServices(IServiceCollection services)
-        {
-        }*/
-
+    {        
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = "Server=(localdb)\\mssqllocaldb;Database=culinarysitedb;Trusted_Connection=True;";
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
-
-
             services.AddControllers()
            .AddNewtonsoftJson(options =>
            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "CulinarySiteApp/dist";
@@ -35,28 +25,23 @@ namespace CulinarySite
             services.AddScoped(typeof(IReadOnlyGenericRepository<>), typeof(EFReadOnlyGenericRepository<>));
             services.AddScoped(typeof(IAddressService), typeof(AddressService));
             services.AddScoped(typeof(IAuthorService), typeof(AuthorService));
+            services.AddScoped(typeof(IBookService), typeof(BookService));
+            services.AddScoped(typeof(ICommentService), typeof(CommentService));
+            services.AddScoped(typeof(ICookingStageService), typeof(CookingStageService));
+            services.AddScoped(typeof(ICulinaryChannelService), typeof(CulinaryChannelService));
+            services.AddScoped(typeof(IDishService), typeof(DishService));
+            services.AddScoped(typeof(IEpisodeService), typeof(EpisodeService));
+            services.AddScoped(typeof(IImageService), typeof(ImageService));
+            services.AddScoped(typeof(IIngredientService), typeof(IngredientService));
+            services.AddScoped(typeof(IOrganicMatterService), typeof(OrganicMatterService));
+            services.AddScoped(typeof(IRecipeService), typeof(RecipeService));
+            services.AddScoped(typeof(IRestaurantService), typeof(RestaurantService));
+            services.AddScoped(typeof(ISubscriberService), typeof(SubscriberService));
+            services.AddScoped(typeof(ITagService), typeof(TagService));
+            services.AddScoped(typeof(ITelephoneService), typeof(TelephoneService));            
             //
 
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        /*public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-            });
-        }*/
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -69,7 +54,6 @@ namespace CulinarySite
             {
                 app.UseSpaStaticFiles();
             }
-
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

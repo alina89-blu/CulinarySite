@@ -7,7 +7,7 @@ export class CookingStage {
   public content: string;
   public recipeId: number;
   public recipe: Recipe;
-  public images: Image[];
+  public images?: Image[];
 
   constructor(public cookingStage?: ICookingStage) {
     if (cookingStage) {

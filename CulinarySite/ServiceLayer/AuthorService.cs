@@ -30,7 +30,7 @@ namespace ServiceLayer
         }
         public Author GetAuthorWithInclude(int id)
         {
-            return authorReadOnlyRepository.GetItemWithInclude(x => x.Id == id, x => x.Books);
+            return authorReadOnlyRepository.GetItemWithInclude(x => x.Id == id, x => x.Books, x => x.Recipes);
         }
         public IEnumerable<Author> GetAuthorListWithInclude()
         {
