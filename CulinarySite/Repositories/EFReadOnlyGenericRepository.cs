@@ -9,8 +9,8 @@ namespace Repositories
 {
     public class EFReadOnlyGenericRepository<TEntity> : IReadOnlyGenericRepository<TEntity> where TEntity : BaseEntity
     {
-        ApplicationContext db;
-        DbSet<TEntity> dbSet;
+        private readonly ApplicationContext db;
+        private readonly DbSet<TEntity> dbSet;
         public EFReadOnlyGenericRepository(ApplicationContext db)
         {
             this.db = db;
@@ -21,24 +21,28 @@ namespace Repositories
         {
             return this.dbSet.AsNoTracking().ToList();
         }
+
         public IEnumerable<TEntity> GetItemListWithInclude(params Expression<Func<TEntity, object>>[] includeProperties)
         {
             return this.Include(includeProperties).ToList();
         }
+
         public TEntity GetItem(int id)
         {
-            //return this.dbSet.Find(id);
             return this.dbSet.AsNoTracking().FirstOrDefault(x => x.Id == id);
         }
+
         public TEntity GetItemWithInclude(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
         {
             return this.Include(includeProperties).Where(predicate).FirstOrDefault();
         }
+
         private IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includeProperties)
         {
             IQueryable<TEntity> query = this.dbSet.AsNoTracking();
             return includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }
+
         public int GetNumberOfItems()
         {
             return this.dbSet.Count();

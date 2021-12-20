@@ -1,5 +1,4 @@
-﻿using System;
-using Database;
+﻿using Database;
 
 namespace Repositories
 {
@@ -9,7 +8,5 @@ namespace Repositories
         void Update(TEntity item);
         void Delete(int id);
         void Save();
-
     }
-   
 }

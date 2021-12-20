@@ -42,6 +42,5 @@ namespace CulinarySite.Controllers
         {
             this.restaurantService.DeleteRestaurant(id);
         }
-
     }
 }

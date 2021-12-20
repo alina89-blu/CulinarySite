@@ -9,7 +9,6 @@ namespace ServiceLayer
     {
         private readonly IReadOnlyGenericRepository<Recipe> recipeReadOnlyRepository;
         private readonly IWriteGenericRepository<Recipe> recipeWriteRepository;
-
         public RecipeService(
             IReadOnlyGenericRepository<Recipe> recipeReadOnlyRepository,
             IWriteGenericRepository<Recipe> recipeWriteRepository)
@@ -17,21 +16,25 @@ namespace ServiceLayer
             this.recipeReadOnlyRepository = recipeReadOnlyRepository;
             this.recipeWriteRepository = recipeWriteRepository;
         }
+
         public void CreateRecipe(Recipe recipe)
         {
             this.recipeWriteRepository.Create(recipe);
             this.recipeWriteRepository.Save();
         }
+
         public void UpdateRecipe(Recipe recipe)
         {
             this.recipeWriteRepository.Update(recipe);
             this.recipeWriteRepository.Save();
         }
+
         public void DeleteRecipe(int id)
         {
             this.recipeWriteRepository.Delete(id);
             this.recipeWriteRepository.Save();
         }
+
         public IEnumerable<Recipe> GetRecipeListWithInclude()
         {
             return this.recipeReadOnlyRepository.GetItemListWithInclude(
@@ -43,6 +46,7 @@ namespace ServiceLayer
                 x => x.Book,
                 x => x.Dish);
         }
+
         public Recipe GetRecipeWithInclude(int id)
         {
             return this.recipeReadOnlyRepository.GetItemWithInclude(

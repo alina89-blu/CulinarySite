@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ServiceLayer;
 using Database;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +12,7 @@ namespace CulinarySite.Controllers
         {
             this.organicMatterService = organicMatterService;
         }
+
         [HttpGet]
         public IEnumerable<OrganicMatter> GetOrganicMatterList()
         {
@@ -44,6 +42,5 @@ namespace CulinarySite.Controllers
         {
             this.organicMatterService.DeleteOrganicMatter(id);
         }
-
     }
 }

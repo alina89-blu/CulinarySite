@@ -8,7 +8,6 @@ namespace ServiceLayer
     {
         private readonly IReadOnlyGenericRepository<Restaurant> restaurantReadOnlyRepository;
         private readonly IWriteGenericRepository<Restaurant> restaurantWriteRepository;
-
         public RestaurantService(
             IReadOnlyGenericRepository<Restaurant> restaurantReadOnlyRepository,
             IWriteGenericRepository<Restaurant> restaurantWriteRepository)
@@ -22,16 +21,19 @@ namespace ServiceLayer
             this.restaurantWriteRepository.Create(restaurant);
             this.restaurantWriteRepository.Save();
         }
+
         public void UpdateRestaurant(Restaurant restaurant)
         {
             this.restaurantWriteRepository.Update(restaurant);
             this.restaurantWriteRepository.Save();
         }
+
         public void DeleteRestaurant(int id)
         {
             this.restaurantWriteRepository.Delete(id);
             this.restaurantWriteRepository.Save();
         }
+
         public IEnumerable<Restaurant> GetRestaurantListWithInclude()
         {
             return restaurantReadOnlyRepository.GetItemListWithInclude(
@@ -39,6 +41,7 @@ namespace ServiceLayer
                 x => x.Comments,
                 x => x.Address);
         }
+
         public Restaurant GetRestaurantWithInclude(int id)
         {
             return restaurantReadOnlyRepository.GetItemWithInclude(

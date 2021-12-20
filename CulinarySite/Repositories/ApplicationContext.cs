@@ -1,8 +1,6 @@
 ﻿using Database;
 using Microsoft.EntityFrameworkCore;
 
-
-
 namespace Repositories
 {
     public class ApplicationContext : DbContext
@@ -29,8 +27,5 @@ namespace Repositories
         public DbSet<Episode> Episodes { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Tag> Tags { get; set; }
-
-
-
     }
 }

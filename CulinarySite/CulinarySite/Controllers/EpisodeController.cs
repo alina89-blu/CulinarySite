@@ -12,6 +12,7 @@ namespace CulinarySite.Controllers
         {
             this.episodeService = episodeService;
         }
+
         [HttpGet]
         public IEnumerable<Episode> GetEpisodeListWithInclude()
         {
@@ -42,6 +43,5 @@ namespace CulinarySite.Controllers
             this.episodeService.DeleteEpisode(id);
         }
     }
-
 }
 

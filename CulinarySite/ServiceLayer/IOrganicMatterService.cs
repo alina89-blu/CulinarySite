@@ -1,13 +1,9 @@
 ﻿using Database;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServiceLayer
 {
- public interface    IOrganicMatterService
+    public interface IOrganicMatterService
     {
         void CreateOrganicMatter(OrganicMatter organicMatter);
         void UpdateOrganicMatter(OrganicMatter organicMatter);

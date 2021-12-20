@@ -3,7 +3,7 @@ using Database;
 
 namespace ServiceLayer
 {
-  public  interface IEpisodeService
+    public interface IEpisodeService
     {
         void CreateEpisode(Episode episode);
         void UpdateEpisode(Episode episode);

@@ -8,7 +8,6 @@ namespace ServiceLayer
     {
         private readonly IReadOnlyGenericRepository<OrganicMatter> organicMatterReadOnlyRepository;
         private readonly IWriteGenericRepository<OrganicMatter> organicMatterWriteRepository;
-
         public OrganicMatterService(
             IReadOnlyGenericRepository<OrganicMatter> organicMatterReadOnlyRepository,
             IWriteGenericRepository<OrganicMatter> organicMatterWriteRepository)
@@ -22,20 +21,24 @@ namespace ServiceLayer
             this.organicMatterWriteRepository.Create(organicMatter);
             this.organicMatterWriteRepository.Save();
         }
+
         public void UpdateOrganicMatter(OrganicMatter organicMatter)
         {
             this.organicMatterWriteRepository.Update(organicMatter);
             this.organicMatterWriteRepository.Save();
         }
+
         public void DeleteOrganicMatter(int id)
         {
             this.organicMatterWriteRepository.Delete(id);
             this.organicMatterWriteRepository.Save();
         }
+
         public IEnumerable<OrganicMatter> GetOrganicMatterList()
         {
             return this.organicMatterReadOnlyRepository.GetItemList();
         }
+
         public OrganicMatter GetOrganicMatter(int id)
         {
             return this.organicMatterReadOnlyRepository.GetItem(id);

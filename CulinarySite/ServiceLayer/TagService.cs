@@ -8,7 +8,6 @@ namespace ServiceLayer
     {
         private readonly IReadOnlyGenericRepository<Tag> tagReadOnlyRepository;
         private readonly IWriteGenericRepository<Tag> tagWriteRepository;
-
         public TagService(
             IReadOnlyGenericRepository<Tag> tagReadOnlyRepository,
             IWriteGenericRepository<Tag> tagWriteRepository)
@@ -22,22 +21,26 @@ namespace ServiceLayer
             this.tagWriteRepository.Create(tag);
             this.tagWriteRepository.Save();
         }
+
         public void UpdateTag(Tag tag)
         {
             this.tagWriteRepository.Update(tag);
             this.tagWriteRepository.Save();
         }
+
         public void DeleteTag(int id)
         {
             this.tagWriteRepository.Delete(id);
             this.tagWriteRepository.Save();
         }
+
         public IEnumerable<Tag> GetTagListWithInclude()
         {
             return this.tagReadOnlyRepository.GetItemListWithInclude(
                 x => x.Recipes,
                 x => x.Episodes);
         }
+
         public Tag GetTagWithInclude(int id)
         {
             return this.tagReadOnlyRepository.GetItemWithInclude(

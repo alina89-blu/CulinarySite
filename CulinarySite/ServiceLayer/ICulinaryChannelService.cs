@@ -3,7 +3,7 @@ using Database;
 
 namespace ServiceLayer
 {
-  public  interface ICulinaryChannelService
+    public interface ICulinaryChannelService
     {
         void CreateCulinaryChannel(CulinaryChannel culinaryChannel);
         void UpdateCulinaryChannel(CulinaryChannel culinaryChannel);

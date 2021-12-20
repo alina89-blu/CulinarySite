@@ -1,5 +1,4 @@
-﻿
-using Database;
+﻿using Database;
 using System.Collections.Generic;
 
 namespace ServiceLayer
@@ -8,9 +7,8 @@ namespace ServiceLayer
     {
         void CreateAddress(Address address);
         void UpdateAddress(Address address);
-        void DeleteAddress(int id);      
+        void DeleteAddress(int id);
         IEnumerable<Address> GetAddressList();
         Address GetAddress(int id);
-        
     }
 }

@@ -8,7 +8,6 @@ namespace ServiceLayer
     {
         private readonly IReadOnlyGenericRepository<Subscriber> subscriberReadOnlyRepository;
         private readonly IWriteGenericRepository<Subscriber> subscriberWriteRepository;
-
         public SubscriberService(
             IReadOnlyGenericRepository<Subscriber> subscriberReadOnlyRepository,
             IWriteGenericRepository<Subscriber> subscriberWriteRepository)
@@ -16,25 +15,30 @@ namespace ServiceLayer
             this.subscriberReadOnlyRepository = subscriberReadOnlyRepository;
             this.subscriberWriteRepository = subscriberWriteRepository;
         }
+
         public void CreateSubscriber(Subscriber subscriber)
         {
             this.subscriberWriteRepository.Create(subscriber);
             this.subscriberWriteRepository.Save();
         }
+
         public void UpdateSubscriber(Subscriber subscriber)
         {
             this.subscriberWriteRepository.Update(subscriber);
             this.subscriberWriteRepository.Save();
         }
+
         public void DeleteSubscriber(int id)
         {
             this.subscriberWriteRepository.Delete(id);
             this.subscriberWriteRepository.Save();
         }
+
         public IEnumerable<Subscriber> GetSubscriberList()
         {
             return subscriberReadOnlyRepository.GetItemList();
         }
+
         public Subscriber GetSubscriber(int id)
         {
             return subscriberReadOnlyRepository.GetItem(id);

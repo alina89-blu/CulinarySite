@@ -3,7 +3,7 @@ using Database;
 
 namespace ServiceLayer
 {
-  public  interface IIngredientService
+    public interface IIngredientService
     {
         void CreateIngredient(Ingredient ingredient);
         void UpdateIngredient(Ingredient ingredient);

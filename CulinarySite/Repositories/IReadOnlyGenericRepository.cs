@@ -5,7 +5,7 @@ using Database;
 
 namespace Repositories
 {
-   public interface IReadOnlyGenericRepository<TEntity> where TEntity : BaseEntity
+    public interface IReadOnlyGenericRepository<TEntity> where TEntity : BaseEntity
     {
         IEnumerable<TEntity> GetItemList();
         IEnumerable<TEntity> GetItemListWithInclude(params Expression<Func<TEntity, object>>[] includeProperties);
