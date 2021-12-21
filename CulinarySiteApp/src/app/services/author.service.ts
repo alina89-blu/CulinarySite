@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 import { IAuthor } from '../interfaces/author.interface';
 import { Author } from '../viewmodels/author.class';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthorService {
   public url: string = '/api/author';
 

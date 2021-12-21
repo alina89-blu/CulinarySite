@@ -6,6 +6,20 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AddressService } from './services/address.service';
 import { AuthorService } from './services/author.service';
+import { BookService } from './services/book.service';
+import { CommentService } from './services/comment.service';
+import { CookingStageService } from './services/cooking-stage.service';
+import { CulinaryChannelService } from './services/culinary-channel.service';
+import { DishService } from './services/dish.service';
+import { EpisodeService } from './services/episode.service';
+import { ImageService } from './services/image.service';
+import { IngredientService } from './services/ingredient.service';
+import { OrganicMatterService } from './services/organic-matter.service';
+import { RecipeService } from './services/recipe.service';
+import { RestaurantService } from './services/restaurant.service';
+import { SubscriberService } from './services/subscriber.service';
+import { TagService } from './services/tag.service';
+import { TelephoneService } from './services/telephone.service';
 
 import { AppComponent } from './app.component';
 import { AddressListComponent } from './address/address-list/address-list.component';
@@ -45,7 +59,24 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [AddressService, AuthorService],
+  providers: [
+    AddressService,
+    AuthorService,
+    BookService,
+    CommentService,
+    CookingStageService,
+    CulinaryChannelService,
+    DishService,
+    EpisodeService,
+    ImageService,
+    IngredientService,
+    OrganicMatterService,
+    RecipeService,
+    RestaurantService,
+    SubscriberService,
+    TagService,
+    TelephoneService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
