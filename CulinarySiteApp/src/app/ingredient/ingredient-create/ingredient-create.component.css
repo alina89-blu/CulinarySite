@@ -1,0 +1,21 @@
+.btn {
+  border: none;
+  color: white;
+  padding: 14px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.info {
+  background-color: #2196f3;
+}
+.info:hover {
+  background: #0b7dda;
+}
+
+input,
+select {
+  padding: 10px 20px;
+  font-size: medium;
+}

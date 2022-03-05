@@ -1,0 +1,91 @@
+<!--<h1>Таблица рецептов</h1>-->
+<!-- <div>
+  <button class="btn info">
+    <a [routerLink]="['/createRecipe']">Добавить</a>
+  </button>
+</div> -->
+<!-- <table>
+  <thead>
+    <tr>
+      <th colspan="6">Рецепты</th>
+    </tr>
+    <tr>
+      <td>Ид</td>
+      <td>Название</td>
+      <td>Количество порций</td>
+      <td>Время приготовления</td>
+      <td>Уровень сложности</td>
+      <td>Содержание</td>
+      <td>Категория блюда</td>
+      <td>Действия</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let recipe of recipes; let idx = index">
+      <td class="text-align-center">{{ idx + 1 }}</td>
+      <td>{{ recipe.name }}</td>
+      <td class="text-align-center">{{ recipe.servingsNumber }}</td>
+      <td>
+        {{ recipe.cookingTime | date: "HH" }} час
+        {{ recipe.cookingTime | date: "mm" }} мин.
+      </td>
+
+      
+      <td class="text-align-center">{{ recipe.difficultyLevel }}</td>
+      <td class="text-align-justify">{{ recipe.content }}</td>
+      <td class="text-align-center">{{ recipe.dishCategory }}</td>
+      <td>
+        <a class="btn info" [routerLink]="['/editRecipe', recipe.recipeId]"
+          >Редактировать</a
+        >
+        <button class="btn info" (click)="deleteRecipe(recipe.recipeId)">
+          Удалить
+        </button>
+
+        <button class="btn info" (click)="add()">Add</button>
+      </td>
+    </tr>
+  </tbody>
+</table> -->
+
+<!-- <div *ngIf="hidded">
+  <div>
+    <label>Ingredient</label>
+    <select
+      [(ngModel)]="createRecipeIngredientModel.ingredientId"
+      class="form-control"
+    >
+      <option
+        *ngFor="let ingredient of ingredients"
+        [ngValue]="ingredient.ingredientId"
+      >
+        {{ ingredient.name }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Quantity</label>
+    <input type="number" [(ngModel)]="createRecipeIngredientModel.quantity" />
+  </div>
+  <div>
+    <label>Unit</label>
+    <select [(ngModel)]="createRecipeIngredientModel.unit" class="form-control">
+      <option *ngFor="let unit of units">
+        {{ unit }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <button class="btn info" (click)="createRecipeIngredient()">
+      СоздатьIngredient
+    </button>
+  </div>
+</div> -->
+
+<div>
+  <button class="btn info">
+    <a [routerLink]="['/createRecipe']">Добавить</a>
+  </button>
+</div>

@@ -2,6 +2,7 @@
 using ServiceLayer;
 using Database;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.ViewModels.Comment;
 
 namespace CulinarySite.Controllers
 {
@@ -14,21 +15,27 @@ namespace CulinarySite.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Comment> GetCommentListWithInclude()
+        public IEnumerable<CommentListModel> GetCommentList(bool withRelated)
         {
-            return this.commentService.GetCommentListWithInclude();
+            return this.commentService.GetCommentList(withRelated);
         }
 
         [HttpGet("{id}")]
-        public Comment GetCommentWithInclude(int id)
+        public CommentDetailModel GetComment(int id, bool withRelated)
         {
-            return this.commentService.GetCommentWithInclude(id);
+            return this.commentService.GetComment(id,withRelated);
         }
 
         [HttpPost]
-        public void CreateComment(Comment comment)
+        public void CreateComment(CreateCommentModel createCommentModel)
         {
-            this.commentService.CreateComment(comment);
+            this.commentService.CreateComment(createCommentModel);
+        }
+
+        [HttpPut]
+        public void UpdateComment(UpdateCommentModel updateCommentModel)
+        {
+            this.commentService.UpdateComment(updateCommentModel);
         }
 
         [HttpDelete("{id}")]

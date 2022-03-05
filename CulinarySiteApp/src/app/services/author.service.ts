@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IAuthor } from '../interfaces/author.interface';
-import { Author } from '../viewmodels/author.class';
+import { IAuthorListModel } from '../interfaces/author/author-list-model.interface';
+import { IAuthorDetailModel } from '../interfaces/author/author-detail-model.interface';
+import { CreateAuthorModel } from '../viewmodels/author/create-author-model.class';
+import { UpdateAuthorModel } from '../viewmodels/author/update-author-model.class';
+import { IAuthorModel } from '../interfaces/author/author-model.interface';
 
 @Injectable()
 export class AuthorService {
@@ -10,20 +13,31 @@ export class AuthorService {
 
   constructor(private http: HttpClient) {}
 
-  public getAuthorListWithInclude(): Observable<IAuthor[]> {
-    return this.http.get<IAuthor[]>(this.url);
+  public getAuthorDetailList(
+    withRelated: boolean
+  ): Observable<IAuthorListModel[]> {
+    return this.http.get<IAuthorListModel[]>(this.url + '/' + withRelated);
   }
 
-  public getAuthorWithInclude(id: number): Observable<IAuthor> {
-    return this.http.get<IAuthor>(this.url + '/' + id);
+  public getAuthorList(): Observable<IAuthorModel[]> {
+    return this.http.get<IAuthorModel[]>(this.url);
   }
 
-  public createAuthor(author: Author): Observable<void> {
-    return this.http.post<void>(this.url, author);
+  public getAuthor(
+    id: number,
+    withRelated: boolean
+  ): Observable<IAuthorDetailModel> {
+    return this.http.get<IAuthorDetailModel>(
+      this.url + '/' + id + '/' + withRelated
+    );
   }
 
-  public updateAuthor(author: Author): Observable<void> {
-    return this.http.put<void>(this.url, author);
+  public createAuthor(createAuthorModel: CreateAuthorModel): Observable<void> {
+    return this.http.post<void>(this.url, createAuthorModel);
+  }
+
+  public updateAuthor(updateAuthorModel: UpdateAuthorModel): Observable<void> {
+    return this.http.put<void>(this.url, updateAuthorModel);
   }
 
   public deleteAuthor(id: number): Observable<void> {

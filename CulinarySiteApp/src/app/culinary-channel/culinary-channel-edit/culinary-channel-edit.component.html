@@ -1,0 +1,18 @@
+<h3>Изменение кулинарного канала</h3>
+<div>
+  <label>Название</label>
+  <input type="text" [(ngModel)]="updateCulinaryChannelModel.name" />
+</div>
+<div>
+  <label>Содержание</label>
+  <input type="text" [(ngModel)]="updateCulinaryChannelModel.content" />
+</div>
+<div>
+  <button class="btn info" (click)="updateCulinaryChannel()">Обновить</button>
+</div>
+<p>
+  <a [routerLink]="['/culinaryChannel']">Назад к списку кулинарных каналов</a>
+</p>
+<p>
+  <a routerLink="/">На домашнюю страницу</a>
+</p>

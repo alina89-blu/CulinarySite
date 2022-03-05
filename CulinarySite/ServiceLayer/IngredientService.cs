@@ -1,6 +1,7 @@
 ﻿using Database;
 using Repositories;
 using System.Collections.Generic;
+using ServiceLayer.ViewModels.Ingredient;
 
 namespace ServiceLayer
 {
@@ -16,14 +17,23 @@ namespace ServiceLayer
             this.ingredientWriteRepository = ingredientWriteRepository;
         }
 
-        public void CreateIngredient(Ingredient ingredient)
+        public void CreateIngredient(CreateIngredientModel createIngredientModel)
         {
+            var ingredient = new Ingredient
+            {
+                Name = createIngredientModel.Name
+            };
             this.ingredientWriteRepository.Create(ingredient);
             this.ingredientWriteRepository.Save();
         }
 
-        public void UpdateIngredient(Ingredient ingredient)
+        public void UpdateIngredient(UpdateIngredientModel updateIngredientModel)
         {
+            var ingredient = new Ingredient
+            {
+                Id = updateIngredientModel.IngredientId,
+                Name = updateIngredientModel.Name
+            };
             this.ingredientWriteRepository.Update(ingredient);
             this.ingredientWriteRepository.Save();
         }
@@ -34,17 +44,57 @@ namespace ServiceLayer
             this.ingredientWriteRepository.Save();
         }
 
-        public IEnumerable<Ingredient> GetIngredientListWithInclude()
+        public IEnumerable<IngredientListModel> GetIngredientList(bool withRelated)
         {
-            return this.ingredientReadOnlyRepository.GetItemListWithInclude(
-                x => x.Recipes);
+            IEnumerable<Ingredient> ingredients;
+            List<IngredientListModel> ingredientListModels = new List<IngredientListModel>();
+            if (withRelated)
+            {
+                ingredients = this.ingredientReadOnlyRepository.GetItemListWithInclude();
+                foreach (var ingredient in ingredients)
+                {
+                    ingredientListModels.Add(new IngredientListModel
+                    {
+                        IngredientId = ingredient.Id,
+                        Name = ingredient.Name
+                    });
+                }
+                return ingredientListModels;
+            }
+            ingredients = this.ingredientReadOnlyRepository.GetItemList();
+            foreach (var ingredient in ingredients)
+            {
+                ingredientListModels.Add(new IngredientListModel
+                {
+                    IngredientId = ingredient.Id,
+                    Name = ingredient.Name
+                });
+            }
+            return ingredientListModels;
         }
 
-        public Ingredient GetIngredientWithInclude(int id)
+        public IngredientDetailModel GetIngredient(int id, bool withRelated)
         {
-            return this.ingredientReadOnlyRepository.GetItemWithInclude(
-                x => x.Id == id,
-                x => x.Recipes);
+            Ingredient ingredient = new Ingredient();
+            IngredientDetailModel ingredientDetailModel = new IngredientDetailModel();
+            if (withRelated)
+            {
+                ingredient = this.ingredientReadOnlyRepository.GetItemWithInclude(
+                                x => x.Id == id);
+                ingredientDetailModel = new IngredientDetailModel
+                {
+                    IngredientId = ingredient.Id,
+                    Name = ingredient.Name
+                };
+                return ingredientDetailModel;
+            }
+            ingredient = this.ingredientReadOnlyRepository.GetItem(id);
+            ingredientDetailModel = new IngredientDetailModel
+            {
+                IngredientId = ingredient.Id,
+                Name = ingredient.Name
+            };
+            return ingredientDetailModel;
         }
     }
 }

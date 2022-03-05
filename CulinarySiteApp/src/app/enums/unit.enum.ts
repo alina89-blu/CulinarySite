@@ -1,8 +1,9 @@
 export enum Unit {
-  Piece = 'Piece',
-  Kilogram = 'Kilogram',
-  Gram = 'Gram',
-  Liter = 'Liter',
-  Milliliter = 'Milliliter',
-  Calorie = 'Calorie',
+  Кусок = 'Кусок',
+  Килограмм = 'Килограмм',
+  Грамм = 'Грамм',
+  Литр = 'Литр',
+  Миллилитр = 'Миллилитр',
+  Калории = 'Калории',
+  Штука = 'шт.',
 }

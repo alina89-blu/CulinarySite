@@ -34,11 +34,14 @@ namespace CulinarySite
             services.AddScoped(typeof(IImageService), typeof(ImageService));
             services.AddScoped(typeof(IIngredientService), typeof(IngredientService));
             services.AddScoped(typeof(IOrganicMatterService), typeof(OrganicMatterService));
+            services.AddScoped(typeof(IRecipeOrganicMatterService), typeof(RecipeOrganicMatterService));
             services.AddScoped(typeof(IRecipeService), typeof(RecipeService));
+            services.AddScoped(typeof(IRecipeIngredientService), typeof(RecipeIngredientService));
             services.AddScoped(typeof(IRestaurantService), typeof(RestaurantService));
             services.AddScoped(typeof(ISubscriberService), typeof(SubscriberService));
             services.AddScoped(typeof(ITagService), typeof(TagService));
-            services.AddScoped(typeof(ITelephoneService), typeof(TelephoneService));            
+            services.AddScoped(typeof(ITelephoneService), typeof(TelephoneService));
+            
             //
 
         }

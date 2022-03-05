@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ServiceLayer;
-using Database;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.ViewModels.Tag;
 
 namespace CulinarySite.Controllers
 {
@@ -13,28 +13,28 @@ namespace CulinarySite.Controllers
             this.tagService = tagService;
         }
 
-        [HttpGet]
-        public IEnumerable<Tag> GetTagListWithInclude()
+        [HttpGet("{withRelated}")]
+        public IEnumerable<TagListModel> GetTagList(bool withRelated)
         {
-            return this.tagService.GetTagListWithInclude();
+            return this.tagService.GetTagList(withRelated);
         }
 
-        [HttpGet("{id}")]
-        public Tag GetTagWithInclude(int id)
+        [HttpGet("{id}/{withRelated}")]
+        public TagDetailModel GetTagWithInclude(int id, bool withRelated)
         {
-            return this.tagService.GetTagWithInclude(id);
+            return this.tagService.GetTag(id, withRelated);
         }
 
         [HttpPost]
-        public void CreateTag(Tag tag)
+        public void CreateTag(CreateTagModel createTagModel)
         {
-            this.tagService.CreateTag(tag);
+            this.tagService.CreateTag(createTagModel);
         }
 
         [HttpPut]
-        public void UpdateTag(Tag tag)
+        public void UpdateTag(UpdateTagModel updateTagModel)
         {
-            this.tagService.UpdateTag(tag);
+            this.tagService.UpdateTag(updateTagModel);
         }
 
         [HttpDelete("{id}")]

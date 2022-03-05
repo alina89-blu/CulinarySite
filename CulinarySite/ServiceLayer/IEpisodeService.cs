@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Database;
+using ServiceLayer.ViewModels.Episode;
 
 namespace ServiceLayer
 {
     public interface IEpisodeService
     {
-        void CreateEpisode(Episode episode);
-        void UpdateEpisode(Episode episode);
+        void CreateEpisode(CreateEpisodeModel createEpisodeModel);
+        void UpdateEpisode(UpdateEpisodeModel updateEpisodeModel);
         void DeleteEpisode(int id);
-        Episode GetEpisodeWithInclude(int id);
-        IEnumerable<Episode> GetEpisodeListWithInclude();
+        EpisodeDetailModel GetEpisode(int id,bool withRelated);
+        IEnumerable<EpisodeListModel> GetEpisodeList(bool withRelated);
     }
 }

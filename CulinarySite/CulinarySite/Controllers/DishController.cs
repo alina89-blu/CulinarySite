@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ServiceLayer;
-using Database;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.ViewModels.Dish;
 
 namespace CulinarySite.Controllers
 {
@@ -13,28 +13,28 @@ namespace CulinarySite.Controllers
             this.dishService = dishService;
         }
 
-        [HttpGet]
-        public IEnumerable<Dish> GetDishListWithInclude()
+        [HttpGet("{withRelated}")]
+        public IEnumerable<DishListModel> GetDishList(bool withRelated)
         {
-            return this.dishService.GetDishListWithInclude();
+            return this.dishService.GetDishList(withRelated);
         }
 
-        [HttpGet("{id}")]
-        public Dish GetDishWithInclude(int id)
+        [HttpGet("{id}/{withRelated}")]
+        public DishDetailModel GetDish(int id, bool withRelated)
         {
-            return this.dishService.GetDishWithInclude(id);
+            return this.dishService.GetDish(id,withRelated);
         }
 
         [HttpPost]
-        public void CreateDish(Dish dish)
+        public void CreateDish(CreateDishModel createDishModel)
         {
-            this.dishService.CreateDish(dish);
+            this.dishService.CreateDish(createDishModel);
         }
 
         [HttpPut]
-        public void UpdateDish(Dish dish)
+        public void UpdateDish(UpdateDishModel updateDishModel)
         {
-            this.dishService.UpdateDish(dish);
+            this.dishService.UpdateDish(updateDishModel);
         }
 
         [HttpDelete("{id}")]

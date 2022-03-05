@@ -12,5 +12,6 @@ namespace Repositories
         TEntity GetItem(int id);
         TEntity GetItemWithInclude(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
         int GetNumberOfItems();
+
     }
 }

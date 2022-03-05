@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Database;
+using ServiceLayer.ViewModels.CulinaryChannel;
 
 namespace ServiceLayer
 {
     public interface ICulinaryChannelService
     {
-        void CreateCulinaryChannel(CulinaryChannel culinaryChannel);
-        void UpdateCulinaryChannel(CulinaryChannel culinaryChannel);
+        void CreateCulinaryChannel(CreateCulinaryChannelModel createCulinaryChannelModel);
+        void UpdateCulinaryChannel(UpdateCulinaryChannelModel updateCulinaryChannelModel);
         void DeleteCulinaryChannel(int id);
-        IEnumerable<CulinaryChannel> GetCulinaryChannelListWithInclude();
-        CulinaryChannel GetCulinaryChannelWithInclude(int id);
+        IEnumerable<CulinaryChannelListModel> GetCulinaryChannelList(bool withRelated);
+        CulinaryChannelDetailModel GetCulinaryChannel(int id, bool withRelated);
     }
 }

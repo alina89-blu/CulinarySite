@@ -1,0 +1,31 @@
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: pink;
+}
+
+.btn {
+  border: none;
+  color: white;
+  padding: 14px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.info {
+  background-color: #2196f3;
+}
+.info:hover {
+  background: #0b7dda;
+}

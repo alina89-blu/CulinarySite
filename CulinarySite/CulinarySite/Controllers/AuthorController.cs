@@ -2,6 +2,7 @@
 using Database;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using ServiceLayer.ViewModels.Author;
 
 namespace CulinarySite.Controllers
 {
@@ -13,28 +14,34 @@ namespace CulinarySite.Controllers
             this.authorService = authorService;
         }
 
-        [HttpGet]
-        public IEnumerable<Author> GetAuthorListWithInclude()
+        [HttpGet("{withRelated}")]
+        public IEnumerable<AuthorDetailListModel> GetAuthorList(bool withRelated)
         {
-            return this.authorService.GetAuthorListWithInclude();
+            return this.authorService.GetAuthorDetailList(withRelated);
         }
 
-        [HttpGet("{id}")]
-        public Author GetAuthorWithInclude(int id)
+        [HttpGet]
+        public IEnumerable<AuthorModel> GetAuthorList()
         {
-            return this.authorService.GetAuthorWithInclude(id);
+            return this.authorService.GetAuthorList();
+        }
+
+        [HttpGet("{id}/{withRelated}")]
+        public AuthorDetailModel GetAuthor(int id, bool withRelated)
+        {
+            return this.authorService.GetAuthor(id,withRelated);
         }
 
         [HttpPost]
-        public void CreateAuthor(Author author)
+        public void CreateAuthor(CreateAuthorModel createAuthorModel)
         {
-            this.authorService.CreateAuthor(author);
+            this.authorService.CreateAuthor(createAuthorModel);
         }
 
         [HttpPut]
-        public void UpdateAuthor(Author author)
+        public void UpdateAuthor(UpdateAuthorModel updateAuthorModel)
         {
-            this.authorService.UpdateAuthor(author);
+            this.authorService.UpdateAuthor(updateAuthorModel);
         }
 
         [HttpDelete("{id}")]

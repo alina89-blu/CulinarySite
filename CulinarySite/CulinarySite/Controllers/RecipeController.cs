@@ -1,40 +1,49 @@
 ﻿using System.Collections.Generic;
-using Database;
 using ServiceLayer;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.ViewModels.Recipe;
 
 namespace CulinarySite.Controllers
 {
-    public class RecipeController:BaseController
+    public class RecipeController : BaseController
     {
-       private readonly IRecipeService recipeService;
-        public RecipeController(IRecipeService recipeService)
+        private readonly IRecipeService recipeService;
+        private readonly IRecipeIngredientService recipeIngredientService;
+
+        public RecipeController(IRecipeService recipeService, IRecipeIngredientService recipeIngredientService)
         {
             this.recipeService = recipeService;
+            this.recipeIngredientService = recipeIngredientService;
         }
 
-        [HttpGet]
-        public IEnumerable<Recipe> GetRecipeListWithInclude()
+        [HttpGet("{withRelated}")]
+        public IEnumerable<RecipeListModel> GetRecipeList(bool withRelated)
         {
-            return this.recipeService.GetRecipeListWithInclude();
+            return this.recipeService.GetRecipeList(withRelated);
         }
 
-        [HttpGet("{id}")]
-        public Recipe GetRecipeWithInclude(int id)
+        [HttpGet("{id}/{withRelated}")]
+        public RecipeDetailModel GetRecipe(int id, bool withRelated)
         {
-            return this.recipeService.GetRecipeWithInclude(id);
+            return this.recipeService.GetRecipe(id, withRelated);
         }
 
         [HttpPost]
-        public void CreateRecipe(Recipe recipe)
+        public void CreateRecipe(CreateRecipeModel createRecipeModel)
         {
-            this.recipeService.CreateRecipe(recipe);
-        }
+
+            foreach (var createRecipeIngredientModel in createRecipeModel.RecipeIngredients)
+            {
+                this.recipeIngredientService.CreateRecipeIngredient(createRecipeIngredientModel);
+            }
+
+            this.recipeService.CreateRecipe(createRecipeModel);
+        }  
 
         [HttpPut]
-        public void UpdateRecipe(Recipe recipe)
+        public void UpdateRecipe(UpdateRecipeModel updateRecipeModel)
         {
-            this.recipeService.UpdateRecipe(recipe);
+            this.recipeService.UpdateRecipe(updateRecipeModel);
         }
 
         [HttpDelete("{id}")]

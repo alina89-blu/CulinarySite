@@ -9,5 +9,6 @@ namespace Database
         public List<Restaurant> Restaurants { get; set; } = new List<Restaurant>();
         public int? SubscriberId { get; set; }
         public Subscriber Subscriber { get; set; }
+       
     }
 }

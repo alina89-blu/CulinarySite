@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Database;
+using ServiceLayer.ViewModels.Ingredient;
 
 namespace ServiceLayer
 {
     public interface IIngredientService
     {
-        void CreateIngredient(Ingredient ingredient);
-        void UpdateIngredient(Ingredient ingredient);
+        void CreateIngredient(CreateIngredientModel createIngredientModel);
+        void UpdateIngredient(UpdateIngredientModel updateIngredientModel);
         void DeleteIngredient(int id);
-        IEnumerable<Ingredient> GetIngredientListWithInclude();
-        Ingredient GetIngredientWithInclude(int id);
+        IEnumerable<IngredientListModel> GetIngredientList(bool withRelated);
+        IngredientDetailModel GetIngredient(int id, bool withRelated);
     }
 }

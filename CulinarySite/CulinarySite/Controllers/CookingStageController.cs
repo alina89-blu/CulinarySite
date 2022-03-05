@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer;
-using Database;
+using ServiceLayer.ViewModels.CookingStage;
 
 namespace CulinarySite.Controllers
 {
@@ -13,28 +13,28 @@ namespace CulinarySite.Controllers
             this.cookingStageService = cookingStageService;
         }
 
-        [HttpGet]
-        public IEnumerable<CookingStage> GetCookingStageListWithInclude()
+        [HttpGet("{withRelated}")]
+        public IEnumerable<CookingStageListModel> GetCookingStageList(bool withRelated)
         {
-            return this.cookingStageService.GetCookingStageListWithInclude();
+            return this.cookingStageService.GetCookingStageList(withRelated);
         }
 
-        [HttpGet("{id}")]
-        public CookingStage GetCookingStageWithInclude(int id)
+        [HttpGet("{id}/{withRelated}")]
+        public CookingStageDetailModel GetCookingStage(int id, bool withRelated)
         {
-            return this.cookingStageService.GetCookingStageWithInclude(id);
+            return this.cookingStageService.GetCookingStage(id, withRelated);
         }
 
         [HttpPost]
-        public void CreateCookingStage(CookingStage cookingStage)
+        public void CreateCookingStage(CreateCookingStageModel createCookingStageModel)
         {
-            this.cookingStageService.CreateCookingStage(cookingStage);
+            this.cookingStageService.CreateCookingStage(createCookingStageModel);
         }
 
         [HttpPut]
-        public void UpdateCookingStage(CookingStage cookingStage)
+        public void UpdateCookingStage(UpdateCookingStageModel updateCookingStageModel)
         {
-            this.cookingStageService.UpdateCookingStage(cookingStage);
+            this.cookingStageService.UpdateCookingStage(updateCookingStageModel);
         }
 
         [HttpDelete("{id}")]

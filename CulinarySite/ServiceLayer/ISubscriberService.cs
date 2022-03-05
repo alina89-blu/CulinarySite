@@ -1,14 +1,14 @@
-﻿using Database;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using ServiceLayer.ViewModels.Subscriber;
 
 namespace ServiceLayer
 {
     public interface ISubscriberService
-    {
-        void CreateSubscriber(Subscriber subscriber);
-        void UpdateSubscriber(Subscriber subscriber);
+    {        
+        void CreateSubscriber(CreateSubscriberModel createSubscriberModel);
+        void UpdateSubscriber(UpdateSubscriberModel updateSubscriberModel);
         void DeleteSubscriber(int id);
-        IEnumerable<Subscriber> GetSubscriberList();
-        Subscriber GetSubscriber(int id);
+        IEnumerable<SubscriberListModel> GetSubscriberList(bool withRelated);
+        SubscriberDetailModel GetSubscriber(int id, bool withRelated);
     }
 }

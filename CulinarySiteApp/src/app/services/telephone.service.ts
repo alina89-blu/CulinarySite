@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ITelephone } from '../interfaces/telephone.interface';
-import { Telephone } from '../viewmodels/telephone.class';
+import { ITelephoneDetailModel } from '../interfaces/telephone/telephone-detail-model.interface';
+import { ITelephoneListModel } from '../interfaces/telephone/telephone-list-model.interface';
+import { CreateTelephoneModel } from '../viewmodels/telephone/create-telephone-model.class';
+import { UpdateTelephoneModel } from '../viewmodels/telephone/update-telephone-model.class';
 
 @Injectable()
 export class TelephoneService {
@@ -10,20 +12,24 @@ export class TelephoneService {
 
   constructor(private http: HttpClient) {}
 
-  public getTelephoneList(): Observable<ITelephone[]> {
-    return this.http.get<ITelephone[]>(this.url);
+  public getTelephoneList(): Observable<ITelephoneListModel[]> {
+    return this.http.get<ITelephoneListModel[]>(this.url);
   }
 
-  public getTelephone(id: number): Observable<ITelephone> {
-    return this.http.get<ITelephone>(this.url + '/' + id);
+  public getTelephone(id: number): Observable<ITelephoneDetailModel> {
+    return this.http.get<ITelephoneDetailModel>(this.url + '/' + id);
   }
 
-  public createTelephone(telephone: Telephone): Observable<void> {
-    return this.http.post<void>(this.url, telephone);
+  public createTelephone(
+    createTelephoneModel: CreateTelephoneModel
+  ): Observable<void> {
+    return this.http.post<void>(this.url, createTelephoneModel);
   }
 
-  public updateTelephone(telephone: Telephone): Observable<void> {
-    return this.http.put<void>(this.url, telephone);
+  public updateTelephone(
+    updateTelephoneModel: UpdateTelephoneModel
+  ): Observable<void> {
+    return this.http.put<void>(this.url, updateTelephoneModel);
   }
 
   public delete(id: number): Observable<void> {

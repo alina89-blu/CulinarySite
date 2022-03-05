@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using Database;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer;
+using ServiceLayer.ViewModels.Image.DishImage;
+using ServiceLayer.ViewModels.Image.EpisodeImage;
 
 
 namespace CulinarySite.Controllers
@@ -14,28 +15,52 @@ namespace CulinarySite.Controllers
             this.imageService = imageService;
         }
 
-        [HttpGet]
-        public IEnumerable<Image> GetImageList()
+        [HttpGet("{withRelated}/dish")]
+        public IEnumerable<DishImageListModel> GetDishImageList(bool withRelated)
         {
-            return this.imageService.GetImageList();
+            return this.imageService.GetDishImageList(withRelated);
         }
 
-        [HttpGet("{id}")]
-        public Image GetImage(int id)
+        [HttpGet("{id}/{withRelated}/dish")]
+        public DishImageDetailModel GetDishImage(int id, bool withRelated)
         {
-            return this.imageService.GetImage(id);
+            return this.imageService.GetDishImage(id, withRelated);
         }
 
-        [HttpPost]
-        public void CreateImage(Image image)
+        [HttpPost("dish")]
+        public void CreateDishImage(CreateDishImageModel createDishImageModel)
         {
-            this.imageService.CreateImage(image);
+            this.imageService.CreateDishImage(createDishImageModel);
         }
 
-        [HttpPut]
-        public void UpdateImage(Image image)
+        [HttpPut("dish")]
+        public void UpdateDishImage(UpdateDishImageModel updateDishImageModel)
         {
-            this.imageService.UpdateImage(image);
+            this.imageService.UpdateDishImage(updateDishImageModel);
+        }       
+
+        [HttpGet("{withRelated}/episode")]
+        public IEnumerable<EpisodeImageListModel> GetEpisodeImageList(bool withRelated)
+        {
+            return this.imageService.GetEpisodeImageList(withRelated);
+        }
+
+        [HttpGet("{id}/{withRelated}/episode")]
+        public EpisodeImageDetailModel GetEpisodeImage(int id, bool withRelated)
+        {
+            return this.imageService.GetEpisodeImage(id, withRelated);
+        }
+
+        [HttpPost("episode")]
+        public void CreateEpisodeImage(CreateEpisodeImageModel createEpisodeImageModel)
+        {
+            this.imageService.CreateEpisodeImage(createEpisodeImageModel);
+        }
+
+        [HttpPut("episode")]
+        public void UpdateEpisodeImage(UpdateEpisodeImageModel updateEpisodeImageModel)
+        {
+            this.imageService.UpdateEpisodeImage(updateEpisodeImageModel);
         }
 
         [HttpDelete("{id}")]
@@ -43,5 +68,6 @@ namespace CulinarySite.Controllers
         {
             this.imageService.DeleteImage(id);
         }
+
     }
 }

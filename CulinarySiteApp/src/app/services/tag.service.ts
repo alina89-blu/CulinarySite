@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ITag } from '../interfaces/tag.interface';
-import { Tag } from '../viewmodels/tag.class';
+import { ITagDetailModel } from '../interfaces/tag/tag-detail-model.interface';
+import { ITagListModel } from '../interfaces/tag/tag-list-model.interface';
+import { CreateTagModel } from '../viewmodels/tag/create-tag-model.class';
+import { UpdateTagModel } from '../viewmodels/tag/update-tag-model.class';
 
 @Injectable()
 export class TagService {
@@ -10,20 +12,22 @@ export class TagService {
 
   constructor(private http: HttpClient) {}
 
-  public getTagListWithInclude(): Observable<ITag[]> {
-    return this.http.get<ITag[]>(this.url);
+  public getTagList(withRelated: boolean): Observable<ITagListModel[]> {
+    return this.http.get<ITagListModel[]>(this.url + '/' + withRelated);
   }
 
-  public getTagWithInclude(id: number): Observable<ITag> {
-    return this.http.get<ITag>(this.url + '/' + id);
+  public getTag(id: number, withRelated: boolean): Observable<ITagDetailModel> {
+    return this.http.get<ITagDetailModel>(
+      this.url + '/' + id + '/' + withRelated
+    );
   }
 
-  public createTag(tag: Tag): Observable<void> {
-    return this.http.post<void>(this.url, tag);
+  public createTag(createTagModel: CreateTagModel): Observable<void> {
+    return this.http.post<void>(this.url, createTagModel);
   }
 
-  public updateTag(tag: Tag): Observable<void> {
-    return this.http.put<void>(this.url, tag);
+  public updateTag(updateTagModel: UpdateTagModel): Observable<void> {
+    return this.http.put<void>(this.url, updateTagModel);
   }
 
   public deleteTag(id: number): Observable<void> {

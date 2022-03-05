@@ -1,7 +1,7 @@
 export enum DifficultyLevel {
-  Easy = 'Easy',
-  VeryEasy = 'VeryEasy',
-  Average = 'Average',
-  AboveAverage = 'AboveAverage',
-  Difficult = 'Difficult',
+  'Лёгкий' = 'Лёгкий',
+  'Очень Лёгкий' = 'Очень лёгкий',
+  'Средний' = 'Средний',
+  'Выше cреднего' = 'Выше среднего',
+  'Сложный' = 'Сложный',
 }

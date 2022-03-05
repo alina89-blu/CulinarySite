@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer;
-using Database;
+using ServiceLayer.ViewModels.CulinaryChannel;
 
 namespace CulinarySite.Controllers
 {
@@ -13,28 +13,28 @@ namespace CulinarySite.Controllers
             this.culinaryChannelService = culinaryChannelService;
         }
 
-        [HttpGet]
-        public IEnumerable<CulinaryChannel> GetCulinaryChannelListWithInclude()
+        [HttpGet("{withRelated}")]
+        public IEnumerable<CulinaryChannelListModel> GetCulinaryChannelList(bool withRelated)
         {
-            return this.culinaryChannelService.GetCulinaryChannelListWithInclude();
+            return this.culinaryChannelService.GetCulinaryChannelList(withRelated);
         }
 
-        [HttpGet("{id}")]
-        public CulinaryChannel GetCulinaryChannelWithInclude(int id)
+        [HttpGet("{id}/{withRelated}")]
+        public CulinaryChannelDetailModel GetCulinaryChannel(int id, bool withRelated)
         {
-            return this.culinaryChannelService.GetCulinaryChannelWithInclude(id);
+            return this.culinaryChannelService.GetCulinaryChannel(id,withRelated);
         }
 
         [HttpPost]
-        public void CreateCulinaryChannel(CulinaryChannel culinaryChannel)
+        public void CreateCulinaryChannel(CreateCulinaryChannelModel createCulinaryChannelModel)
         {
-            this.culinaryChannelService.CreateCulinaryChannel(culinaryChannel);
+            this.culinaryChannelService.CreateCulinaryChannel(createCulinaryChannelModel);
         }
 
         [HttpPut]
-        public void UpdateCulinaryChannel(CulinaryChannel culinaryChannel)
+        public void UpdateCulinaryChannel(UpdateCulinaryChannelModel updateCulinaryChannelModel)
         {
-            this.culinaryChannelService.UpdateCulinaryChannel(culinaryChannel);
+            this.culinaryChannelService.UpdateCulinaryChannel(updateCulinaryChannelModel);
         }
 
         [HttpDelete("{id}")]

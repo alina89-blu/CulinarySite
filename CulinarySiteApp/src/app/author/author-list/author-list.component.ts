@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorService } from 'src/app/services/author.service';
-import { IAuthor } from 'src/app/interfaces/author.interface';
-import { Author } from 'src/app/viewmodels/author.class';
+import { AuthorListModel } from 'src/app/viewmodels/author/author-list-model.class';
+import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.interface';
 
 @Component({
   selector: 'app-author-list',
@@ -9,25 +9,24 @@ import { Author } from 'src/app/viewmodels/author.class';
   styleUrls: ['./author-list.component.css'],
 })
 export class AuthorListComponent implements OnInit {
-  authors: Author[] = [];
+  authors: AuthorListModel[] = [];
 
   constructor(private authorService: AuthorService) {}
 
   public ngOnInit(): void {
-    this.getAuthorListWithInclude();
+    this.getAuthorList();
   }
 
-  public getAuthorListWithInclude(): void {
+  public getAuthorList(): void {
     this.authorService
-      .getAuthorListWithInclude()
+      .getAuthorDetailList(true)
       .subscribe(
-        (data: IAuthor[]) => (this.authors = data.map((x) => new Author(x)))
+        (data: IAuthorListModel[]) =>
+          (this.authors = data.map((x) => new AuthorListModel(x)))
       );
   }
 
   public deleteAuthor(id: number): void {
-    this.authorService
-      .deleteAuthor(id)
-      .subscribe(() => this.getAuthorListWithInclude());
+    this.authorService.deleteAuthor(id).subscribe(() => this.getAuthorList());
   }
 }

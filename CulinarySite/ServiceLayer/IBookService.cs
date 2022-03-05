@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
-using Database;
+using ServiceLayer.ViewModels.Book;
 
 namespace ServiceLayer
 {
     public interface IBookService
     {
-        void CreateBook(Book book);
-        void UpdateBook(Book book);
+        void CreateBook(CreateBookModel createBookModel);
+        void UpdateBook(UpdateBookModel updateBookModel);
         void DeleteBook(int id);
-        IEnumerable<Book> GetBookListWithInclude();
-        Book GetBookWithInclude(int id);
+        IEnumerable<BookDetailListModel> GetBookDetailList(bool withRelated);
+        BookDetailModel GetBook(int id, bool withRelated);
+        IEnumerable<BookModel> GetBookList();
     }
 }

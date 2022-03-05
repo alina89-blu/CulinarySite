@@ -1,0 +1,29 @@
+<div>
+  <button class="btn info">
+    <a [routerLink]="['/createDish']">Add</a>
+  </button>
+</div>
+<table>
+  <thead>
+    <tr>
+      <td>Number</td>
+      <td>Category</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dish of dishes; let idx = index">
+      <td>{{ idx + 1 }}</td>
+      <td>{{ dish?.category }}</td>
+      <td>
+        <a class="btn info" [routerLink]="['/editDish', dish.dishId]">Edit</a>
+        <button class="btn info" (click)="deleteDish(dish.dishId)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  <a routerLink="/">Home</a>
+</p>

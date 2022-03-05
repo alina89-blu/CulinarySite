@@ -1,14 +1,15 @@
 ﻿using Database;
+using ServiceLayer.ViewModels.Address;
 using System.Collections.Generic;
 
 namespace ServiceLayer
 {
     public interface IAddressService
     {
-        void CreateAddress(Address address);
-        void UpdateAddress(Address address);
+        void CreateAddress(CreateAddressModel createAddressModel);
+        void UpdateAddress(UpdateAddressModel updateAddressModel );
         void DeleteAddress(int id);
-        IEnumerable<Address> GetAddressList();
-        Address GetAddress(int id);
+        IEnumerable<AddressListModel> GetAddressList();
+        AddressDetailModel GetAddress(int id);
     }
 }

@@ -1,14 +1,16 @@
 ﻿using Database;
 using System.Collections.Generic;
+using ServiceLayer.ViewModels.Author;
 
 namespace ServiceLayer
 {
     public interface IAuthorService
     {
-        void CreateAuthor(Author author);
-        void UpdateAuthor(Author author);
+        void CreateAuthor(CreateAuthorModel createAuthorModel);
+        void UpdateAuthor(UpdateAuthorModel updateAuthorModel);
         void DeleteAuthor(int id);
-        Author GetAuthorWithInclude(int id);
-        IEnumerable<Author> GetAuthorListWithInclude();
+        AuthorDetailModel GetAuthor(int id, bool withRelated);
+        IEnumerable<AuthorDetailListModel> GetAuthorDetailList(bool withRelated);
+        IEnumerable<AuthorModel> GetAuthorList();
     }
 }

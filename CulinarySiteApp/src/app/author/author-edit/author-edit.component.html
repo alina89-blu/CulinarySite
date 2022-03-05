@@ -1,15 +1,56 @@
+<h3>Изменение автора</h3>
 <div>
-  <label>Name</label>
-  <input type="text" [(ngModel)]="author.name" />
+  <label>Имя</label>
+  <input type="text" [(ngModel)]="updateAuthorModel.name" />
 </div>
-<div>
-  <button class="btn info" (click)="updateAuthor()">Update</button>
+
+<!-- <label>Book</label>
+  <select [(ngModel)]="book.bookId" class="form-control">
+    <option *ngFor="let book of books" [ngValue]="book.bookId">
+      {{ book.name }}
+    </option>
+  </select> -->
+
+<!-- <form [formGroup]="myForm">
+  <div
+    formArrayName="books"
+    *ngFor="let book of getFormsControls()['controls']; let i = index"
+  >
+    <select
+      class="form-control"
+      formControlName="{{ i }}"
+      [(ngModel)]="updateAuthorModel.books[i].bookId"
+    >
+      <option *ngFor="let book of books" [ngValue]="book.bookId">
+        {{ book.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <button class="btn info" (click)="addBook()">Добавить книгу</button>
+  </div>
+</form> -->
+
+<!-- <div
+  formArrayName="numbers"
+  *ngFor="let item of userForm.get('numbers').['controls']; let i = index"
+>
+  <input type="text" [formControlName]="i" />
+</div> -->
+
+<!-- <div>
+  <button class="btn info" (click)="updateAuthor()">Обновить</button>
 </div>
 
 <p>
-  <a [routerLink]="['/author']">Back to author's list</a>
+  <a [routerLink]="['/author']">Назад к списку авторов</a>
 </p>
 
 <p>
-  <a routerLink="/">Home</a>
+  <a [routerLink]="['/book']">К списку книг</a>
 </p>
+
+<p>
+  <a routerLink="/">На домашнюю страницу</a>
+</p> -->

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Address } from 'src/app/viewmodels/address.class';
-import { IAddress } from 'src/app/interfaces/address.interface';
 import { AddressService } from 'src/app/services/address.service';
+import { UpdateAddressModel } from 'src/app/viewmodels/address/update-address-model.class';
+import { IAddressDetailModel } from 'src/app/interfaces/address/address-detail-model.interface';
 
 @Component({
   selector: 'app-address-edit',
@@ -11,8 +11,7 @@ import { AddressService } from 'src/app/services/address.service';
 })
 export class AddressEditComponent implements OnInit {
   private id: number;
-  // public address: Address;
-  public address: Address = new Address();
+  public updateAddressModel: UpdateAddressModel = new UpdateAddressModel();
 
   constructor(
     private addressService: AddressService,
@@ -26,13 +25,16 @@ export class AddressEditComponent implements OnInit {
     if (this.id) {
       this.addressService
         .getAddress(this.id)
-        .subscribe((data: IAddress) => (this.address = new Address(data)));
+        .subscribe(
+          (data: IAddressDetailModel) =>
+            (this.updateAddressModel = new UpdateAddressModel(data))
+        );
     }
   }
 
   public updateAddress(): void {
     this.addressService
-      .updateAddress(this.address)
+      .updateAddress(this.updateAddressModel)
       .subscribe(() => this.router.navigateByUrl('address'));
   }
 }

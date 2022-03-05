@@ -1,6 +1,7 @@
 ﻿using Database;
 using Repositories;
 using System.Collections.Generic;
+using ServiceLayer.ViewModels.OrganicMatter;
 
 namespace ServiceLayer
 {
@@ -16,14 +17,23 @@ namespace ServiceLayer
             this.organicMatterWriteRepository = organicMatterWriteRepository;
         }
 
-        public void CreateOrganicMatter(OrganicMatter organicMatter)
+        public void CreateOrganicMatter(CreateOrganicMatterModel createOrganicMatterModel)
         {
+            var organicMatter = new OrganicMatter
+            {
+                Name = createOrganicMatterModel.Name
+            };
             this.organicMatterWriteRepository.Create(organicMatter);
             this.organicMatterWriteRepository.Save();
         }
 
-        public void UpdateOrganicMatter(OrganicMatter organicMatter)
+        public void UpdateOrganicMatter(UpdateOrganicMatterModel updateOrganicMatterModel)
         {
+            var organicMatter = new OrganicMatter
+            {
+                Id = updateOrganicMatterModel.OrganicMatterId,
+                Name = updateOrganicMatterModel.Name
+            };
             this.organicMatterWriteRepository.Update(organicMatter);
             this.organicMatterWriteRepository.Save();
         }
@@ -34,14 +44,32 @@ namespace ServiceLayer
             this.organicMatterWriteRepository.Save();
         }
 
-        public IEnumerable<OrganicMatter> GetOrganicMatterList()
+        public IEnumerable<OrganicMatterListModel> GetOrganicMatterList()
         {
-            return this.organicMatterReadOnlyRepository.GetItemList();
+            IEnumerable<OrganicMatter> organicMatters;
+            List<OrganicMatterListModel> organicMatterListModels = new List<OrganicMatterListModel>();
+
+            organicMatters = this.organicMatterReadOnlyRepository.GetItemList();
+            foreach (var organicMatter in organicMatters)
+            {
+                organicMatterListModels.Add(new OrganicMatterListModel
+                {
+                    OrganicMatterId = organicMatter.Id,
+                    Name = organicMatter.Name
+                });
+            }
+            return organicMatterListModels;
         }
 
-        public OrganicMatter GetOrganicMatter(int id)
-        {
-            return this.organicMatterReadOnlyRepository.GetItem(id);
+        public OrganicMatterDetailModel GetOrganicMatter(int id)
+        {           
+            OrganicMatter organicMatter = this.organicMatterReadOnlyRepository.GetItem(id);
+            var organicMatterDetailModel = new OrganicMatterDetailModel
+            {
+                OrganicMatterId = organicMatter.Id,
+                Name = organicMatter.Name
+            };
+            return organicMatterDetailModel;
         }
     }
 }

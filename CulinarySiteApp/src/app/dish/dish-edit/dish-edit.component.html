@@ -1,0 +1,23 @@
+<h3>Editing the dish</h3>
+
+<div>
+  <label>Category</label>
+
+  <select [(ngModel)]="updateDishModel.category" class="form-control">
+    <option *ngFor="let dishCategory of dishCategories">
+      {{ dishCategory }}
+    </option>
+  </select>
+</div>
+
+<div>
+  <button class="btn info" (click)="updateDish()">Update</button>
+</div>
+
+<p>
+  <a [routerLink]="['/dish']">Back to dishes's list</a>
+</p>
+
+<p>
+  <a routerLink="/">Home</a>
+</p>

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Database;
 using Repositories;
+using ServiceLayer.ViewModels.CulinaryChannel;
 
 namespace ServiceLayer
 {
@@ -16,14 +17,26 @@ namespace ServiceLayer
             this.culinaryChannelWriteRepository = culinaryChannelWriteRepository;
         }
 
-        public void CreateCulinaryChannel(CulinaryChannel culinaryChannel)
+        public void CreateCulinaryChannel(CreateCulinaryChannelModel createCulinaryChannelModel)
         {
+            var culinaryChannel = new CulinaryChannel
+            {
+                Name = createCulinaryChannelModel.Name,
+                Content = createCulinaryChannelModel.Content
+            };
+
             this.culinaryChannelWriteRepository.Create(culinaryChannel);
             this.culinaryChannelWriteRepository.Save();
         }
 
-        public void UpdateCulinaryChannel(CulinaryChannel culinaryChannel)
+        public void UpdateCulinaryChannel(UpdateCulinaryChannelModel updateCulinaryChannelModel)
         {
+            var culinaryChannel = new CulinaryChannel
+            {
+                Id = updateCulinaryChannelModel.CulinaryChannelId,
+                Name = updateCulinaryChannelModel.Name,
+                Content = updateCulinaryChannelModel.Content
+            };
             this.culinaryChannelWriteRepository.Update(culinaryChannel);
             this.culinaryChannelWriteRepository.Save();
         }
@@ -34,16 +47,62 @@ namespace ServiceLayer
             this.culinaryChannelWriteRepository.Save();
         }
 
-        public IEnumerable<CulinaryChannel> GetCulinaryChannelListWithInclude()
+        public IEnumerable<CulinaryChannelListModel> GetCulinaryChannelList(bool withRelated)
         {
-            return this.culinaryChannelReadOnlyRepository.GetItemListWithInclude(x => x.Episodes);
+            IEnumerable<CulinaryChannel> culinaryChannels;
+            List<CulinaryChannelListModel> culinaryChannelListModels = new List<CulinaryChannelListModel>();
+            if (withRelated)
+            {
+                culinaryChannels = this.culinaryChannelReadOnlyRepository.GetItemListWithInclude();
+                foreach (var culinaryChannel in culinaryChannels)
+                {
+                    culinaryChannelListModels.Add(new CulinaryChannelListModel
+                    {
+                        CulinaryChannelId = culinaryChannel.Id,
+                        Name = culinaryChannel.Name,
+                        Content = culinaryChannel.Content
+                    });
+                }
+                return culinaryChannelListModels;
+            }
+            culinaryChannels = this.culinaryChannelReadOnlyRepository.GetItemList();
+            foreach (var culinaryChannel in culinaryChannels)
+            {
+                culinaryChannelListModels.Add(new CulinaryChannelListModel
+                {
+                    CulinaryChannelId = culinaryChannel.Id,
+                    Name = culinaryChannel.Name,
+                    Content = culinaryChannel.Content
+                });
+            }
+            return culinaryChannelListModels;
         }
 
-        public CulinaryChannel GetCulinaryChannelWithInclude(int id)
+        public CulinaryChannelDetailModel GetCulinaryChannel(int id, bool withRelated)
         {
-            return this.culinaryChannelReadOnlyRepository.GetItemWithInclude(
-                x => x.Id == id,
-                x => x.Episodes);
+            var culinaryChannel = new CulinaryChannel();
+            CulinaryChannelDetailModel culinaryChannelDetailModel = new CulinaryChannelDetailModel();
+
+            if (withRelated)
+            {
+                culinaryChannel = this.culinaryChannelReadOnlyRepository.GetItemWithInclude(
+                x => x.Id == id);
+                culinaryChannelDetailModel = new CulinaryChannelDetailModel
+                {
+                    CulinaryChannelId = culinaryChannel.Id,
+                    Name = culinaryChannel.Name,
+                    Content = culinaryChannel.Content
+                };
+                return culinaryChannelDetailModel;
+            }
+            culinaryChannel = this.culinaryChannelReadOnlyRepository.GetItem(id);
+            culinaryChannelDetailModel = new CulinaryChannelDetailModel
+            {
+                CulinaryChannelId = culinaryChannel.Id,
+                Name = culinaryChannel.Name,
+                Content = culinaryChannel.Content
+            };
+            return culinaryChannelDetailModel;
         }
     }
 }

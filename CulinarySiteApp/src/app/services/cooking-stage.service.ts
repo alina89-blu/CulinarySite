@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ICookingStage } from '../interfaces/cooking-stage.interface';
-import { CookingStage } from '../viewmodels/cooking-stage.class';
+import { ICookingStageListModel } from '../interfaces/cooking-stage/cooking-stage-list-model.interface';
+import { ICookingStageDetailModel } from '../interfaces/cooking-stage/cooking-stage-detail-model.interface';
+import { CreateCookingStageModel } from '../viewmodels/cooking-stage/create-cooking-stage-model.class';
+import { UpdateCookingStageModel } from '../viewmodels/cooking-stage/update-cooking-stage-model.class';
 
 @Injectable()
 export class CookingStageService {
@@ -10,20 +12,33 @@ export class CookingStageService {
 
   constructor(private http: HttpClient) {}
 
-  public getCookingStageListWithInclude(): Observable<ICookingStage[]> {
-    return this.http.get<ICookingStage[]>(this.url);
+  public getCookingStageList(
+    withRelated: boolean
+  ): Observable<ICookingStageListModel[]> {
+    return this.http.get<ICookingStageListModel[]>(
+      this.url + '/' + withRelated
+    );
   }
 
-  public getCookingStageWithInclude(id: number): Observable<ICookingStage> {
-    return this.http.get<ICookingStage>(this.url + '/' + id);
+  public getCookingStage(
+    id: number,
+    withRelated: boolean
+  ): Observable<ICookingStageDetailModel> {
+    return this.http.get<ICookingStageDetailModel>(
+      this.url + '/' + id + '/' + withRelated
+    );
   }
 
-  public createCookingStage(cookingStage: CookingStage): Observable<void> {
-    return this.http.post<void>(this.url, cookingStage);
+  public createCookingStage(
+    createCookingStageModel: CreateCookingStageModel
+  ): Observable<void> {
+    return this.http.post<void>(this.url, createCookingStageModel);
   }
 
-  public updateCookingStage(cookingStage: CookingStage): Observable<void> {
-    return this.http.put<void>(this.url, cookingStage);
+  public updateCookingStage(
+    updateCookingStageModel: UpdateCookingStageModel
+  ): Observable<void> {
+    return this.http.put<void>(this.url, updateCookingStageModel);
   }
 
   public deleteCookingStage(id: number): Observable<void> {

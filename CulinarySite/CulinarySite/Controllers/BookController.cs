@@ -1,7 +1,7 @@
 ﻿using ServiceLayer;
 using System.Collections.Generic;
-using Database;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.ViewModels.Book;
 
 namespace CulinarySite.Controllers
 {
@@ -13,28 +13,34 @@ namespace CulinarySite.Controllers
             this.bookService = bookService;
         }
 
-        [HttpGet]
-        public IEnumerable<Book> GetBookListWithInclude()
+        [HttpGet("{withRelated}")]
+        public IEnumerable<BookDetailListModel> GetBookDetailList(bool withRelated)
         {
-            return this.bookService.GetBookListWithInclude();
+            return this.bookService.GetBookDetailList(withRelated);
         }
 
-        [HttpGet("{id}")]
-        public Book GetBookWithInclude(int id)
+        [HttpGet]
+        public IEnumerable<BookModel> GetBookList()
         {
-            return this.bookService.GetBookWithInclude(id);
+            return this.bookService.GetBookList();
+        }
+
+        [HttpGet("{id}/{withRelated}")]
+        public BookDetailModel GetBook(int id, bool withRelated)
+        {
+            return this.bookService.GetBook(id, withRelated);
         }
 
         [HttpPost]
-        public void CreateBook(Book book)
+        public void CreateBook(CreateBookModel createBookModel)
         {
-            this.bookService.CreateBook(book);
+            this.bookService.CreateBook(createBookModel);
         }
 
         [HttpPut]
-        public void UpdateBook(Book book)
+        public void UpdateBook(UpdateBookModel updateBookModel)
         {
-            this.bookService.UpdateBook(book);
+            this.bookService.UpdateBook(updateBookModel);
         }
 
         [HttpDelete("{id}")]

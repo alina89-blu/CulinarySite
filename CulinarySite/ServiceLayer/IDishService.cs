@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Database;
+using ServiceLayer.ViewModels.Dish;
 
 namespace ServiceLayer
 {
     public interface IDishService
     {
-        void CreateDish(Dish dish);
-        void UpdateDish(Dish dish);
+        void CreateDish(CreateDishModel createDishModel);
+        void UpdateDish(UpdateDishModel updateDishModel);
         void DeleteDish(int id);
-        Dish GetDishWithInclude(int id);
-        IEnumerable<Dish> GetDishListWithInclude();
+        DishDetailModel GetDish(int id, bool withRelated);
+        IEnumerable<DishListModel> GetDishList(bool withRelated);
     }
 }

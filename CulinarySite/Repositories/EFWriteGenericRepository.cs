@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Database;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace Repositories
@@ -37,5 +39,17 @@ namespace Repositories
         {
             this.db.SaveChanges();
         }
+
+        public TEntity GetItem(int id)
+        {
+            // return this.dbSet.Find(id);
+            return this.dbSet.FirstOrDefault(x => x.Id == id);
+        }
+
+        public IEnumerable<TEntity> GetItemList()
+        {
+            return this.dbSet.ToList();
+        }
+
     }
 }

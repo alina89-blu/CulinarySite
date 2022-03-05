@@ -1,14 +1,14 @@
-﻿using Database;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using ServiceLayer.ViewModels.OrganicMatter;
 
 namespace ServiceLayer
 {
     public interface IOrganicMatterService
     {
-        void CreateOrganicMatter(OrganicMatter organicMatter);
-        void UpdateOrganicMatter(OrganicMatter organicMatter);
+        void CreateOrganicMatter(CreateOrganicMatterModel createOrganicMatterModel);
+        void UpdateOrganicMatter(UpdateOrganicMatterModel updateOrganicMatterModel);
         void DeleteOrganicMatter(int id);
-        IEnumerable<OrganicMatter> GetOrganicMatterList();
-        OrganicMatter GetOrganicMatter(int id);
+        IEnumerable<OrganicMatterListModel> GetOrganicMatterList();
+        OrganicMatterDetailModel GetOrganicMatter(int id);
     }
 }

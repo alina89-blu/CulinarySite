@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ICulinaryChannel } from '../interfaces/culinary-channel.interface';
-import { CulinaryChannel } from '../viewmodels/culinary-channel.class';
+import { ICulinaryChannelListModel } from '../interfaces/culinary-channel/culinary-channel-list-model.interface';
+import { ICulinaryChannelDetail } from '../interfaces/culinary-channel/culinary-channel-detail.interface';
+import { CreateCulinaryChannelModel } from '../viewmodels/culinary-channel/create-culinary-channel-model.class';
+import { UpdateCulinaryChannelModel } from '../viewmodels/culinary-channel/update-culinary-channel-model.class';
 
 @Injectable()
 export class CulinaryChannelService {
@@ -10,26 +12,33 @@ export class CulinaryChannelService {
 
   constructor(private http: HttpClient) {}
 
-  public getCulinaryChannelListWithInclude(): Observable<ICulinaryChannel[]> {
-    return this.http.get<ICulinaryChannel[]>(this.url);
+  public getCulinaryChannelList(
+    withRelated: boolean
+  ): Observable<ICulinaryChannelListModel[]> {
+    return this.http.get<ICulinaryChannelListModel[]>(
+      this.url + '/' + withRelated
+    );
   }
 
-  public getCulinaryChannelWithInclude(
-    id: number
-  ): Observable<ICulinaryChannel> {
-    return this.http.get<ICulinaryChannel>(this.url + '/' + id);
+  public getCulinaryChannel(
+    id: number,
+    withRelated: boolean
+  ): Observable<ICulinaryChannelDetail> {
+    return this.http.get<ICulinaryChannelDetail>(
+      this.url + '/' + id + '/' + withRelated
+    );
   }
 
   public createCulinaryChannel(
-    culinaryChannel: CulinaryChannel
+    createCulinaryChannelModel: CreateCulinaryChannelModel
   ): Observable<void> {
-    return this.http.post<void>(this.url, culinaryChannel);
+    return this.http.post<void>(this.url, createCulinaryChannelModel);
   }
 
   public updateCulinaryChannel(
-    culinaryChannel: CulinaryChannel
+    updateCulinaryChannelModel: UpdateCulinaryChannelModel
   ): Observable<void> {
-    return this.http.put<void>(this.url, culinaryChannel);
+    return this.http.put<void>(this.url, updateCulinaryChannelModel);
   }
 
   public deleteCulinaryChannel(id: number): Observable<void> {

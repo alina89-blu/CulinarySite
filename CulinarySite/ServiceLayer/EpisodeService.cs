@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Database;
 using Repositories;
+using ServiceLayer.ViewModels.Episode;
 
 namespace ServiceLayer
 {
@@ -16,14 +17,25 @@ namespace ServiceLayer
             this.episodeWriteRepository = episodeWriteRepository;
         }
 
-        public void CreateEpisode(Episode episode)
+        public void CreateEpisode(CreateEpisodeModel createEpisodeModel)
         {
+            var episode = new Episode
+            {
+                Name = createEpisodeModel.Name,
+                CulinaryChannelId = createEpisodeModel.CulinaryChannelId
+            };
             this.episodeWriteRepository.Create(episode);
             this.episodeWriteRepository.Save();
         }
 
-        public void UpdateEpisode(Episode episode)
+        public void UpdateEpisode(UpdateEpisodeModel updateEpisodeModel)
         {
+            var episode = new Episode
+            {
+                Id = updateEpisodeModel.EpisodeId,
+                Name = updateEpisodeModel.Name,
+                CulinaryChannelId = updateEpisodeModel.CulinaryChannelId
+            };
             this.episodeWriteRepository.Update(episode);
             this.episodeWriteRepository.Save();
         }
@@ -34,21 +46,63 @@ namespace ServiceLayer
             this.episodeWriteRepository.Save();
         }
 
-        public Episode GetEpisodeWithInclude(int id)
+        public EpisodeDetailModel GetEpisode(int id, bool withRelated)
         {
-            return this.episodeReadOnlyRepository.GetItemWithInclude(
-                x => x.Id == id,
-                x => x.CulinaryChannel,
-                x => x.Image,
-                x => x.Tags);
+            var episode = new Episode();
+            EpisodeDetailModel episodeDetailModel = new EpisodeDetailModel();
+            if (withRelated)
+            {
+                episode = this.episodeReadOnlyRepository.GetItemWithInclude(
+                                x => x.Id == id,
+                                x => x.CulinaryChannel
+                               );
+                episodeDetailModel = new EpisodeDetailModel
+                {
+                    EpisodeId = episode.Id,
+                    Name = episode.Name,
+                    CulinaryChannelId = episode.CulinaryChannelId
+                };
+                return episodeDetailModel;
+            }
+
+            episode = this.episodeReadOnlyRepository.GetItem(id);
+            episodeDetailModel = new EpisodeDetailModel
+            {
+                EpisodeId = episode.Id,
+                Name = episode.Name,
+            };
+            return episodeDetailModel;
         }
 
-        public IEnumerable<Episode> GetEpisodeListWithInclude()
+        public IEnumerable<EpisodeListModel> GetEpisodeList(bool withRelated)
         {
-            return this.episodeReadOnlyRepository.GetItemListWithInclude(
-                x => x.CulinaryChannel,
-                x => x.Image,
-                x => x.Tags);
+            IEnumerable<Episode> episodes;
+            List<EpisodeListModel> episodeListModels = new List<EpisodeListModel>();
+            if (withRelated)
+            {
+                episodes = this.episodeReadOnlyRepository.GetItemListWithInclude(
+                                x => x.CulinaryChannel);
+                foreach (var episode in episodes)
+                {
+                    episodeListModels.Add(new EpisodeListModel
+                    {
+                        EpisodeId = episode.Id,
+                        Name = episode.Name,
+                        CulinaryChannelName = episode.CulinaryChannel.Name
+                    });
+                }
+                return episodeListModels;
+            }
+            episodes = this.episodeReadOnlyRepository.GetItemList();
+            foreach (var episode in episodes)
+            {
+                episodeListModels.Add(new EpisodeListModel
+                {
+                    EpisodeId = episode.Id,
+                    Name = episode.Name                    
+                });
+            }
+            return episodeListModels;
         }
     }
 }

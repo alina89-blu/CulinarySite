@@ -2,16 +2,16 @@
 {
     public enum DishCategory
     {
-        Soups,
-        Snacks,
-        SecondDishes,
-        Salads,
-        Pizza,
-        Pies,
-        CakesAndPastries,
-        SaucesAndCondiments,
-        Drinkables,
-        Desserts,
-        Pancakes
+        Супы,
+        Закуски,
+        ВторыеБлюда,
+        Салаты,
+        Пицца,
+        Пироги,
+        ТортыИПирожные,
+        СоусыИПриправы,
+        Напитки,
+        Десерты,
+        Блины
     }
 }

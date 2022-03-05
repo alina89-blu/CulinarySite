@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IRecipe } from '../interfaces/recipe.interface';
-import { Recipe } from '../viewmodels/recipe.class';
+import { IRecipeDetailModel } from '../interfaces/recipe/recipe-detail-model.interface';
+import { IRecipeListModel } from '../interfaces/recipe/recipe-list-model.interface';
+import { CreateRecipeModel } from '../viewmodels/recipe/create-recipe-model.class';
+import { UpdateRecipeModel } from '../viewmodels/recipe/update-recipe-model.class';
 
 @Injectable()
 export class RecipeService {
@@ -10,20 +12,25 @@ export class RecipeService {
 
   constructor(private http: HttpClient) {}
 
-  public getRecipeListWithInclude(): Observable<IRecipe[]> {
-    return this.http.get<IRecipe[]>(this.url);
+  public getRecipeList(withRelated: boolean): Observable<IRecipeListModel[]> {
+    return this.http.get<IRecipeListModel[]>(this.url + '/' + withRelated);
   }
 
-  public getRecipeWithInclude(id: number): Observable<IRecipe> {
-    return this.http.get<IRecipe>(this.url + '/' + id);
+  public getRecipe(
+    id: number,
+    withRelated: boolean
+  ): Observable<IRecipeDetailModel> {
+    return this.http.get<IRecipeDetailModel>(
+      this.url + '/' + id + '/' + withRelated
+    );
   }
 
-  public createRecipe(recipe: Recipe): Observable<void> {
-    return this.http.post<void>(this.url, recipe);
+  public createRecipe(createRecipeModel: CreateRecipeModel): Observable<void> {
+    return this.http.post<void>(this.url, createRecipeModel);
   }
 
-  public updateRecipe(recipe: Recipe): Observable<void> {
-    return this.http.put<void>(this.url, recipe);
+  public updateRecipe(updateRecipeModel: UpdateRecipeModel): Observable<void> {
+    return this.http.put<void>(this.url, updateRecipeModel);
   }
 
   public deleteRecipe(id: number): Observable<void> {

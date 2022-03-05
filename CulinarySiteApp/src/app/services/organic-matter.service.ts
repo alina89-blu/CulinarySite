@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IOrganicMatter } from '../interfaces/organic-matter.interface';
-import { OrganicMatter } from '../viewmodels/organic-matter.class';
+import { IOrganicMatterDetailModel } from '../interfaces/organic-matter/organic-matter-detail-model.interface';
+import { IOrganicMatterListModel } from '../interfaces/organic-matter/organic-matter-list-model.interface';
+import { CreateOrganicMatterModel } from '../viewmodels/organic-matter/create-organic-matter-model.class';
+import { UpdateOrganicMatterModel } from '../viewmodels/organic-matter/update-organic-matter-model.class';
 
 @Injectable()
 export class OrganicMatterService {
@@ -10,20 +12,24 @@ export class OrganicMatterService {
 
   constructor(private http: HttpClient) {}
 
-  public getOrganicMatterList(): Observable<IOrganicMatter[]> {
-    return this.http.get<IOrganicMatter[]>(this.url);
+  public getOrganicMatterList(): Observable<IOrganicMatterListModel[]> {
+    return this.http.get<IOrganicMatterListModel[]>(this.url);
   }
 
-  public getOrganicMatter(id: number): Observable<IOrganicMatter> {
-    return this.http.get<IOrganicMatter>(this.url + '/' + id);
+  public getOrganicMatter(id: number): Observable<IOrganicMatterDetailModel> {
+    return this.http.get<IOrganicMatterDetailModel>(this.url + '/' + id);
   }
 
-  public createOrganicMatter(organicMatter: OrganicMatter): Observable<void> {
-    return this.http.post<void>(this.url, organicMatter);
+  public createOrganicMatter(
+    createOrganicMatterModel: CreateOrganicMatterModel
+  ): Observable<void> {
+    return this.http.post<void>(this.url, createOrganicMatterModel);
   }
 
-  public updateOrganicMatter(organicMatter: OrganicMatter): Observable<void> {
-    return this.http.put<void>(this.url, organicMatter);
+  public updateOrganicMatter(
+    updateOrganicMatterModel: UpdateOrganicMatterModel
+  ): Observable<void> {
+    return this.http.put<void>(this.url, updateOrganicMatterModel);
   }
 
   public delete(id: number): Observable<void> {

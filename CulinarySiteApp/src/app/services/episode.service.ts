@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Episode } from '../viewmodels/episode.class';
 import { Observable } from 'rxjs';
-import { IEpisode } from '../interfaces/episode.interface';
+import { IEpisodeListModel } from '../interfaces/episode/episode-list-model.interface';
+import { IEpisodeDetailModel } from '../interfaces/episode/episode-detail-model.interface';
+import { CreateEpisodeModel } from '../viewmodels/episode/create-episode-model.class';
+import { UpdateEpisodeModel } from '../viewmodels/episode/update-episode-model.class';
 
 @Injectable()
 export class EpisodeService {
@@ -10,20 +12,29 @@ export class EpisodeService {
 
   constructor(private http: HttpClient) {}
 
-  public getEpisodeListWithInclude(): Observable<IEpisode[]> {
-    return this.http.get<IEpisode[]>(this.url);
+  public getEpisodeList(withRelated: boolean): Observable<IEpisodeListModel[]> {
+    return this.http.get<IEpisodeListModel[]>(this.url + '/' + withRelated);
   }
 
-  public getEpisodeWithInclude(id: number): Observable<IEpisode> {
-    return this.http.get<IEpisode>(this.url + '/' + id);
+  public getEpisode(
+    id: number,
+    withRelated: boolean
+  ): Observable<IEpisodeDetailModel> {
+    return this.http.get<IEpisodeDetailModel>(
+      this.url + '/' + id + '/' + withRelated
+    );
   }
 
-  public createEpisode(episode: Episode): Observable<void> {
-    return this.http.post<void>(this.url, episode);
+  public createEpisode(
+    createEpisodeModel: CreateEpisodeModel
+  ): Observable<void> {
+    return this.http.post<void>(this.url, createEpisodeModel);
   }
 
-  public updateEpisode(episode: Episode): Observable<void> {
-    return this.http.put<void>(this.url, episode);
+  public updateEpisode(
+    updateEpisodeModel: UpdateEpisodeModel
+  ): Observable<void> {
+    return this.http.put<void>(this.url, updateEpisodeModel);
   }
 
   public deleteEpisode(id: number): Observable<void> {

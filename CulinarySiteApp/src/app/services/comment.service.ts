@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IComment } from '../interfaces/comment.interface';
+import { ICommentListModel } from '../interfaces/comment/comment-list-model.interface';
+import { ICommentDetailModel } from '../interfaces/comment/comment-detail-model.interface';
+import { CreateCommentModel } from '../viewmodels/comment/create-comment-model.class';
+import { UpdateCommentModel } from '../viewmodels/comment/update-comment-model.class';
 
 @Injectable()
 export class CommentService {
@@ -9,16 +12,29 @@ export class CommentService {
 
   constructor(private http: HttpClient) {}
 
-  public getCommentListWithInclude(): Observable<IComment[]> {
-    return this.http.get<IComment[]>(this.url);
+  public getCommentList(withRelated: boolean): Observable<ICommentListModel[]> {
+    return this.http.get<ICommentListModel[]>(this.url + '/' + withRelated);
   }
 
-  public getCommentWithInclude(id: number): Observable<IComment> {
-    return this.http.get<IComment>(this.url + '/' + id);
+  public getComment(
+    id: number,
+    withRelated: boolean
+  ): Observable<ICommentDetailModel> {
+    return this.http.get<ICommentDetailModel>(
+      this.url + '/' + id + '/' + withRelated
+    );
   }
 
-  public createComment(comment: Comment): Observable<void> {
-    return this.http.post<void>(this.url, comment);
+  public createComment(
+    createCommentModel: CreateCommentModel
+  ): Observable<void> {
+    return this.http.post<void>(this.url, createCommentModel);
+  }
+
+  public updateComment(
+    updateCommentModel: UpdateCommentModel
+  ): Observable<void> {
+    return this.http.post<void>(this.url, updateCommentModel);
   }
 
   public deleteComment(id: number): Observable<void> {

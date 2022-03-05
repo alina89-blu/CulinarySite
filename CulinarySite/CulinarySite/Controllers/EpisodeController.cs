@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Database;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer;
+using ServiceLayer.ViewModels.Episode;
 
 namespace CulinarySite.Controllers
 {
@@ -13,28 +13,28 @@ namespace CulinarySite.Controllers
             this.episodeService = episodeService;
         }
 
-        [HttpGet]
-        public IEnumerable<Episode> GetEpisodeListWithInclude()
+        [HttpGet("{withRelated}")]
+        public IEnumerable<EpisodeListModel> GetEpisodeList(bool withRelated)
         {
-            return this.episodeService.GetEpisodeListWithInclude();
+            return this.episodeService.GetEpisodeList(withRelated);
         }
 
-        [HttpGet("{id}")]
-        public Episode GetEpisodeWithInclude(int id)
+        [HttpGet("{id}/{withRelated}")]
+        public EpisodeDetailModel GetEpisode(int id, bool withRelated)
         {
-            return this.episodeService.GetEpisodeWithInclude(id);
+            return this.episodeService.GetEpisode(id,withRelated);
         }
 
         [HttpPost]
-        public void CreateEpisode(Episode episode)
+        public void CreateEpisode(CreateEpisodeModel createEpisodeModel)
         {
-            this.episodeService.CreateEpisode(episode);
+            this.episodeService.CreateEpisode(createEpisodeModel);
         }
 
         [HttpPut]
-        public void UpdateEpisode(Episode episode)
+        public void UpdateEpisode(UpdateEpisodeModel updateEpisodeModel)
         {
-            this.episodeService.UpdateEpisode(episode);
+            this.episodeService.UpdateEpisode(updateEpisodeModel);
         }
 
         [HttpDelete("{id}")]

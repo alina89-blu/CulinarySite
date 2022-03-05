@@ -1,0 +1,48 @@
+<h3>Изменение ингредиента</h3>
+<div>
+  <label>Название</label>
+  <input type="text" [(ngModel)]="updateIngredientModel.name" />
+</div>
+
+<!-- <div>
+  <label>Единица измерения</label>
+  <select [(ngModel)]="ingredient.unit" class="form-control">
+    <option *ngFor="let unit of units">
+      {{ unit }}
+    </option>
+  </select>
+  <div>
+    <label>Количество</label>
+    <input type="text" [(ngModel)]="ingredient.quantity" />
+  </div>
+
+  <form [formGroup]="myForm">
+    <div formArrayName="recipes">
+      <div
+        class="form-group"
+        *ngFor="let recipe of getFormsControls()['controls']; let i = index"
+      >
+        <label>Название рецепта</label>
+
+        <select class="form-control" formControlName="{{ i }}">
+          <option *ngFor="let recipe of recipesMas" [ngValue]="recipe.id">
+            {{ recipe.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <button class="btn info" (click)="addRecipe()">Добавить рецепт</button>
+    </div>
+  </form>  
+</div> -->
+
+<div>
+  <button class="btn info" (click)="updateIngredient()">Обновить</button>
+</div>
+<p>
+  <a [routerLink]="['/ingredient']">Назад к списку ингредиентов</a>
+</p>
+<p>
+  <a routerLink="/">На домашнюю страницу</a>
+</p>

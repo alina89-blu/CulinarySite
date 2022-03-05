@@ -1,14 +1,14 @@
-﻿using Database;
+﻿using ServiceLayer.ViewModels.Recipe;
 using System.Collections.Generic;
 
 namespace ServiceLayer
 {
     public interface IRecipeService
     {
-        void CreateRecipe(Recipe recipe);
-        void UpdateRecipe(Recipe recipe);
+        void CreateRecipe(CreateRecipeModel createRecipeModel);
+        void UpdateRecipe(UpdateRecipeModel updateRecipeModel);
         void DeleteRecipe(int id);
-        IEnumerable<Recipe> GetRecipeListWithInclude();
-        Recipe GetRecipeWithInclude(int id);
+        IEnumerable<RecipeListModel> GetRecipeList(bool withRelated);
+        RecipeDetailModel GetRecipe(int id, bool withRelated);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ServiceLayer;
-using Database;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.ViewModels.Ingredient;
 
 namespace CulinarySite.Controllers
 {
@@ -13,28 +13,28 @@ namespace CulinarySite.Controllers
             this.ingredientService = ingredientService;
         }
 
-        [HttpGet]
-        public IEnumerable<Ingredient> GetIngredientListWithInclude()
+        [HttpGet("{withRelated}")]
+        public IEnumerable<IngredientListModel> GetIngredientList(bool withRelated)
         {
-            return this.ingredientService.GetIngredientListWithInclude();
+            return this.ingredientService.GetIngredientList(withRelated);
         }
 
-        [HttpGet("{id}")]
-        public Ingredient GetIngredientWithInclude(int id)
+        [HttpGet("{id}/{withRelated}")]
+        public IngredientDetailModel GetIngredient(int id, bool withRelated)
         {
-            return this.ingredientService.GetIngredientWithInclude(id);
+            return this.ingredientService.GetIngredient(id, withRelated);
         }
 
         [HttpPost]
-        public void CreateIngredient(Ingredient ingredient)
+        public void CreateIngredient(CreateIngredientModel createIngredientModel)
         {
-            this.ingredientService.CreateIngredient(ingredient);
+            this.ingredientService.CreateIngredient(createIngredientModel);
         }
 
         [HttpPut]
-        public void UpdateIngredient(Ingredient ingredient)
+        public void UpdateIngredient(UpdateIngredientModel updateIngredientModel)
         {
-            this.ingredientService.UpdateIngredient(ingredient);
+            this.ingredientService.UpdateIngredient(updateIngredientModel);
         }
 
         [HttpDelete("{id}")]
@@ -44,3 +44,4 @@ namespace CulinarySite.Controllers
         }
     }
 }
+

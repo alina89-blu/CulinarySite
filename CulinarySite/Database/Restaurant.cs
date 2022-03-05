@@ -8,7 +8,7 @@ namespace Database
 
         public List<Telephone> Telephones { get; set; } = new List<Telephone>();
         public List<Comment> Comments { get; set; } = new List<Comment>();
-        public int? AddressId { get; set; }
+        public int AddressId { get; set; }
         public Address Address { get; set; }
     }
 }

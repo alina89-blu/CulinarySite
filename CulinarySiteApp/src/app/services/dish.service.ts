@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Dish } from '../viewmodels/dish.class';
 import { Observable } from 'rxjs';
-import { IDish } from '../interfaces/dish.interface';
+import { IDishListModel } from '../interfaces/dish/dish-list-model.interface';
+import { IDishDetailModel } from '../interfaces/dish/dish-detail-model.interface';
+import { CreateDishModel } from '../viewmodels/dish/create-dish-model.class';
+import { UpdateDishModel } from '../viewmodels/dish/update-dish-model.class';
 
 @Injectable()
 export class DishService {
@@ -10,20 +12,25 @@ export class DishService {
 
   constructor(private http: HttpClient) {}
 
-  public getDishListWithInclude(): Observable<IDish[]> {
-    return this.http.get<IDish[]>(this.url);
+  public getDishList(withRelated: boolean): Observable<IDishListModel[]> {
+    return this.http.get<IDishListModel[]>(this.url + '/' + withRelated);
   }
 
-  public getDishWithInclude(id: number): Observable<IDish> {
-    return this.http.get<IDish>(this.url + '/' + id);
+  public getDish(
+    id: number,
+    withRelated: boolean
+  ): Observable<IDishDetailModel> {
+    return this.http.get<IDishDetailModel>(
+      this.url + '/' + id + '/' + withRelated
+    );
   }
 
-  public createDish(dish: Dish): Observable<void> {
-    return this.http.post<void>(this.url, dish);
+  public createDish(createDishModel: CreateDishModel): Observable<void> {
+    return this.http.post<void>(this.url, createDishModel);
   }
 
-  public updateDish(dish: Dish): Observable<void> {
-    return this.http.put<void>(this.url, dish);
+  public updateDish(updateDishModel: UpdateDishModel): Observable<void> {
+    return this.http.put<void>(this.url, updateDishModel);
   }
 
   public deleteDish(id: number): Observable<void> {

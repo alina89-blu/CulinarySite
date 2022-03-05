@@ -1,15 +1,16 @@
+<h3>Изменение адреса</h3>
 <div>
-  <label>Name</label>
-  <input type="text" [(ngModel)]="address.name" />
+  <label>Название</label>
+  <input type="text" [(ngModel)]="updateAddressModel.name" />
 </div>
 <div>
-  <button class="btn info" (click)="updateAddress()">Update</button>
+  <button class="btn info" (click)="updateAddress()">Обновить</button>
 </div>
 
 <p>
-  <a [routerLink]="['/address']">Back to address's list</a>
+  <a [routerLink]="['/address']">Назад к списку адресов</a>
 </p>
 
 <p>
-  <a routerLink="/">Home</a>
+  <a routerLink="/">На домашнюю страницу</a>
 </p>

@@ -1,14 +1,14 @@
-﻿using Database;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using ServiceLayer.ViewModels.Restaurant;
 
 namespace ServiceLayer
 {
     public interface IRestaurantService
     {
-        void CreateRestaurant(Restaurant restaurant);
-        void UpdateRestaurant(Restaurant restaurant);
+        void CreateRestaurant(CreateRestaurantModel createRestaurantModel);
+        void UpdateRestaurant(UpdateRestaurantModel updateRestaurantModel);
         void DeleteRestaurant(int id);
-        IEnumerable<Restaurant> GetRestaurantListWithInclude();
-        Restaurant GetRestaurantWithInclude(int id);
+        IEnumerable<RestaurantListModel> GetRestaurantList(bool withRelated);
+        RestaurantDetailModel GetRestaurant(int id, bool withRelated);
     }
 }

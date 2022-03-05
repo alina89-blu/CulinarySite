@@ -1,0 +1,19 @@
+<h3>Добавление нового кулинарного канала</h3>
+<div>
+  <label>Название</label>
+  <input type="text" [(ngModel)]="createCulinaryChannelModel.name" />
+</div>
+<div>
+  <label>Содержание</label>
+  <input type="text" [(ngModel)]="createCulinaryChannelModel.content" />
+</div>
+<div>
+  <button class="btn info" (click)="createCulinaryChannel()">Создать</button>
+</div>
+<p>
+  <a [routerLink]="['/culinaryChannel']">Назад к списку кулинарных каналов</a>
+</p>
+
+<p>
+  <a routerLink="/">На домашнюю страницу</a>
+</p>

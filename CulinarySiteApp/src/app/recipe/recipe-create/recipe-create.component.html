@@ -1,0 +1,106 @@
+<h3>Добавление нового рецепта</h3>
+
+<form [formGroup]="myForm">
+  <div>
+    <label>Название</label>
+    <input
+      type="text"
+      [(ngModel)]="createRecipeModel.name"
+      formControlName="name"
+    />
+  </div>
+
+  <div>
+    <label>Категория блюда</label>
+    <select
+      [(ngModel)]="createRecipeModel.dishId"
+      class="form-control"
+      formControlName="dish"
+    >
+      <option *ngFor="let dish of dishes" [ngValue]="dish.dishId">
+        {{ dish.category }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Author</label>
+    <select
+      [(ngModel)]="createRecipeModel.authorId"
+      class="form-control"
+      formControlName="author"
+    >
+      <option *ngFor="let author of authors" [ngValue]="author.authorId">
+        {{ author.name }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Book</label>
+    <select
+      [(ngModel)]="createRecipeModel.bookId"
+      class="form-control"
+      formControlName="book"
+    >
+      <option *ngFor="let book of books" [ngValue]="book.bookId">
+        {{ book.name }}
+      </option>
+    </select>
+  </div>
+
+  <button class="btn info" (click)="addIngredients()">Add ingredients</button>
+
+  <div *ngIf="showIngredients">
+    <div
+      formArrayName="recipeIngredients"
+      *ngFor="
+        let recipeIngredient of getFormsControls()['controls'];
+        let i = index
+      "
+    >
+      <div [formGroupName]="i">
+        <label>Ingredient</label>
+        <select
+          [(ngModel)]="createRecipeModel.recipeIngredients[i].ingredientId"
+          class="form-control"
+          formControlName="ingredientId"
+        >
+          <option
+            *ngFor="let ingredient of ingredients"
+            [ngValue]="ingredient.ingredientId"
+          >
+            {{ ingredient.name }}
+          </option>
+        </select>
+
+        <label>Unit</label>
+        <select
+          [(ngModel)]="createRecipeModel.recipeIngredients[i].unit"
+          class="form-control"
+          formControlName="unit"
+        >
+          <option></option>
+          <option *ngFor="let unit of units">
+            {{ unit }}
+          </option>
+        </select>
+
+        <label>Quantity</label>
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="createRecipeModel.recipeIngredients[i].quantity"
+          formControlName="quantity"
+        />
+
+        <button (click)="deleteRecipeIngredient(i)">delete</button>
+      </div>
+    </div>
+    <button class="btn info" (click)="addRecipeIngredient()">+</button>
+  </div>
+</form>
+
+<div>
+  <button class="btn info" (click)="createRecipe()">Создать</button>
+</div>

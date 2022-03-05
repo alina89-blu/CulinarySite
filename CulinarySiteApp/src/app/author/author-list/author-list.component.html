@@ -1,21 +1,43 @@
 <div>
-  <button class="btn info"><a [routerLink]="['/createAuthor']">Add</a></button>
+  <button class="btn info">
+    <a [routerLink]="['/createAuthor']">Добавить</a>
+  </button>
 </div>
 <table>
   <thead>
     <tr>
-      <td>Id</td>
-      <td>Name</td>
+      <th colspan="2">Авторы</th>
+    </tr>
+    <tr>
+      <td>Нр.</td>
+      <td>Имя</td>
+      <td>Recipe</td>
+      <td>Books</td>
+      <td>Действия</td>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let author of authors">
-      <td>{{ author.id }}</td>
+    <tr *ngFor="let author of authors; let idx = index">
+      <td>{{ idx + 1 }}</td>
       <td>{{ author.name }}</td>
       <td>
-        <a class="btn info" [routerLink]="['/editAuthor', author.id]">Edit</a>
-        <button class="btn info" (click)="deleteAuthor(author.id)">
-          Delete
+        <li *ngFor="let recipe of author.recipeModels">
+          <p>{{ recipe.name }}</p>
+        </li>
+      </td>
+
+      <td>
+        <li *ngFor="let book of author.books">
+          <p>{{ book.name }}</p>
+        </li>
+      </td>
+
+      <td>
+        <a class="btn info" [routerLink]="['/editAuthor', author.authorId]"
+          >Редактировать</a
+        >
+        <button class="btn info" (click)="deleteAuthor(author.authorId)">
+          Удалить
         </button>
       </td>
     </tr>

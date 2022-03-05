@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Repositories;
 using Database;
+using ServiceLayer.ViewModels.Subscriber;
 
 namespace ServiceLayer
 {
@@ -16,14 +17,25 @@ namespace ServiceLayer
             this.subscriberWriteRepository = subscriberWriteRepository;
         }
 
-        public void CreateSubscriber(Subscriber subscriber)
+        public void CreateSubscriber(CreateSubscriberModel createSubscriberModel)
         {
+            var subscriber = new Subscriber
+            {
+                Name = createSubscriberModel.Name,
+                Email = createSubscriberModel.Email
+            };
             this.subscriberWriteRepository.Create(subscriber);
             this.subscriberWriteRepository.Save();
         }
 
-        public void UpdateSubscriber(Subscriber subscriber)
+        public void UpdateSubscriber(UpdateSubscriberModel updateSubscriberModel)
         {
+            var subscriber = new Subscriber
+            {
+                Id = updateSubscriberModel.SubscriberId,
+                Name = updateSubscriberModel.Name,
+                Email = updateSubscriberModel.Email
+            };
             this.subscriberWriteRepository.Update(subscriber);
             this.subscriberWriteRepository.Save();
         }
@@ -34,14 +46,62 @@ namespace ServiceLayer
             this.subscriberWriteRepository.Save();
         }
 
-        public IEnumerable<Subscriber> GetSubscriberList()
+        public IEnumerable<SubscriberListModel> GetSubscriberList(bool withRelated)
         {
-            return subscriberReadOnlyRepository.GetItemList();
+            IEnumerable<Subscriber> subscribers;
+            List<SubscriberListModel> subscriberListModels = new List<SubscriberListModel>();
+            if (withRelated)
+            {
+                subscribers = subscriberReadOnlyRepository.GetItemListWithInclude(x => x.Comments);
+                foreach (var subscriber in subscribers)
+                {
+                    subscriberListModels.Add(new SubscriberListModel
+                    {
+                        SubscriberId = subscriber.Id,
+                        Name = subscriber.Name,
+                        Email = subscriber.Email
+                    });
+                }
+                return subscriberListModels;
+            }
+            subscribers = subscriberReadOnlyRepository.GetItemList();
+            foreach (var subscriber in subscribers)
+            {
+                subscriberListModels.Add(new SubscriberListModel
+                {
+                    SubscriberId = subscriber.Id,
+                    Name = subscriber.Name,
+                    Email = subscriber.Email
+                });
+            }
+            return subscriberListModels;
         }
 
-        public Subscriber GetSubscriber(int id)
+        public SubscriberDetailModel GetSubscriber(int id, bool withRelated)
         {
-            return subscriberReadOnlyRepository.GetItem(id);
+            var subscriber = new Subscriber();
+            var subscriberDetailModel = new SubscriberDetailModel();
+            if (withRelated)
+            {
+                subscriber = this.subscriberReadOnlyRepository.GetItemWithInclude(
+                    x => x.Id == id,
+                    x => x.Comments);
+                subscriberDetailModel = new SubscriberDetailModel
+                {
+                    SubscriberId = subscriber.Id,
+                    Name = subscriber.Name,
+                    Email = subscriber.Email
+                };
+                return subscriberDetailModel;
+            }
+            subscriber = subscriberReadOnlyRepository.GetItem(id);
+            subscriberDetailModel = new SubscriberDetailModel
+            {
+                SubscriberId = subscriber.Id,
+                Name = subscriber.Name,
+                Email = subscriber.Email
+            };
+            return subscriberDetailModel;
         }
     }
 }

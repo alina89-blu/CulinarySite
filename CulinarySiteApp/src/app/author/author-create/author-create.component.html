@@ -1,16 +1,40 @@
-<h3>Adding a new author</h3>
+<h3>Добавление нового автора</h3>
 <div>
-  <label>Name</label>
-  <input type="text" [(ngModel)]="author.name" />
+  <label>Имя</label>
+  <input type="text" [(ngModel)]="createAuthorModel.name" />
 </div>
+
+<form [formGroup]="myForm">
+  <div
+    formArrayName="books"
+    *ngFor="let book of getFormsControls()['controls']; let i = index"
+  >
+    <div formGroupName="{{ i }}">
+      <label>Книга</label>
+      <select class="form-control" formControlName="id">
+        <option *ngFor="let book of books" [ngValue]="book.bookId">
+          {{ book.name }}
+        </option>
+      </select>
+      <button (click)="deleteBook(i)">delete book</button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button class="btn info" (click)="setOrderItemArray()">
+      Добавить книгу
+    </button>
+  </div>
+</form>
+
 <div>
-  <button class="btn info" (click)="createAuthor()">Create</button>
+  <button class="btn info" (click)="createAuthor()">Добавить</button>
 </div>
 
 <p>
-  <a [routerLink]="['/author']">Back to author's list</a>
+  <a [routerLink]="['/author']">Назад к списку авторов</a>
 </p>
 
 <p>
-  <a routerLink="/">Home</a>
+  <a routerLink="/">На домашнюю страницу</a>
 </p>

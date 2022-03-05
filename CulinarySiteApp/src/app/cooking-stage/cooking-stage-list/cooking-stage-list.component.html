@@ -1,0 +1,37 @@
+<div>
+  <button class="btn info">
+    <a [routerLink]="['/createCookingStage']">Add</a>
+  </button>
+</div>
+<table>
+  <thead>
+    <tr>
+      <td>Id</td>
+      <td>Content</td>
+      <td>Recipe</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cookingStage of cookingStages; let idx = index">
+      <td>{{ idx + 1 }}</td>
+      <td>{{ cookingStage.content }}</td>
+      <td>{{ cookingStage.recipeName }}</td>
+      <td>
+        <a
+          class="btn info"
+          [routerLink]="['/editCookingStage', cookingStage.cookingStageId]"
+          >Edit</a
+        >
+        <button
+          class="btn info"
+          (click)="deleteCookingStage(cookingStage.cookingStageId)"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>
+  <a routerLink="/">Home</a>
+</p>

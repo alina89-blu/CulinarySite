@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Address } from 'src/app/viewmodels/address.class';
-import { IAddress } from 'src/app/interfaces/address.interface';
 import { AddressService } from '../../services/address.service';
+import { AddressListModel } from 'src/app/viewmodels/address/address-list-model.class';
+import { IAddressListModel } from 'src/app/interfaces/address/address-list-model.interface';
 
 @Component({
   selector: 'app-address',
@@ -10,7 +10,7 @@ import { AddressService } from '../../services/address.service';
   providers: [AddressService],
 })
 export class AddressListComponent implements OnInit {
-  addresses: Address[] = [];
+  addresses: AddressListModel[] = [];
 
   constructor(private addressService: AddressService) {}
 
@@ -22,7 +22,8 @@ export class AddressListComponent implements OnInit {
     this.addressService
       .getAddressList()
       .subscribe(
-        (data: IAddress[]) => (this.addresses = data.map((x) => new Address(x)))
+        (data: IAddressListModel[]) =>
+          (this.addresses = data.map((x) => new AddressListModel(x)))
       );
   }
 

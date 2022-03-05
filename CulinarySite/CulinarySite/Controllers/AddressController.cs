@@ -2,6 +2,7 @@
 using ServiceLayer;
 using Database;
 using System.Collections.Generic;
+using ServiceLayer.ViewModels.Address;
 
 namespace CulinarySite.Controllers
 {
@@ -14,27 +15,27 @@ namespace CulinarySite.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Address> GetAddressList()
+        public IEnumerable<AddressListModel> GetAddressList()
         {
             return this.addressService.GetAddressList();
         }
 
         [HttpGet("{id}")]
-        public Address GetAddress(int id)
+        public AddressDetailModel GetAddress(int id)
         {
             return this.addressService.GetAddress(id);
         }
 
         [HttpPost]
-        public void CreateAddress(Address address)
+        public void CreateAddress(CreateAddressModel createAddressModel)
         {
-            this.addressService.CreateAddress(address);
+            this.addressService.CreateAddress(createAddressModel);
         }
 
         [HttpPut]
-        public void UpdateAddress(Address address)
+        public void UpdateAddress(UpdateAddressModel updateAddressModel)
         {
-            this.addressService.UpdateAddress(address);
+            this.addressService.UpdateAddress(updateAddressModel);
         }
 
         [HttpDelete("{id}")]

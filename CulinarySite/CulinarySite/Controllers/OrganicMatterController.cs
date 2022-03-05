@@ -2,6 +2,7 @@
 using ServiceLayer;
 using Database;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.ViewModels.OrganicMatter;
 
 namespace CulinarySite.Controllers
 {
@@ -14,27 +15,27 @@ namespace CulinarySite.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<OrganicMatter> GetOrganicMatterList()
+        public IEnumerable<OrganicMatterListModel> GetOrganicMatterList()
         {
             return this.organicMatterService.GetOrganicMatterList();
         }
 
         [HttpGet("{id}")]
-        public OrganicMatter GetOrganicMatter(int id)
+        public OrganicMatterDetailModel GetOrganicMatter(int id)
         {
             return this.organicMatterService.GetOrganicMatter(id);
         }
 
         [HttpPost]
-        public void CreateOrganicMatter(OrganicMatter organicMatter)
+        public void CreateOrganicMatter(CreateOrganicMatterModel createOrganicMatterModel)
         {
-            this.organicMatterService.CreateOrganicMatter(organicMatter);
+            this.organicMatterService.CreateOrganicMatter(createOrganicMatterModel);
         }
 
         [HttpPut]
-        public void UpdateOrganicMatter(OrganicMatter organicMatter)
+        public void UpdateOrganicMatter(UpdateOrganicMatterModel updateOrganicMatterModel)
         {
-            this.organicMatterService.UpdateOrganicMatter(organicMatter);
+            this.organicMatterService.UpdateOrganicMatter(updateOrganicMatterModel);
         }
 
         [HttpDelete("{id}")]

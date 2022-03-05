@@ -1,5 +1,6 @@
 ﻿using Database;
 using Repositories;
+using ServiceLayer.ViewModels.Address;
 using System.Collections.Generic;
 
 namespace ServiceLayer
@@ -16,14 +17,23 @@ namespace ServiceLayer
             this.addressWriteRepository = addressWriteRepository;
         }
 
-        public void CreateAddress(Address address)
+        public void CreateAddress(CreateAddressModel createAddressModel )
         {
+            var address = new Address
+            {
+                Name = createAddressModel.Name
+            };
             this.addressWriteRepository.Create(address);
             this.addressWriteRepository.Save();
         }
 
-        public void UpdateAddress(Address address)
+        public void UpdateAddress(UpdateAddressModel updateAddressModel )
         {
+            var address = new Address
+            {
+                Id = updateAddressModel.Id,
+                Name = updateAddressModel.Name
+            };
             this.addressWriteRepository.Update(address);
             this.addressWriteRepository.Save();
         }
@@ -34,14 +44,31 @@ namespace ServiceLayer
             this.addressWriteRepository.Save();
         }
 
-        public IEnumerable<Address> GetAddressList()
+        public IEnumerable<AddressListModel> GetAddressList()
         {
-            return this.addressReadOnlyRepository.GetItemList();
+            IEnumerable<Address> addresses = this.addressReadOnlyRepository.GetItemList();
+            List<AddressListModel> addressListModels = new List<AddressListModel>();
+
+            foreach(var address in addresses)
+            {
+                addressListModels.Add(new AddressListModel
+                {
+                    Id = address.Id,
+                    Name = address.Name
+                });
+            }
+            return addressListModels;
         }
 
-        public Address GetAddress(int id)
+        public AddressDetailModel GetAddress(int id)
         {
-            return this.addressReadOnlyRepository.GetItem(id);
+            Address address= this.addressReadOnlyRepository.GetItem(id);
+            AddressDetailModel addressDetailModel = new AddressDetailModel
+            {
+                Id = address.Id,
+                Name = address.Name
+            };
+            return addressDetailModel;
         }
     }
 }

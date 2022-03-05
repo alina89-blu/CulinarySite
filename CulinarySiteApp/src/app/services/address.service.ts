@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Address } from '../viewmodels/address.class';
-import { IAddress } from '../interfaces/address.interface';
+import { CreateAddressModel } from '../viewmodels/address/create-address-model.class';
+import { UpdateAddressModel } from '../viewmodels/address/update-address-model.class';
+import { IAddressListModel } from '../interfaces/address/address-list-model.interface';
+import { IAddressDetailModel } from '../interfaces/address/address-detail-model.interface';
 
 @Injectable()
 export class AddressService {
@@ -10,20 +12,24 @@ export class AddressService {
 
   constructor(private http: HttpClient) {}
 
-  public getAddressList(): Observable<IAddress[]> {
-    return this.http.get<IAddress[]>(this.url);
+  public getAddressList(): Observable<IAddressListModel[]> {
+    return this.http.get<IAddressListModel[]>(this.url);
   }
 
-  public getAddress(id: number): Observable<IAddress> {
-    return this.http.get<IAddress>(this.url + '/' + id);
+  public getAddress(id: number): Observable<IAddressDetailModel> {
+    return this.http.get<IAddressDetailModel>(this.url + '/' + id);
   }
 
-  public createAddress(address: Address): Observable<void> {
-    return this.http.post<void>(this.url, address);
+  public createAddress(
+    createAddressModel: CreateAddressModel
+  ): Observable<void> {
+    return this.http.post<void>(this.url, createAddressModel);
   }
 
-  public updateAddress(address: Address): Observable<void> {
-    return this.http.put<void>(this.url, address);
+  public updateAddress(
+    updateAddressModel: UpdateAddressModel
+  ): Observable<void> {
+    return this.http.put<void>(this.url, updateAddressModel);
   }
 
   public delete(id: number): Observable<void> {

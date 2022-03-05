@@ -42,7 +42,7 @@ namespace Repositories
             IQueryable<TEntity> query = this.dbSet.AsNoTracking();
             return includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }
-
+       
         public int GetNumberOfItems()
         {
             return this.dbSet.Count();

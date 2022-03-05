@@ -1,0 +1,27 @@
+<h3>Editing the cooking stage</h3>
+<div>
+  <label>Content</label>
+  <input type="text" [(ngModel)]="updateCookingStageModel.content" />
+</div>
+
+<div>
+  <label>Recipe</label>
+
+  <select [(ngModel)]="updateCookingStageModel.recipeId" class="form-control">
+    <option *ngFor="let recipe of recipes" [ngValue]="recipe.recipeId">
+      {{ recipe.name }}
+    </option>
+  </select>
+</div>
+
+<div>
+  <button class="btn info" (click)="updateCookingStage()">Update</button>
+</div>
+
+<p>
+  <a [routerLink]="['/cookingStage']">Back to cooking stage's list</a>
+</p>
+
+<p>
+  <a routerLink="/">Home</a>
+</p>

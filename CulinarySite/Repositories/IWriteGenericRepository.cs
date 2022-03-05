@@ -1,4 +1,5 @@
 ﻿using Database;
+using System.Collections.Generic;
 
 namespace Repositories
 {
@@ -8,5 +9,7 @@ namespace Repositories
         void Update(TEntity item);
         void Delete(int id);
         void Save();
+        TEntity GetItem(int id);
+        IEnumerable<TEntity> GetItemList();
     }
 }

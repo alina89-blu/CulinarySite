@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Repositories;
 using Database;
+using ServiceLayer.ViewModels.CookingStage;
 
 namespace ServiceLayer
 {
@@ -16,14 +17,25 @@ namespace ServiceLayer
             this.cookingStageWriteRepository = cookingStageWriteRepository;
         }
 
-        public void CreateCookingStage(CookingStage cookingStage)
+        public void CreateCookingStage(CreateCookingStageModel createCookingStageModel)
         {
+            var cookingStage = new CookingStage
+            {
+                Content = createCookingStageModel.Content,
+                RecipeId = createCookingStageModel.RecipeId
+            };
             this.cookingStageWriteRepository.Create(cookingStage);
             this.cookingStageWriteRepository.Save();
         }
 
-        public void UpdateCookingStage(CookingStage cookingStage)
+        public void UpdateCookingStage(UpdateCookingStageModel updateCookingStageModel)
         {
+            var cookingStage = new CookingStage
+            {
+                Id = updateCookingStageModel.CookingStageId,
+                Content = updateCookingStageModel.Content,
+                RecipeId = updateCookingStageModel.RecipeId
+            };
             this.cookingStageWriteRepository.Update(cookingStage);
             this.cookingStageWriteRepository.Save();
         }
@@ -34,19 +46,63 @@ namespace ServiceLayer
             this.cookingStageWriteRepository.Save();
         }
 
-        public IEnumerable<CookingStage> GetCookingStageListWithInclude()
+        public IEnumerable<CookingStageListModel> GetCookingStageList(bool withRelated)
         {
-            return this.cookingStageReadOnlyRepository.GetItemListWithInclude(
-                x => x.Recipe,
-                x => x.Images);
+            IEnumerable<CookingStage> cookingStages;
+            List<CookingStageListModel> cookingStageListModels = new List<CookingStageListModel>();
+            if (withRelated)
+            {
+                cookingStages = this.cookingStageReadOnlyRepository.GetItemListWithInclude(
+                    x => x.Recipe,
+                    x => x.Images);
+                foreach (var cookingStage in cookingStages)
+                {
+                    cookingStageListModels.Add(new CookingStageListModel
+                    {
+                        CookingStageId = cookingStage.Id,
+                        Content = cookingStage.Content,
+                        RecipeName = cookingStage.Recipe.Name
+                    });
+                }
+                return cookingStageListModels;
+            }
+            cookingStages = this.cookingStageReadOnlyRepository.GetItemList();
+            foreach (var cookingStage in cookingStages)
+            {
+                cookingStageListModels.Add(new CookingStageListModel
+                {
+                    CookingStageId = cookingStage.Id,
+                    Content = cookingStage.Content,
+                });
+            }
+            return cookingStageListModels;
         }
 
-        public CookingStage GetCookingStageWithInclude(int id)
+        public CookingStageDetailModel GetCookingStage(int id, bool withRelated)
         {
-            return this.cookingStageReadOnlyRepository.GetItemWithInclude(
+            var cookingStage = new CookingStage();
+            CookingStageDetailModel cookingStageDetailModel = new CookingStageDetailModel();
+            if (withRelated)
+            {
+                cookingStage = this.cookingStageReadOnlyRepository.GetItemWithInclude(
                 x => x.Id == id,
                 x => x.Recipe,
                 x => x.Images);
+                cookingStageDetailModel = new CookingStageDetailModel
+                {
+                    CookingStageId = cookingStage.Id,
+                    Content = cookingStage.Content,
+                    RecipeId = cookingStage.RecipeId
+                };
+                return cookingStageDetailModel;
+            }
+            cookingStage = this.cookingStageReadOnlyRepository.GetItem(id);
+            cookingStageDetailModel = new CookingStageDetailModel
+            {
+                CookingStageId = cookingStage.Id,
+                Content = cookingStage.Content,               
+            };
+            return cookingStageDetailModel;
         }
     }
 }
