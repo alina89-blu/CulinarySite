@@ -15,7 +15,6 @@ namespace ServiceLayer.ViewModels.Recipe
         public int DishId { get; set; }
         public int AuthorId { get; set; }
         public int? BookId { get; set; }       
-        public List<CreateRecipeIngredientModel> RecipeIngredients { get; set; } = new List<CreateRecipeIngredientModel>();
-        public List<CreateRecipeOrganicMatterModel> OrganicMatterRecipes { get; set; } = new List<CreateRecipeOrganicMatterModel>();
+       
     }
 }

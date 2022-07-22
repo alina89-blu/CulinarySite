@@ -38,11 +38,15 @@ namespace CulinarySite.Controllers
             }
 
             this.recipeService.CreateRecipe(createRecipeModel);
-        }  
+        }
 
         [HttpPut]
         public void UpdateRecipe(UpdateRecipeModel updateRecipeModel)
         {
+            foreach (var recipeIngredient in updateRecipeModel.RecipeIngredients)
+            {
+                this.recipeIngredientService.UpdateRecipeIngredient(recipeIngredient);
+            }
             this.recipeService.UpdateRecipe(updateRecipeModel);
         }
 

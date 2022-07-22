@@ -3,12 +3,10 @@ import { BookModel } from '../book/book-model.class';
 
 export class CreateAuthorModel {
   public name: string;
-  public books: BookModel[];
 
   constructor(public createAuthorModel?: ICreateAuthorModel) {
     if (createAuthorModel) {
       this.name = createAuthorModel.name;
-      this.books = createAuthorModel.books;
     }
   }
 }

@@ -2,6 +2,7 @@
 using Repositories;
 using System.Collections.Generic;
 using ServiceLayer.ViewModels.RecipeIngredient;
+using System.Linq;
 
 namespace ServiceLayer
 {
@@ -19,29 +20,46 @@ namespace ServiceLayer
 
         public void CreateRecipeIngredient(CreateRecipeIngredientModel createRecipeIngredientModel)
         {
-           
+
             var recipeIngredient = new RecipeIngredient
             {
                 IngredientId = createRecipeIngredientModel.IngredientId,
                 Unit = createRecipeIngredientModel.Unit,
-                Quantity = createRecipeIngredientModel.Quantity                            
+                Quantity = createRecipeIngredientModel.Quantity
             };
             this.recipeIngredientWriteRepository.Create(recipeIngredient);
             this.recipeIngredientWriteRepository.Save();
         }
 
-        public void UpdateRecipeIngredient(UpdateRecipeIngredientModel updateRecipeIngredientModel)
+        public void UpdateRecipeIngredient(UpdateRecipeIngredientModel updateRecipeIngredientModel)//
         {
-            var recipeIngredient = new RecipeIngredient
+            var recipeIngredientsId = this.recipeIngredientReadOnlyRepository.GetItemList().Select(x => x.Id);
+            var recipeIngredient = new RecipeIngredient();
+
+            if (recipeIngredientsId.Contains(updateRecipeIngredientModel.RecipeIngredientId))
             {
-                Id = updateRecipeIngredientModel.RecipeIngredientId,
-                IngredientId = updateRecipeIngredientModel.IngredientId,
-                Unit = updateRecipeIngredientModel.Unit,
-                Quantity = updateRecipeIngredientModel.Quantity,
-             //   RecipeId = updateRecipeIngredientModel.RecipeId
-            };
-            this.recipeIngredientWriteRepository.Update(recipeIngredient);
-            this.recipeIngredientWriteRepository.Save();
+                // recipeIngredient = this.recipeIngredientWriteRepository.GetItem(updateRecipeIngredientModel.RecipeIngredientId);
+                recipeIngredient = new RecipeIngredient
+                {
+                    Id = updateRecipeIngredientModel.RecipeIngredientId,
+                    IngredientId = updateRecipeIngredientModel.IngredientId,
+                    Unit = updateRecipeIngredientModel.Unit,
+                    Quantity = updateRecipeIngredientModel.Quantity,
+                };
+                this.recipeIngredientWriteRepository.Update(recipeIngredient);
+                this.recipeIngredientWriteRepository.Save();
+            }
+            else
+            {
+                recipeIngredient = new RecipeIngredient
+                {
+                    IngredientId = updateRecipeIngredientModel.IngredientId,
+                    Unit = updateRecipeIngredientModel.Unit,
+                    Quantity = updateRecipeIngredientModel.Quantity,
+                };
+                this.recipeIngredientWriteRepository.Create(recipeIngredient);
+                this.recipeIngredientWriteRepository.Save();
+            }
         }
 
         public void DeleteRecipeIngredient(int id)
@@ -67,7 +85,7 @@ namespace ServiceLayer
                         Unit = recipeIngredient.Unit,
                         Quantity = recipeIngredient.Quantity,
                         IngredientName = recipeIngredient.Ingredient.Name,
-                     //   RecipeName=recipeIngredient.Recipe.Name
+                        //   RecipeName=recipeIngredient.Recipe.Name
                     });
                 }
                 return recipeIngredientListModels;
@@ -102,7 +120,7 @@ namespace ServiceLayer
                     IngredientId = recipeIngredient.IngredientId,
                     Unit = recipeIngredient.Unit,
                     Quantity = recipeIngredient.Quantity,
-                  //  RecipeId=recipeIngredient.RecipeId
+                    //  RecipeId=recipeIngredient.RecipeId
                 };
                 return recipeIngredientDetailModel;
             }

@@ -4,42 +4,7 @@
   <input type="text" [(ngModel)]="updateAuthorModel.name" />
 </div>
 
-<!-- <label>Book</label>
-  <select [(ngModel)]="book.bookId" class="form-control">
-    <option *ngFor="let book of books" [ngValue]="book.bookId">
-      {{ book.name }}
-    </option>
-  </select> -->
-
-<!-- <form [formGroup]="myForm">
-  <div
-    formArrayName="books"
-    *ngFor="let book of getFormsControls()['controls']; let i = index"
-  >
-    <select
-      class="form-control"
-      formControlName="{{ i }}"
-      [(ngModel)]="updateAuthorModel.books[i].bookId"
-    >
-      <option *ngFor="let book of books" [ngValue]="book.bookId">
-        {{ book.name }}
-      </option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <button class="btn info" (click)="addBook()">Добавить книгу</button>
-  </div>
-</form> -->
-
-<!-- <div
-  formArrayName="numbers"
-  *ngFor="let item of userForm.get('numbers').['controls']; let i = index"
->
-  <input type="text" [formControlName]="i" />
-</div> -->
-
-<!-- <div>
+<div>
   <button class="btn info" (click)="updateAuthor()">Обновить</button>
 </div>
 
@@ -53,4 +18,4 @@
 
 <p>
   <a routerLink="/">На домашнюю страницу</a>
-</p> -->
+</p>

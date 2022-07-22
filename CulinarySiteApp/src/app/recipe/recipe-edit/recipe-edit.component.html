@@ -32,6 +32,55 @@
   </select>
 </div>
 
+<form [formGroup]="myForm">
+  <div
+    formArrayName="recipeIngredients"
+    *ngFor="
+      let recipeIngredient of getFormsControls()['controls'];
+      let i = index
+    "
+  >
+    <div [formGroupName]="i">
+      <label>Ingredient</label>
+      <select
+        [(ngModel)]="updateRecipeModel.recipeIngredients[i].ingredientId"
+        class="form-control"
+        formControlName="ingredientId"
+      >
+        <option
+          *ngFor="let ingredient of ingredients"
+          [ngValue]="ingredient.ingredientId"
+        >
+          {{ ingredient.name }}
+        </option>
+      </select>
+
+      <label>Unit</label>
+      <select
+        [(ngModel)]="updateRecipeModel.recipeIngredients[i].unit"
+        class="form-control"
+        formControlName="unit"
+      >
+        <option></option>
+        <option *ngFor="let unit of units">
+          {{ unit }}
+        </option>
+      </select>
+
+      <label>Quantity</label>
+      <input
+        type="number"
+        min="0"
+        [(ngModel)]="updateRecipeModel.recipeIngredients[i].quantity"
+        formControlName="quantity"
+      />
+
+      <!--  <button (click)="deleteRecipeIngredient(i)">delete</button>-->
+    </div>
+  </div>
+  <button class="btn info" (click)="addRecipeIngredient()">+</button>
+</form>
+
 <div>
   <button class="btn info" (click)="updateRecipe()">обновить</button>
 </div>

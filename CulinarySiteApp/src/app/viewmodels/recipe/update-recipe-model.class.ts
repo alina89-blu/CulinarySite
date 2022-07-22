@@ -1,7 +1,9 @@
 import { DifficultyLevel } from 'src/app/enums/difficulty-level.enum';
 import { IRecipeDetailModel } from 'src/app/interfaces/recipe/recipe-detail-model.interface';
 import { IUpdateRecipeModel } from 'src/app/interfaces/recipe/update-recipe-model.interface';
+import { CreateRecipeIngredientModel } from '../recipe-ingredient/create-recipe-ingredient-model.class';
 import { RecipeIngredientModel } from '../recipe-ingredient/recipe-ingredient-model.class';
+import { UpdateRecipeIngredientModel } from '../recipe-ingredient/update-recipe-ingredient-model.class';
 
 export class UpdateRecipeModel {
   public recipeId: number;
@@ -13,7 +15,8 @@ export class UpdateRecipeModel {
   public dishId: number;
   public authorId: number;
   public bookId?: number;
-  public recipeIngredients: RecipeIngredientModel[];
+  //public recipeIngredients: RecipeIngredientModel[];
+  public recipeIngredients: UpdateRecipeIngredientModel[];
 
   constructor(
     public updateRecipeModel?: IUpdateRecipeModel | IRecipeDetailModel

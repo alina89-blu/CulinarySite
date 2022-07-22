@@ -25,32 +25,26 @@ namespace ServiceLayer
 
         public void CreateAuthor(CreateAuthorModel createAuthorModel)
         {
-            var books = createAuthorModel
+            /*var books = createAuthorModel
                 .Books
                 .Select(x => this.bookWriteRepository.GetItem(x.BookId))
-                .ToList();
+                .ToList();*/
 
             var author = new Author()
             {
-                Name = createAuthorModel.Name,
-                Books = books
+                Name = createAuthorModel.Name,                
             };
             this.authorWriteRepository.Create(author);
             this.authorWriteRepository.Save();
         }
 
         public void UpdateAuthor(UpdateAuthorModel updateAuthorModel)
-        {
-            var books = updateAuthorModel
-                 .Books
-                 .Select(x => this.bookWriteRepository.GetItem(x.BookId))
-                 .ToList();
-
+        {          
             var author = new Author
             {
                 Id = updateAuthorModel.AuthorId,
                 Name = updateAuthorModel.Name,
-                Books = books
+                
             };
             this.authorWriteRepository.Update(author);
             this.authorWriteRepository.Save();

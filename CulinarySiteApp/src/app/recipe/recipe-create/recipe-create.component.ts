@@ -72,6 +72,9 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
     this.myForm = new FormGroup({
       name: new FormControl('recept', Validators.required),
       servingsNumber: new FormControl('', Validators.required),
+      cookingTime: new FormControl('', Validators.required),
+      difficultyLevel: new FormControl('', Validators.required),
+      content: new FormControl('', Validators.required),
       dish: new FormControl('', Validators.required),
       author: new FormControl('', Validators.required),
       book: new FormControl('', Validators.required),

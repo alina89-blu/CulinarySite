@@ -11,16 +11,41 @@
   </div>
 
   <div>
-    <label>Категория блюда</label>
+    <label>Количество порций</label>
+    <input
+      type="text"
+      [(ngModel)]="createRecipeModel.servingsNumber"
+      formControlName="servingsNumber"
+    />
+  </div>
+  <div>
+    <label>время готовки</label>
+    <input
+      type="time"
+      [(ngModel)]="createRecipeModel.cookingTime"
+      formControlName="cookingTime"
+    />
+  </div>
+  <div>
+    <label>сложный уровень</label>
     <select
-      [(ngModel)]="createRecipeModel.dishId"
+      [(ngModel)]="createRecipeModel.difficultyLevel"
       class="form-control"
-      formControlName="dish"
+      formControlName="difficultyLevel"
     >
-      <option *ngFor="let dish of dishes" [ngValue]="dish.dishId">
-        {{ dish.category }}
+      <option *ngFor="let difficultyLevel of difficultyLevels">
+        {{ difficultyLevel }}
       </option>
     </select>
+  </div>
+
+  <div>
+    <label>содержание</label>
+    <input
+      type="text"
+      [(ngModel)]="createRecipeModel.content"
+      formControlName="content"
+    />
   </div>
 
   <div>
@@ -45,6 +70,19 @@
     >
       <option *ngFor="let book of books" [ngValue]="book.bookId">
         {{ book.name }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Категория блюда</label>
+    <select
+      [(ngModel)]="createRecipeModel.dishId"
+      class="form-control"
+      formControlName="dish"
+    >
+      <option *ngFor="let dish of dishes" [ngValue]="dish.dishId">
+        {{ dish.category }}
       </option>
     </select>
   </div>
