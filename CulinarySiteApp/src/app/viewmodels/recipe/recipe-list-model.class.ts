@@ -1,6 +1,9 @@
 import { DifficultyLevel } from 'src/app/enums/difficulty-level.enum';
 import { IRecipeListModel } from 'src/app/interfaces/recipe/recipe-list-model.interface';
-import { RecipeIngredientModel } from '../recipe-ingredient/recipe-ingredient-model.class';
+import { CookingStageModel } from '../cooking-stage/cooking-stage-model.class';
+import { IngredientModel } from '../ingredient/ingredient-model.class';
+import { OrganicMatterModel } from '../organic-matter/organic-matter-model.class';
+import { TagModel } from '../tag/tag-model.class';
 
 export class RecipeListModel {
   public recipeId: number;
@@ -12,7 +15,10 @@ export class RecipeListModel {
   public dishCategory: string;
   public authorName: string;
   public bookName?: string;
-  public recipeIngredients: RecipeIngredientModel[];
+  public ingredients: IngredientModel[];
+  public organicMatters: OrganicMatterModel[];
+  public cookingStages: CookingStageModel[];
+  public tags: TagModel[];
 
   constructor(public recipeListModel?: IRecipeListModel) {
     if (recipeListModel) {
@@ -25,7 +31,10 @@ export class RecipeListModel {
       this.dishCategory = recipeListModel.dishCategory;
       this.authorName = recipeListModel.authorName;
       this.bookName = recipeListModel.bookName;
-      this.recipeIngredients = recipeListModel.recipeIngredients;
+      this.ingredients = recipeListModel.ingredients;
+      this.organicMatters = recipeListModel.organicMatters;
+      this.cookingStages = recipeListModel.cookingStages;
+      this.tags = recipeListModel.tags;
     }
   }
 }

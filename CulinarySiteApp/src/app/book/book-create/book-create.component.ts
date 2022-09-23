@@ -32,7 +32,7 @@ export class BookCreateComponent implements OnInit {
 
   public getAuthorList(): void {
     this.authorService
-      .getAuthorDetailList(false)
+      .getAuthorList()
       .subscribe(
         (data: IAuthorListModel[]) =>
           (this.authors = data.map((x) => new AuthorListModel(x)))

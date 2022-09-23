@@ -2,14 +2,14 @@ import { ICookingStageDetailModel } from 'src/app/interfaces/cooking-stage/cooki
 
 export class CookingStageDetailModel {
   public cookingStageId: number;
-  public recipeId: number;
   public content: string;
+  public recipeId: number;
 
   constructor(public cookingStageDetailModel?: ICookingStageDetailModel) {
     if (cookingStageDetailModel) {
       this.cookingStageId = cookingStageDetailModel.cookingStageId;
-      this.recipeId = cookingStageDetailModel.recipeId;
       this.content = cookingStageDetailModel.content;
+      this.recipeId = cookingStageDetailModel.recipeId;
     }
   }
 }

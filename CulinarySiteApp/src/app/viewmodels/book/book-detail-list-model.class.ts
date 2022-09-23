@@ -3,7 +3,7 @@ import { IBookDetailListModel } from 'src/app/interfaces/book/book-detail-list-m
 export class BookDetailListModel {
   public bookId: number;
   public name: string;
-  public creationYear: Date = new Date();
+  public creationYear: number;
   public authorName: string;
   public description: string;
 

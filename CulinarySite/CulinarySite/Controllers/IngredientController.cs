@@ -14,15 +14,15 @@ namespace CulinarySite.Controllers
         }
 
         [HttpGet("{withRelated}")]
-        public IEnumerable<IngredientListModel> GetIngredientList(bool withRelated)
+        public IEnumerable<IngredientListModel> GetIngredientList()
         {
-            return this.ingredientService.GetIngredientList(withRelated);
+            return this.ingredientService.GetIngredientList();
         }
 
         [HttpGet("{id}/{withRelated}")]
-        public IngredientDetailModel GetIngredient(int id, bool withRelated)
+        public IngredientDetailModel GetIngredient(int id)
         {
-            return this.ingredientService.GetIngredient(id, withRelated);
+            return this.ingredientService.GetIngredient(id);
         }
 
         [HttpPost]

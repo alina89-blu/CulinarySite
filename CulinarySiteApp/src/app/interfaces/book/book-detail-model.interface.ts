@@ -2,6 +2,6 @@ export interface IBookDetailModel {
   bookId: number;
   authorId: number;
   name: string;
-  creationYear: Date;
+  creationYear: number;
   description: string;
 }

@@ -1,10 +1,10 @@
 import { IBookDetailModel } from 'src/app/interfaces/book/book-detail-model.interface';
 
 export class BookDetailModel {
-  public bookId?: number;
+  public bookId: number;
   public authorId: number;
   public name: string;
-  public creationYear: Date = new Date();
+  public creationYear: number;
   public description: string;
 
   constructor(public bookDetailModel?: IBookDetailModel) {

@@ -1,15 +1,17 @@
 ﻿using System.Collections.Generic;
-using ServiceLayer.ViewModels.Book;
+using ServiceLayer.Dtos.Book;
 
 namespace ServiceLayer
 {
     public interface IBookService
     {
-        void CreateBook(CreateBookModel createBookModel);
-        void UpdateBook(UpdateBookModel updateBookModel);
+        void CreateBook(CreateBookDto createBookDto);
+        void UpdateBook(UpdateBookDto updateBookDto);
         void DeleteBook(int id);
-        IEnumerable<BookDetailListModel> GetBookDetailList(bool withRelated);
-        BookDetailModel GetBook(int id, bool withRelated);
-        IEnumerable<BookModel> GetBookList();
+        IEnumerable<BookDetailListDto> GetBookDetailList(bool withRelated);
+        BookDetailDto GetBook(int id, bool withRelated);
+        IEnumerable<BookDto> GetBookList();
+        IEnumerable<BookDetailListDto> GetSortedBooksByName(bool withRelated);
+        IEnumerable<BookDetailListDto> GetSortedBooksByYear(bool withRelated);
     }
 }

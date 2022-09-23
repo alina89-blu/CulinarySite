@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IAuthorListModel } from '../interfaces/author/author-list-model.interface';
 import { IAuthorDetailModel } from '../interfaces/author/author-detail-model.interface';
 import { CreateAuthorModel } from '../viewmodels/author/create-author-model.class';
 import { UpdateAuthorModel } from '../viewmodels/author/update-author-model.class';
-import { IAuthorModel } from '../interfaces/author/author-model.interface';
+import { IAuthorListModel } from '../interfaces/author/author-list-model.interface';
 
 @Injectable()
 export class AuthorService {
@@ -13,14 +12,14 @@ export class AuthorService {
 
   constructor(private http: HttpClient) {}
 
-  public getAuthorDetailList(
+  /* public getAuthorDetailList(
     withRelated: boolean
   ): Observable<IAuthorListModel[]> {
     return this.http.get<IAuthorListModel[]>(this.url + '/' + withRelated);
-  }
+  }*/
 
-  public getAuthorList(): Observable<IAuthorModel[]> {
-    return this.http.get<IAuthorModel[]>(this.url);
+  public getAuthorList(): Observable<IAuthorListModel[]> {
+    return this.http.get<IAuthorListModel[]>(this.url);
   }
 
   public getAuthor(

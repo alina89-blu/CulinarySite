@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Database;
+using System.Collections.Generic;
 using ServiceLayer.ViewModels.Ingredient;
 
 namespace ServiceLayer
@@ -8,7 +9,7 @@ namespace ServiceLayer
         void CreateIngredient(CreateIngredientModel createIngredientModel);
         void UpdateIngredient(UpdateIngredientModel updateIngredientModel);
         void DeleteIngredient(int id);
-        IEnumerable<IngredientListModel> GetIngredientList(bool withRelated);
-        IngredientDetailModel GetIngredient(int id, bool withRelated);
+        IEnumerable<IngredientListModel> GetIngredientList();
+        IngredientDetailModel GetIngredient(int id);
     }
 }

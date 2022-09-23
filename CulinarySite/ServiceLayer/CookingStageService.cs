@@ -2,107 +2,94 @@
 using Repositories;
 using Database;
 using ServiceLayer.ViewModels.CookingStage;
+using ServiceLayer.Dtos.CookingStage;
+using AutoMapper;
 
 namespace ServiceLayer
 {
     public class CookingStageService : ICookingStageService
     {
-        private readonly IReadOnlyGenericRepository<CookingStage> cookingStageReadOnlyRepository;
-        private readonly IWriteGenericRepository<CookingStage> cookingStageWriteRepository;
+        private readonly IReadOnlyGenericRepository<CookingStage> _cookingStageReadOnlyRepository;
+        private readonly IWriteGenericRepository<CookingStage> _cookingStageWriteRepository;
+        private readonly IMapper _mapper;
         public CookingStageService(
             IReadOnlyGenericRepository<CookingStage> cookingStageReadOnlyRepository,
-            IWriteGenericRepository<CookingStage> cookingStageWriteRepository)
+            IWriteGenericRepository<CookingStage> cookingStageWriteRepository,
+             IMapper mapper)
         {
-            this.cookingStageReadOnlyRepository = cookingStageReadOnlyRepository;
-            this.cookingStageWriteRepository = cookingStageWriteRepository;
+            _cookingStageReadOnlyRepository = cookingStageReadOnlyRepository;
+            _cookingStageWriteRepository = cookingStageWriteRepository;
+            _mapper = mapper;
         }
 
-        public void CreateCookingStage(CreateCookingStageModel createCookingStageModel)
+        public void CreateCookingStage(CreateCookingStageDto createCookingStageDto)
         {
-            var cookingStage = new CookingStage
-            {
-                Content = createCookingStageModel.Content,
-                RecipeId = createCookingStageModel.RecipeId
-            };
-            this.cookingStageWriteRepository.Create(cookingStage);
-            this.cookingStageWriteRepository.Save();
+            CookingStage cookingStage= _mapper.Map<CookingStage>(createCookingStageDto);
+
+            _cookingStageWriteRepository.Create(cookingStage);
+            _cookingStageWriteRepository.Save();
         }
 
-        public void UpdateCookingStage(UpdateCookingStageModel updateCookingStageModel)
+        public void UpdateCookingStage(UpdateCookingStageDto updateCookingStageDto)
         {
-            var cookingStage = new CookingStage
-            {
-                Id = updateCookingStageModel.CookingStageId,
-                Content = updateCookingStageModel.Content,
-                RecipeId = updateCookingStageModel.RecipeId
-            };
-            this.cookingStageWriteRepository.Update(cookingStage);
-            this.cookingStageWriteRepository.Save();
+            CookingStage cookingStage = _mapper.Map<CookingStage>(updateCookingStageDto);
+
+            _cookingStageWriteRepository.Update(cookingStage);
+            _cookingStageWriteRepository.Save();
         }
 
         public void DeleteCookingStage(int id)
         {
-            this.cookingStageWriteRepository.Delete(id);
-            this.cookingStageWriteRepository.Save();
+            _cookingStageWriteRepository.Delete(id);
+            _cookingStageWriteRepository.Save();
         }
 
-        public IEnumerable<CookingStageListModel> GetCookingStageList(bool withRelated)
+        public IEnumerable<CookingStageListDto> GetCookingStageList(bool withRelated)
         {
-            IEnumerable<CookingStage> cookingStages;
-            List<CookingStageListModel> cookingStageListModels = new List<CookingStageListModel>();
+            IEnumerable<CookingStage> cookingStages;           
+            var cookingStageListDtos = new List<CookingStageListDto>();
             if (withRelated)
             {
-                cookingStages = this.cookingStageReadOnlyRepository.GetItemListWithInclude(
+                cookingStages = _cookingStageReadOnlyRepository.GetItemListWithInclude(
                     x => x.Recipe,
                     x => x.Images);
+
                 foreach (var cookingStage in cookingStages)
                 {
-                    cookingStageListModels.Add(new CookingStageListModel
-                    {
-                        CookingStageId = cookingStage.Id,
-                        Content = cookingStage.Content,
-                        RecipeName = cookingStage.Recipe.Name
-                    });
+                    cookingStageListDtos.Add(_mapper.Map<CookingStageListDto>(cookingStage));
                 }
-                return cookingStageListModels;
+                return cookingStageListDtos;
             }
-            cookingStages = this.cookingStageReadOnlyRepository.GetItemList();
+            cookingStages = _cookingStageReadOnlyRepository.GetItemList();
+
             foreach (var cookingStage in cookingStages)
             {
-                cookingStageListModels.Add(new CookingStageListModel
-                {
-                    CookingStageId = cookingStage.Id,
-                    Content = cookingStage.Content,
-                });
+                cookingStageListDtos.Add(_mapper.Map<CookingStageListDto>(cookingStage));
             }
-            return cookingStageListModels;
+            return cookingStageListDtos;
         }
 
-        public CookingStageDetailModel GetCookingStage(int id, bool withRelated)
+        public CookingStageDetailDto GetCookingStage(int id, bool withRelated)
         {
-            var cookingStage = new CookingStage();
-            CookingStageDetailModel cookingStageDetailModel = new CookingStageDetailModel();
+            var cookingStage = new CookingStage();           
+            var cookingStageDetailDto = new CookingStageDetailDto();
+
             if (withRelated)
             {
-                cookingStage = this.cookingStageReadOnlyRepository.GetItemWithInclude(
+                cookingStage = _cookingStageReadOnlyRepository.GetItemWithInclude(
                 x => x.Id == id,
                 x => x.Recipe,
                 x => x.Images);
-                cookingStageDetailModel = new CookingStageDetailModel
-                {
-                    CookingStageId = cookingStage.Id,
-                    Content = cookingStage.Content,
-                    RecipeId = cookingStage.RecipeId
-                };
-                return cookingStageDetailModel;
+
+                cookingStageDetailDto = _mapper.Map<CookingStageDetailDto>(cookingStage);
+
+                return cookingStageDetailDto;
             }
-            cookingStage = this.cookingStageReadOnlyRepository.GetItem(id);
-            cookingStageDetailModel = new CookingStageDetailModel
-            {
-                CookingStageId = cookingStage.Id,
-                Content = cookingStage.Content,               
-            };
-            return cookingStageDetailModel;
+            cookingStage = _cookingStageReadOnlyRepository.GetItem(id);
+
+            cookingStageDetailDto = _mapper.Map<CookingStageDetailDto>(cookingStage);
+
+            return cookingStageDetailDto;
         }
     }
 }

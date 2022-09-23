@@ -3,66 +3,95 @@ using Repositories;
 using Database;
 using ServiceLayer.ViewModels.Author;
 using ServiceLayer.ViewModels.Recipe;
-using System.Linq;
 using ServiceLayer.ViewModels.Book;
+using AutoMapper;
+using ServiceLayer.Dtos.Author;
 
 namespace ServiceLayer
 {
     public class AuthorService : IAuthorService
     {
-        private readonly IReadOnlyGenericRepository<Author> authorReadOnlyRepository;
-        private readonly IWriteGenericRepository<Book> bookWriteRepository;
-        private readonly IWriteGenericRepository<Author> authorWriteRepository;
+        private readonly IReadOnlyGenericRepository<Author> _authorReadOnlyRepository;
+        private readonly IWriteGenericRepository<Book> _bookWriteRepository;
+        private readonly IWriteGenericRepository<Author> _authorWriteRepository;
+        private readonly IMapper _mapper;
         public AuthorService(
             IReadOnlyGenericRepository<Author> authorReadOnlyRepository,
             IWriteGenericRepository<Book> bookWriteRepository,
-            IWriteGenericRepository<Author> authorWriteRepository)
+            IWriteGenericRepository<Author> authorWriteRepository,
+            IMapper mapper)
         {
-            this.authorReadOnlyRepository = authorReadOnlyRepository;
-            this.bookWriteRepository = bookWriteRepository;
-            this.authorWriteRepository = authorWriteRepository;
+            _authorReadOnlyRepository = authorReadOnlyRepository;
+            _bookWriteRepository = bookWriteRepository;
+            _authorWriteRepository = authorWriteRepository;
+            _mapper = mapper;
         }
 
-        public void CreateAuthor(CreateAuthorModel createAuthorModel)
+        public void CreateAuthor(CreateAuthorDto createAuthorDto)
         {
-            /*var books = createAuthorModel
-                .Books
-                .Select(x => this.bookWriteRepository.GetItem(x.BookId))
-                .ToList();*/
+            Author author = _mapper.Map<Author>(createAuthorDto);
 
-            var author = new Author()
-            {
-                Name = createAuthorModel.Name,                
-            };
-            this.authorWriteRepository.Create(author);
-            this.authorWriteRepository.Save();
+            _authorWriteRepository.Create(author);
+            _authorWriteRepository.Save();
         }
 
-        public void UpdateAuthor(UpdateAuthorModel updateAuthorModel)
-        {          
-            var author = new Author
-            {
-                Id = updateAuthorModel.AuthorId,
-                Name = updateAuthorModel.Name,
-                
-            };
-            this.authorWriteRepository.Update(author);
-            this.authorWriteRepository.Save();
+        public void UpdateAuthor(UpdateAuthorDto updateAuthorDto)
+        {
+            Author author = _mapper.Map<Author>(updateAuthorDto);
+
+            _authorWriteRepository.Update(author);
+            _authorWriteRepository.Save();
         }
 
         public void DeleteAuthor(int id)
         {
-            this.authorWriteRepository.Delete(id);
-            this.authorWriteRepository.Save();
+            _authorWriteRepository.Delete(id);
+            _authorWriteRepository.Save();
         }
 
-        public AuthorDetailModel GetAuthor(int id, bool withRelated)
+        public AuthorDetailDto GetAuthor(int id, bool withRelated)
+        {
+            var author = new Author();
+            var authorDetailDto = new AuthorDetailDto();
+
+            if (withRelated)
+            {
+                author = _authorReadOnlyRepository.GetItemWithInclude(
+                       x => x.Id == id,
+                       x => x.Books,
+                       x => x.Recipes);
+
+                authorDetailDto = _mapper.Map<AuthorDetailDto>(author);
+
+                return authorDetailDto;
+            }
+            author = _authorReadOnlyRepository.GetItem(id);
+
+            authorDetailDto = _mapper.Map<AuthorDetailDto>(author);
+
+            return authorDetailDto;
+        }
+
+        public IEnumerable<AuthorListDto> GetAuthorList()
+        {
+            IEnumerable<Author> authors = _authorReadOnlyRepository.GetItemList();
+            List<AuthorListDto> authorListDtos = new List<AuthorListDto>();
+
+            foreach (var author in authors)
+            {
+                authorListDtos.Add(_mapper.Map<AuthorListDto>(author));
+            }
+            return authorListDtos;
+        }
+
+
+        /*public AuthorDetailModel GetAuthor(int id, bool withRelated)
         {
             var author = new Author();
             AuthorDetailModel authorDetailModel = new AuthorDetailModel();
             if (withRelated)
             {
-                author = authorReadOnlyRepository.GetItemWithInclude(
+                author = _authorReadOnlyRepository.GetItemWithInclude(
                        x => x.Id == id,
                        x => x.Books,
                        x => x.Recipes);
@@ -84,88 +113,14 @@ namespace ServiceLayer
                 };
                 return authorDetailModel;
             }
-            author = authorReadOnlyRepository.GetItem(id);
+            author = _authorReadOnlyRepository.GetItem(id);
             authorDetailModel = new AuthorDetailModel
             {
                 AuthorId = author.Id,
                 Name = author.Name
             };
             return authorDetailModel;
-        }
-
-        public IEnumerable<AuthorDetailListModel> GetAuthorDetailList(bool withRelated)
-        {
-            IEnumerable<Author> authors;
-            List<AuthorDetailListModel> authorListModels = new List<AuthorDetailListModel>();         
-
-            if (withRelated)
-            {
-                authors = this.authorReadOnlyRepository.GetItemListWithInclude(
-                    x => x.Books,
-                    x => x.Recipes);
-
-                foreach (var author in authors)
-                {
-                    var recipeModels = new List<RecipeModel>();
-                    foreach (var recipe in author.Recipes)
-                    {                        
-                        recipeModels.Add(new RecipeModel {  Name = recipe.Name});
-                    }
-
-                    var bookModels = new List<BookModel>();
-                    foreach (var book in author.Books)
-                    {                        
-                        bookModels.Add(new BookModel { BookId = book.Id, Name = book.Name });
-                    }
-
-                    authorListModels.Add(new AuthorDetailListModel
-                    {
-                        AuthorId = author.Id,
-                        Name = author.Name,
-                        RecipeModels = recipeModels,
-                        Books = bookModels
-                    });
-
-                    /*foreach (var recipe in author.Recipes)
-                    {
-                        //recipeModels.Add(new RecipeModel { Id = recipe.Id, Name = recipe.Name, AuthorId = author.Id });                       
-                        authorListModels.Add(new AuthorListModel
-                        {
-                            Id = author.Id,
-                            Name = author.Name,
-                            RecipeModels = new List<RecipeModel> { new RecipeModel { AuthorId = author.Id, Name = recipe.Name, Id = recipe.Id } }
-                        });
-                    }*/
-                }
-                return authorListModels;
-            }
-            authors = authorReadOnlyRepository.GetItemList();
-            foreach (var author in authors)
-            {
-                authorListModels.Add(new AuthorDetailListModel
-                {
-                    AuthorId = author.Id,
-                    Name = author.Name
-                });
-            }
-            return authorListModels;
-        }
-
-        public IEnumerable<AuthorModel> GetAuthorList()
-        {
-            IEnumerable<Author> authors = this.authorReadOnlyRepository.GetItemList();
-            List<AuthorModel> authorModels = new List<AuthorModel>();
-
-            foreach (var author in authors)
-            {
-                authorModels.Add(new AuthorModel
-                {
-                    AuthorId = author.Id,
-                    Name = author.Name
-                });
-            }
-            return authorModels;
-        }
+        }*/
 
     }
 }

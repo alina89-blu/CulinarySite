@@ -1,108 +1,98 @@
 ﻿using System.Collections.Generic;
+using AutoMapper;
 using Database;
 using Repositories;
-using ServiceLayer.ViewModels.Episode;
+using ServiceLayer.Dtos.Episode;
 
 namespace ServiceLayer
 {
     public class EpisodeService : IEpisodeService
     {
-        private readonly IReadOnlyGenericRepository<Episode> episodeReadOnlyRepository;
-        private readonly IWriteGenericRepository<Episode> episodeWriteRepository;
+        private readonly IReadOnlyGenericRepository<Episode> _episodeReadOnlyRepository;
+        private readonly IWriteGenericRepository<Episode> _episodeWriteRepository;
+        private readonly IMapper _mapper;
         public EpisodeService(
             IReadOnlyGenericRepository<Episode> episodeReadOnlyRepository,
-            IWriteGenericRepository<Episode> episodeWriteRepository)
+            IWriteGenericRepository<Episode> episodeWriteRepository,
+            IMapper mapper)
         {
-            this.episodeReadOnlyRepository = episodeReadOnlyRepository;
-            this.episodeWriteRepository = episodeWriteRepository;
+            _episodeReadOnlyRepository = episodeReadOnlyRepository;
+            _episodeWriteRepository = episodeWriteRepository;
+            _mapper = mapper;
         }
 
-        public void CreateEpisode(CreateEpisodeModel createEpisodeModel)
+        public void CreateEpisode(CreateEpisodeDto createEpisodeDto)
         {
-            var episode = new Episode
-            {
-                Name = createEpisodeModel.Name,
-                CulinaryChannelId = createEpisodeModel.CulinaryChannelId
-            };
-            this.episodeWriteRepository.Create(episode);
-            this.episodeWriteRepository.Save();
+            Episode episode = _mapper.Map<Episode>(createEpisodeDto);
+
+            _episodeWriteRepository.Create(episode);
+            _episodeWriteRepository.Save();
         }
 
-        public void UpdateEpisode(UpdateEpisodeModel updateEpisodeModel)
+        public void UpdateEpisode(UpdateEpisodeDto updateEpisodeDto)
         {
-            var episode = new Episode
-            {
-                Id = updateEpisodeModel.EpisodeId,
-                Name = updateEpisodeModel.Name,
-                CulinaryChannelId = updateEpisodeModel.CulinaryChannelId
-            };
-            this.episodeWriteRepository.Update(episode);
-            this.episodeWriteRepository.Save();
+            Episode episode = _mapper.Map<Episode>(updateEpisodeDto);
+
+            _episodeWriteRepository.Update(episode);
+            _episodeWriteRepository.Save();
         }
 
         public void DeleteEpisode(int id)
         {
-            this.episodeWriteRepository.Delete(id);
-            this.episodeWriteRepository.Save();
+            _episodeWriteRepository.Delete(id);
+            _episodeWriteRepository.Save();
         }
 
-        public EpisodeDetailModel GetEpisode(int id, bool withRelated)
+        public EpisodeDetailDto GetEpisode(int id, bool withRelated)
         {
             var episode = new Episode();
-            EpisodeDetailModel episodeDetailModel = new EpisodeDetailModel();
+            var episodeDetailDto = new EpisodeDetailDto();
+
             if (withRelated)
             {
-                episode = this.episodeReadOnlyRepository.GetItemWithInclude(
+                episode = _episodeReadOnlyRepository.GetItemWithInclude(
                                 x => x.Id == id,
-                                x => x.CulinaryChannel
+                                x => x.CulinaryChannel,
+                                x => x.Image,
+                                x => x.Tags
                                );
-                episodeDetailModel = new EpisodeDetailModel
-                {
-                    EpisodeId = episode.Id,
-                    Name = episode.Name,
-                    CulinaryChannelId = episode.CulinaryChannelId
-                };
-                return episodeDetailModel;
+
+                episodeDetailDto = _mapper.Map<EpisodeDetailDto>(episode);
+
+                return episodeDetailDto;
             }
 
-            episode = this.episodeReadOnlyRepository.GetItem(id);
-            episodeDetailModel = new EpisodeDetailModel
-            {
-                EpisodeId = episode.Id,
-                Name = episode.Name,
-            };
-            return episodeDetailModel;
+            episode = _episodeReadOnlyRepository.GetItem(id);
+            episodeDetailDto = _mapper.Map<EpisodeDetailDto>(episode);
+
+            return episodeDetailDto;
         }
 
-        public IEnumerable<EpisodeListModel> GetEpisodeList(bool withRelated)
+        public IEnumerable<EpisodeListDto> GetEpisodeList(bool withRelated)
         {
             IEnumerable<Episode> episodes;
-            List<EpisodeListModel> episodeListModels = new List<EpisodeListModel>();
+            var episodeListDtos = new List<EpisodeListDto>();
+
             if (withRelated)
             {
-                episodes = this.episodeReadOnlyRepository.GetItemListWithInclude(
-                                x => x.CulinaryChannel);
+                episodes = _episodeReadOnlyRepository.GetItemListWithInclude(
+                                x => x.CulinaryChannel,
+                                x => x.Image,
+                                x => x.Tags);
+
                 foreach (var episode in episodes)
                 {
-                    episodeListModels.Add(new EpisodeListModel
-                    {
-                        EpisodeId = episode.Id,
-                        Name = episode.Name,
-                        CulinaryChannelName = episode.CulinaryChannel.Name
-                    });
+                    episodeListDtos.Add(_mapper.Map<EpisodeListDto>(episode));
                 }
-                return episodeListModels;
+                return episodeListDtos;
             }
-            episodes = this.episodeReadOnlyRepository.GetItemList();
+            episodes = _episodeReadOnlyRepository.GetItemList();
+
             foreach (var episode in episodes)
             {
-                episodeListModels.Add(new EpisodeListModel
-                {
-                    EpisodeId = episode.Id,
-                    Name = episode.Name                    
-                });
+                episodeListDtos.Add(_mapper.Map<EpisodeListDto>(episode));
             }
-            return episodeListModels;
+            return episodeListDtos;
         }
     }
 }

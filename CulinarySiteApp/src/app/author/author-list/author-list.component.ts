@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.interface';
 import { AuthorService } from 'src/app/services/author.service';
 import { AuthorListModel } from 'src/app/viewmodels/author/author-list-model.class';
-import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.interface';
 
 @Component({
   selector: 'app-author-list',
@@ -19,7 +19,7 @@ export class AuthorListComponent implements OnInit {
 
   public getAuthorList(): void {
     this.authorService
-      .getAuthorDetailList(true)
+      .getAuthorList()
       .subscribe(
         (data: IAuthorListModel[]) =>
           (this.authors = data.map((x) => new AuthorListModel(x)))

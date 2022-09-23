@@ -1,3 +1,5 @@
+using CulinarySite.AutoMapperProfiles;
+using Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Repositories;
 using ServiceLayer;
+using ServiceLayer.AutoMapperProfiles;
 
 namespace CulinarySite
 {
@@ -12,7 +15,7 @@ namespace CulinarySite
     {        
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = "Server=(localdb)\\mssqllocaldb;Database=culinarysitedb;Trusted_Connection=True;";
+            string connectionString = "Server=DESKTOP-N5BQGM7\\SQLEXPRESS;Database=culinarysitedb;Trusted_Connection=True;";
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
             services.AddControllers()
            .AddNewtonsoftJson(options =>
@@ -21,6 +24,8 @@ namespace CulinarySite
             {
                 configuration.RootPath = "CulinarySiteApp/dist";
             });
+            services.AddAutoMapper(typeof(DtoProfile), typeof(EntityProfile));
+
             services.AddScoped(typeof(IWriteGenericRepository<>), typeof(EFWriteGenericRepository<>));
             services.AddScoped(typeof(IReadOnlyGenericRepository<>), typeof(EFReadOnlyGenericRepository<>));
             services.AddScoped(typeof(IAddressService), typeof(AddressService));
@@ -33,15 +38,13 @@ namespace CulinarySite
             services.AddScoped(typeof(IEpisodeService), typeof(EpisodeService));
             services.AddScoped(typeof(IImageService), typeof(ImageService));
             services.AddScoped(typeof(IIngredientService), typeof(IngredientService));
-            services.AddScoped(typeof(IOrganicMatterService), typeof(OrganicMatterService));
-            services.AddScoped(typeof(IRecipeOrganicMatterService), typeof(RecipeOrganicMatterService));
-            services.AddScoped(typeof(IRecipeService), typeof(RecipeService));
-            services.AddScoped(typeof(IRecipeIngredientService), typeof(RecipeIngredientService));
+            services.AddScoped(typeof(IOrganicMatterService), typeof(OrganicMatterService));            
+            services.AddScoped(typeof(IRecipeService), typeof(RecipeService));           
             services.AddScoped(typeof(IRestaurantService), typeof(RestaurantService));
             services.AddScoped(typeof(ISubscriberService), typeof(SubscriberService));
             services.AddScoped(typeof(ITagService), typeof(TagService));
             services.AddScoped(typeof(ITelephoneService), typeof(TelephoneService));
-            
+
             //
 
         }

@@ -1,5 +1,8 @@
 ﻿using Database;
-using ServiceLayer.ViewModels.RecipeIngredient;
+using ServiceLayer.ViewModels.Ingredient;
+using ServiceLayer.ViewModels.OrganicMatter;
+using ServiceLayer.ViewModels.CookingStage;
+using ServiceLayer.ViewModels.Tag;
 using System;
 using System.Collections.Generic;
 
@@ -16,6 +19,9 @@ namespace ServiceLayer.ViewModels.Recipe
         public int DishId { get; set; }
         public int AuthorId { get; set; }
         public int? BookId { get; set; }
-        public List<RecipeIngredientModel> RecipeIngredients { get; set; } = new List<RecipeIngredientModel>();
+        public List<IngredientModel> Ingredients { get; set; } = new List<IngredientModel>();        
+        public List<OrganicMatterModel> OrganicMatters { get; set; } = new List<OrganicMatterModel>();
+        public List<CookingStageModel> CookingStages { get; set; } = new List<CookingStageModel>();
+        public List<TagModel> Tags { get; set; } = new List<TagModel>();
     }
 }

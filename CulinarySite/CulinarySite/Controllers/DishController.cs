@@ -2,45 +2,61 @@
 using ServiceLayer;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.ViewModels.Dish;
+using AutoMapper;
+using ServiceLayer.Dtos.Dish;
 
 namespace CulinarySite.Controllers
 {
-    public class DishController:BaseController
+    public class DishController : BaseController
     {
-        private readonly IDishService dishService;
-        public DishController(IDishService dishService)
+        private readonly IDishService _dishService;
+        private readonly IMapper _mapper;
+        public DishController(IDishService dishService, IMapper mapper)
         {
-            this.dishService = dishService;
+            _dishService = dishService;
+            _mapper = mapper;
         }
 
         [HttpGet("{withRelated}")]
         public IEnumerable<DishListModel> GetDishList(bool withRelated)
         {
-            return this.dishService.GetDishList(withRelated);
+            IEnumerable<DishListDto> dishListDtos = _dishService.GetDishList(withRelated);
+            var dishListModels = new List<DishListModel>();
+
+            foreach (var dishListDto in dishListDtos)
+            {
+                dishListModels.Add(_mapper.Map<DishListModel>(dishListDto));
+            }
+            return dishListModels;
         }
 
         [HttpGet("{id}/{withRelated}")]
         public DishDetailModel GetDish(int id, bool withRelated)
         {
-            return this.dishService.GetDish(id,withRelated);
+            DishDetailDto dishDetailDto = _dishService.GetDish(id, withRelated);
+            DishDetailModel dishDetailModel = _mapper.Map<DishDetailModel>(dishDetailDto);
+
+            return dishDetailModel;
         }
 
         [HttpPost]
         public void CreateDish(CreateDishModel createDishModel)
         {
-            this.dishService.CreateDish(createDishModel);
+            CreateDishDto createDishDto = _mapper.Map<CreateDishDto>(createDishModel);
+            _dishService.CreateDish(createDishDto);
         }
 
         [HttpPut]
         public void UpdateDish(UpdateDishModel updateDishModel)
         {
-            this.dishService.UpdateDish(updateDishModel);
+            UpdateDishDto updateDishDto = _mapper.Map<UpdateDishDto>(updateDishModel);
+            _dishService.UpdateDish(updateDishDto);
         }
 
         [HttpDelete("{id}")]
         public void DeleteDish(int id)
         {
-            this.dishService.DeleteDish(id);
+            _dishService.DeleteDish(id);
         }
     }
 }

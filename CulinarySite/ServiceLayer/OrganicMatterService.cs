@@ -21,7 +21,9 @@ namespace ServiceLayer
         {
             var organicMatter = new OrganicMatter
             {
-                Name = createOrganicMatterModel.Name
+                Name = createOrganicMatterModel.Name,
+                Unit=createOrganicMatterModel.Unit,
+                Quantity=createOrganicMatterModel.Quantity
             };
             this.organicMatterWriteRepository.Create(organicMatter);
             this.organicMatterWriteRepository.Save();
@@ -32,7 +34,9 @@ namespace ServiceLayer
             var organicMatter = new OrganicMatter
             {
                 Id = updateOrganicMatterModel.OrganicMatterId,
-                Name = updateOrganicMatterModel.Name
+                Name = updateOrganicMatterModel.Name,
+                Unit = updateOrganicMatterModel.Unit,
+                Quantity = updateOrganicMatterModel.Quantity
             };
             this.organicMatterWriteRepository.Update(organicMatter);
             this.organicMatterWriteRepository.Save();
@@ -55,7 +59,9 @@ namespace ServiceLayer
                 organicMatterListModels.Add(new OrganicMatterListModel
                 {
                     OrganicMatterId = organicMatter.Id,
-                    Name = organicMatter.Name
+                    Name = organicMatter.Name,
+                    Unit=organicMatter.Unit,
+                    Quantity=organicMatter.Quantity
                 });
             }
             return organicMatterListModels;
@@ -67,7 +73,9 @@ namespace ServiceLayer
             var organicMatterDetailModel = new OrganicMatterDetailModel
             {
                 OrganicMatterId = organicMatter.Id,
-                Name = organicMatter.Name
+                Name = organicMatter.Name,
+                Unit=organicMatter.Unit,
+                Quantity=organicMatter.Quantity
             };
             return organicMatterDetailModel;
         }

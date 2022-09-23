@@ -5,7 +5,7 @@ export class UpdateBookModel {
   public bookId: number;
   public authorId: number;
   public name: string;
-  public creationYear: Date = new Date();
+  public creationYear: number;
   public description: string;
 
   constructor(public updateBookModel?: IUpdateBookModel | IBookDetailModel) {

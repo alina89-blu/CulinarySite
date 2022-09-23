@@ -7,7 +7,7 @@ import { IngredientService } from 'src/app/services/ingredient.service';
 import { RecipeIngredientService } from 'src/app/services/recipe-ingredient.service';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { IngredientListModel } from 'src/app/viewmodels/ingredient/ingredient-list-model.class';
-import { CreateRecipeIngredientModel } from 'src/app/viewmodels/recipe-ingredient/create-recipe-ingredient-model.class';
+import { CreateIngredientModel } from 'src/app/viewmodels/ingredient/create-ingredient-model.class';
 import { RecipeListModel } from 'src/app/viewmodels/recipe/recipe-list-model.class';
 
 @Component({
@@ -18,8 +18,8 @@ import { RecipeListModel } from 'src/app/viewmodels/recipe/recipe-list-model.cla
 export class RecipeListComponent implements OnInit {
   public recipes: RecipeListModel[] = [];
   hidded: boolean = false;
-  public createRecipeIngredientModel: CreateRecipeIngredientModel =
-    new CreateRecipeIngredientModel();
+  public createRecipeIngredientModel: CreateIngredientModel =
+    new CreateIngredientModel();
   public ingredients: IngredientListModel[] = [];
   public units: Unit[] = [
     Unit.Грамм,

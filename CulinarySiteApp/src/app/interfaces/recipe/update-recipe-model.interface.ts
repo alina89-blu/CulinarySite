@@ -1,7 +1,8 @@
 import { DifficultyLevel } from 'src/app/enums/difficulty-level.enum';
-import { CreateRecipeIngredientModel } from 'src/app/viewmodels/recipe-ingredient/create-recipe-ingredient-model.class';
-import { RecipeIngredientModel } from 'src/app/viewmodels/recipe-ingredient/recipe-ingredient-model.class';
-import { UpdateRecipeIngredientModel } from 'src/app/viewmodels/recipe-ingredient/update-recipe-ingredient-model.class';
+import { UpdateCookingStageModel } from 'src/app/viewmodels/cooking-stage/update-cooking-stage-model.class';
+import { UpdateIngredientModel } from 'src/app/viewmodels/ingredient/update-ingredient-model.class';
+import { UpdateOrganicMatterModel } from 'src/app/viewmodels/organic-matter/update-organic-matter-model.class';
+import { UpdateTagModel } from 'src/app/viewmodels/tag/update-tag-model.class';
 
 export interface IUpdateRecipeModel {
   recipeId: number;
@@ -12,7 +13,9 @@ export interface IUpdateRecipeModel {
   content: string;
   dishId: number;
   authorId: number;
-  bookId: number;
-  //recipeIngredients: RecipeIngredientModel[];
-  recipeIngredients: UpdateRecipeIngredientModel[];
+  bookId?: number;
+  ingredients: UpdateIngredientModel[];
+  organicMatters: UpdateOrganicMatterModel[];
+  cookingStages: UpdateCookingStageModel[];
+  tags: UpdateTagModel[];
 }

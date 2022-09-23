@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using ServiceLayer.ViewModels.RecipeIngredient;
+using ServiceLayer.ViewModels.Ingredient;
+using ServiceLayer.ViewModels.OrganicMatter;
+using ServiceLayer.ViewModels.CookingStage;
+using ServiceLayer.ViewModels.Tag;
 
 namespace ServiceLayer.ViewModels.Recipe
 {
@@ -14,7 +17,10 @@ namespace ServiceLayer.ViewModels.Recipe
         public string Content { get; set; }
         public string DishCategory { get; set; }
         public string AuthorName { get; set; }
-        public string? BookName { get; set; }
-        public List<RecipeIngredientModel> RecipeIngredients { get; set; } = new List<RecipeIngredientModel>();
+        public string BookName { get; set; }
+        public List<IngredientModel> Ingredients { get; set; } = new List<IngredientModel>();
+        public List<OrganicMatterModel> OrganicMatters { get; set; } = new List<OrganicMatterModel>();
+        public List<CookingStageModel> CookingStages { get; set; } = new List<CookingStageModel>();
+        public List<TagModel> Tags { get; set; } = new List<TagModel>();
     }
 }

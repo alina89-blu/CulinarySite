@@ -43,4 +43,20 @@ export class BookService {
   public deleteBook(id: number): Observable<void> {
     return this.http.delete<void>(this.url + '/' + id);
   }
+
+  public getSortedBooksByName(
+    withRelated: boolean
+  ): Observable<IBookDetailListModel[]> {
+    return this.http.get<IBookDetailListModel[]>(
+      this.url + '/' + withRelated + '/' + 'sortedByName'
+    );
+  }
+
+  public getSortedBooksByYear(
+    withRelated: boolean
+  ): Observable<IBookDetailListModel[]> {
+    return this.http.get<IBookDetailListModel[]>(
+      this.url + '/' + withRelated + '/' + 'sortedByYear'
+    );
+  }
 }

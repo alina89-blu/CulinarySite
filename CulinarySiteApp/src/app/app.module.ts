@@ -52,9 +52,7 @@ import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component'
 import { EpisodeListComponent } from './episode/episode-list/episode-list.component';
 import { EpisodeCreateComponent } from './episode/episode-create/episode-create.component';
 import { EpisodeEditComponent } from './episode/episode-edit/episode-edit.component';
-import { IngredientListComponent } from './ingredient/ingredient-list/ingredient-list.component';
-import { IngredientCreateComponent } from './ingredient/ingredient-create/ingredient-create.component';
-import { IngredientEditComponent } from './ingredient/ingredient-edit/ingredient-edit.component';
+import { CernovicComponent } from './cernovic/cernovic.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -83,9 +81,7 @@ const appRoutes: Routes = [
   { path: 'episode', component: EpisodeListComponent },
   { path: 'createEpisode', component: EpisodeCreateComponent },
   { path: 'editEpisode/:id', component: EpisodeEditComponent },
-  { path: 'ingredient', component: IngredientListComponent },
-  { path: 'createIngredient', component: IngredientCreateComponent },
-  { path: 'editIngredient/:id', component: IngredientEditComponent },
+
   //
 ];
 
@@ -119,9 +115,7 @@ const appRoutes: Routes = [
     EpisodeListComponent,
     EpisodeCreateComponent,
     EpisodeEditComponent,
-    IngredientListComponent,
-    IngredientCreateComponent,
-    IngredientEditComponent,
+    CernovicComponent,
   ],
   imports: [
     BrowserModule,

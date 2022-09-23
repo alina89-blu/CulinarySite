@@ -1,10 +1,13 @@
 ﻿using Database;
 using Repositories;
 using ServiceLayer.ViewModels.Ingredient;
+using ServiceLayer.ViewModels.OrganicMatter;
+using ServiceLayer.ViewModels.CookingStage;
 using ServiceLayer.ViewModels.Recipe;
-using ServiceLayer.ViewModels.RecipeIngredient;
+using ServiceLayer.ViewModels.Tag;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace ServiceLayer
 {
@@ -12,54 +15,67 @@ namespace ServiceLayer
     {
         private readonly IReadOnlyGenericRepository<Recipe> recipeReadOnlyRepository;
         private readonly IWriteGenericRepository<Recipe> recipeWriteRepository;
-        private readonly IWriteGenericRepository<RecipeIngredient> recipeIngredientWriteRepository;
+        private readonly IWriteGenericRepository<Ingredient> ingredientWriteRepository;
+        // private readonly IReadOnlyGenericRepository<Ingredient> ingredientReadOnlyRepository;
         private readonly IReadOnlyGenericRepository<Ingredient> ingredientReadOnlyRepository;
-        private readonly IReadOnlyGenericRepository<RecipeIngredient> recipeIngredientReadOnlyRepository;
         public RecipeService(
             IReadOnlyGenericRepository<Recipe> recipeReadOnlyRepository,
             IWriteGenericRepository<Recipe> recipeWriteRepository,
-            IWriteGenericRepository<RecipeIngredient> recipeIngredientWriteRepository,
-            IReadOnlyGenericRepository<Ingredient> ingredientReadOnlyRepository,
-            IReadOnlyGenericRepository<RecipeIngredient> recipeIngredientReadOnlyRepository)
+            IWriteGenericRepository<Ingredient> ingredientWriteRepository,
+            //IReadOnlyGenericRepository<Ingredient> ingredientReadOnlyRepository,
+            IReadOnlyGenericRepository<Ingredient> ingredientReadOnlyRepository)
         {
             this.recipeReadOnlyRepository = recipeReadOnlyRepository;
             this.recipeWriteRepository = recipeWriteRepository;
-            this.recipeIngredientWriteRepository = recipeIngredientWriteRepository;
+            this.ingredientWriteRepository = ingredientWriteRepository;
+            // this.ingredientReadOnlyRepository = ingredientReadOnlyRepository;
             this.ingredientReadOnlyRepository = ingredientReadOnlyRepository;
-            this.recipeIngredientReadOnlyRepository = recipeIngredientReadOnlyRepository;
         }
 
-        //exAMPLE
-        /*public void CreateRecipe(RecipeCreateModel recipeBla)
-        {
-            var receipe = new Recipe { ServingsNumber = recipeBla.ServingsNumber };
-
-            this.recipeWriteRepository.Create(receipe);
-            this.recipeWriteRepository.Save();           
-        }*/
         public void CreateRecipe(CreateRecipeModel createRecipeModel)
         {
-            List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
-            foreach (var recipeIngredient in createRecipeModel.RecipeIngredients)
+            List<Ingredient> ingredients = new List<Ingredient>();
+            foreach (var ingredient in createRecipeModel.Ingredients)
             {
-                recipeIngredients.Add(new RecipeIngredient
+                if (ingredient.Name != null)
                 {
-                    // Id = recipeIngredient.RecipeIngredientId,
-                    IngredientId = recipeIngredient.IngredientId,
-                    Unit = recipeIngredient.Unit,
-                    Quantity = recipeIngredient.Quantity
+                    ingredients.Add(new Ingredient
+                    {
+                        Name = ingredient.Name,
+                        Unit = ingredient.Unit,
+                        Quantity = ingredient.Quantity
+                    });
+                }
+
+            }
+
+            List<OrganicMatter> organicMatters = new List<OrganicMatter>();
+            foreach (var organicMatter in createRecipeModel.OrganicMatters)
+            {
+                organicMatters.Add(new OrganicMatter
+                {
+                    Name = organicMatter.Name,
+                    Unit = organicMatter.Unit,
+                    Quantity = organicMatter.Quantity
                 });
             }
 
-            List<RecipeOrganicMatter> recipeOrganicMatters = new List<RecipeOrganicMatter>();
-            foreach (var recipeOrganicMatter in createRecipeModel.OrganicMatterRecipes)
+            List<CookingStage> cookingStages = new List<CookingStage>();
+            foreach (var cookingStage in createRecipeModel.CookingStages)
             {
-                recipeOrganicMatters.Add(new RecipeOrganicMatter
+                cookingStages.Add(new CookingStage
                 {
-                    Id = recipeOrganicMatter.RecipeOrganicMatterId,
-                    OrganicMatterId = recipeOrganicMatter.OrganicMatterId,
-                    Unit = recipeOrganicMatter.Unit,
-                    Quantity = recipeOrganicMatter.Quantity
+                    Content = cookingStage.Content,
+                    RecipeId = cookingStage.RecipeId
+                });
+            }
+
+            List<Tag> tags = new List<Tag>();
+            foreach (var tag in createRecipeModel.Tags)
+            {
+                tags.Add(new Tag
+                {
+                    Text = tag.Text
                 });
             }
 
@@ -73,52 +89,104 @@ namespace ServiceLayer
                 DishId = createRecipeModel.DishId,
                 AuthorId = createRecipeModel.AuthorId,
                 BookId = createRecipeModel.BookId,
-                RecipeIngredients = recipeIngredients,
-                RecipeOrganicMatters = recipeOrganicMatters
+                Ingredients = ingredients,
+                OrganicMatters = organicMatters,
+                CookingStages = cookingStages,
+                Tags = tags
             };
             this.recipeWriteRepository.Create(recipe);
             this.recipeWriteRepository.Save();
         }
 
+        public void UpdateIngredient(UpdateIngredientModel updateIngredientModel)//
+        {
+            var ingredientsId = this.ingredientReadOnlyRepository.GetItemList().Select(x => x.Id);
+            var ingredient = new Ingredient();
+
+            if (ingredientsId.Contains(updateIngredientModel.IngredientId))
+            {
+
+                ingredient = new Ingredient
+                {
+                    Id = updateIngredientModel.IngredientId,
+                    Name = updateIngredientModel.Name,
+                    Unit = updateIngredientModel.Unit,
+                    Quantity = updateIngredientModel.Quantity,
+                };
+                this.ingredientWriteRepository.Update(ingredient);
+                this.ingredientWriteRepository.Save();
+            }
+            else
+            {
+                ingredient = new Ingredient
+                {
+                    Name = updateIngredientModel.Name,
+                    Unit = updateIngredientModel.Unit,
+                    Quantity = updateIngredientModel.Quantity,
+                };
+                this.ingredientWriteRepository.Create(ingredient);
+                this.ingredientWriteRepository.Save();
+            }
+        }
         public void UpdateRecipe(UpdateRecipeModel updateRecipeModel)
         {
-            var recipeIngredients = updateRecipeModel
-           .RecipeIngredients
-           .Select(x => this.recipeIngredientWriteRepository.GetItem(x.RecipeIngredientId))
-           .ToList();
+            /*   var ingredients = updateRecipeModel
+             .Ingredients
+             .Select(x => this.ingredientWriteRepository.GetItem(x.IngredientId))
+             .ToList();
+   */
 
 
+          
 
-            /*     List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();            
-                 var recipeIngredientsId = this.recipeReadOnlyRepository.GetItem(updateRecipeModel.RecipeId).RecipeIngredients.Select(x=>x.Id);
+            /*List<Ingredient> ingredients = new List<Ingredient>();
 
-               foreach(var recipeIngredient in updateRecipeModel.RecipeIngredients)
-                 {
-                     if (recipeIngredientsId.Contains(recipeIngredient.RecipeIngredientId))
-                     {
-                         *//* recipeIngredients.Add(new RecipeIngredient
-                          {
-                              Id = recipeIngredient.RecipeIngredientId,
-                              IngredientId = recipeIngredient.IngredientId,
-                              Unit = recipeIngredient.Unit,
-                              Quantity = recipeIngredient.Quantity
-                          });*//*
+            foreach (var ingredient in updateRecipeModel.Ingredients)
+            {               
+                    ingredients.Add(new Ingredient
+                    {
+                        Id = ingredient.IngredientId,
+                        Name = ingredient.Name,
+                        Unit = ingredient.Unit,
+                        Quantity = ingredient.Quantity
+                    });              
+            }*/
 
-                          recipeIngredients = updateRecipeModel
-               .RecipeIngredients
-               .Select(x => this.recipeIngredientWriteRepository.GetItem(x.RecipeIngredientId))
-               .ToList();
-                     }
-                     else
-                     {
-                         recipeIngredients.Add(new RecipeIngredient
-                         {                     
-                             IngredientId = recipeIngredient.IngredientId,
-                             Unit = recipeIngredient.Unit,
-                             Quantity = recipeIngredient.Quantity
-                         });
-                     }
-                 }*/
+            List<OrganicMatter> organicMatters = new List<OrganicMatter>();
+
+            foreach (var organicMatter in updateRecipeModel.OrganicMatters)
+            {
+                organicMatters.Add(new OrganicMatter
+                {
+                    Id = organicMatter.OrganicMatterId,
+                    Name = organicMatter.Name,
+                    Unit = organicMatter.Unit,
+                    Quantity = organicMatter.Quantity
+                });
+            }
+
+            List<CookingStage> cookingStages = new List<CookingStage>();
+
+            foreach (var cookingStage in updateRecipeModel.CookingStages)
+            {
+                cookingStages.Add(new CookingStage
+                {
+                    Id = cookingStage.CookingStageId,
+                    Content = cookingStage.Content,
+                    RecipeId = cookingStage.RecipeId
+                });
+            }
+
+            List<Tag> tags = new List<Tag>();
+
+            foreach (var tag in updateRecipeModel.Tags)
+            {
+                tags.Add(new Tag
+                {
+                    Id = tag.TagId,
+                    Text = tag.Text
+                });
+            }
 
             var recipe = new Recipe
             {
@@ -131,7 +199,10 @@ namespace ServiceLayer
                 DishId = updateRecipeModel.DishId,
                 AuthorId = updateRecipeModel.AuthorId,
                 BookId = updateRecipeModel.BookId,
-                RecipeIngredients = recipeIngredients
+              //  Ingredients = ingredients,
+                OrganicMatters = organicMatters,
+                CookingStages = cookingStages,
+                Tags = tags
             };
             this.recipeWriteRepository.Update(recipe);
             this.recipeWriteRepository.Save();
@@ -154,27 +225,60 @@ namespace ServiceLayer
                     x => x.Dish,
                     x => x.Author,
                     x => x.Book,
-                    x => x.RecipeIngredients);
+                    x => x.Ingredients,
+                    x => x.OrganicMatters,
+                    x => x.CookingStages,
+                    x => x.Tags
+                    );
 
                 foreach (var recipe in recipes)
                 {
-                    var recipeIngredientModels = new List<RecipeIngredientModel>();
+                    var ingredients = new List<IngredientModel>();
 
-                    foreach (var recipeIngredient in recipe.RecipeIngredients)
+                    foreach (var ingredient in recipe.Ingredients)
                     {
-                        /*  IngredientDetailModel ingredientDetailModel = new IngredientDetailModel
-                          {
-                              IngredientId = recipeIngredient.IngredientId,
-                              Name=recipeIngredient.Ingredient.Name                            
-                          };*/
-
-                        recipeIngredientModels.Add(new RecipeIngredientModel
+                        ingredients.Add(new IngredientModel
                         {
-                            RecipeIngredientId = recipeIngredient.Id,
-                            IngredientId = recipeIngredient.IngredientId,
-                            Quantity = recipeIngredient.Quantity,
-                            Unit = recipeIngredient.Unit,
-                            //Ingredient=ingredientDetailModel                                                                             
+                            IngredientId = ingredient.Id,
+                            Name = ingredient.Name,
+                            Unit = ingredient.Unit,
+                            Quantity = ingredient.Quantity,
+                        });
+                    }
+
+                    var organicMatters = new List<OrganicMatterModel>();
+
+                    foreach (var organicMatter in recipe.OrganicMatters)
+                    {
+                        organicMatters.Add(new OrganicMatterModel
+                        {
+                            OrganicMatterId = organicMatter.Id,
+                            Name = organicMatter.Name,
+                            Unit = organicMatter.Unit,
+                            Quantity = organicMatter.Quantity,
+                        });
+                    }
+
+                    var cookingStages = new List<CookingStageModel>();
+
+                    foreach (var cookingStage in recipe.CookingStages)
+                    {
+                        cookingStages.Add(new CookingStageModel
+                        {
+                            CookingStageId = cookingStage.Id,
+                            Content = cookingStage.Content,
+                            RecipeId = cookingStage.RecipeId
+                        });
+                    }
+
+                    var tags = new List<TagModel>();
+
+                    foreach (var tag in recipe.Tags)
+                    {
+                        tags.Add(new TagModel
+                        {
+                            TagId = tag.Id,
+                            Text = tag.Text
                         });
                     }
                     recipeListModels.Add(new RecipeListModel
@@ -188,11 +292,16 @@ namespace ServiceLayer
                         DishCategory = recipe.Dish.Category,
                         AuthorName = recipe.Author.Name,
                         BookName = recipe.Book?.Name,
-                        RecipeIngredients = recipeIngredientModels
+                        Ingredients = ingredients,
+                        OrganicMatters = organicMatters,
+                        CookingStages = cookingStages,
+                        Tags = tags
                     });
                 }
                 return recipeListModels;
             }
+
+
             recipes = this.recipeReadOnlyRepository.GetItemList();
             foreach (var recipe in recipes)
             {
@@ -203,7 +312,7 @@ namespace ServiceLayer
                     ServingsNumber = recipe.ServingsNumber,
                     CookingTime = recipe.CookingTime,
                     DifficultyLevel = recipe.DifficultyLevel,
-                    Content = recipe.Content,
+                    Content = recipe.Content
                 });
             }
             return recipeListModels;
@@ -218,24 +327,65 @@ namespace ServiceLayer
             {
                 recipe = this.recipeReadOnlyRepository.GetItemWithInclude(
                     x => x.Id == id,
-                    x => x.RecipeIngredients,
-                    //x => x.OrganicMatters,
+                    x => x.Dish,
+                    x => x.Author,
+                    x => x.Book,
+                    x => x.Ingredients,
+                    x => x.OrganicMatters,
                     x => x.CookingStages,
-                    x => x.Tags,
-                    x => x.Dish
+                    x => x.Tags
                    );
 
-                List<RecipeIngredientModel> recipeIngredientModels = new List<RecipeIngredientModel>();
-                foreach (var recipeIngredient in recipe.RecipeIngredients)
+                List<IngredientModel> ingredientModels = new List<IngredientModel>();
+
+                foreach (var ingredient in recipe.Ingredients)
                 {
-                    recipeIngredientModels.Add(new RecipeIngredientModel
+                    ingredientModels.Add(new IngredientModel
                     {
-                        RecipeIngredientId = recipeIngredient.Id,
-                        IngredientId = recipeIngredient.IngredientId,
-                        Quantity = recipeIngredient.Quantity,
-                        Unit = recipeIngredient.Unit
+                        IngredientId = ingredient.Id,
+                        Name = ingredient.Name,
+                        Unit = ingredient.Unit,
+                        Quantity = ingredient.Quantity
                     });
                 }
+
+                List<OrganicMatterModel> organicMatterModels = new List<OrganicMatterModel>();
+
+                foreach (var organicMatter in recipe.OrganicMatters)
+                {
+                    organicMatterModels.Add(new OrganicMatterModel
+                    {
+                        OrganicMatterId = organicMatter.Id,
+                        Name = organicMatter.Name,
+                        Unit = organicMatter.Unit,
+                        Quantity = organicMatter.Quantity
+                    });
+                }
+
+                List<CookingStageModel> cookingStageModels = new List<CookingStageModel>();
+
+                foreach (var cookingStage in recipe.CookingStages)
+                {
+                    cookingStageModels.Add(new CookingStageModel
+                    {
+                        CookingStageId = cookingStage.Id,
+                        Content = cookingStage.Content,
+                        RecipeId = cookingStage.RecipeId
+                        //RecipeId = recipe.Id                       
+                    });
+                }
+
+                List<TagModel> tagModels = new List<TagModel>();
+
+                foreach (var tag in recipe.Tags)
+                {
+                    tagModels.Add(new TagModel
+                    {
+                        TagId = tag.Id,
+                        Text = tag.Text
+                    });
+                }
+
                 recipeDetailModel = new RecipeDetailModel
                 {
                     RecipeId = recipe.Id,
@@ -247,10 +397,14 @@ namespace ServiceLayer
                     DishId = recipe.DishId,
                     AuthorId = recipe.AuthorId,
                     BookId = recipe.BookId,
-                    RecipeIngredients = recipeIngredientModels
+                    Ingredients = ingredientModels,
+                    OrganicMatters = organicMatterModels,
+                    CookingStages = cookingStageModels,
+                    Tags = tagModels
                 };
                 return recipeDetailModel;
             }
+
             recipe = this.recipeReadOnlyRepository.GetItem(id);
             recipeDetailModel = new RecipeDetailModel
             {

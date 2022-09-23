@@ -8,8 +8,7 @@ import { DishListModel } from 'src/app/viewmodels/dish/dish-list-model.class';
 import { IDishListModel } from 'src/app/interfaces/dish/dish-list-model.interface';
 import { IngredientService } from 'src/app/services/ingredient.service';
 import { IngredientListModel } from 'src/app/viewmodels/ingredient/ingredient-list-model.class';
-import { IIngredientListModel } from 'src/app/interfaces/ingredient/ingredient-list-model.interface';
-import { CreateRecipeIngredientModel } from 'src/app/viewmodels/recipe-ingredient/create-recipe-ingredient-model.class';
+import { CreateIngredientModel } from 'src/app/viewmodels/ingredient/create-ingredient-model.class';
 import { Unit } from 'src/app/enums/unit.enum';
 import { AuthorService } from 'src/app/services/author.service';
 import {
@@ -23,8 +22,8 @@ import { BookService } from 'src/app/services/book.service';
 import { IBookModel } from 'src/app/interfaces/book/book-model.interface';
 import { BookModel } from 'src/app/viewmodels/book/book-model.class';
 import { AfterViewChecked, ChangeDetectorRef } from '@angular/core';
-import { IAuthorModel } from 'src/app/interfaces/author/author-model.interface';
-import { AuthorModel } from 'src/app/viewmodels/author/author-model.class';
+import { AuthorListModel } from 'src/app/viewmodels/author/author-list-model.class';
+import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.interface';
 
 @Component({
   selector: 'app-recipe-create',
@@ -51,8 +50,8 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
     Unit.Штука,
   ];
   public dishes: DishListModel[] = [];
-  public ingredients: IngredientListModel[] = [];
-  public authors: AuthorModel[] = [];
+  //public ingredients: IngredientListModel[] = [];
+  public authors: AuthorListModel[] = [];
   public books: BookModel[] = [];
 
   public showIngredients: boolean = false;
@@ -78,36 +77,32 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
       dish: new FormControl('', Validators.required),
       author: new FormControl('', Validators.required),
       book: new FormControl('', Validators.required),
-      recipeIngredients: new FormArray([
+      ingredients: new FormArray([
         new FormGroup({
-          ingredientId: new FormControl('', Validators.required),
+          name: new FormControl('', Validators.required),
           unit: new FormControl('', Validators.required),
           quantity: new FormControl('', Validators.required),
         }),
       ]),
     });
-    this.createRecipeModel.recipeIngredients = [
-      new CreateRecipeIngredientModel(),
-    ];
+    this.createRecipeModel.ingredients = [new CreateIngredientModel()];
   }
 
   public getFormsControls(): FormArray {
-    return this.myForm.controls['recipeIngredients'] as FormArray;
+    return this.myForm.controls['ingredients'] as FormArray;
   }
 
-  public addRecipeIngredient(): void {
-    (<FormArray>this.myForm.controls['recipeIngredients']).push(
-      this.createNewRecipeIngredient()
+  public addIngredient(): void {
+    (<FormArray>this.myForm.controls['ingredients']).push(
+      this.createNewIngredient()
     );
 
-    this.createRecipeModel.recipeIngredients.push(
-      new CreateRecipeIngredientModel()
-    );
+    this.createRecipeModel.ingredients.push(new CreateIngredientModel());
   }
 
-  public createNewRecipeIngredient(): FormGroup {
+  public createNewIngredient(): FormGroup {
     const group = new FormGroup({
-      ingredientId: new FormControl('', Validators.required),
+      name: new FormControl('', Validators.required),
       unit: new FormControl('', Validators.required),
       quantity: new FormControl('', Validators.required),
     });
@@ -116,7 +111,6 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
 
   public ngOnInit(): void {
     this.getDishList();
-    this.getIngredientList();
     this.getAuthorList();
     this.getBookList();
   }
@@ -144,15 +138,6 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
       );
   }
 
-  public getIngredientList(): void {
-    this.ingredientService
-      .getIngredientList(false)
-      .subscribe(
-        (data: IIngredientListModel[]) =>
-          (this.ingredients = data.map((x) => new IngredientListModel(x)))
-      );
-  }
-
   public getBookList(): void {
     this.bookService
       .getBookList()
@@ -165,12 +150,12 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
     this.authorService
       .getAuthorList()
       .subscribe(
-        (data: IAuthorModel[]) =>
-          (this.authors = data.map((x) => new AuthorModel(x)))
+        (data: IAuthorListModel[]) =>
+          (this.authors = data.map((x) => new AuthorListModel(x)))
       );
   }
 
-  public deleteRecipeIngredient(index: number) {
+  public deleteIngredient(index: number) {
     this.getFormsControls().removeAt(index);
   }
 }

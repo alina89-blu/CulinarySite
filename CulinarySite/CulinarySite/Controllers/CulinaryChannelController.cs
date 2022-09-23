@@ -1,46 +1,62 @@
 ﻿using System.Collections.Generic;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer;
+using ServiceLayer.Dtos.CulinaryChannel;
 using ServiceLayer.ViewModels.CulinaryChannel;
 
 namespace CulinarySite.Controllers
 {
     public class CulinaryChannelController : BaseController
     {
-        private readonly ICulinaryChannelService culinaryChannelService;
-        public CulinaryChannelController(ICulinaryChannelService culinaryChannelService)
+        private readonly ICulinaryChannelService _culinaryChannelService;
+        private readonly IMapper _mapper;
+        public CulinaryChannelController(ICulinaryChannelService culinaryChannelService, IMapper mapper)
         {
-            this.culinaryChannelService = culinaryChannelService;
+            _culinaryChannelService = culinaryChannelService;
+            _mapper = mapper;
         }
 
         [HttpGet("{withRelated}")]
         public IEnumerable<CulinaryChannelListModel> GetCulinaryChannelList(bool withRelated)
         {
-            return this.culinaryChannelService.GetCulinaryChannelList(withRelated);
+            IEnumerable<CulinaryChannelListDto> culinaryChannelListDtos = _culinaryChannelService.GetCulinaryChannelList(withRelated);
+            var culinaryChannelListModels = new List<CulinaryChannelListModel>();
+
+            foreach (var culinaryChannelListDto in culinaryChannelListDtos)
+            {
+                culinaryChannelListModels.Add(_mapper.Map<CulinaryChannelListModel>(culinaryChannelListDto));
+            }
+            return culinaryChannelListModels;
         }
 
         [HttpGet("{id}/{withRelated}")]
         public CulinaryChannelDetailModel GetCulinaryChannel(int id, bool withRelated)
         {
-            return this.culinaryChannelService.GetCulinaryChannel(id,withRelated);
+            CulinaryChannelDetailDto culinaryChannelDetailDto = _culinaryChannelService.GetCulinaryChannel(id, withRelated);
+            CulinaryChannelDetailModel culinaryChannelDetailModel = _mapper.Map<CulinaryChannelDetailModel>(culinaryChannelDetailDto);
+
+            return culinaryChannelDetailModel;
         }
 
         [HttpPost]
         public void CreateCulinaryChannel(CreateCulinaryChannelModel createCulinaryChannelModel)
         {
-            this.culinaryChannelService.CreateCulinaryChannel(createCulinaryChannelModel);
+            var createCulinaryChannelDto = _mapper.Map<CreateCulinaryChannelDto>(createCulinaryChannelModel);
+            _culinaryChannelService.CreateCulinaryChannel(createCulinaryChannelDto);
         }
 
         [HttpPut]
         public void UpdateCulinaryChannel(UpdateCulinaryChannelModel updateCulinaryChannelModel)
         {
-            this.culinaryChannelService.UpdateCulinaryChannel(updateCulinaryChannelModel);
+            var updateCulinaryChannelDto = _mapper.Map<UpdateCulinaryChannelDto>(updateCulinaryChannelModel);
+            _culinaryChannelService.UpdateCulinaryChannel(updateCulinaryChannelDto);
         }
 
         [HttpDelete("{id}")]
         public void DeleteCulinaryChannel(int id)
         {
-            this.culinaryChannelService.DeleteCulinaryChannel(id);
+            _culinaryChannelService.DeleteCulinaryChannel(id);
         }
     }
 }

@@ -8,12 +8,12 @@ namespace CulinarySite.Controllers
     public class RecipeController : BaseController
     {
         private readonly IRecipeService recipeService;
-        private readonly IRecipeIngredientService recipeIngredientService;
+        private readonly IIngredientService ingredientService;
 
-        public RecipeController(IRecipeService recipeService, IRecipeIngredientService recipeIngredientService)
+        public RecipeController(IRecipeService recipeService, IIngredientService ingredientService)
         {
             this.recipeService = recipeService;
-            this.recipeIngredientService = recipeIngredientService;
+            this.ingredientService = ingredientService;
         }
 
         [HttpGet("{withRelated}")]
@@ -32,23 +32,26 @@ namespace CulinarySite.Controllers
         public void CreateRecipe(CreateRecipeModel createRecipeModel)
         {
 
-            foreach (var createRecipeIngredientModel in createRecipeModel.RecipeIngredients)
+           /* foreach (var ingredient in createRecipeModel.Ingredients)
             {
-                this.recipeIngredientService.CreateRecipeIngredient(createRecipeIngredientModel);
-            }
+                this.ingredientService.CreateIngredient(ingredient);
+            }*/
 
             this.recipeService.CreateRecipe(createRecipeModel);
         }
 
+
         [HttpPut]
         public void UpdateRecipe(UpdateRecipeModel updateRecipeModel)
         {
-            foreach (var recipeIngredient in updateRecipeModel.RecipeIngredients)
+            foreach (var ingredient in updateRecipeModel.Ingredients)
             {
-                this.recipeIngredientService.UpdateRecipeIngredient(recipeIngredient);
+                this.ingredientService.UpdateIngredient(ingredient);
             }
             this.recipeService.UpdateRecipe(updateRecipeModel);
         }
+
+        
 
         [HttpDelete("{id}")]
         public void DeleteRecipe(int id)

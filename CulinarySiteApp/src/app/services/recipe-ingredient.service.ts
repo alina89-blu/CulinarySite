@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IRecipeIngredientDetailModel } from '../interfaces/recipe-ingredient/recipe-ingredient-detail-model.interface';
-import { IRecipeIngredientListModel } from '../interfaces/recipe-ingredient/recipe-ingredient-list-model.interface';
-import { CreateRecipeIngredientModel } from '../viewmodels/recipe-ingredient/create-recipe-ingredient-model.class';
-import { UpdateRecipeIngredientModel } from '../viewmodels/recipe-ingredient/update-recipe-ingredient-model.class';
+import { IIngredientDetailModel } from '../interfaces/ingredient/ingredient-detail-model.interface';
+import { IIngredientListModel } from '../interfaces/ingredient/ingredient-list-model.interface';
+import { CreateIngredientModel } from '../viewmodels/ingredient/create-ingredient-model.class';
+import { UpdateIngredientModel } from '../viewmodels/ingredient/update-ingredient-model.class';
 
 @Injectable()
 export class RecipeIngredientService {
@@ -14,29 +14,27 @@ export class RecipeIngredientService {
 
   public getRecipeIngredientList(
     withRelated: boolean
-  ): Observable<IRecipeIngredientListModel[]> {
-    return this.http.get<IRecipeIngredientListModel[]>(
-      this.url + '/' + withRelated
-    );
+  ): Observable<IIngredientListModel[]> {
+    return this.http.get<IIngredientListModel[]>(this.url + '/' + withRelated);
   }
 
   public getRecipeIngredient(
     id: number,
     withRelated: boolean
-  ): Observable<IRecipeIngredientDetailModel> {
-    return this.http.get<IRecipeIngredientDetailModel>(
+  ): Observable<IIngredientDetailModel> {
+    return this.http.get<IIngredientDetailModel>(
       this.url + '/' + id + '/' + withRelated
     );
   }
 
   public createRecipeIngredient(
-    createRecipeIngredientModel: CreateRecipeIngredientModel
+    createRecipeIngredientModel: CreateIngredientModel
   ): Observable<void> {
     return this.http.post<void>(this.url, createRecipeIngredientModel);
   }
 
   public updateRecipeIngredient(
-    updateRecipeIngredientModel: UpdateRecipeIngredientModel
+    updateRecipeIngredientModel: UpdateIngredientModel
   ): Observable<void> {
     return this.http.put<void>(this.url, updateRecipeIngredientModel);
   }

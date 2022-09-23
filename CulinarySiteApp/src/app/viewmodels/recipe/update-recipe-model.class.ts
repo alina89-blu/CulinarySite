@@ -1,9 +1,10 @@
 import { DifficultyLevel } from 'src/app/enums/difficulty-level.enum';
 import { IRecipeDetailModel } from 'src/app/interfaces/recipe/recipe-detail-model.interface';
 import { IUpdateRecipeModel } from 'src/app/interfaces/recipe/update-recipe-model.interface';
-import { CreateRecipeIngredientModel } from '../recipe-ingredient/create-recipe-ingredient-model.class';
-import { RecipeIngredientModel } from '../recipe-ingredient/recipe-ingredient-model.class';
-import { UpdateRecipeIngredientModel } from '../recipe-ingredient/update-recipe-ingredient-model.class';
+import { UpdateCookingStageModel } from '../cooking-stage/update-cooking-stage-model.class';
+import { UpdateIngredientModel } from '../ingredient/update-ingredient-model.class';
+import { UpdateOrganicMatterModel } from '../organic-matter/update-organic-matter-model.class';
+import { UpdateTagModel } from '../tag/update-tag-model.class';
 
 export class UpdateRecipeModel {
   public recipeId: number;
@@ -15,8 +16,10 @@ export class UpdateRecipeModel {
   public dishId: number;
   public authorId: number;
   public bookId?: number;
-  //public recipeIngredients: RecipeIngredientModel[];
-  public recipeIngredients: UpdateRecipeIngredientModel[];
+  public ingredients: UpdateIngredientModel[];
+  public organicMatters: UpdateOrganicMatterModel[];
+  public cookingStages: UpdateCookingStageModel[];
+  public tags: UpdateTagModel[];
 
   constructor(
     public updateRecipeModel?: IUpdateRecipeModel | IRecipeDetailModel
@@ -31,7 +34,10 @@ export class UpdateRecipeModel {
       this.dishId = updateRecipeModel.dishId;
       this.authorId = updateRecipeModel.authorId;
       this.bookId = updateRecipeModel.bookId;
-      this.recipeIngredients = updateRecipeModel.recipeIngredients;
+      this.ingredients = updateRecipeModel.ingredients;
+      this.organicMatters = updateRecipeModel.organicMatters;
+      this.cookingStages = updateRecipeModel.cookingStages;
+      this.tags = updateRecipeModel.tags;
     }
   }
 }

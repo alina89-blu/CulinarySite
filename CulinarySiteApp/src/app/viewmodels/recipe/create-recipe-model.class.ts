@@ -1,7 +1,9 @@
 import { DifficultyLevel } from 'src/app/enums/difficulty-level.enum';
 import { ICreateRecipeModel } from 'src/app/interfaces/recipe/create-recipe-model.interface';
-import { CreateRecipeIngredientModel } from '../recipe-ingredient/create-recipe-ingredient-model.class';
-import { CreateRecipeOrganicMatterModel } from '../recipe-organic-matter/create-recipe-organic-matter-model.class';
+import { CreateCookingStageModel } from '../cooking-stage/create-cooking-stage-model.class';
+import { CreateIngredientModel } from '../ingredient/create-ingredient-model.class';
+import { CreateOrganicMatterModel } from '../organic-matter/create-organic-matter-model.class';
+import { CreateTagModel } from '../tag/create-tag-model.class';
 
 export class CreateRecipeModel {
   public name: string;
@@ -12,8 +14,10 @@ export class CreateRecipeModel {
   public dishId: number;
   public authorId: number;
   public bookId?: number;
-  public recipeIngredients: CreateRecipeIngredientModel[];
-  public recipeOrganicMatters: CreateRecipeOrganicMatterModel[];
+  public ingredients: CreateIngredientModel[];
+  public organicMatters: CreateOrganicMatterModel[];
+  public cookingStages: CreateCookingStageModel[];
+  public tags: CreateTagModel[];
 
   constructor(public createRecipeModel?: ICreateRecipeModel) {
     if (createRecipeModel) {
@@ -25,8 +29,10 @@ export class CreateRecipeModel {
       this.dishId = createRecipeModel.dishId;
       this.authorId = createRecipeModel.authorId;
       this.bookId = createRecipeModel.bookId;
-      this.recipeIngredients = createRecipeModel.recipeIngredients;
-      this.recipeOrganicMatters = createRecipeModel.recipeOrganicMatters;
+      this.ingredients = createRecipeModel.ingredients;
+      this.organicMatters = createRecipeModel.organicMatters;
+      this.cookingStages = createRecipeModel.cookingStages;
+      this.tags = createRecipeModel.tags;
     }
   }
 }

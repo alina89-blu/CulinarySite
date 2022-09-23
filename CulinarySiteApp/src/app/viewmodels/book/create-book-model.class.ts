@@ -1,9 +1,9 @@
 import { ICreateBookModel } from 'src/app/interfaces/book/create-book-model.interface';
 
 export class CreateBookModel {
-  public authorId?: number;
+  public authorId: number;
   public name: string;
-  public creationYear: Date = new Date();
+  public creationYear: number;
   public description: string;
 
   constructor(public createBookModel?: ICreateBookModel) {

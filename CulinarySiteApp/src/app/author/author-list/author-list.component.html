@@ -11,8 +11,6 @@
     <tr>
       <td>Нр.</td>
       <td>Имя</td>
-      <td>Recipe</td>
-      <td>Books</td>
       <td>Действия</td>
     </tr>
   </thead>
@@ -20,18 +18,6 @@
     <tr *ngFor="let author of authors; let idx = index">
       <td>{{ idx + 1 }}</td>
       <td>{{ author.name }}</td>
-      <td>
-        <li *ngFor="let recipe of author.recipeModels">
-          <p>{{ recipe.name }}</p>
-        </li>
-      </td>
-
-      <td>
-        <li *ngFor="let book of author.books">
-          <p>{{ book.name }}</p>
-        </li>
-      </td>
-
       <td>
         <a class="btn info" [routerLink]="['/editAuthor', author.authorId]"
           >Редактировать</a

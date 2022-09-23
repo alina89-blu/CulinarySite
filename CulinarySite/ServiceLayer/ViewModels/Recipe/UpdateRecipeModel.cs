@@ -1,6 +1,9 @@
 ﻿
-using ServiceLayer.ViewModels.RecipeIngredient;
-using ServiceLayer.ViewModels.RecipeOrganicMatter;
+
+using ServiceLayer.ViewModels.CookingStage;
+using ServiceLayer.ViewModels.Ingredient;
+using ServiceLayer.ViewModels.OrganicMatter;
+using ServiceLayer.ViewModels.Tag;
 using System.Collections.Generic;
 
 namespace ServiceLayer.ViewModels.Recipe
@@ -8,8 +11,10 @@ namespace ServiceLayer.ViewModels.Recipe
     public class UpdateRecipeModel : CreateUpdateRecipeBaseModel
     {
         public int RecipeId { get; set; }
-       public List<UpdateRecipeIngredientModel> RecipeIngredients { get; set; } = new List<UpdateRecipeIngredientModel>();
-        public List<UpdateRecipeOrganicMatterModel> OrganicMatterRecipes { get; set; } = new List<UpdateRecipeOrganicMatterModel>();
-       // public List<CreateRecipeIngredientModel> RecipeIngredients { get; set; } = new List<CreateRecipeIngredientModel>();
+        public List<UpdateIngredientModel> Ingredients { get; set; } = new List<UpdateIngredientModel>();
+        public List<UpdateOrganicMatterModel> OrganicMatters { get; set; } = new List<UpdateOrganicMatterModel>();
+        public List<UpdateCookingStageModel> CookingStages { get; set; } = new List<UpdateCookingStageModel>();
+        public List<UpdateTagModel> Tags { get; set; } = new List<UpdateTagModel>();
+
     }
 }

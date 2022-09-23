@@ -1,101 +1,95 @@
 ﻿using System.Collections.Generic;
 using Repositories;
 using Database;
-using ServiceLayer.ViewModels.Dish;
+using AutoMapper;
+using ServiceLayer.Dtos.Dish;
 
 namespace ServiceLayer
 {
     public class DishService : IDishService
     {
-        private readonly IReadOnlyGenericRepository<Dish> dishReadOnlyRepository;
-        private readonly IWriteGenericRepository<Dish> dishWriteRepository;
+        private readonly IReadOnlyGenericRepository<Dish> _dishReadOnlyRepository;
+        private readonly IWriteGenericRepository<Dish> _dishWriteRepository;
+        private readonly IMapper _mapper;
         public DishService(
             IReadOnlyGenericRepository<Dish> dishReadOnlyRepository,
-            IWriteGenericRepository<Dish> dishWriteRepository)
+            IWriteGenericRepository<Dish> dishWriteRepository,
+            IMapper mapper)
         {
-            this.dishReadOnlyRepository = dishReadOnlyRepository;
-            this.dishWriteRepository = dishWriteRepository;
+            _dishReadOnlyRepository = dishReadOnlyRepository;
+            _dishWriteRepository = dishWriteRepository;
+            _mapper = mapper;
         }
 
-        public void CreateDish(CreateDishModel createDishModel)
+        public void CreateDish(CreateDishDto createDishDto)
         {
-            var dish = new Dish()
-            {
-                Category = createDishModel.Category
-            };
+            Dish dish = _mapper.Map<Dish>(createDishDto);
 
-            this.dishWriteRepository.Create(dish);
-            this.dishWriteRepository.Save();
+            _dishWriteRepository.Create(dish);
+            _dishWriteRepository.Save();
         }
 
-        public void UpdateDish(UpdateDishModel updateDishModel)
+        public void UpdateDish(UpdateDishDto updateDishDto)
         {
-            var dish = new Dish()
-            {
-                Id=updateDishModel.DishId,
-                Category = updateDishModel.Category
-            };
-            this.dishWriteRepository.Update(dish);
-            this.dishWriteRepository.Save();
+            Dish dish = _mapper.Map<Dish>(updateDishDto);
+
+            _dishWriteRepository.Update(dish);
+            _dishWriteRepository.Save();
         }
 
         public void DeleteDish(int id)
         {
-            this.dishWriteRepository.Delete(id);
-            this.dishWriteRepository.Save();
+            _dishWriteRepository.Delete(id);
+            _dishWriteRepository.Save();
         }
 
-        public DishDetailModel GetDish(int id, bool withRelated)
+        public DishDetailDto GetDish(int id, bool withRelated)
         {
             var dish = new Dish();
-            DishDetailModel dishDetailModel = new DishDetailModel();
+            var dishDetailDto = new DishDetailDto();
+
             if (withRelated)
             {
-                dish = this.dishReadOnlyRepository.GetItemWithInclude(
-                                x => x.Id == id);
-                dishDetailModel = new DishDetailModel
-                {
-                    DishId = dish.Id,
-                    Category = dish.Category
-                };
-                return dishDetailModel;
+                dish = _dishReadOnlyRepository.GetItemWithInclude(
+                                x => x.Id == id,
+                                x => x.Recipes,
+                                x => x.Image);
+
+                dishDetailDto = _mapper.Map<DishDetailDto>(dish);
+
+                return dishDetailDto;
             }
-            dish = this.dishReadOnlyRepository.GetItem(id);
-            dishDetailModel = new DishDetailModel
-            {
-                DishId = dish.Id,
-                Category = dish.Category
-            };
-            return dishDetailModel;
+
+            dish = _dishReadOnlyRepository.GetItem(id);
+            dishDetailDto = _mapper.Map<DishDetailDto>(dish);
+
+            return dishDetailDto;
         }
 
-        public IEnumerable<DishListModel> GetDishList(bool withRelated)
+        public IEnumerable<DishListDto> GetDishList(bool withRelated)
         {
             IEnumerable<Dish> dishes;
-            List<DishListModel> dishListModels = new List<DishListModel>();
+            var dishListDtos = new List<DishListDto>();
+
             if (withRelated)
             {
-                dishes = this.dishReadOnlyRepository.GetItemListWithInclude();
+                dishes = _dishReadOnlyRepository.GetItemListWithInclude(
+                    x => x.Recipes,
+                    x => x.Image);
+
                 foreach (var dish in dishes)
                 {
-                    dishListModels.Add(new DishListModel
-                    {
-                        DishId = dish.Id,
-                        Category = dish.Category
-                    });
+                    dishListDtos.Add(_mapper.Map<DishListDto>(dish));
                 }
-                return dishListModels;
+                return dishListDtos;
             }
-            dishes = this.dishReadOnlyRepository.GetItemList();
+            dishes = _dishReadOnlyRepository.GetItemList();
+
             foreach (var dish in dishes)
             {
-                dishListModels.Add(new DishListModel
-                {
-                    DishId = dish.Id,
-                    Category = dish.Category
-                });
+                dishListDtos.Add(_mapper.Map<DishListDto>(dish));
             }
-            return dishListModels;
+            return dishListDtos;
         }
     }
 }

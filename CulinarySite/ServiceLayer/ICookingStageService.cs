@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
-using Database;
-using ServiceLayer.ViewModels.CookingStage;
+using ServiceLayer.Dtos.CookingStage;
 
 namespace ServiceLayer
 {
     public interface ICookingStageService
     {
-        void CreateCookingStage(CreateCookingStageModel createCookingStageModel);
-        void UpdateCookingStage(UpdateCookingStageModel updateCookingStageModel);
+        void CreateCookingStage(CreateCookingStageDto createCookingStageDto);
+        void UpdateCookingStage(UpdateCookingStageDto updateCookingStageDto);
         void DeleteCookingStage(int id);
-        IEnumerable<CookingStageListModel> GetCookingStageList(bool withRelated);
-        CookingStageDetailModel GetCookingStage(int id, bool withRelated);
+        IEnumerable<CookingStageListDto> GetCookingStageList(bool withRelated);
+        CookingStageDetailDto GetCookingStage(int id, bool withRelated);
     }
 }
 

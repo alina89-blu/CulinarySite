@@ -1,13 +1,18 @@
 ﻿
-using ServiceLayer.ViewModels.RecipeIngredient;
-using ServiceLayer.ViewModels.RecipeOrganicMatter;
+using ServiceLayer.ViewModels.Ingredient;
+using ServiceLayer.ViewModels.OrganicMatter;
+using ServiceLayer.ViewModels.CookingStage;
+using ServiceLayer.ViewModels.Tag;
 using System.Collections.Generic;
 
 namespace ServiceLayer.ViewModels.Recipe
 {
     public class CreateRecipeModel : CreateUpdateRecipeBaseModel
     {
-        public List<CreateRecipeIngredientModel> RecipeIngredients { get; set; } = new List<CreateRecipeIngredientModel>();
-        public List<CreateRecipeOrganicMatterModel> OrganicMatterRecipes { get; set; } = new List<CreateRecipeOrganicMatterModel>();
+        public List<CreateIngredientModel> Ingredients { get; set; } = new List<CreateIngredientModel>();
+        public List<CreateOrganicMatterModel> OrganicMatters { get; set; } = new List<CreateOrganicMatterModel>();
+        public List<CreateCookingStageModel> CookingStages { get; set; } = new List<CreateCookingStageModel>();//
+        public List<CreateTagModel> Tags { get; set; } = new List<CreateTagModel>();
+
     }
 }

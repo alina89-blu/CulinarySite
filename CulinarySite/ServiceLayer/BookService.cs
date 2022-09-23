@@ -1,139 +1,127 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using Database;
 using Repositories;
+using ServiceLayer.Dtos.Book;
 using ServiceLayer.ViewModels.Book;
 
 namespace ServiceLayer
 {
     public class BookService : IBookService
     {
-        private readonly IReadOnlyGenericRepository<Book> bookReadOnlyRepository;
-        private readonly IWriteGenericRepository<Book> bookWriteRepository;
+        private readonly IReadOnlyGenericRepository<Book> _bookReadOnlyRepository;
+        private readonly IWriteGenericRepository<Book> _bookWriteRepository;
+        private readonly IMapper _mapper;
         public BookService(
             IReadOnlyGenericRepository<Book> bookReadOnlyRepository,
-            IWriteGenericRepository<Book> bookWriteRepository)
+            IWriteGenericRepository<Book> bookWriteRepository,
+            IMapper mapper)
         {
-            this.bookReadOnlyRepository = bookReadOnlyRepository;
-            this.bookWriteRepository = bookWriteRepository;
+            _bookReadOnlyRepository = bookReadOnlyRepository;
+            _bookWriteRepository = bookWriteRepository;
+            _mapper = mapper;
         }
 
-        public void CreateBook(CreateBookModel createBookModel)
+        public void CreateBook(CreateBookDto createBookDto)
         {
-            var book = new Book
-            {
-                Name = createBookModel.Name,
-                CreationYear = createBookModel.CreationYear,
-                Description = createBookModel.Description,
-                AuthorId = createBookModel.AuthorId
+            Book book = _mapper.Map<Book>(createBookDto);
 
-                // Author = new Author { Name = createBookModel.AuthorName }
-            };
-            this.bookWriteRepository.Create(book);
-            this.bookWriteRepository.Save();
+            _bookWriteRepository.Create(book);
+            _bookWriteRepository.Save();
         }
 
-        public void UpdateBook(UpdateBookModel updateBookModel)
+        public void UpdateBook(UpdateBookDto updateBookDto)
         {
-            var book = new Book
-            {
-                Id = updateBookModel.BookId,
-                Name = updateBookModel.Name,
-                CreationYear = updateBookModel.CreationYear,
-                Description = updateBookModel.Description,
-                AuthorId = updateBookModel.AuthorId
-            };
-            this.bookWriteRepository.Update(book);
-            this.bookWriteRepository.Save();
+            Book book = _mapper.Map<Book>(updateBookDto);
+
+            _bookWriteRepository.Update(book);
+            _bookWriteRepository.Save();
         }
 
         public void DeleteBook(int id)
         {
-            this.bookWriteRepository.Delete(id);
-            this.bookWriteRepository.Save();
+            _bookWriteRepository.Delete(id);
+            _bookWriteRepository.Save();
         }
 
-        public IEnumerable<BookDetailListModel> GetBookDetailList(bool withRelated)
+        public BookDetailDto GetBook(int id, bool withRelated)
         {
-            IEnumerable<Book> books;
-            List<BookDetailListModel> bookDetailListModels = new List<BookDetailListModel>();
-            if (withRelated)
-            {
-                books = this.bookReadOnlyRepository.GetItemListWithInclude(
-                x => x.Author);
-                foreach (var book in books)
-                {
-                    bookDetailListModels.Add(new BookDetailListModel
-                    {
-                        BookId = book.Id,
-                        Name = book.Name,
-                        CreationYear = book.CreationYear,
-                        Description = book.Description,
-                        AuthorName = book.Author?.Name
-                    });
-                }
-                return bookDetailListModels;
-            }
-
-            books = this.bookReadOnlyRepository.GetItemList();
-            foreach (var book in books)
-            {
-                bookDetailListModels.Add(new BookDetailListModel
-                {
-                    BookId = book.Id,
-                    Name = book.Name,
-                    CreationYear = book.CreationYear,
-                    Description = book.Description
-                });
-            }
-            return bookDetailListModels;
-        }
-
-        public BookDetailModel GetBook(int id, bool withRelated)
-        {
-            Book book;
-            BookDetailModel bookDetailModel = new BookDetailModel();
+            var book = new Book();
+            var bookDetailDto = new BookDetailDto();
 
             if (withRelated)
             {
-                book = this.bookReadOnlyRepository.GetItemWithInclude(
+                book = _bookReadOnlyRepository.GetItemWithInclude(
                 x => x.Id == id,
                 x => x.Author);
-                bookDetailModel = new BookDetailModel
-                {
-                    BookId = book.Id,
-                    Name = book.Name,
-                    CreationYear = book.CreationYear,
-                    Description = book.Description,
-                    AuthorId = book.AuthorId  //
 
-                };
-                return bookDetailModel;
+                bookDetailDto = _mapper.Map<BookDetailDto>(book);
+
+                return bookDetailDto;
             }
-            book = this.bookReadOnlyRepository.GetItem(id);
-            bookDetailModel = new BookDetailModel
+            book = _bookReadOnlyRepository.GetItem(id);
+
+            bookDetailDto = _mapper.Map<BookDetailDto>(book);
+
+            return bookDetailDto;
+        }
+        public IEnumerable<BookDetailListDto> GetBookDetailList(bool withRelated)
+        {
+            IEnumerable<Book> books;
+            var bookDetailListDtos = new List<BookDetailListDto>();
+
+            if (withRelated)
             {
-                BookId = book.Id,
-                Name = book.Name,
-                CreationYear = book.CreationYear,
-                Description = book.Description,
-            };
-            return bookDetailModel;
+                books = _bookReadOnlyRepository.GetItemListWithInclude(
+                x => x.Author);
+
+                foreach (var book in books)
+                {
+                    bookDetailListDtos.Add(_mapper.Map<BookDetailListDto>(book));
+                }
+                return bookDetailListDtos;
+            }
+
+            books = _bookReadOnlyRepository.GetItemList();
+            foreach (var book in books)
+            {
+                bookDetailListDtos.Add(_mapper.Map<BookDetailListDto>(book));
+            }
+            return bookDetailListDtos;
         }
 
-        public IEnumerable<BookModel> GetBookList()
+        public IEnumerable<BookDto> GetBookList()
         {
-            IEnumerable<Book> books = this.bookReadOnlyRepository.GetItemList();
-            List<BookModel> bookModels = new List<BookModel>();
+            IEnumerable<Book> books = _bookReadOnlyRepository.GetItemList();
+            var bookDtos = new List<BookDto>();
 
             foreach (var book in books)
             {
-                bookModels.Add(new BookModel
-                {
-                    BookId = book.Id,
-                    Name = book.Name
-                });
+                bookDtos.Add(_mapper.Map<BookDto>(book));
             }
-            return bookModels;
+            return bookDtos;
         }
+
+        public IEnumerable<BookDetailListDto> GetSortedBooksByName(bool withRelated)
+        {
+            List<BookDetailListDto> books = GetBookDetailList(withRelated).ToList();
+            books.Sort(new BookNameComparer());
+            return books;
+        }
+
+        public IEnumerable<BookDetailListDto> GetSortedBooksByYear(bool withRelated)
+        {
+            List<BookDetailListDto> books = GetBookDetailList(withRelated).ToList();
+            books.Sort(new BookYearComparer());
+            return books;
+        }
+
+        /*public IEnumerable<BookDetailListModel> GetSortedBooksByYear(bool withRelated)
+        {
+            List<BookDetailListModel> books = GetBookDetailList(withRelated).ToList();
+            books.Sort(new BookYearComparer());
+            return books;
+        }*/
     }
 }

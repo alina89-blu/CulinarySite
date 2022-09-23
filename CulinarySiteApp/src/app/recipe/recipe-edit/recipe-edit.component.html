@@ -9,7 +9,7 @@
 </div>
 <div>
   <label>Время приготовления</label>
-  <input type="time" [(ngModel)]="updateRecipeModel.cookingTime" />
+  <input type="time " [(ngModel)]="updateRecipeModel.cookingTime" />
 </div>
 <div>
   <label>Уровень сложности</label>
@@ -34,30 +34,21 @@
 
 <form [formGroup]="myForm">
   <div
-    formArrayName="recipeIngredients"
-    *ngFor="
-      let recipeIngredient of getFormsControls()['controls'];
-      let i = index
-    "
+    formArrayName="ingredients"
+    *ngFor="let ingredient of getFormsControls()['controls']; let i = index"
   >
     <div [formGroupName]="i">
       <label>Ingredient</label>
-      <select
-        [(ngModel)]="updateRecipeModel.recipeIngredients[i].ingredientId"
-        class="form-control"
-        formControlName="ingredientId"
-      >
-        <option
-          *ngFor="let ingredient of ingredients"
-          [ngValue]="ingredient.ingredientId"
-        >
-          {{ ingredient.name }}
-        </option>
-      </select>
+
+      <input
+        type="text"
+        [(ngModel)]="updateRecipeModel.ingredients[i].name"
+        formControlName="name"
+      />
 
       <label>Unit</label>
       <select
-        [(ngModel)]="updateRecipeModel.recipeIngredients[i].unit"
+        [(ngModel)]="updateRecipeModel.ingredients[i].unit"
         class="form-control"
         formControlName="unit"
       >
@@ -71,14 +62,14 @@
       <input
         type="number"
         min="0"
-        [(ngModel)]="updateRecipeModel.recipeIngredients[i].quantity"
+        [(ngModel)]="updateRecipeModel.ingredients[i].quantity"
         formControlName="quantity"
       />
 
       <!--  <button (click)="deleteRecipeIngredient(i)">delete</button>-->
     </div>
   </div>
-  <button class="btn info" (click)="addRecipeIngredient()">+</button>
+  <button class="btn info" (click)="addIngredient()">+</button>
 </form>
 
 <div>

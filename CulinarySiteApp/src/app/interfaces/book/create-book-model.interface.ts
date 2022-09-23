@@ -1,6 +1,6 @@
 export interface ICreateBookModel {
   authorId: number;
   name: string;
-  creationYear: Date;
+  creationYear: number;
   description: string;
 }

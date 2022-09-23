@@ -7,33 +7,35 @@ import { UpdateRecipeModel } from 'src/app/viewmodels/recipe/update-recipe-model
 import { IRecipeDetailModel } from 'src/app/interfaces/recipe/recipe-detail-model.interface';
 import { DishListModel } from 'src/app/viewmodels/dish/dish-list-model.class';
 import { IDishListModel } from 'src/app/interfaces/dish/dish-list-model.interface';
+import { AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { IRecipeIngredientModel } from 'src/app/interfaces/recipe-ingredient/recipe-ingredient-model.interface';
+
 import { FormArray } from '@angular/forms';
-import { CreateRecipeIngredientModel } from 'src/app/viewmodels/recipe-ingredient/create-recipe-ingredient-model.class';
-import { ICreateRecipeIngredientModel } from 'src/app/interfaces/recipe-ingredient/create-recipe-ingredient-model.interface';
+
 import { IngredientService } from 'src/app/services/ingredient.service';
 import { IIngredientListModel } from 'src/app/interfaces/ingredient/ingredient-list-model.interface';
 import { IngredientListModel } from 'src/app/viewmodels/ingredient/ingredient-list-model.class';
 import { AuthorService } from 'src/app/services/author.service';
 import { BookService } from 'src/app/services/book.service';
-import { AuthorModel } from 'src/app/viewmodels/author/author-model.class';
 import { BookModel } from 'src/app/viewmodels/book/book-model.class';
 import { IBookModel } from 'src/app/interfaces/book/book-model.interface';
-import { IAuthorModel } from 'src/app/interfaces/author/author-model.interface';
 import { Unit } from 'src/app/enums/unit.enum';
+import { CreateIngredientModel } from 'src/app/viewmodels/ingredient/create-ingredient-model.class';
+import { ICreateIngredientModel } from 'src/app/interfaces/ingredient/create-ingredient-model.interface';
+import { AuthorListModel } from 'src/app/viewmodels/author/author-list-model.class';
+import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.interface';
 
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.css'],
 })
-export class RecipeEditComponent implements OnInit {
+export class RecipeEditComponent implements OnInit, AfterViewChecked {
   private id: number;
   public updateRecipeModel: UpdateRecipeModel = new UpdateRecipeModel();
   difficultyLevels: DifficultyLevel[] = [
@@ -54,7 +56,7 @@ export class RecipeEditComponent implements OnInit {
   ];
   public dishes: DishListModel[] = [];
 
-  public authors: AuthorModel[] = [];
+  public authors: AuthorListModel[] = [];
   public books: BookModel[] = [];
 
   public myForm: FormGroup;
@@ -68,28 +70,25 @@ export class RecipeEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private ingredientService: IngredientService,
     private authorService: AuthorService,
-    private bookService: BookService
+    private bookService: BookService,
+    private readonly changeDetectorRef: ChangeDetectorRef
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
     this.myForm = new FormGroup({
-      name: new FormControl('recept', Validators.required),
-      servingsNumber: new FormControl('', Validators.required),
-      dish: new FormControl('', Validators.required),
-      author: new FormControl('', Validators.required),
-      book: new FormControl('', Validators.required),
-      recipeIngredients: new FormArray([
+      ingredients: new FormArray([
         new FormGroup({
-          ingredientId: new FormControl('', Validators.required),
+          name: new FormControl('', Validators.required),
           unit: new FormControl('', Validators.required),
           quantity: new FormControl('', Validators.required),
         }),
       ]),
     });
-    this.updateRecipeModel.recipeIngredients = [
-      new CreateRecipeIngredientModel(),
-    ];
+    this.updateRecipeModel.ingredients = [new CreateIngredientModel()];
   }
 
+  public ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
+  }
   public ngOnInit(): void {
     if (this.id) {
       this.recipeService
@@ -106,31 +105,21 @@ export class RecipeEditComponent implements OnInit {
     this.getBookList();
 
     this.myForm.patchValue({
-      recipeIngredients: this.updateRecipeModel.recipeIngredients,
+      ingredients: this.updateRecipeModel.ingredients,
     });
 
     this.myForm.setControl(
-      'recipeIngredients',
-      this.setExistingBooks(this.updateRecipeModel.recipeIngredients)
+      'ingredients',
+      this.setExistingBooks(this.updateRecipeModel.ingredients)
     );
   }
 
-  /*  editEmployee(author: IAuthorDetailModel) {
-    this.myForm.patchValue({
-      books: author.books,
-    });
-
-    this.myForm.setControl('skills', this.setExistingBooks(author.books));
-  }*/
-
-  setExistingBooks(
-    recipeIngredients: ICreateRecipeIngredientModel[]
-  ): FormArray {
+  setExistingBooks(ingredients: ICreateIngredientModel[]): FormArray {
     const formArray = new FormArray([]);
-    recipeIngredients.forEach((s) => {
+    ingredients.forEach((s) => {
       formArray.push(
         this.formBuilder.group({
-          ingredientId: s.ingredientId,
+          name: s.name,
           unit: s.unit,
           quantity: s.quantity,
         })
@@ -155,22 +144,20 @@ export class RecipeEditComponent implements OnInit {
   }
 
   public getFormsControls(): FormArray {
-    return this.myForm.controls['recipeIngredients'] as FormArray;
+    return this.myForm.controls['ingredients'] as FormArray;
   }
 
-  public addRecipeIngredient(): void {
-    (<FormArray>this.myForm.controls['recipeIngredients']).push(
-      this.createNewRecipeIngredient()
+  public addIngredient(): void {
+    (<FormArray>this.myForm.controls['ingredients']).push(
+      this.createNewIngredient()
     );
 
-    this.updateRecipeModel.recipeIngredients.push(
-      new CreateRecipeIngredientModel()
-    );
+    this.updateRecipeModel.ingredients.push(new CreateIngredientModel());
   }
 
-  public createNewRecipeIngredient(): FormGroup {
+  public createNewIngredient(): FormGroup {
     const group = new FormGroup({
-      ingredientId: new FormControl('', Validators.required),
+      name: new FormControl('', Validators.required),
       unit: new FormControl('', Validators.required),
       quantity: new FormControl('', Validators.required),
     });
@@ -198,8 +185,8 @@ export class RecipeEditComponent implements OnInit {
     this.authorService
       .getAuthorList()
       .subscribe(
-        (data: IAuthorModel[]) =>
-          (this.authors = data.map((x) => new AuthorModel(x)))
+        (data: IAuthorListModel[]) =>
+          (this.authors = data.map((x) => new AuthorListModel(x)))
       );
   }
 }

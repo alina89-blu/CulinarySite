@@ -1,16 +1,16 @@
-﻿using Database;
+﻿
 using System.Collections.Generic;
 using ServiceLayer.ViewModels.Author;
+using ServiceLayer.Dtos.Author;
 
 namespace ServiceLayer
 {
     public interface IAuthorService
     {
-        void CreateAuthor(CreateAuthorModel createAuthorModel);
-        void UpdateAuthor(UpdateAuthorModel updateAuthorModel);
+        void CreateAuthor(CreateAuthorDto createAuthorDto);
+        void UpdateAuthor(UpdateAuthorDto updateAuthorDto);
         void DeleteAuthor(int id);
-        AuthorDetailModel GetAuthor(int id, bool withRelated);
-        IEnumerable<AuthorDetailListModel> GetAuthorDetailList(bool withRelated);
-        IEnumerable<AuthorModel> GetAuthorList();
+        AuthorDetailDto GetAuthor(int id, bool withRelated);        
+        IEnumerable<AuthorListDto> GetAuthorList();
     }
 }

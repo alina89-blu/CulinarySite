@@ -1,46 +1,62 @@
 ﻿using System.Collections.Generic;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer;
+using ServiceLayer.Dtos.Episode;
 using ServiceLayer.ViewModels.Episode;
 
 namespace CulinarySite.Controllers
 {
     public class EpisodeController : BaseController
     {
-        private readonly IEpisodeService episodeService;
-        public EpisodeController(IEpisodeService episodeService)
+        private readonly IEpisodeService _episodeService;
+        private readonly IMapper _mapper;
+        public EpisodeController(IEpisodeService episodeService, IMapper mapper)
         {
-            this.episodeService = episodeService;
+            _episodeService = episodeService;
+            _mapper = mapper;
         }
 
         [HttpGet("{withRelated}")]
         public IEnumerable<EpisodeListModel> GetEpisodeList(bool withRelated)
         {
-            return this.episodeService.GetEpisodeList(withRelated);
+            IEnumerable<EpisodeListDto> episodeListDtos = _episodeService.GetEpisodeList(withRelated);
+            var episodeListModels = new List<EpisodeListModel>();
+
+            foreach (var episodeListDto in episodeListDtos)
+            {
+                episodeListModels.Add(_mapper.Map<EpisodeListModel>(episodeListDto));
+            }
+            return episodeListModels;
         }
 
         [HttpGet("{id}/{withRelated}")]
         public EpisodeDetailModel GetEpisode(int id, bool withRelated)
         {
-            return this.episodeService.GetEpisode(id,withRelated);
+            EpisodeDetailDto episodeDetailDto = _episodeService.GetEpisode(id, withRelated);
+            EpisodeDetailModel episodeDetailModel = _mapper.Map<EpisodeDetailModel>(episodeDetailDto);
+
+            return episodeDetailModel;
         }
 
         [HttpPost]
         public void CreateEpisode(CreateEpisodeModel createEpisodeModel)
         {
-            this.episodeService.CreateEpisode(createEpisodeModel);
+            CreateEpisodeDto createEpisodeDto = _mapper.Map<CreateEpisodeDto>(createEpisodeModel);
+            _episodeService.CreateEpisode(createEpisodeDto);
         }
 
         [HttpPut]
         public void UpdateEpisode(UpdateEpisodeModel updateEpisodeModel)
         {
-            this.episodeService.UpdateEpisode(updateEpisodeModel);
+            UpdateEpisodeDto updateEpisodeDto = _mapper.Map<UpdateEpisodeDto>(updateEpisodeModel);
+            _episodeService.UpdateEpisode(updateEpisodeDto);
         }
 
         [HttpDelete("{id}")]
         public void DeleteEpisode(int id)
         {
-            this.episodeService.DeleteEpisode(id);
+            _episodeService.DeleteEpisode(id);
         }
     }
 }

@@ -1,108 +1,89 @@
 ﻿using System.Collections.Generic;
+using AutoMapper;
 using Database;
 using Repositories;
-using ServiceLayer.ViewModels.CulinaryChannel;
+using ServiceLayer.Dtos.CulinaryChannel;
 
 namespace ServiceLayer
 {
     public class CulinaryChannelService : ICulinaryChannelService
     {
-        private readonly IReadOnlyGenericRepository<CulinaryChannel> culinaryChannelReadOnlyRepository;
-        private readonly IWriteGenericRepository<CulinaryChannel> culinaryChannelWriteRepository;
+        private readonly IReadOnlyGenericRepository<CulinaryChannel> _culinaryChannelReadOnlyRepository;
+        private readonly IWriteGenericRepository<CulinaryChannel> _culinaryChannelWriteRepository;
+        private readonly IMapper _mapper;
         public CulinaryChannelService(
             IReadOnlyGenericRepository<CulinaryChannel> culinaryChannelReadOnlyRepository,
-            IWriteGenericRepository<CulinaryChannel> culinaryChannelWriteRepository)
+            IWriteGenericRepository<CulinaryChannel> culinaryChannelWriteRepository,
+            IMapper mapper)
         {
-            this.culinaryChannelReadOnlyRepository = culinaryChannelReadOnlyRepository;
-            this.culinaryChannelWriteRepository = culinaryChannelWriteRepository;
+            _culinaryChannelReadOnlyRepository = culinaryChannelReadOnlyRepository;
+            _culinaryChannelWriteRepository = culinaryChannelWriteRepository;
+            _mapper = mapper;
         }
 
-        public void CreateCulinaryChannel(CreateCulinaryChannelModel createCulinaryChannelModel)
+        public void CreateCulinaryChannel(CreateCulinaryChannelDto createCulinaryChannelDto)
         {
-            var culinaryChannel = new CulinaryChannel
-            {
-                Name = createCulinaryChannelModel.Name,
-                Content = createCulinaryChannelModel.Content
-            };
-
-            this.culinaryChannelWriteRepository.Create(culinaryChannel);
-            this.culinaryChannelWriteRepository.Save();
+            CulinaryChannel culinaryChannel = _mapper.Map<CulinaryChannel>(createCulinaryChannelDto);
+            _culinaryChannelWriteRepository.Create(culinaryChannel);
+            _culinaryChannelWriteRepository.Save();
         }
 
-        public void UpdateCulinaryChannel(UpdateCulinaryChannelModel updateCulinaryChannelModel)
+        public void UpdateCulinaryChannel(UpdateCulinaryChannelDto updateCulinaryChannelDto)
         {
-            var culinaryChannel = new CulinaryChannel
-            {
-                Id = updateCulinaryChannelModel.CulinaryChannelId,
-                Name = updateCulinaryChannelModel.Name,
-                Content = updateCulinaryChannelModel.Content
-            };
-            this.culinaryChannelWriteRepository.Update(culinaryChannel);
-            this.culinaryChannelWriteRepository.Save();
+            CulinaryChannel culinaryChannel = _mapper.Map<CulinaryChannel>(updateCulinaryChannelDto);
+            _culinaryChannelWriteRepository.Update(culinaryChannel);
+            _culinaryChannelWriteRepository.Save();
         }
 
         public void DeleteCulinaryChannel(int id)
         {
-            this.culinaryChannelWriteRepository.Delete(id);
-            this.culinaryChannelWriteRepository.Save();
+            _culinaryChannelWriteRepository.Delete(id);
+            _culinaryChannelWriteRepository.Save();
         }
 
-        public IEnumerable<CulinaryChannelListModel> GetCulinaryChannelList(bool withRelated)
+        public IEnumerable<CulinaryChannelListDto> GetCulinaryChannelList(bool withRelated)
         {
             IEnumerable<CulinaryChannel> culinaryChannels;
-            List<CulinaryChannelListModel> culinaryChannelListModels = new List<CulinaryChannelListModel>();
+            var culinaryChannelListDtos = new List<CulinaryChannelListDto>();
+
             if (withRelated)
             {
-                culinaryChannels = this.culinaryChannelReadOnlyRepository.GetItemListWithInclude();
+                culinaryChannels = _culinaryChannelReadOnlyRepository.GetItemListWithInclude(x => x.Episodes);
                 foreach (var culinaryChannel in culinaryChannels)
                 {
-                    culinaryChannelListModels.Add(new CulinaryChannelListModel
-                    {
-                        CulinaryChannelId = culinaryChannel.Id,
-                        Name = culinaryChannel.Name,
-                        Content = culinaryChannel.Content
-                    });
+                    culinaryChannelListDtos.Add(_mapper.Map<CulinaryChannelListDto>(culinaryChannel));
                 }
-                return culinaryChannelListModels;
+                return culinaryChannelListDtos;
             }
-            culinaryChannels = this.culinaryChannelReadOnlyRepository.GetItemList();
+            culinaryChannels = _culinaryChannelReadOnlyRepository.GetItemList();
+
             foreach (var culinaryChannel in culinaryChannels)
             {
-                culinaryChannelListModels.Add(new CulinaryChannelListModel
-                {
-                    CulinaryChannelId = culinaryChannel.Id,
-                    Name = culinaryChannel.Name,
-                    Content = culinaryChannel.Content
-                });
+                culinaryChannelListDtos.Add(_mapper.Map<CulinaryChannelListDto>(culinaryChannel));
             }
-            return culinaryChannelListModels;
+            return culinaryChannelListDtos;
         }
 
-        public CulinaryChannelDetailModel GetCulinaryChannel(int id, bool withRelated)
+        public CulinaryChannelDetailDto GetCulinaryChannel(int id, bool withRelated)
         {
             var culinaryChannel = new CulinaryChannel();
-            CulinaryChannelDetailModel culinaryChannelDetailModel = new CulinaryChannelDetailModel();
+            var culinaryChannelDetailDto = new CulinaryChannelDetailDto();
 
             if (withRelated)
             {
-                culinaryChannel = this.culinaryChannelReadOnlyRepository.GetItemWithInclude(
-                x => x.Id == id);
-                culinaryChannelDetailModel = new CulinaryChannelDetailModel
-                {
-                    CulinaryChannelId = culinaryChannel.Id,
-                    Name = culinaryChannel.Name,
-                    Content = culinaryChannel.Content
-                };
-                return culinaryChannelDetailModel;
+                culinaryChannel = _culinaryChannelReadOnlyRepository.GetItemWithInclude(
+                x => x.Id == id,
+                x => x.Episodes);
+
+                culinaryChannelDetailDto = _mapper.Map<CulinaryChannelDetailDto>(culinaryChannel);
+
+                return culinaryChannelDetailDto;
             }
-            culinaryChannel = this.culinaryChannelReadOnlyRepository.GetItem(id);
-            culinaryChannelDetailModel = new CulinaryChannelDetailModel
-            {
-                CulinaryChannelId = culinaryChannel.Id,
-                Name = culinaryChannel.Name,
-                Content = culinaryChannel.Content
-            };
-            return culinaryChannelDetailModel;
+            culinaryChannel = _culinaryChannelReadOnlyRepository.GetItem(id);
+
+            culinaryChannelDetailDto = _mapper.Map<CulinaryChannelDetailDto>(culinaryChannel);
+
+            return culinaryChannelDetailDto;
         }
     }
 }

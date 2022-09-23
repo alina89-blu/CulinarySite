@@ -2,6 +2,7 @@
 using Repositories;
 using System.Collections.Generic;
 using ServiceLayer.ViewModels.Ingredient;
+using System.Linq;
 
 namespace ServiceLayer
 {
@@ -18,24 +19,48 @@ namespace ServiceLayer
         }
 
         public void CreateIngredient(CreateIngredientModel createIngredientModel)
-        {
-            var ingredient = new Ingredient
-            {
-                Name = createIngredientModel.Name
-            };
-            this.ingredientWriteRepository.Create(ingredient);
-            this.ingredientWriteRepository.Save();
+        {            
+                var ingredient = new Ingredient
+                {
+                    Name = createIngredientModel.Name,
+                    Unit = createIngredientModel.Unit,
+                    Quantity = createIngredientModel.Quantity
+                };
+                this.ingredientWriteRepository.Create(ingredient);
+                this.ingredientWriteRepository.Save();                                    
         }
 
-        public void UpdateIngredient(UpdateIngredientModel updateIngredientModel)
+
+
+        public void UpdateIngredient(UpdateIngredientModel updateIngredientModel)//
         {
-            var ingredient = new Ingredient
+            var ingredientsId = this.ingredientReadOnlyRepository.GetItemList().Select(x => x.Id);
+            var ingredient = new Ingredient();
+
+            if (ingredientsId.Contains(updateIngredientModel.IngredientId))
             {
-                Id = updateIngredientModel.IngredientId,
-                Name = updateIngredientModel.Name
-            };
-            this.ingredientWriteRepository.Update(ingredient);
-            this.ingredientWriteRepository.Save();
+                
+                ingredient = new Ingredient
+                {
+                    Id = updateIngredientModel.IngredientId,
+                    Name = updateIngredientModel.Name,
+                    Unit = updateIngredientModel.Unit,
+                    Quantity = updateIngredientModel.Quantity,
+                };
+                this.ingredientWriteRepository.Update(ingredient);
+                this.ingredientWriteRepository.Save();
+            }
+            else
+            {
+                ingredient = new Ingredient
+                {
+                    Name= updateIngredientModel.Name,
+                    Unit = updateIngredientModel.Unit,
+                    Quantity = updateIngredientModel.Quantity,
+                };
+                this.ingredientWriteRepository.Create(ingredient);
+                this.ingredientWriteRepository.Save();
+            }
         }
 
         public void DeleteIngredient(int id)
@@ -44,55 +69,33 @@ namespace ServiceLayer
             this.ingredientWriteRepository.Save();
         }
 
-        public IEnumerable<IngredientListModel> GetIngredientList(bool withRelated)
+        public IEnumerable<IngredientListModel> GetIngredientList()
         {
-            IEnumerable<Ingredient> ingredients;
+            IEnumerable<Ingredient> ingredients= this.ingredientReadOnlyRepository.GetItemList();
             List<IngredientListModel> ingredientListModels = new List<IngredientListModel>();
-            if (withRelated)
-            {
-                ingredients = this.ingredientReadOnlyRepository.GetItemListWithInclude();
-                foreach (var ingredient in ingredients)
-                {
-                    ingredientListModels.Add(new IngredientListModel
-                    {
-                        IngredientId = ingredient.Id,
-                        Name = ingredient.Name
-                    });
-                }
-                return ingredientListModels;
-            }
-            ingredients = this.ingredientReadOnlyRepository.GetItemList();
+                               
             foreach (var ingredient in ingredients)
             {
                 ingredientListModels.Add(new IngredientListModel
                 {
                     IngredientId = ingredient.Id,
-                    Name = ingredient.Name
+                    Name = ingredient.Name,
+                    Unit = ingredient.Unit,
+                    Quantity = ingredient.Quantity,
                 });
             }
             return ingredientListModels;
         }
 
-        public IngredientDetailModel GetIngredient(int id, bool withRelated)
+        public IngredientDetailModel GetIngredient(int id)
         {
-            Ingredient ingredient = new Ingredient();
-            IngredientDetailModel ingredientDetailModel = new IngredientDetailModel();
-            if (withRelated)
-            {
-                ingredient = this.ingredientReadOnlyRepository.GetItemWithInclude(
-                                x => x.Id == id);
-                ingredientDetailModel = new IngredientDetailModel
-                {
-                    IngredientId = ingredient.Id,
-                    Name = ingredient.Name
-                };
-                return ingredientDetailModel;
-            }
-            ingredient = this.ingredientReadOnlyRepository.GetItem(id);
-            ingredientDetailModel = new IngredientDetailModel
+            Ingredient ingredient =  this.ingredientReadOnlyRepository.GetItem(id);
+            IngredientDetailModel ingredientDetailModel = new IngredientDetailModel()                              
             {
                 IngredientId = ingredient.Id,
-                Name = ingredient.Name
+                Name = ingredient.Name,
+                Unit = ingredient.Unit,
+                Quantity = ingredient.Quantity
             };
             return ingredientDetailModel;
         }
