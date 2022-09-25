@@ -2,27 +2,35 @@
 using ServiceLayer.Dtos.Address;
 using ServiceLayer.Dtos.Author;
 using ServiceLayer.Dtos.Book;
+using ServiceLayer.Dtos.Comment;
 using ServiceLayer.Dtos.CookingStage;
 using ServiceLayer.Dtos.CulinaryChannel;
 using ServiceLayer.Dtos.Dish;
 using ServiceLayer.Dtos.Episode;
+using ServiceLayer.Dtos.Image.DishImage;
+using ServiceLayer.Dtos.Image.EpisodeImage;
 using ServiceLayer.Dtos.Ingredient;
 using ServiceLayer.Dtos.OrganicMatter;
 using ServiceLayer.Dtos.Recipe;
 using ServiceLayer.Dtos.Restaurant;
+using ServiceLayer.Dtos.Subscriber;
 using ServiceLayer.Dtos.Tag;
 using ServiceLayer.Dtos.Telephone;
 using ServiceLayer.ViewModels.Address;
 using ServiceLayer.ViewModels.Author;
 using ServiceLayer.ViewModels.Book;
+using ServiceLayer.ViewModels.Comment;
 using ServiceLayer.ViewModels.CookingStage;
 using ServiceLayer.ViewModels.CulinaryChannel;
 using ServiceLayer.ViewModels.Dish;
 using ServiceLayer.ViewModels.Episode;
+using ServiceLayer.ViewModels.Image.DishImage;
+using ServiceLayer.ViewModels.Image.EpisodeImage;
 using ServiceLayer.ViewModels.Ingredient;
 using ServiceLayer.ViewModels.OrganicMatter;
 using ServiceLayer.ViewModels.Recipe;
 using ServiceLayer.ViewModels.Restaurant;
+using ServiceLayer.ViewModels.Subscriber;
 using ServiceLayer.ViewModels.Tag;
 using ServiceLayer.ViewModels.Telephone;
 
@@ -103,6 +111,26 @@ namespace CulinarySite.AutoMapperProfiles
             CreateMap<TelephoneDetailModel, TelephoneDetailDto>().ReverseMap();
             CreateMap<TelephoneListModel, TelephoneListDto>().ReverseMap();
             CreateMap<TelephoneModel, TelephoneDto>().ReverseMap();
+
+            CreateMap<CreateSubscriberModel, CreateSubscriberDto>().ReverseMap();
+            CreateMap<UpdateSubscriberModel, UpdateSubscriberDto>().ReverseMap();
+            CreateMap<SubscriberListModel, SubscriberListDto>().ReverseMap();
+            CreateMap<SubscriberDetailModel, SubscriberDetailDto>().ReverseMap();
+
+            CreateMap<CreateCommentModel, CreateCommentDto>().ReverseMap();
+            CreateMap<UpdateCommentModel, UpdateCommentDto>().ReverseMap();
+            CreateMap<CommentListModel, CommentListDto>().ReverseMap();
+            CreateMap<CommentDetailModel, CommentDetailDto>().ReverseMap();
+
+            CreateMap<CreateDishImageModel, CreateDishImageDto>().ReverseMap();
+            CreateMap<UpdateDishImageModel, UpdateDishImageDto>().ReverseMap();
+            CreateMap<DishImageListModel, DishImageListDto>().ReverseMap();
+            CreateMap<DishImageDetailModel, DishImageDetailDto>().ReverseMap();
+
+            CreateMap<CreateEpisodeImageModel, CreateEpisodeImageDto>().ReverseMap();
+            CreateMap<UpdateEpisodeImageModel, UpdateEpisodeImageDto>().ReverseMap();
+            CreateMap<EpisodeImageListModel, EpisodeImageListDto>().ReverseMap();
+            CreateMap<EpisodeImageDetailModel, EpisodeImageDetailDto>().ReverseMap();
 
 
             // CreateMap<List<AddressListModel>, List<AddressListDto>>().ReverseMap();

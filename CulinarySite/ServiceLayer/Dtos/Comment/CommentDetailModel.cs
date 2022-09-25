@@ -1,8 +1,8 @@
 ﻿
 
-namespace ServiceLayer.ViewModels.Comment
+namespace ServiceLayer.Dtos.Comment
 {
-    public class CommentDetailModel
+    public class CommentDetailDto
     {
         public int CommentId { get; set; }
         public string Content { get; set; }

@@ -1,109 +1,98 @@
 ﻿using Database;
 using Repositories;
 using System.Collections.Generic;
-using ServiceLayer.ViewModels.Comment;
-
+using AutoMapper;
+using ServiceLayer.Dtos.Comment;
 
 namespace ServiceLayer
 {
     public class CommentService : ICommentService
     {
-        private readonly IReadOnlyGenericRepository<Comment> commentReadOnlyRepository;
-        private readonly IWriteGenericRepository<Comment> commentWriteRepository;
+        private readonly IReadOnlyGenericRepository<Comment> _commentReadOnlyRepository;
+        private readonly IWriteGenericRepository<Comment> _commentWriteRepository;
+        private readonly IMapper _mapper;
         public CommentService(
             IReadOnlyGenericRepository<Comment> commentReadOnlyRepository,
-            IWriteGenericRepository<Comment> commentWriteRepository)
+            IWriteGenericRepository<Comment> commentWriteRepository,
+            IMapper mapper)
         {
-            this.commentReadOnlyRepository = commentReadOnlyRepository;
-            this.commentWriteRepository = commentWriteRepository;
+            _commentReadOnlyRepository = commentReadOnlyRepository;
+            _commentWriteRepository = commentWriteRepository;
+            _mapper = mapper;
         }
 
-        public void CreateComment(CreateCommentModel createCommentModel)
+        public void CreateComment(CreateCommentDto createCommentDto)
         {
-            var comment = new Comment
-            {
-                Content = createCommentModel.Content,
-                SubscriberId = createCommentModel.SubscriberId
-            };
-            this.commentWriteRepository.Create(comment);
-            this.commentWriteRepository.Save();
+            Comment comment = _mapper.Map<Comment>(createCommentDto);
+
+            _commentWriteRepository.Create(comment);
+            _commentWriteRepository.Save();
         }
-        public void UpdateComment(UpdateCommentModel updateCommentModel)
+        public void UpdateComment(UpdateCommentDto updateCommentDto)
         {
-            var comment = new Comment
-            {
-                Id = updateCommentModel.CommentId,
-                Content = updateCommentModel.Content,
-                SubscriberId = updateCommentModel.SubscriberId
-            };
-            this.commentWriteRepository.Update(comment);
-            this.commentWriteRepository.Save();
+            Comment comment = _mapper.Map<Comment>(updateCommentDto);
+
+            _commentWriteRepository.Update(comment);
+            _commentWriteRepository.Save();
         }
 
         public void DeleteComment(int id)
         {
-            this.commentWriteRepository.Delete(id);
-            this.commentWriteRepository.Save();
+            _commentWriteRepository.Delete(id);
+            _commentWriteRepository.Save();
         }
 
-        public CommentDetailModel GetComment(int id, bool withRelated)
+        public CommentDetailDto GetComment(int id, bool withRelated)
         {
             var comment = new Comment();
-            var commentDetailModel = new CommentDetailModel();
+            var commentDetailDto = new CommentDetailDto();
 
             if (withRelated)
             {
-                comment = this.commentReadOnlyRepository.GetItemWithInclude(
+                comment = _commentReadOnlyRepository.GetItemWithInclude(
                 x => x.Id == id,
                 x => x.Restaurants,
                 x => x.Subscriber);
-                commentDetailModel = new CommentDetailModel
-                {
-                    CommentId = comment.Id,
-                    Content = comment.Content,
-                    SubscriberId = comment.SubscriberId
-                };
-                return commentDetailModel;
+
+                commentDetailDto = _mapper.Map<CommentDetailDto>(comment);
+
+                return commentDetailDto;
             }
-            comment = this.commentReadOnlyRepository.GetItem(id);
-            commentDetailModel = new CommentDetailModel
-            {
-                CommentId = comment.Id,
-                Content = comment.Content
-            };
-            return commentDetailModel;
+
+            comment = _commentReadOnlyRepository.GetItem(id);
+
+            commentDetailDto = _mapper.Map<CommentDetailDto>(comment);
+
+            return commentDetailDto;
         }
 
-        public IEnumerable<CommentListModel> GetCommentList(bool withRelated)
+        public IEnumerable<CommentListDto> GetCommentList(bool withRelated)
         {
             IEnumerable<Comment> comments;
-            List<CommentListModel> commentListModels = new List<CommentListModel>();
+            var commentListDtos = new List<CommentListDto>();
+
             if (withRelated)
             {
-                comments = this.commentReadOnlyRepository.GetItemListWithInclude(
+                comments = _commentReadOnlyRepository.GetItemListWithInclude(
                 x => x.Restaurants,
                 x => x.Subscriber);
+
                 foreach (var comment in comments)
                 {
-                    commentListModels.Add(new CommentListModel
-                    {
-                        CommentId = comment.Id,
-                        Content = comment.Content,
-                        SubscriberName = comment.Subscriber.Name
-                    });
+                    commentListDtos.Add(_mapper.Map<CommentListDto>(comment));
                 }
-                return commentListModels;
+
+                return commentListDtos;
             }
-            comments = this.commentReadOnlyRepository.GetItemList();
+
+            comments = _commentReadOnlyRepository.GetItemList();
+
             foreach (var comment in comments)
             {
-                commentListModels.Add(new CommentListModel
-                {
-                    CommentId = comment.Id,
-                    Content = comment.Content,
-                });
+                commentListDtos.Add(_mapper.Map<CommentListDto>(comment));
             }
-            return commentListModels;
+
+            return commentListDtos;
         }
     }
 }

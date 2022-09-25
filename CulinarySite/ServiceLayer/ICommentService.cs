@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using ServiceLayer.ViewModels.Comment;
+using ServiceLayer.Dtos.Comment;
 
 namespace ServiceLayer
 {
     public interface ICommentService
     {
-        void CreateComment(CreateCommentModel createCommentModel);
-        void UpdateComment(UpdateCommentModel updateCommentModel);
+        void CreateComment(CreateCommentDto createCommentDto);
+        void UpdateComment(UpdateCommentDto updateCommentDto);
         void DeleteComment(int id);
-        CommentDetailModel GetComment(int id, bool withRelated);
-        IEnumerable<CommentListModel> GetCommentList(bool withRelated);
+        CommentDetailDto GetComment(int id, bool withRelated);
+        IEnumerable<CommentListDto> GetCommentList(bool withRelated);
     }
 }

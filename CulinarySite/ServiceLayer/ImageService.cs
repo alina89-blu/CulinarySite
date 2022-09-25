@@ -1,199 +1,163 @@
 ﻿using System.Collections.Generic;
 using Repositories;
 using Database;
-using ServiceLayer.ViewModels.Image.DishImage;
-using ServiceLayer.ViewModels.Image.EpisodeImage;
+using AutoMapper;
+using ServiceLayer.Dtos.Image.DishImage;
+using ServiceLayer.Dtos.Image.EpisodeImage;
 
 namespace ServiceLayer
 {
     public class ImageService : IImageService
     {
-        private readonly IReadOnlyGenericRepository<Image> imageReadOnlyRepository;
-        private readonly IWriteGenericRepository<Image> imageWriteRepository;
+        private readonly IReadOnlyGenericRepository<Image> _imageReadOnlyRepository;
+        private readonly IWriteGenericRepository<Image> _imageWriteRepository;
+        private readonly IMapper _mapper;
         public ImageService(
             IReadOnlyGenericRepository<Image> imageReadOnlyRepository,
-            IWriteGenericRepository<Image> imageWriteRepository)
+            IWriteGenericRepository<Image> imageWriteRepository,
+            IMapper mapper)
         {
-            this.imageReadOnlyRepository = imageReadOnlyRepository;
-            this.imageWriteRepository = imageWriteRepository;
+            _imageReadOnlyRepository = imageReadOnlyRepository;
+            _imageWriteRepository = imageWriteRepository;
+            _mapper = mapper;
         }
 
-        public void CreateDishImage(CreateDishImageModel createDishImageModel)
+        public void CreateDishImage(CreateDishImageDto createDishImageDto)
         {
-            var image = new Image
-            {
-                Name = createDishImageModel.Name,
-                Url = createDishImageModel.Url,
-                DishId = createDishImageModel.DishId
-            };
-            this.imageWriteRepository.Create(image);
-            this.imageWriteRepository.Save();
+            Image image = _mapper.Map<Image>(createDishImageDto);
+
+            _imageWriteRepository.Create(image);
+            _imageWriteRepository.Save();
         }
 
-        public void UpdateDishImage(UpdateDishImageModel updateDishImageModel)
+        public void UpdateDishImage(UpdateDishImageDto updateDishImageDto)
         {
-            var image = new Image
-            {
-                Id = updateDishImageModel.DishImageId,
-                Name = updateDishImageModel.Name,
-                Url = updateDishImageModel.Url,
-                DishId = updateDishImageModel.DishId
-            };
-            this.imageWriteRepository.Update(image);
-            this.imageWriteRepository.Save();
+            Image image = _mapper.Map<Image>(updateDishImageDto);
+
+            _imageWriteRepository.Update(image);
+            _imageWriteRepository.Save();
         }
 
         public void DeleteImage(int id)
         {
-            this.imageWriteRepository.Delete(id);
-            this.imageWriteRepository.Save();
+            _imageWriteRepository.Delete(id);
+            _imageWriteRepository.Save();
         }
 
-        public IEnumerable<DishImageListModel> GetDishImageList(bool withRelated)
+        public IEnumerable<DishImageListDto> GetDishImageList(bool withRelated)
         {
             IEnumerable<Image> images;
-            List<DishImageListModel> dishImageListModels = new List<DishImageListModel>();
+            var dishImageListDtos = new List<DishImageListDto>();
+
             if (withRelated)
             {
-                images = this.imageReadOnlyRepository.GetItemListWithInclude(x => x.Dish);
+                images = _imageReadOnlyRepository.GetItemListWithInclude(x => x.Dish);
+
                 foreach (var image in images)
                 {
-                    dishImageListModels.Add(new DishImageListModel
-                    {
-                        DishImageId = image.Id,
-                        Name = image.Name,
-                        Url = image.Url,
-                        DishCategory = image.Dish.Category
-                    });
+                    dishImageListDtos.Add(_mapper.Map<DishImageListDto>(image));
                 }
-                return dishImageListModels;
+
+                return dishImageListDtos;
             }
-            images = this.imageReadOnlyRepository.GetItemList();
+
+            images = _imageReadOnlyRepository.GetItemList();
+
             foreach (var image in images)
             {
-                dishImageListModels.Add(new DishImageListModel
-                {
-                    DishImageId = image.Id,
-                    Name = image.Name,
-                    Url = image.Url
-                });
+                dishImageListDtos.Add(_mapper.Map<DishImageListDto>(image));
             }
-            return dishImageListModels;
+
+            return dishImageListDtos;
         }
 
-        public DishImageDetailModel GetDishImage(int id, bool withRelated)
+        public DishImageDetailDto GetDishImage(int id, bool withRelated)
         {
             var image = new Image();
-            DishImageDetailModel dishImageDetailModel = new DishImageDetailModel();
+            var dishImageDetailDto = new DishImageDetailDto();
 
             if (withRelated)
             {
-                image = this.imageReadOnlyRepository.GetItemWithInclude(
+                image = _imageReadOnlyRepository.GetItemWithInclude(
                     x => x.Id == id,
                     x => x.Dish);
-                dishImageDetailModel = new DishImageDetailModel
-                {
-                    DishImageId = image.Id,
-                    Name = image.Name,
-                    Url = image.Url,
-                    DishId = image.DishId
-                };
-                return dishImageDetailModel;
+
+                dishImageDetailDto = _mapper.Map<DishImageDetailDto>(image);
+
+                return dishImageDetailDto;
             }
-            image = this.imageReadOnlyRepository.GetItem(id);
-            dishImageDetailModel = new DishImageDetailModel
-            {
-                DishImageId = image.Id,
-                Name = image.Name,
-                Url = image.Url,
-            };
-            return dishImageDetailModel;
+
+            image = _imageReadOnlyRepository.GetItem(id);
+
+            dishImageDetailDto = _mapper.Map<DishImageDetailDto>(image);
+
+            return dishImageDetailDto;
         }
 
-        public void CreateEpisodeImage(CreateEpisodeImageModel createEpisodeImageModel)
+        public void CreateEpisodeImage(CreateEpisodeImageDto createEpisodeImageDto)
         {
-            var image = new Image
-            {
-                Name = createEpisodeImageModel.Name,
-                Url = createEpisodeImageModel.Url,
-                EpisodeId = createEpisodeImageModel.EpisodeId
-            };
-            this.imageWriteRepository.Create(image);
-            this.imageWriteRepository.Save();
+            Image image = _mapper.Map<Image>(createEpisodeImageDto);
+
+            _imageWriteRepository.Create(image);
+            _imageWriteRepository.Save();
         }
 
-        public void UpdateEpisodeImage(UpdateEpisodeImageModel updateEpisodeImageModel)
+        public void UpdateEpisodeImage(UpdateEpisodeImageDto updateEpisodeImageDto)
         {
-            var image = new Image
-            {
-                Id = updateEpisodeImageModel.EpisodeImageId,
-                Name = updateEpisodeImageModel.Name,
-                Url = updateEpisodeImageModel.Url,
-                EpisodeId = updateEpisodeImageModel.EpisodeId
-            };
-            this.imageWriteRepository.Update(image);
-            this.imageWriteRepository.Save();
+            Image image = _mapper.Map<Image>(updateEpisodeImageDto);
+
+            _imageWriteRepository.Update(image);
+            _imageWriteRepository.Save();
         }
-        
-        public IEnumerable<EpisodeImageListModel> GetEpisodeImageList(bool withRelated)
+
+        public IEnumerable<EpisodeImageListDto> GetEpisodeImageList(bool withRelated)
         {
             IEnumerable<Image> images;
-            List<EpisodeImageListModel> episodeImageListModels = new List<EpisodeImageListModel>();
+            var episodeImageListDtos = new List<EpisodeImageListDto>();
+
             if (withRelated)
             {
-                images = this.imageReadOnlyRepository.GetItemListWithInclude(x => x.Episode);
+                images = _imageReadOnlyRepository.GetItemListWithInclude(x => x.Episode);
+
                 foreach (var image in images)
                 {
-                    episodeImageListModels.Add(new EpisodeImageListModel
-                    {
-                        EpisodeImageId = image.Id,
-                        Name = image.Name,
-                        Url = image.Url,
-                        EpisodeName = image.Episode.Name
-                    });
+                    episodeImageListDtos.Add(_mapper.Map<EpisodeImageListDto>(image));
                 }
-                return episodeImageListModels;
+
+                return episodeImageListDtos;
             }
-            images = this.imageReadOnlyRepository.GetItemList();
+
+            images = _imageReadOnlyRepository.GetItemList();
+
             foreach (var image in images)
             {
-                episodeImageListModels.Add(new EpisodeImageListModel
-                {
-                    EpisodeImageId = image.Id,
-                    Name = image.Name,
-                    Url = image.Url
-                });
+                episodeImageListDtos.Add(_mapper.Map<EpisodeImageListDto>(image));
             }
-            return episodeImageListModels;
+
+            return episodeImageListDtos;
         }
 
-        public EpisodeImageDetailModel GetEpisodeImage(int id, bool withRelated)
+        public EpisodeImageDetailDto GetEpisodeImage(int id, bool withRelated)
         {
             var image = new Image();
-            EpisodeImageDetailModel episodeImageDetailModel = new EpisodeImageDetailModel();
+            var episodeImageDetailDto = new EpisodeImageDetailDto();
 
             if (withRelated)
             {
-                image = this.imageReadOnlyRepository.GetItemWithInclude(
+                image = _imageReadOnlyRepository.GetItemWithInclude(
                     x => x.Id == id,
                     x => x.Episode);
-                episodeImageDetailModel = new EpisodeImageDetailModel
-                {
-                    EpisodeImageId = image.Id,
-                    Name = image.Name,
-                    Url = image.Url,
-                    EpisodeId = image.EpisodeId
-                };
-                return episodeImageDetailModel;
+
+                episodeImageDetailDto = _mapper.Map<EpisodeImageDetailDto>(image);
+
+                return episodeImageDetailDto;
             }
-            image = this.imageReadOnlyRepository.GetItem(id);
-            episodeImageDetailModel = new EpisodeImageDetailModel
-            {
-                EpisodeImageId = image.Id,
-                Name = image.Name,
-                Url = image.Url,
-            };
-            return episodeImageDetailModel;
+
+            image = _imageReadOnlyRepository.GetItem(id);
+
+            episodeImageDetailDto = _mapper.Map<EpisodeImageDetailDto>(image);
+
+            return episodeImageDetailDto;
         }
     }
 }

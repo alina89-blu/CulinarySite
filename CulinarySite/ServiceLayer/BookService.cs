@@ -84,6 +84,7 @@ namespace ServiceLayer
             }
 
             books = _bookReadOnlyRepository.GetItemList();
+
             foreach (var book in books)
             {
                 bookDetailListDtos.Add(_mapper.Map<BookDetailListDto>(book));

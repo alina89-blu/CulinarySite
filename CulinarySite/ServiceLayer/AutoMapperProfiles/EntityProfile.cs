@@ -3,14 +3,18 @@ using Database;
 using ServiceLayer.Dtos.Address;
 using ServiceLayer.Dtos.Author;
 using ServiceLayer.Dtos.Book;
+using ServiceLayer.Dtos.Comment;
 using ServiceLayer.Dtos.CookingStage;
 using ServiceLayer.Dtos.CulinaryChannel;
 using ServiceLayer.Dtos.Dish;
 using ServiceLayer.Dtos.Episode;
+using ServiceLayer.Dtos.Image.DishImage;
+using ServiceLayer.Dtos.Image.EpisodeImage;
 using ServiceLayer.Dtos.Ingredient;
 using ServiceLayer.Dtos.OrganicMatter;
 using ServiceLayer.Dtos.Recipe;
 using ServiceLayer.Dtos.Restaurant;
+using ServiceLayer.Dtos.Subscriber;
 using ServiceLayer.Dtos.Tag;
 using ServiceLayer.Dtos.Telephone;
 
@@ -190,6 +194,52 @@ namespace ServiceLayer.AutoMapperProfiles
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TelephoneId)).ReverseMap();
 
 
+
+            CreateMap<CreateSubscriberDto, Subscriber>().ReverseMap();
+            CreateMap<UpdateSubscriberDto, Subscriber>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.SubscriberId)).ReverseMap();
+
+            CreateMap<SubscriberDetailDto, Subscriber>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.SubscriberId)).ReverseMap();
+
+            CreateMap<SubscriberListDto, Subscriber>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.SubscriberId)).ReverseMap();
+
+
+            CreateMap<CreateCommentDto, Comment>().ReverseMap();
+            CreateMap<UpdateCommentDto, Comment>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CommentId)).ReverseMap();
+
+            CreateMap<CommentDetailDto, Comment>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CommentId)).ReverseMap();
+
+            CreateMap<CommentListDto, Comment>()
+                .ForPath(dest => dest.Subscriber.Name, opt => opt.MapFrom(src => src.SubscriberName))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CommentId)).ReverseMap();
+
+
+            CreateMap<CreateDishImageDto, Image>().ReverseMap();
+            CreateMap<UpdateDishImageDto, Image>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DishImageId)).ReverseMap();
+
+            CreateMap<DishImageDetailDto, Image>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DishImageId)).ReverseMap();
+
+            CreateMap<DishImageListDto, Image>()
+                .ForPath(dest => dest.Dish.Category, opt => opt.MapFrom(src => src.DishCategory))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DishImageId)).ReverseMap();
+
+
+            CreateMap<CreateEpisodeImageDto, Image>().ReverseMap();
+            CreateMap<UpdateEpisodeImageDto, Image>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.EpisodeImageId)).ReverseMap();
+
+            CreateMap<EpisodeImageDetailDto, Image>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.EpisodeImageId)).ReverseMap();
+
+            CreateMap<EpisodeImageListDto, Image>()
+                .ForPath(dest => dest.Episode.Name, opt => opt.MapFrom(src => src.EpisodeName))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.EpisodeImageId)).ReverseMap();
         }
     }
 }
