@@ -1,104 +1,96 @@
 ﻿using Database;
 using Repositories;
 using System.Collections.Generic;
-using ServiceLayer.ViewModels.Tag;
+using AutoMapper;
+using ServiceLayer.Dtos.Tag;
 
 namespace ServiceLayer
 {
     public class TagService : ITagService
     {
-        private readonly IReadOnlyGenericRepository<Tag> tagReadOnlyRepository;
-        private readonly IWriteGenericRepository<Tag> tagWriteRepository;
+        private readonly IReadOnlyGenericRepository<Tag> _tagReadOnlyRepository;
+        private readonly IWriteGenericRepository<Tag> _tagWriteRepository;
+        private readonly IMapper _mapper;
         public TagService(
             IReadOnlyGenericRepository<Tag> tagReadOnlyRepository,
-            IWriteGenericRepository<Tag> tagWriteRepository)
+            IWriteGenericRepository<Tag> tagWriteRepository,
+            IMapper mapper)
         {
-            this.tagReadOnlyRepository = tagReadOnlyRepository;
-            this.tagWriteRepository = tagWriteRepository;
+            _tagReadOnlyRepository = tagReadOnlyRepository;
+            _tagWriteRepository = tagWriteRepository;
+            _mapper = mapper;
         }
 
-        public void CreateTag(CreateTagModel createTagModel)
+        public void CreateTag(CreateTagDto createTagDto)
         {
-            var tag = new Tag
-            {
-                Text = createTagModel.Text
-            };
-            this.tagWriteRepository.Create(tag);
-            this.tagWriteRepository.Save();
+            Tag tag = _mapper.Map<Tag>(createTagDto);
+
+            _tagWriteRepository.Create(tag);
+            _tagWriteRepository.Save();
         }
 
-        public void UpdateTag(UpdateTagModel updateTagModel)
+        public void UpdateTag(UpdateTagDto updateTagDto)
         {
-            var tag = new Tag
-            {
-                Id = updateTagModel.TagId,
-                Text = updateTagModel.Text
-            };
-            this.tagWriteRepository.Update(tag);
-            this.tagWriteRepository.Save();
+            Tag tag = _mapper.Map<Tag>(updateTagDto);
+
+            _tagWriteRepository.Update(tag);
+            _tagWriteRepository.Save();
         }
 
         public void DeleteTag(int id)
         {
-            this.tagWriteRepository.Delete(id);
-            this.tagWriteRepository.Save();
+            _tagWriteRepository.Delete(id);
+            _tagWriteRepository.Save();
         }
 
-        public IEnumerable<TagListModel> GetTagList(bool withRelated)
+        public IEnumerable<TagListDto> GetTagList(bool withRelated)
         {
             IEnumerable<Tag> tags;
-            List<TagListModel> tagListModels = new List<TagListModel>();
+            var tagListDtos = new List<TagListDto>();
+
             if (withRelated)
             {
-                tags = this.tagReadOnlyRepository.GetItemListWithInclude(
+                tags = _tagReadOnlyRepository.GetItemListWithInclude(
                                 x => x.Recipes,
                                 x => x.Episodes);
                 foreach (var tag in tags)
                 {
-                    tagListModels.Add(new TagListModel
-                    {
-                        TagId = tag.Id,
-                        Text = tag.Text
-                    });
+                    tagListDtos.Add(_mapper.Map<TagListDto>(tag));
                 }
-                return tagListModels;
+                return tagListDtos;
             }
-            tags = this.tagReadOnlyRepository.GetItemList();
+
+            tags = _tagReadOnlyRepository.GetItemList();
+
             foreach (var tag in tags)
             {
-                tagListModels.Add(new TagListModel
-                {
-                    TagId = tag.Id,
-                    Text = tag.Text
-                });
+                tagListDtos.Add(_mapper.Map<TagListDto>(tag));
             }
-            return tagListModels;
+            return tagListDtos;
         }
 
-        public TagDetailModel GetTag(int id, bool withRelated)
+        public TagDetailDto GetTag(int id, bool withRelated)
         {
             var tag = new Tag();
-            var tagDetailModel = new TagDetailModel();
+            var tagDetailDto = new TagDetailDto();
+
             if (withRelated)
             {
-                tag = this.tagReadOnlyRepository.GetItemWithInclude(
+                tag = _tagReadOnlyRepository.GetItemWithInclude(
                 x => x.Id == id,
                 x => x.Recipes,
                 x => x.Episodes);
-                tagDetailModel = new TagDetailModel
-                {
-                    TagId = tag.Id,
-                    Text = tag.Text
-                };
-                return tagDetailModel;
+
+                tagDetailDto = _mapper.Map<TagDetailDto>(tag);
+
+                return tagDetailDto;
             }
-            tag = this.tagReadOnlyRepository.GetItem(id);
-            tagDetailModel = new TagDetailModel
-            {
-                TagId = tag.Id,
-                Text = tag.Text
-            };
-            return tagDetailModel;
+
+            tag = _tagReadOnlyRepository.GetItem(id);
+
+            tagDetailDto = _mapper.Map<TagDetailDto>(tag);
+
+            return tagDetailDto;
         }
     }
 }

@@ -27,6 +27,7 @@ namespace CulinarySite.Controllers
             {
                 bookDetailListModels.Add(_mapper.Map<BookDetailListModel>(bookDetailListDto));
             }
+
             return bookDetailListModels;
         }
 
@@ -40,6 +41,7 @@ namespace CulinarySite.Controllers
             {
                 bookModels.Add(_mapper.Map<BookModel>(bookDto));
             }
+
             return bookModels;
         }
 

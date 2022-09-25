@@ -27,6 +27,7 @@ namespace CulinarySite.Controllers
             {
                 episodeListModels.Add(_mapper.Map<EpisodeListModel>(episodeListDto));
             }
+
             return episodeListModels;
         }
 

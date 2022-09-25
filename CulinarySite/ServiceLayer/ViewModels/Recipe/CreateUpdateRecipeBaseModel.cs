@@ -1,9 +1,5 @@
 ﻿
-using ServiceLayer.ViewModels.CookingStage;
-using ServiceLayer.ViewModels.Ingredient;
-using ServiceLayer.ViewModels.OrganicMatter;
 using System;
-using System.Collections.Generic;
 
 namespace ServiceLayer.ViewModels.Recipe
 {
@@ -17,7 +13,7 @@ namespace ServiceLayer.ViewModels.Recipe
         public int DishId { get; set; }
         public int AuthorId { get; set; }
         public int BookId { get; set; }
-        
+
 
     }
 }

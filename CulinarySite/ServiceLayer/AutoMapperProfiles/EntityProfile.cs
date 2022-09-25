@@ -7,6 +7,10 @@ using ServiceLayer.Dtos.CookingStage;
 using ServiceLayer.Dtos.CulinaryChannel;
 using ServiceLayer.Dtos.Dish;
 using ServiceLayer.Dtos.Episode;
+using ServiceLayer.Dtos.Ingredient;
+using ServiceLayer.Dtos.OrganicMatter;
+using ServiceLayer.Dtos.Recipe;
+using ServiceLayer.Dtos.Tag;
 
 namespace ServiceLayer.AutoMapperProfiles
 {
@@ -62,7 +66,7 @@ namespace ServiceLayer.AutoMapperProfiles
             CreateMap<CookingStageDetailDto, CookingStage>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CookingStageId)).ReverseMap();
 
-            
+
             CreateMap<CreateCulinaryChannelDto, CulinaryChannel>().ReverseMap();
             CreateMap<UpdateCulinaryChannelDto, CulinaryChannel>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CulinaryChannelId)).ReverseMap();
@@ -73,7 +77,7 @@ namespace ServiceLayer.AutoMapperProfiles
             CreateMap<CulinaryChannelListDto, CulinaryChannel>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CulinaryChannelId)).ReverseMap();
 
-            ///
+
 
             CreateMap<CreateDishDto, Dish>().ReverseMap();
             CreateMap<UpdateDishDto, Dish>()
@@ -85,7 +89,7 @@ namespace ServiceLayer.AutoMapperProfiles
             CreateMap<DishListDto, Dish>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DishId)).ReverseMap();
 
-////////
+
             CreateMap<CreateEpisodeDto, Episode>().ReverseMap();
             CreateMap<UpdateEpisodeDto, Episode>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.EpisodeId)).ReverseMap();
@@ -99,6 +103,60 @@ namespace ServiceLayer.AutoMapperProfiles
                 .ReverseMap();
 
 
+
+            CreateMap<CreateIngredientDto, Ingredient>().ReverseMap();
+            CreateMap<UpdateIngredientDto, Ingredient>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IngredientId)).ReverseMap();
+
+            CreateMap<IngredientDetailDto, Ingredient>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IngredientId)).ReverseMap();
+
+            CreateMap<IngredientListDto, Ingredient>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IngredientId)).ReverseMap();
+
+            CreateMap<IngredientDto, Ingredient>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IngredientId)).ReverseMap();
+
+
+            CreateMap<CreateOrganicMatterDto, OrganicMatter>().ReverseMap();
+            CreateMap<UpdateOrganicMatterDto, OrganicMatter>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.OrganicMatterId)).ReverseMap();
+
+            CreateMap<OrganicMatterDetailDto, OrganicMatter>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.OrganicMatterId)).ReverseMap();
+
+            CreateMap<OrganicMatterDto, OrganicMatter>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.OrganicMatterId)).ReverseMap();
+
+            CreateMap<OrganicMatterListDto, OrganicMatter>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.OrganicMatterId)).ReverseMap();
+
+
+            CreateMap<CreateTagDto, Tag>().ReverseMap();
+            CreateMap<UpdateTagDto, Tag>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TagId)).ReverseMap();
+
+            CreateMap<TagDetailDto, Tag>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TagId)).ReverseMap();
+
+            CreateMap<TagListDto, Tag>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TagId)).ReverseMap();
+
+            CreateMap<TagDto, Tag>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TagId)).ReverseMap();
+
+
+            CreateMap<CreateRecipeDto, Recipe>().ReverseMap();
+            CreateMap<UpdateRecipeDto, Recipe>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeId)).ReverseMap();
+
+            CreateMap<RecipeDetailDto, Recipe>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeId)).ReverseMap();
+
+            CreateMap<RecipeListDto, Recipe>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeId)).ReverseMap();
+
+            CreateMap<RecipeDto, Recipe>().ReverseMap();
         }
     }
 }

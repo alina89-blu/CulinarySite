@@ -68,7 +68,7 @@ export class RecipeListComponent implements OnInit {
 
   public getIngredientList(): void {
     this.ingredientService
-      .getIngredientList(true)
+      .getIngredientList()
       .subscribe(
         (data: IIngredientListModel[]) =>
           (this.ingredients = data.map((x) => new IngredientListModel(x)))

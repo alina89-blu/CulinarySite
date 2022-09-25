@@ -6,6 +6,10 @@ using ServiceLayer.Dtos.CookingStage;
 using ServiceLayer.Dtos.CulinaryChannel;
 using ServiceLayer.Dtos.Dish;
 using ServiceLayer.Dtos.Episode;
+using ServiceLayer.Dtos.Ingredient;
+using ServiceLayer.Dtos.OrganicMatter;
+using ServiceLayer.Dtos.Recipe;
+using ServiceLayer.Dtos.Tag;
 using ServiceLayer.ViewModels.Address;
 using ServiceLayer.ViewModels.Author;
 using ServiceLayer.ViewModels.Book;
@@ -13,6 +17,10 @@ using ServiceLayer.ViewModels.CookingStage;
 using ServiceLayer.ViewModels.CulinaryChannel;
 using ServiceLayer.ViewModels.Dish;
 using ServiceLayer.ViewModels.Episode;
+using ServiceLayer.ViewModels.Ingredient;
+using ServiceLayer.ViewModels.OrganicMatter;
+using ServiceLayer.ViewModels.Recipe;
+using ServiceLayer.ViewModels.Tag;
 
 namespace CulinarySite.AutoMapperProfiles
 {
@@ -53,10 +61,33 @@ namespace CulinarySite.AutoMapperProfiles
             CreateMap<DishListModel, DishListDto>().ReverseMap();
 
             CreateMap<CreateEpisodeModel, CreateEpisodeDto>().ReverseMap();
-            CreateMap<UpdateEpisodeModel, CreateEpisodeDto>().ReverseMap();
+            CreateMap<UpdateEpisodeModel, UpdateEpisodeDto>().ReverseMap();
             CreateMap<EpisodeDetailModel, EpisodeDetailDto>().ReverseMap();
             CreateMap<EpisodeListModel, EpisodeListDto>().ReverseMap();
 
+            CreateMap<CreateIngredientModel, CreateIngredientDto>().ReverseMap();
+            CreateMap<UpdateIngredientModel, UpdateIngredientDto>().ReverseMap();
+            CreateMap<IngredientDetailModel, IngredientDetailDto>().ReverseMap();
+            CreateMap<IngredientListModel, IngredientListDto>().ReverseMap();
+            CreateMap<IngredientModel, IngredientDto>().ReverseMap();
+
+            CreateMap<CreateOrganicMatterModel, CreateOrganicMatterDto>().ReverseMap();
+            CreateMap<UpdateOrganicMatterModel, UpdateOrganicMatterDto>().ReverseMap();
+            CreateMap<OrganicMatterDetailModel, OrganicMatterDetailDto>().ReverseMap();
+            CreateMap<OrganicMatterModel, OrganicMatterDto>().ReverseMap();
+            CreateMap<OrganicMatterListModel, OrganicMatterListDto>().ReverseMap();
+
+            CreateMap<CreateTagModel, CreateTagDto>().ReverseMap();
+            CreateMap<UpdateTagModel, UpdateTagDto>().ReverseMap();
+            CreateMap<TagDetailModel, TagDetailDto>().ReverseMap();
+            CreateMap<TagListModel, TagListDto>().ReverseMap();
+            CreateMap<TagModel, TagDto>().ReverseMap();
+
+            CreateMap<CreateRecipeModel, CreateRecipeDto>().ReverseMap();
+            CreateMap<UpdateRecipeModel, UpdateRecipeDto>().ReverseMap();
+            CreateMap<RecipeDetailModel, RecipeDetailDto>().ReverseMap();
+            CreateMap<RecipeListModel, RecipeListDto>().ReverseMap();
+            CreateMap<RecipeModel, RecipeDto>().ReverseMap();
 
 
             // CreateMap<List<AddressListModel>, List<AddressListDto>>().ReverseMap();

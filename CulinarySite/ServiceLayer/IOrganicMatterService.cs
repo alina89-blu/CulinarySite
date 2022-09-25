@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using ServiceLayer.ViewModels.OrganicMatter;
+using ServiceLayer.Dtos.OrganicMatter;
 
 namespace ServiceLayer
 {
     public interface IOrganicMatterService
     {
-        void CreateOrganicMatter(CreateOrganicMatterModel createOrganicMatterModel);
-        void UpdateOrganicMatter(UpdateOrganicMatterModel updateOrganicMatterModel);
+        void CreateOrganicMatter(CreateOrganicMatterDto createOrganicMatterDto);
+        void UpdateOrganicMatter(UpdateOrganicMatterDto updateOrganicMatterDto);
         void DeleteOrganicMatter(int id);
-        IEnumerable<OrganicMatterListModel> GetOrganicMatterList();
-        OrganicMatterDetailModel GetOrganicMatter(int id);
+        IEnumerable<OrganicMatterListDto> GetOrganicMatterList();
+        OrganicMatterDetailDto GetOrganicMatter(int id);
     }
 }

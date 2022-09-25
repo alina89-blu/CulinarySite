@@ -27,6 +27,7 @@ namespace CulinarySite.Controllers
             {
                 authorListModels.Add(_mapper.Map<AuthorListModel>(authorListDto));
             }
+
             return authorListModels;
         }
 

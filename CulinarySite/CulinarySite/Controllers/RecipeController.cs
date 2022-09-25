@@ -2,61 +2,65 @@
 using ServiceLayer;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.ViewModels.Recipe;
+using AutoMapper;
+using ServiceLayer.Dtos.Recipe;
 
 namespace CulinarySite.Controllers
 {
     public class RecipeController : BaseController
     {
-        private readonly IRecipeService recipeService;
-        private readonly IIngredientService ingredientService;
+        private readonly IRecipeService _recipeService;
+        private readonly IIngredientService _ingredientService;
+        private readonly IMapper _mapper;
 
-        public RecipeController(IRecipeService recipeService, IIngredientService ingredientService)
+        public RecipeController(IRecipeService recipeService, IIngredientService ingredientService, IMapper mapper)
         {
-            this.recipeService = recipeService;
-            this.ingredientService = ingredientService;
+            _recipeService = recipeService;
+            _ingredientService = ingredientService;
+            _mapper = mapper;
         }
 
         [HttpGet("{withRelated}")]
         public IEnumerable<RecipeListModel> GetRecipeList(bool withRelated)
         {
-            return this.recipeService.GetRecipeList(withRelated);
+            IEnumerable<RecipeListDto> recipeListDtos = _recipeService.GetRecipeList(withRelated);
+            var recipeListModels = new List<RecipeListModel>();
+
+            foreach (var recipeListDto in recipeListDtos)
+            {
+                recipeListModels.Add(_mapper.Map<RecipeListModel>(recipeListDto));
+            }
+
+            return recipeListModels;
         }
 
         [HttpGet("{id}/{withRelated}")]
         public RecipeDetailModel GetRecipe(int id, bool withRelated)
         {
-            return this.recipeService.GetRecipe(id, withRelated);
+            RecipeDetailDto recipeDetailDto = _recipeService.GetRecipe(id, withRelated);
+            RecipeDetailModel recipeDetailModel = _mapper.Map<RecipeDetailModel>(recipeDetailDto);
+
+            return recipeDetailModel;
         }
 
         [HttpPost]
         public void CreateRecipe(CreateRecipeModel createRecipeModel)
         {
-
-           /* foreach (var ingredient in createRecipeModel.Ingredients)
-            {
-                this.ingredientService.CreateIngredient(ingredient);
-            }*/
-
-            this.recipeService.CreateRecipe(createRecipeModel);
+            CreateRecipeDto createRecipeDto = _mapper.Map<CreateRecipeDto>(createRecipeModel);
+            _recipeService.CreateRecipe(createRecipeDto);
         }
-
 
         [HttpPut]
         public void UpdateRecipe(UpdateRecipeModel updateRecipeModel)
         {
-            foreach (var ingredient in updateRecipeModel.Ingredients)
-            {
-                this.ingredientService.UpdateIngredient(ingredient);
-            }
-            this.recipeService.UpdateRecipe(updateRecipeModel);
+            UpdateRecipeDto updateRecipeDto = _mapper.Map<UpdateRecipeDto>(updateRecipeModel);
+            _recipeService.UpdateRecipe(updateRecipeDto);
         }
-
-        
 
         [HttpDelete("{id}")]
         public void DeleteRecipe(int id)
         {
-            this.recipeService.DeleteRecipe(id);
+            _recipeService.DeleteRecipe(id);
         }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
 using Repositories;
 using Database;
-using ServiceLayer.ViewModels.Author;
-using ServiceLayer.ViewModels.Recipe;
-using ServiceLayer.ViewModels.Book;
 using AutoMapper;
 using ServiceLayer.Dtos.Author;
 

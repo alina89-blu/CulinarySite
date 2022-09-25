@@ -1,83 +1,66 @@
 ﻿using Database;
 using Repositories;
 using System.Collections.Generic;
-using ServiceLayer.ViewModels.OrganicMatter;
+using ServiceLayer.Dtos.OrganicMatter;
+using AutoMapper;
 
 namespace ServiceLayer
 {
     public class OrganicMatterService : IOrganicMatterService
     {
-        private readonly IReadOnlyGenericRepository<OrganicMatter> organicMatterReadOnlyRepository;
-        private readonly IWriteGenericRepository<OrganicMatter> organicMatterWriteRepository;
+        private readonly IReadOnlyGenericRepository<OrganicMatter> _organicMatterReadOnlyRepository;
+        private readonly IWriteGenericRepository<OrganicMatter> _organicMatterWriteRepository;
+        private readonly IMapper _mapper;
         public OrganicMatterService(
             IReadOnlyGenericRepository<OrganicMatter> organicMatterReadOnlyRepository,
-            IWriteGenericRepository<OrganicMatter> organicMatterWriteRepository)
+            IWriteGenericRepository<OrganicMatter> organicMatterWriteRepository,
+            IMapper mapper)
         {
-            this.organicMatterReadOnlyRepository = organicMatterReadOnlyRepository;
-            this.organicMatterWriteRepository = organicMatterWriteRepository;
+            _organicMatterReadOnlyRepository = organicMatterReadOnlyRepository;
+            _organicMatterWriteRepository = organicMatterWriteRepository;
+            _mapper = mapper;
         }
 
-        public void CreateOrganicMatter(CreateOrganicMatterModel createOrganicMatterModel)
+        public void CreateOrganicMatter(CreateOrganicMatterDto createOrganicMatterDto)
         {
-            var organicMatter = new OrganicMatter
-            {
-                Name = createOrganicMatterModel.Name,
-                Unit=createOrganicMatterModel.Unit,
-                Quantity=createOrganicMatterModel.Quantity
-            };
-            this.organicMatterWriteRepository.Create(organicMatter);
-            this.organicMatterWriteRepository.Save();
+            OrganicMatter organicMatter = _mapper.Map<OrganicMatter>(createOrganicMatterDto);
+
+            _organicMatterWriteRepository.Create(organicMatter);
+            _organicMatterWriteRepository.Save();
         }
 
-        public void UpdateOrganicMatter(UpdateOrganicMatterModel updateOrganicMatterModel)
+        public void UpdateOrganicMatter(UpdateOrganicMatterDto updateOrganicMatterDto)
         {
-            var organicMatter = new OrganicMatter
-            {
-                Id = updateOrganicMatterModel.OrganicMatterId,
-                Name = updateOrganicMatterModel.Name,
-                Unit = updateOrganicMatterModel.Unit,
-                Quantity = updateOrganicMatterModel.Quantity
-            };
-            this.organicMatterWriteRepository.Update(organicMatter);
-            this.organicMatterWriteRepository.Save();
+            OrganicMatter organicMatter = _mapper.Map<OrganicMatter>(updateOrganicMatterDto);
+
+            _organicMatterWriteRepository.Update(organicMatter);
+            _organicMatterWriteRepository.Save();
         }
 
         public void DeleteOrganicMatter(int id)
         {
-            this.organicMatterWriteRepository.Delete(id);
-            this.organicMatterWriteRepository.Save();
+            _organicMatterWriteRepository.Delete(id);
+            _organicMatterWriteRepository.Save();
         }
 
-        public IEnumerable<OrganicMatterListModel> GetOrganicMatterList()
+        public IEnumerable<OrganicMatterListDto> GetOrganicMatterList()
         {
-            IEnumerable<OrganicMatter> organicMatters;
-            List<OrganicMatterListModel> organicMatterListModels = new List<OrganicMatterListModel>();
+            IEnumerable<OrganicMatter> organicMatters = _organicMatterReadOnlyRepository.GetItemList();
+            var organicMatterListDtos = new List<OrganicMatterListDto>();
 
-            organicMatters = this.organicMatterReadOnlyRepository.GetItemList();
             foreach (var organicMatter in organicMatters)
             {
-                organicMatterListModels.Add(new OrganicMatterListModel
-                {
-                    OrganicMatterId = organicMatter.Id,
-                    Name = organicMatter.Name,
-                    Unit=organicMatter.Unit,
-                    Quantity=organicMatter.Quantity
-                });
+                organicMatterListDtos.Add(_mapper.Map<OrganicMatterListDto>(organicMatter));
             }
-            return organicMatterListModels;
+            return organicMatterListDtos;
         }
 
-        public OrganicMatterDetailModel GetOrganicMatter(int id)
-        {           
-            OrganicMatter organicMatter = this.organicMatterReadOnlyRepository.GetItem(id);
-            var organicMatterDetailModel = new OrganicMatterDetailModel
-            {
-                OrganicMatterId = organicMatter.Id,
-                Name = organicMatter.Name,
-                Unit=organicMatter.Unit,
-                Quantity=organicMatter.Quantity
-            };
-            return organicMatterDetailModel;
+        public OrganicMatterDetailDto GetOrganicMatter(int id)
+        {
+            OrganicMatter organicMatter = _organicMatterReadOnlyRepository.GetItem(id);
+            OrganicMatterDetailDto organicMatterDetailDto = _mapper.Map<OrganicMatterDetailDto>(organicMatter);
+
+            return organicMatterDetailDto;
         }
     }
 }

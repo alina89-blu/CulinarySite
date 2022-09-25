@@ -12,19 +12,12 @@ export class IngredientService {
 
   constructor(private http: HttpClient) {}
 
-  public getIngredientList(
-    withRelated: boolean
-  ): Observable<IIngredientListModel[]> {
-    return this.http.get<IIngredientListModel[]>(this.url + '/' + withRelated);
+  public getIngredientList(): Observable<IIngredientListModel[]> {
+    return this.http.get<IIngredientListModel[]>(this.url);
   }
 
-  public getIngredient(
-    id: number,
-    withRelated: boolean
-  ): Observable<IIngredientDetailModel> {
-    return this.http.get<IIngredientDetailModel>(
-      this.url + '/' + id + '/' + withRelated
-    );
+  public getIngredient(id: number): Observable<IIngredientDetailModel> {
+    return this.http.get<IIngredientDetailModel>(this.url + '/' + id);
   }
 
   public createIngredient(

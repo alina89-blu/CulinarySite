@@ -27,6 +27,7 @@ namespace CulinarySite.Controllers
             {
                 cookingStageListModels.Add(_mapper.Map<CookingStageListModel>(cookingStageListDto));
             }
+
             return cookingStageListModels;
         }
        

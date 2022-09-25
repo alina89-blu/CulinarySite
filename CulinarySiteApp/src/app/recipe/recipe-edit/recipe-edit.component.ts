@@ -166,7 +166,7 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
 
   public getIngredientList(): void {
     this.ingredientService
-      .getIngredientList(false)
+      .getIngredientList()
       .subscribe(
         (data: IIngredientListModel[]) =>
           (this.ingredients = data.map((x) => new IngredientListModel(x)))

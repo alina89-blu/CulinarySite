@@ -2,45 +2,62 @@
 using ServiceLayer;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.ViewModels.Tag;
+using AutoMapper;
+using ServiceLayer.Dtos.Tag;
 
 namespace CulinarySite.Controllers
 {
     public class TagController : BaseController
     {
-        private readonly ITagService tagService;
-        public TagController(ITagService tagService)
+        private readonly ITagService _tagService;
+        private readonly IMapper _mapper;
+        public TagController(ITagService tagService, IMapper mapper)
         {
-            this.tagService = tagService;
+            _tagService = tagService;
+            _mapper = mapper;
         }
 
         [HttpGet("{withRelated}")]
         public IEnumerable<TagListModel> GetTagList(bool withRelated)
         {
-            return this.tagService.GetTagList(withRelated);
+            IEnumerable<TagListDto> tagListDtos = _tagService.GetTagList(withRelated);
+            var tagListModels = new List<TagListModel>();
+
+            foreach (var tagListDto in tagListDtos)
+            {
+                tagListModels.Add(_mapper.Map<TagListModel>(tagListDto));
+            }
+
+            return tagListModels;
         }
 
         [HttpGet("{id}/{withRelated}")]
-        public TagDetailModel GetTagWithInclude(int id, bool withRelated)
+        public TagDetailModel GetTag(int id, bool withRelated)
         {
-            return this.tagService.GetTag(id, withRelated);
+            TagDetailDto tagDetailDto = _tagService.GetTag(id, withRelated);
+            TagDetailModel tagDetailModel = _mapper.Map<TagDetailModel>(tagDetailDto);
+
+            return tagDetailModel;
         }
 
         [HttpPost]
         public void CreateTag(CreateTagModel createTagModel)
         {
-            this.tagService.CreateTag(createTagModel);
+            CreateTagDto createTagDto = _mapper.Map<CreateTagDto>(createTagModel);
+            _tagService.CreateTag(createTagDto);
         }
 
         [HttpPut]
         public void UpdateTag(UpdateTagModel updateTagModel)
         {
-            this.tagService.UpdateTag(updateTagModel);
+            UpdateTagDto updateTagDto = _mapper.Map<UpdateTagDto>(updateTagModel);
+            _tagService.UpdateTag(updateTagDto);
         }
 
         [HttpDelete("{id}")]
         public void DeleteTag(int id)
         {
-            this.tagService.DeleteTag(id);
+            _tagService.DeleteTag(id);
         }
     }
 }

@@ -27,6 +27,7 @@ namespace CulinarySite.Controllers
             {
                 addressListModels.Add(_mapper.Map<AddressListModel>(addressListDto));
             }
+
             return addressListModels;
         }
 

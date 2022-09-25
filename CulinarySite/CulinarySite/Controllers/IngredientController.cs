@@ -2,45 +2,62 @@
 using ServiceLayer;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.ViewModels.Ingredient;
+using AutoMapper;
+using ServiceLayer.Dtos.Ingredient;
 
 namespace CulinarySite.Controllers
 {
     public class IngredientController : BaseController
     {
-        private readonly IIngredientService ingredientService;
-        public IngredientController(IIngredientService ingredientService)
+        private readonly IIngredientService _ingredientService;
+        private readonly IMapper _mapper;
+        public IngredientController(IIngredientService ingredientService, IMapper mapper)
         {
-            this.ingredientService = ingredientService;
+            _ingredientService = ingredientService;
+            _mapper = mapper;
         }
 
-        [HttpGet("{withRelated}")]
+        [HttpGet]
         public IEnumerable<IngredientListModel> GetIngredientList()
         {
-            return this.ingredientService.GetIngredientList();
+            IEnumerable<IngredientListDto> ingredientListDtos = _ingredientService.GetIngredientList();
+            var ingredientListModels = new List<IngredientListModel>();
+
+            foreach (var ingredientListDto in ingredientListDtos)
+            {
+                ingredientListModels.Add(_mapper.Map<IngredientListModel>(ingredientListDto));
+            }
+
+            return ingredientListModels;
         }
 
-        [HttpGet("{id}/{withRelated}")]
+        [HttpGet("{id}")]
         public IngredientDetailModel GetIngredient(int id)
         {
-            return this.ingredientService.GetIngredient(id);
+            IngredientDetailDto ingredientDetailDto = _ingredientService.GetIngredient(id);
+            IngredientDetailModel ingredientDetailModel = _mapper.Map<IngredientDetailModel>(ingredientDetailDto);
+
+            return ingredientDetailModel;
         }
 
         [HttpPost]
         public void CreateIngredient(CreateIngredientModel createIngredientModel)
         {
-            this.ingredientService.CreateIngredient(createIngredientModel);
+            CreateIngredientDto createIngredientDto = _mapper.Map<CreateIngredientDto>(createIngredientModel);
+            _ingredientService.CreateIngredient(createIngredientDto);
         }
 
         [HttpPut]
         public void UpdateIngredient(UpdateIngredientModel updateIngredientModel)
         {
-            this.ingredientService.UpdateIngredient(updateIngredientModel);
+            UpdateIngredientDto updateIngredientDto = _mapper.Map<UpdateIngredientDto>(updateIngredientModel);
+            _ingredientService.UpdateIngredient(updateIngredientDto);
         }
 
         [HttpDelete("{id}")]
         public void DeleteIngredient(int id)
         {
-            this.ingredientService.DeleteIngredient(id);
+            _ingredientService.DeleteIngredient(id);
         }
     }
 }

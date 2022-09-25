@@ -1,15 +1,14 @@
-﻿using Database;
-using System.Collections.Generic;
-using ServiceLayer.ViewModels.Ingredient;
+﻿using System.Collections.Generic;
+using ServiceLayer.Dtos.Ingredient;
 
 namespace ServiceLayer
 {
     public interface IIngredientService
     {
-        void CreateIngredient(CreateIngredientModel createIngredientModel);
-        void UpdateIngredient(UpdateIngredientModel updateIngredientModel);
+        void CreateIngredient(CreateIngredientDto createIngredientDto);
+        void UpdateIngredient(UpdateIngredientDto updateIngredientDto);
         void DeleteIngredient(int id);
-        IEnumerable<IngredientListModel> GetIngredientList();
-        IngredientDetailModel GetIngredient(int id);
+        IEnumerable<IngredientListDto> GetIngredientList();
+        IngredientDetailDto GetIngredient(int id);
     }
 }

@@ -1,103 +1,98 @@
 ﻿using Database;
 using Repositories;
 using System.Collections.Generic;
-using ServiceLayer.ViewModels.Ingredient;
-using System.Linq;
+using ServiceLayer.Dtos.Ingredient;
+using AutoMapper;
 
 namespace ServiceLayer
 {
     public class IngredientService : IIngredientService
     {
-        private readonly IReadOnlyGenericRepository<Ingredient> ingredientReadOnlyRepository;
-        private readonly IWriteGenericRepository<Ingredient> ingredientWriteRepository;
+        private readonly IReadOnlyGenericRepository<Ingredient> _ingredientReadOnlyRepository;
+        private readonly IWriteGenericRepository<Ingredient> _ingredientWriteRepository;
+        private readonly IMapper _mapper;
         public IngredientService(
             IReadOnlyGenericRepository<Ingredient> ingredientReadOnlyRepository,
-            IWriteGenericRepository<Ingredient> ingredientWriteRepository)
+            IWriteGenericRepository<Ingredient> ingredientWriteRepository,
+             IMapper mapper)
         {
-            this.ingredientReadOnlyRepository = ingredientReadOnlyRepository;
-            this.ingredientWriteRepository = ingredientWriteRepository;
+            _ingredientReadOnlyRepository = ingredientReadOnlyRepository;
+            _ingredientWriteRepository = ingredientWriteRepository;
+            _mapper = mapper;
         }
 
-        public void CreateIngredient(CreateIngredientModel createIngredientModel)
-        {            
-                var ingredient = new Ingredient
-                {
-                    Name = createIngredientModel.Name,
-                    Unit = createIngredientModel.Unit,
-                    Quantity = createIngredientModel.Quantity
-                };
-                this.ingredientWriteRepository.Create(ingredient);
-                this.ingredientWriteRepository.Save();                                    
+        public void CreateIngredient(CreateIngredientDto createIngredientDto)
+        {
+            Ingredient ingredient = _mapper.Map<Ingredient>(createIngredientDto);
+
+            _ingredientWriteRepository.Create(ingredient);
+            _ingredientWriteRepository.Save();
         }
 
-
-
-        public void UpdateIngredient(UpdateIngredientModel updateIngredientModel)//
+        public void UpdateIngredient(UpdateIngredientDto updateIngredientDto)
         {
-            var ingredientsId = this.ingredientReadOnlyRepository.GetItemList().Select(x => x.Id);
-            var ingredient = new Ingredient();
+            Ingredient ingredient = _mapper.Map<Ingredient>(updateIngredientDto);
 
-            if (ingredientsId.Contains(updateIngredientModel.IngredientId))
-            {
-                
-                ingredient = new Ingredient
-                {
-                    Id = updateIngredientModel.IngredientId,
-                    Name = updateIngredientModel.Name,
-                    Unit = updateIngredientModel.Unit,
-                    Quantity = updateIngredientModel.Quantity,
-                };
-                this.ingredientWriteRepository.Update(ingredient);
-                this.ingredientWriteRepository.Save();
-            }
-            else
-            {
-                ingredient = new Ingredient
-                {
-                    Name= updateIngredientModel.Name,
-                    Unit = updateIngredientModel.Unit,
-                    Quantity = updateIngredientModel.Quantity,
-                };
-                this.ingredientWriteRepository.Create(ingredient);
-                this.ingredientWriteRepository.Save();
-            }
+            _ingredientWriteRepository.Update(ingredient);
+            _ingredientWriteRepository.Save();
         }
 
         public void DeleteIngredient(int id)
         {
-            this.ingredientWriteRepository.Delete(id);
-            this.ingredientWriteRepository.Save();
+            _ingredientWriteRepository.Delete(id);
+            _ingredientWriteRepository.Save();
         }
 
-        public IEnumerable<IngredientListModel> GetIngredientList()
+        public IEnumerable<IngredientListDto> GetIngredientList()
         {
-            IEnumerable<Ingredient> ingredients= this.ingredientReadOnlyRepository.GetItemList();
-            List<IngredientListModel> ingredientListModels = new List<IngredientListModel>();
-                               
+            IEnumerable<Ingredient> ingredients = _ingredientReadOnlyRepository.GetItemList();
+
+            var ingredientListDtos = new List<IngredientListDto>();
+
             foreach (var ingredient in ingredients)
             {
-                ingredientListModels.Add(new IngredientListModel
-                {
-                    IngredientId = ingredient.Id,
-                    Name = ingredient.Name,
-                    Unit = ingredient.Unit,
-                    Quantity = ingredient.Quantity,
-                });
+                ingredientListDtos.Add(_mapper.Map<IngredientListDto>(ingredient));
             }
-            return ingredientListModels;
+            return ingredientListDtos;
         }
 
-        public IngredientDetailModel GetIngredient(int id)
+        public IngredientDetailDto GetIngredient(int id)
         {
-            Ingredient ingredient =  this.ingredientReadOnlyRepository.GetItem(id);
-            IngredientDetailModel ingredientDetailModel = new IngredientDetailModel()                              
-            {
-                IngredientId = ingredient.Id,
-                Name = ingredient.Name,
-                Unit = ingredient.Unit,
-                Quantity = ingredient.Quantity
-            };
-            return ingredientDetailModel;
+            Ingredient ingredient = _ingredientReadOnlyRepository.GetItem(id);
+            IngredientDetailDto ingredientDetailDto = _mapper.Map<IngredientDetailDto>(ingredient);
+
+            return ingredientDetailDto;
         }
+
+        /* public void UpdateIngredient(UpdateIngredientModel updateIngredientModel)//
+         {
+             var ingredientsId = ingredientReadOnlyRepository.GetItemList().Select(x => x.Id);
+             var ingredient = new Ingredient();
+
+             if (ingredientsId.Contains(updateIngredientModel.IngredientId))
+             {
+
+                 ingredient = new Ingredient
+                 {
+                     Id = updateIngredientModel.IngredientId,
+                     Name = updateIngredientModel.Name,
+                     Unit = updateIngredientModel.Unit,
+                     Quantity = updateIngredientModel.Quantity,
+                 };
+                 ingredientWriteRepository.Update(ingredient);
+                 ingredientWriteRepository.Save();
+             }
+             else
+             {
+                 ingredient = new Ingredient
+                 {
+                     Name = updateIngredientModel.Name,
+                     Unit = updateIngredientModel.Unit,
+                     Quantity = updateIngredientModel.Quantity,
+                 };
+                 ingredientWriteRepository.Create(ingredient);
+                 ingredientWriteRepository.Save();
+             }
+         }*/
     }
 }
