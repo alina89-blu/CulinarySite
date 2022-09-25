@@ -2,45 +2,62 @@
 using ServiceLayer;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.ViewModels.Restaurant;
+using AutoMapper;
+using ServiceLayer.Dtos.Restaurant;
 
 namespace CulinarySite.Controllers
 {
     public class RestaurantController : BaseController
     {
-        private readonly IRestaurantService restaurantService;
-        public RestaurantController(IRestaurantService restaurantService)
+        private readonly IRestaurantService _restaurantService;
+        private readonly IMapper _mapper;
+        public RestaurantController(IRestaurantService restaurantService, IMapper mapper)
         {
-            this.restaurantService = restaurantService;
+            _restaurantService = restaurantService;
+            _mapper = mapper;
         }
 
         [HttpGet("{withRelated}")]
         public IEnumerable<RestaurantListModel> GetRestaurantList(bool withRelated)
         {
-            return this.restaurantService.GetRestaurantList(withRelated);
+            IEnumerable<RestaurantListDto> restaurantListDtos = _restaurantService.GetRestaurantList(withRelated);
+            var restaurantListModels = new List<RestaurantListModel>();
+
+            foreach (var restaurantListDto in restaurantListDtos)
+            {
+                restaurantListModels.Add(_mapper.Map<RestaurantListModel>(restaurantListDto));
+            }
+
+            return restaurantListModels;
         }
 
         [HttpGet("{id}/{withRelated}")]
         public RestaurantDetailModel GetRestaurant(int id, bool withRelated)
         {
-            return this.restaurantService.GetRestaurant(id,withRelated);
+            RestaurantDetailDto restaurantDetailDto = _restaurantService.GetRestaurant(id, withRelated);
+            RestaurantDetailModel restaurantDetailModel = _mapper.Map<RestaurantDetailModel>(restaurantDetailDto);
+
+            return restaurantDetailModel;
         }
 
         [HttpPost]
         public void CreateRestaurant(CreateRestaurantModel createRestaurantModel)
         {
-            this.restaurantService.CreateRestaurant(createRestaurantModel);
+            CreateRestaurantDto createRestaurantDto = _mapper.Map<CreateRestaurantDto>(createRestaurantModel);
+            _restaurantService.CreateRestaurant(createRestaurantDto);
         }
 
         [HttpPut]
         public void UpdateRestaurant(UpdateRestaurantModel updateRestaurantModel)
         {
-            this.restaurantService.UpdateRestaurant(updateRestaurantModel);
+            UpdateRestaurantDto updateRestaurantDto = _mapper.Map<UpdateRestaurantDto>(updateRestaurantModel);
+            _restaurantService.UpdateRestaurant(updateRestaurantDto);
         }
 
         [HttpDelete("{id}")]
         public void DeleteRestaurant(int id)
         {
-            this.restaurantService.DeleteRestaurant(id);
+            _restaurantService.DeleteRestaurant(id);
         }
     }
 }

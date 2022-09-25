@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.ViewModels.Recipe;
 using AutoMapper;
 using ServiceLayer.Dtos.Recipe;
+using ServiceLayer.Dtos.Ingredient;
 
 namespace CulinarySite.Controllers
 {

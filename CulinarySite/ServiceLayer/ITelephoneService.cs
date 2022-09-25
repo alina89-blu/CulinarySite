@@ -1,14 +1,15 @@
-﻿using Database;
+﻿
+using ServiceLayer.Dtos.Telephone;
 using System.Collections.Generic;
 
 namespace ServiceLayer
 {
     public interface ITelephoneService
     {
-        void CreateTelephone(Telephone telephone);
-        void UpdateTelephone(Telephone telephone);
+        void CreateTelephone(CreateTelephoneDto createTelephoneDto);
+        void UpdateTelephone(UpdateTelephoneDto updateTelephoneDto);
         void DeleteTelephone(int id);
-        IEnumerable<Telephone> GetTelephoneList();
-        Telephone GetTelephone(int id);
+        IEnumerable<TelephoneListDto> GetTelephoneList();
+        TelephoneDetailDto GetTelephone(int id);
     }
 }

@@ -1,11 +1,11 @@
 import { IRestaurantListModel } from 'src/app/interfaces/restaurant/restaurant-list-model.interface';
-import { TelephoneDetailModel } from '../telephone/telephone-detail-model.class';
+import { TelephoneModel } from '../telephone/telephone-model.class';
 
 export class RestaurantListModel {
   public restaurantId: number;
   public name: string;
   public addressName: string;
-  public telephones: TelephoneDetailModel[];
+  public telephones: TelephoneModel[];
 
   constructor(public restaurantListModel?: IRestaurantListModel) {
     if (restaurantListModel) {

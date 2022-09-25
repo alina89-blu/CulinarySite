@@ -10,7 +10,9 @@ using ServiceLayer.Dtos.Episode;
 using ServiceLayer.Dtos.Ingredient;
 using ServiceLayer.Dtos.OrganicMatter;
 using ServiceLayer.Dtos.Recipe;
+using ServiceLayer.Dtos.Restaurant;
 using ServiceLayer.Dtos.Tag;
+using ServiceLayer.Dtos.Telephone;
 
 namespace ServiceLayer.AutoMapperProfiles
 {
@@ -157,6 +159,37 @@ namespace ServiceLayer.AutoMapperProfiles
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeId)).ReverseMap();
 
             CreateMap<RecipeDto, Recipe>().ReverseMap();
+
+
+            CreateMap<CreateRestaurantDto, Restaurant>().ReverseMap();
+            CreateMap<UpdateRestaurantDto, Restaurant>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RestaurantId)).ReverseMap();
+
+            CreateMap<RestaurantDetailDto, Restaurant>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RestaurantId)).ReverseMap();
+
+            CreateMap<RestaurantListDto, Restaurant>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RestaurantId))
+                .ForPath(dest => dest.Address.Name, opt => opt.MapFrom(src => src.AddressName))
+                .ReverseMap();
+
+
+            CreateMap<CreateTelephoneDto, Telephone>().ReverseMap();
+            CreateMap<UpdateTelephoneDto, Telephone>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TelephoneId)).ReverseMap();
+
+            CreateMap<TelephoneDetailDto, Telephone>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TelephoneId)).ReverseMap();
+
+            CreateMap<TelephoneListDto, Telephone>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TelephoneId))
+                .ForPath(dest => dest.Restaurant.Name, opt => opt.MapFrom(src => src.RestaurantName))
+                .ReverseMap();
+
+            CreateMap<TelephoneDto, Telephone>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TelephoneId)).ReverseMap();
+
+
         }
     }
 }

@@ -1,134 +1,100 @@
 ﻿using System.Collections.Generic;
+using AutoMapper;
 using Database;
 using Repositories;
-using ServiceLayer.ViewModels.Restaurant;
-using ServiceLayer.ViewModels.Telephone;
+using ServiceLayer.Dtos.Restaurant;
 
 namespace ServiceLayer
 {
     public class RestaurantService : IRestaurantService
     {
-        private readonly IReadOnlyGenericRepository<Restaurant> restaurantReadOnlyRepository;
-        private readonly IWriteGenericRepository<Restaurant> restaurantWriteRepository;
+        private readonly IReadOnlyGenericRepository<Restaurant> _restaurantReadOnlyRepository;
+        private readonly IWriteGenericRepository<Restaurant> _restaurantWriteRepository;
+        private readonly IMapper _mapper;
         public RestaurantService(
             IReadOnlyGenericRepository<Restaurant> restaurantReadOnlyRepository,
-            IWriteGenericRepository<Restaurant> restaurantWriteRepository)
+            IWriteGenericRepository<Restaurant> restaurantWriteRepository,
+            IMapper mapper)
         {
-            this.restaurantReadOnlyRepository = restaurantReadOnlyRepository;
-            this.restaurantWriteRepository = restaurantWriteRepository;
+            _restaurantReadOnlyRepository = restaurantReadOnlyRepository;
+            _restaurantWriteRepository = restaurantWriteRepository;
+            _mapper = mapper;
         }
 
-        public void CreateRestaurant(CreateRestaurantModel createRestaurantModel)
+        public void CreateRestaurant(CreateRestaurantDto createRestaurantDto)
         {
-            var restaurant = new Restaurant
-            {
-                Name = createRestaurantModel.Name,
-                AddressId = createRestaurantModel.AddressId
-            };
-            this.restaurantWriteRepository.Create(restaurant);
-            this.restaurantWriteRepository.Save();
+            Restaurant restaurant = _mapper.Map<Restaurant>(createRestaurantDto);
+
+            _restaurantWriteRepository.Create(restaurant);
+            _restaurantWriteRepository.Save();
         }
 
-        public void UpdateRestaurant(UpdateRestaurantModel updateRestaurantModel)
+        public void UpdateRestaurant(UpdateRestaurantDto updateRestaurantDto)
         {
-            var restaurant = new Restaurant
-            {
-                Id = updateRestaurantModel.RestaurantId,
-                Name = updateRestaurantModel.Name,
-                AddressId = updateRestaurantModel.AddressId
-            };
-            this.restaurantWriteRepository.Update(restaurant);
-            this.restaurantWriteRepository.Save();
+            Restaurant restaurant = _mapper.Map<Restaurant>(updateRestaurantDto);
+
+            _restaurantWriteRepository.Update(restaurant);
+            _restaurantWriteRepository.Save();
         }
 
         public void DeleteRestaurant(int id)
         {
-            this.restaurantWriteRepository.Delete(id);
-            this.restaurantWriteRepository.Save();
+            _restaurantWriteRepository.Delete(id);
+            _restaurantWriteRepository.Save();
         }
 
-        public IEnumerable<RestaurantListModel> GetRestaurantList(bool withRelated)
+        public IEnumerable<RestaurantListDto> GetRestaurantList(bool withRelated)
         {
             IEnumerable<Restaurant> restaurants;
-            List<RestaurantListModel> restaurantListModels = new List<RestaurantListModel>();
+            var restaurantListDtos = new List<RestaurantListDto>();
             if (withRelated)
             {
-                restaurants = restaurantReadOnlyRepository.GetItemListWithInclude(
+                restaurants = _restaurantReadOnlyRepository.GetItemListWithInclude(
                    x => x.Telephones,
-                   x => x.Address);
+                   x => x.Address,
+                   x => x.Comments);
+
                 foreach (var restaurant in restaurants)
                 {
-                    var telephones = new List<TelephoneDetailModel>();
-                    foreach (var telephone in restaurant.Telephones)
-                    {
-                        telephones.Add(new TelephoneDetailModel
-                        {
-                            TelephoneId = telephone.Id,
-                            Number = telephone.Number,
-                            RestaurantId = restaurant.Id
-                        });
-                    }
-                    restaurantListModels.Add(new RestaurantListModel
-                    {
-                        RestaurantId = restaurant.Id,
-                        Name = restaurant.Name,
-                        AddressName = restaurant.Address.Name,
-                        Telephones = telephones
-                    });
+                    restaurantListDtos.Add(_mapper.Map<RestaurantListDto>(restaurant));
                 }
-                return restaurantListModels;
+
+                return restaurantListDtos;
             }
-            restaurants = this.restaurantReadOnlyRepository.GetItemList();
+
+            restaurants = _restaurantReadOnlyRepository.GetItemList();
+
             foreach (var restaurant in restaurants)
             {
-                restaurantListModels.Add(new RestaurantListModel
-                {
-                    RestaurantId = restaurant.Id,
-                    Name = restaurant.Name
-                });
+                restaurantListDtos.Add(_mapper.Map<RestaurantListDto>(restaurant));
             }
-            return restaurantListModels;
+
+            return restaurantListDtos;
         }
 
-        public RestaurantDetailModel GetRestaurant(int id, bool withRelated)
+        public RestaurantDetailDto GetRestaurant(int id, bool withRelated)
         {
             var restaurant = new Restaurant();
-            var restaurantDetailModel = new RestaurantDetailModel();
-
+            var restaurantDetailDto = new RestaurantDetailDto();
 
             if (withRelated)
             {
-                restaurant = restaurantReadOnlyRepository.GetItemWithInclude(
+                restaurant = _restaurantReadOnlyRepository.GetItemWithInclude(
                                x => x.Id == id,
                                x => x.Telephones,
-                               x => x.Address);
-                var telephones = new List<TelephoneDetailModel>();
+                               x => x.Address,
+                               x => x.Comments);
 
-                foreach (var telephone in restaurant.Telephones)
-                {
-                    telephones.Add(new TelephoneDetailModel
-                    {
-                        TelephoneId = telephone.Id,
-                        Number = telephone.Number,
-                        RestaurantId = restaurant.Id
-                    });
-                }
-                restaurantDetailModel = new RestaurantDetailModel
-                {
-                    RestaurantId = restaurant.Id,
-                    Name = restaurant.Name,
-                    AddressId = restaurant.AddressId,
-                    Telephones = telephones
-                };
-                return restaurantDetailModel;
+                restaurantDetailDto = _mapper.Map<RestaurantDetailDto>(restaurant);
+
+                return restaurantDetailDto;
             }
-            restaurant = this.restaurantReadOnlyRepository.GetItem(id);
-            restaurantDetailModel = new RestaurantDetailModel
-            {
-                RestaurantId = restaurant.Id,
-                Name = restaurant.Name
-            };
-            return restaurantDetailModel;
+
+            restaurant = _restaurantReadOnlyRepository.GetItem(id);
+
+            restaurantDetailDto = _mapper.Map<RestaurantDetailDto>(restaurant);
+
+            return restaurantDetailDto;
         }
     }
 }

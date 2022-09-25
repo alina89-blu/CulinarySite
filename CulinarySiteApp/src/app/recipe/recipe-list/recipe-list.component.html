@@ -36,11 +36,11 @@
       <td class="text-align-center">{{ recipe.dishCategory }}</td>
       <td class="text-align-center">{{ recipe.authorName }}</td>
       <td class="text-align-center">{{ recipe.bookName }}</td>
-      <!-- <td>
-        <li *ngFor="let recipeIngredient of recipe.recipeIngredients">
-          <p>{{ recipeIngredient.ingredientName }}</p>
+      <td>
+        <li *ngFor="let recipeIngredient of recipe.ingredients">
+          <p>{{ recipeIngredient.name }}</p>
         </li>
-      </td> -->
+      </td>
 
       <td>
         <a class="btn info" [routerLink]="['/editRecipe', recipe.recipeId]"

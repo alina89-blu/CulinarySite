@@ -1,8 +1,8 @@
-import { TelephoneDetailModel } from 'src/app/viewmodels/telephone/telephone-detail-model.class';
+import { TelephoneModel } from 'src/app/viewmodels/telephone/telephone-model.class';
 
 export interface IRestaurantDetailModel {
   restaurantId: number;
   name: string;
   addressId: number;
-  telephones: TelephoneDetailModel[];
+  telephones: TelephoneModel[];
 }

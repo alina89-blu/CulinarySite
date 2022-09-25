@@ -9,6 +9,6 @@ namespace ServiceLayer.ViewModels.Restaurant
         public int RestaurantId { get; set; }
         public string Name { get; set; }
         public string AddressName { get; set; }
-        public List<TelephoneDetailModel> Telephones { get; set; } = new List<TelephoneDetailModel>();
+        public List<TelephoneModel> Telephones { get; set; } = new List<TelephoneModel>();
     }
 }

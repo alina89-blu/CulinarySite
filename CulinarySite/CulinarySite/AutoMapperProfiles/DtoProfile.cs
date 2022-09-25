@@ -9,7 +9,9 @@ using ServiceLayer.Dtos.Episode;
 using ServiceLayer.Dtos.Ingredient;
 using ServiceLayer.Dtos.OrganicMatter;
 using ServiceLayer.Dtos.Recipe;
+using ServiceLayer.Dtos.Restaurant;
 using ServiceLayer.Dtos.Tag;
+using ServiceLayer.Dtos.Telephone;
 using ServiceLayer.ViewModels.Address;
 using ServiceLayer.ViewModels.Author;
 using ServiceLayer.ViewModels.Book;
@@ -20,7 +22,9 @@ using ServiceLayer.ViewModels.Episode;
 using ServiceLayer.ViewModels.Ingredient;
 using ServiceLayer.ViewModels.OrganicMatter;
 using ServiceLayer.ViewModels.Recipe;
+using ServiceLayer.ViewModels.Restaurant;
 using ServiceLayer.ViewModels.Tag;
+using ServiceLayer.ViewModels.Telephone;
 
 namespace CulinarySite.AutoMapperProfiles
 {
@@ -88,6 +92,17 @@ namespace CulinarySite.AutoMapperProfiles
             CreateMap<RecipeDetailModel, RecipeDetailDto>().ReverseMap();
             CreateMap<RecipeListModel, RecipeListDto>().ReverseMap();
             CreateMap<RecipeModel, RecipeDto>().ReverseMap();
+
+            CreateMap<CreateRestaurantModel, CreateRestaurantDto>().ReverseMap();
+            CreateMap<UpdateRestaurantModel, UpdateRestaurantDto>().ReverseMap();
+            CreateMap<RestaurantDetailModel, RestaurantDetailDto>().ReverseMap();
+            CreateMap<RestaurantListModel, RestaurantListDto>().ReverseMap();
+
+            CreateMap<CreateTelephoneModel, CreateTelephoneDto>().ReverseMap();
+            CreateMap<UpdateTelephoneModel, UpdateTelephoneDto>().ReverseMap();
+            CreateMap<TelephoneDetailModel, TelephoneDetailDto>().ReverseMap();
+            CreateMap<TelephoneListModel, TelephoneListDto>().ReverseMap();
+            CreateMap<TelephoneModel, TelephoneDto>().ReverseMap();
 
 
             // CreateMap<List<AddressListModel>, List<AddressListDto>>().ReverseMap();

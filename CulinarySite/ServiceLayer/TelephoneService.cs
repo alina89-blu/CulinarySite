@@ -1,47 +1,67 @@
-﻿using Database;
+﻿using AutoMapper;
+using Database;
 using Repositories;
+using ServiceLayer.Dtos.Telephone;
 using System.Collections.Generic;
 
 namespace ServiceLayer
 {
     public class TelephoneService : ITelephoneService
     {
-        private readonly IReadOnlyGenericRepository<Telephone> telephoneReadOnlyRepository;
-        private readonly IWriteGenericRepository<Telephone> telephoneWriteRepository;
+        private readonly IReadOnlyGenericRepository<Telephone> _telephoneReadOnlyRepository;
+        private readonly IWriteGenericRepository<Telephone> _telephoneWriteRepository;
+        private readonly IMapper _mapper;
         public TelephoneService(
             IReadOnlyGenericRepository<Telephone> telephoneReadOnlyRepository,
-            IWriteGenericRepository<Telephone> telephoneWriteRepository)
+            IWriteGenericRepository<Telephone> telephoneWriteRepository,
+            IMapper mapper)
         {
-            this.telephoneReadOnlyRepository = telephoneReadOnlyRepository;
-            this.telephoneWriteRepository = telephoneWriteRepository;
+            _telephoneReadOnlyRepository = telephoneReadOnlyRepository;
+            _telephoneWriteRepository = telephoneWriteRepository;
+            _mapper = mapper;
         }
 
-        public void CreateTelephone(Telephone telephone)
+        public void CreateTelephone(CreateTelephoneDto createTelephoneDto)
         {
-            this.telephoneWriteRepository.Create(telephone);
-            this.telephoneWriteRepository.Save();
+            Telephone telephone = _mapper.Map<Telephone>(createTelephoneDto);
+
+            _telephoneWriteRepository.Create(telephone);
+            _telephoneWriteRepository.Save();
         }
 
-        public void UpdateTelephone(Telephone telephone)
+        public void UpdateTelephone(UpdateTelephoneDto updateTelephoneDto)
         {
-            this.telephoneWriteRepository.Update(telephone);
-            this.telephoneWriteRepository.Save();
+            Telephone telephone = _mapper.Map<Telephone>(updateTelephoneDto);
+
+            _telephoneWriteRepository.Update(telephone);
+            _telephoneWriteRepository.Save();
         }
 
         public void DeleteTelephone(int id)
         {
-            this.telephoneWriteRepository.Delete(id);
-            this.telephoneWriteRepository.Save();
+            _telephoneWriteRepository.Delete(id);
+            _telephoneWriteRepository.Save();
         }
 
-        public IEnumerable<Telephone> GetTelephoneList()
+        public IEnumerable<TelephoneListDto> GetTelephoneList()
         {
-            return this.telephoneReadOnlyRepository.GetItemList();
+            IEnumerable<Telephone> telephones = _telephoneReadOnlyRepository.GetItemList();
+            var telephoneListDtos = new List<TelephoneListDto>();
+
+            foreach (var telephone in telephones)
+            {
+                telephoneListDtos.Add(_mapper.Map<TelephoneListDto>(telephone));
+            }
+
+            return telephoneListDtos;
         }
 
-        public Telephone GetTelephone(int id)
+        public TelephoneDetailDto GetTelephone(int id)
         {
-            return this.telephoneReadOnlyRepository.GetItem(id);
+            Telephone telephone = _telephoneReadOnlyRepository.GetItem(id);
+            TelephoneDetailDto telephoneDetailDto = _mapper.Map<TelephoneDetailDto>(telephone);
+
+            return telephoneDetailDto;
         }
     }
 }

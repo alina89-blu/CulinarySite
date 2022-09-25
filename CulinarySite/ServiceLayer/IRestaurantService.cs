@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using ServiceLayer.ViewModels.Restaurant;
+using ServiceLayer.Dtos.Restaurant;
 
 namespace ServiceLayer
 {
     public interface IRestaurantService
     {
-        void CreateRestaurant(CreateRestaurantModel createRestaurantModel);
-        void UpdateRestaurant(UpdateRestaurantModel updateRestaurantModel);
+        void CreateRestaurant(CreateRestaurantDto createRestaurantDto);
+        void UpdateRestaurant(UpdateRestaurantDto updateRestaurantDto);
         void DeleteRestaurant(int id);
-        IEnumerable<RestaurantListModel> GetRestaurantList(bool withRelated);
-        RestaurantDetailModel GetRestaurant(int id, bool withRelated);
+        IEnumerable<RestaurantListDto> GetRestaurantList(bool withRelated);
+        RestaurantDetailDto GetRestaurant(int id, bool withRelated);
     }
 }
