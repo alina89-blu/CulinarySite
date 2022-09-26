@@ -1,0 +1,12 @@
+<div class="A">
+  <h1>Рецепты от Джейми Оливера</h1>
+  <div *ngFor="let recipe of dishDetailModel.recipes; let idx = index">
+    <a [routerLink]="['/recipe', recipe.recipeId]">
+      <h2>{{ recipe.name }}</h2>
+    </a>
+
+    <img src="{{ recipe.image?.url }}" alt="not found" />
+
+    <p>{{ recipe.content }}</p>
+  </div>
+</div>

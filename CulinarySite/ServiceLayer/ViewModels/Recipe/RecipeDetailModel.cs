@@ -5,6 +5,7 @@ using ServiceLayer.ViewModels.CookingStage;
 using ServiceLayer.ViewModels.Tag;
 using System;
 using System.Collections.Generic;
+using ServiceLayer.ViewModels.Image.RecipeImage;
 
 namespace ServiceLayer.ViewModels.Recipe
 {
@@ -23,5 +24,6 @@ namespace ServiceLayer.ViewModels.Recipe
         public List<OrganicMatterModel> OrganicMatters { get; set; } = new List<OrganicMatterModel>();
         public List<CookingStageModel> CookingStages { get; set; } = new List<CookingStageModel>();
         public List<TagModel> Tags { get; set; } = new List<TagModel>();
+        public RecipeImageModel Image { get; set; }
     }
 }

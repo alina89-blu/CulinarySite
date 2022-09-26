@@ -4,9 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using ServiceLayer;
 using ServiceLayer.Dtos.Image.DishImage;
 using ServiceLayer.Dtos.Image.EpisodeImage;
+using ServiceLayer.Dtos.Image.RecipeImage;
 using ServiceLayer.ViewModels.Image.DishImage;
 using ServiceLayer.ViewModels.Image.EpisodeImage;
-
+using ServiceLayer.ViewModels.Image.RecipeImage;
 
 namespace CulinarySite.Controllers
 {
@@ -99,6 +100,45 @@ namespace CulinarySite.Controllers
         {
             _imageService.DeleteImage(id);
         }
+        
+        [HttpGet("{withRelated}/recipe")]
+        public IEnumerable<RecipeImageListModel> GetRecipeImageList(bool withRelated)
+        {
+            IEnumerable<RecipeImageListDto> recipeImageListDtos = _imageService.GetRecipeImageList(withRelated);
+            var recipeImageListModels = new List<RecipeImageListModel>();
+
+            foreach (var recipeImageListDto in recipeImageListDtos)
+            {
+                recipeImageListModels.Add(_mapper.Map<RecipeImageListModel>(recipeImageListDto));
+            }
+
+            return recipeImageListModels;
+        }
+
+        [HttpGet("{id}/{withRelated}/recipe")]
+        public RecipeImageDetailModel GetRecipeImage(int id, bool withRelated)
+        {
+            RecipeImageDetailDto recipeImageDetailDto = _imageService.GetRecipeImage(id, withRelated);
+            RecipeImageDetailModel recipeImageDetailModel = _mapper.Map<RecipeImageDetailModel>(recipeImageDetailDto);
+
+            return recipeImageDetailModel;
+        }
+
+        [HttpPost("recipe")]
+        public void CreateRecipeImage(CreateRecipeImageModel createRecipeImageModel)
+        {
+            CreateRecipeImageDto createRecipeImageDto = _mapper.Map<CreateRecipeImageDto>(createRecipeImageModel);
+            _imageService.CreateRecipeImage(createRecipeImageDto);
+        }
+
+        [HttpPut("recipe")]
+        public void UpdateRecipeImage(UpdateRecipeImageModel updateRecipeImageModel)
+        {
+            UpdateRecipeImageDto updateRecipeImageDto = _mapper.Map<UpdateRecipeImageDto>(updateRecipeImageModel);
+            _imageService.UpdateRecipeImage(updateRecipeImageDto);
+        }
+
+       
 
     }
 }

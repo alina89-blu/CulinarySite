@@ -1,0 +1,38 @@
+<div>
+  <img
+    src="https://img5.goodfon.com/wallpaper/nbig/f/c1/red-hot-chilli-pepper-eda-fon.jpg"
+    width="700px"
+    height="400"
+    alt="not found"
+  />
+</div>
+
+<h2 class="A">Рецепты от Джейми Оливера</h2>
+
+<div class="A">
+  Джейми Оливер, рецепты которого представляются образцом утилитарности и
+  элегантности, выбирает более доступные ингредиенты, помогая очень сильно
+  сократить время готовки. Именно благодаря своим великолепным рецептам Джейми
+  Оливер стал столь известен во всем мире. Они просты и оригинальны. Этого и
+  хочет достичь Джейми Оливер, рецепты которого могут быть использованы
+  абсолютно любым, пусть даже самым неподготовленным, человеком. Само собой при
+  условии, что в результате выйдет полезное и вкуснейшее блюдо, настоящий
+  шедевр, которым не стыдно похвастать перед гостями.
+</div>
+
+<!--<div class="A" *ngFor="let recipe of recipes; let idx = index">
+  <h3>
+    <a [routerLink]="['/recipe', recipe.recipeId]">
+      <p>{{ recipe.name }}</p>
+    </a>
+  </h3>
+  <p>{{ recipe.content }}</p>
+</div>-->
+
+<div *ngFor="let dish of dishes; let idx = index">
+  <img src="{{ dish.image?.url }}" alt="not found" />
+
+  <a [routerLink]="['/dish', dish.dishId]">
+    <h3>{{ dish.category }}</h3>
+  </a>
+</div>

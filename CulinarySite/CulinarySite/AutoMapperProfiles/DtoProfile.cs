@@ -9,6 +9,7 @@ using ServiceLayer.Dtos.Dish;
 using ServiceLayer.Dtos.Episode;
 using ServiceLayer.Dtos.Image.DishImage;
 using ServiceLayer.Dtos.Image.EpisodeImage;
+using ServiceLayer.Dtos.Image.RecipeImage;
 using ServiceLayer.Dtos.Ingredient;
 using ServiceLayer.Dtos.OrganicMatter;
 using ServiceLayer.Dtos.Recipe;
@@ -26,6 +27,7 @@ using ServiceLayer.ViewModels.Dish;
 using ServiceLayer.ViewModels.Episode;
 using ServiceLayer.ViewModels.Image.DishImage;
 using ServiceLayer.ViewModels.Image.EpisodeImage;
+using ServiceLayer.ViewModels.Image.RecipeImage;
 using ServiceLayer.ViewModels.Ingredient;
 using ServiceLayer.ViewModels.OrganicMatter;
 using ServiceLayer.ViewModels.Recipe;
@@ -126,11 +128,18 @@ namespace CulinarySite.AutoMapperProfiles
             CreateMap<UpdateDishImageModel, UpdateDishImageDto>().ReverseMap();
             CreateMap<DishImageListModel, DishImageListDto>().ReverseMap();
             CreateMap<DishImageDetailModel, DishImageDetailDto>().ReverseMap();
+            CreateMap<DishImageModel, DishImageDto>().ReverseMap();
 
             CreateMap<CreateEpisodeImageModel, CreateEpisodeImageDto>().ReverseMap();
             CreateMap<UpdateEpisodeImageModel, UpdateEpisodeImageDto>().ReverseMap();
             CreateMap<EpisodeImageListModel, EpisodeImageListDto>().ReverseMap();
             CreateMap<EpisodeImageDetailModel, EpisodeImageDetailDto>().ReverseMap();
+
+            CreateMap<CreateRecipeImageModel, CreateRecipeImageDto>().ReverseMap();
+            CreateMap<UpdateRecipeImageModel, UpdateRecipeImageDto>().ReverseMap();
+            CreateMap<RecipeImageListModel, RecipeImageListDto>().ReverseMap();
+            CreateMap<RecipeImageDetailModel, RecipeImageDetailDto>().ReverseMap();
+            CreateMap<RecipeImageModel, RecipeImageDto>().ReverseMap();
 
 
             // CreateMap<List<AddressListModel>, List<AddressListDto>>().ReverseMap();

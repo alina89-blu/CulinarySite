@@ -5,6 +5,7 @@ using ServiceLayer.Dtos.CookingStage;
 using ServiceLayer.Dtos.Tag;
 using System;
 using System.Collections.Generic;
+using ServiceLayer.Dtos.Image.RecipeImage;
 
 namespace ServiceLayer.Dtos.Recipe
 {
@@ -23,5 +24,6 @@ namespace ServiceLayer.Dtos.Recipe
         public List<OrganicMatterDto> OrganicMatters { get; set; } = new List<OrganicMatterDto>();
         public List<CookingStageDto> CookingStages { get; set; } = new List<CookingStageDto>();
         public List<TagDto> Tags { get; set; } = new List<TagDto>();
+        public RecipeImageDto Image { get; set; }
     }
 }

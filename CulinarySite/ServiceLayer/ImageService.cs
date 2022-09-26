@@ -4,6 +4,7 @@ using Database;
 using AutoMapper;
 using ServiceLayer.Dtos.Image.DishImage;
 using ServiceLayer.Dtos.Image.EpisodeImage;
+using ServiceLayer.Dtos.Image.RecipeImage;
 
 namespace ServiceLayer
 {
@@ -158,6 +159,75 @@ namespace ServiceLayer
             episodeImageDetailDto = _mapper.Map<EpisodeImageDetailDto>(image);
 
             return episodeImageDetailDto;
+        }
+
+
+        ///
+
+        public void CreateRecipeImage(CreateRecipeImageDto createRecipeImageDto)
+        {
+            Image image = _mapper.Map<Image>(createRecipeImageDto);
+
+            _imageWriteRepository.Create(image);
+            _imageWriteRepository.Save();
+        }
+
+        public void UpdateRecipeImage(UpdateRecipeImageDto updateRecipeImageDto)
+        {
+            Image image = _mapper.Map<Image>(updateRecipeImageDto);
+
+            _imageWriteRepository.Update(image);
+            _imageWriteRepository.Save();
+        }
+
+        public IEnumerable<RecipeImageListDto> GetRecipeImageList(bool withRelated)
+        {
+            IEnumerable<Image> images;
+            var recipeImageListDtos = new List<RecipeImageListDto>();
+
+            if (withRelated)
+            {
+                images = _imageReadOnlyRepository.GetItemListWithInclude(x => x.Recipe);
+
+                foreach (var image in images)
+                {
+                    recipeImageListDtos.Add(_mapper.Map<RecipeImageListDto>(image));
+                }
+
+                return recipeImageListDtos;
+            }
+
+            images = _imageReadOnlyRepository.GetItemList();
+
+            foreach (var image in images)
+            {
+                recipeImageListDtos.Add(_mapper.Map<RecipeImageListDto>(image));
+            }
+
+            return recipeImageListDtos;
+        }
+
+        public RecipeImageDetailDto GetRecipeImage(int id, bool withRelated)
+        {
+            var image = new Image();
+            var recipeImageDetailDto = new RecipeImageDetailDto();
+
+            if (withRelated)
+            {
+                image = _imageReadOnlyRepository.GetItemWithInclude(
+                    x => x.Id == id,
+                    x => x.Recipe);
+
+                recipeImageDetailDto = _mapper.Map<RecipeImageDetailDto>(image);
+
+                return recipeImageDetailDto;
+            }
+
+            image = _imageReadOnlyRepository.GetItem(id);
+
+            recipeImageDetailDto = _mapper.Map<RecipeImageDetailDto>(image);
+
+            return recipeImageDetailDto;
         }
     }
 }

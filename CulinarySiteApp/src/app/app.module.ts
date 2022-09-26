@@ -49,10 +49,16 @@ import { DishEditComponent } from './dish/dish-edit/dish-edit.component';
 import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component';
 import { RecipeCreateComponent } from './recipe/recipe-create/recipe-create.component';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
+import { RecipeDetailComponent } from './recipe/recipe-detail/recipe-detail.component';
 import { EpisodeListComponent } from './episode/episode-list/episode-list.component';
 import { EpisodeCreateComponent } from './episode/episode-create/episode-create.component';
 import { EpisodeEditComponent } from './episode/episode-edit/episode-edit.component';
 import { CernovicComponent } from './cernovic/cernovic.component';
+import { RecipeLibraryComponent } from './recipe-library/recipe-library.component';
+import { BookLibraryComponent } from './book-library/book-library.component';
+import { RestaurantLibraryComponent } from './restaurant-library/restaurant-library.component';
+import { BookDetailComponent } from './book/book-detail/book-detail.component';
+import { DishDetailComponent } from './dish/dish-detail/dish-detail.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -78,10 +84,15 @@ const appRoutes: Routes = [
   { path: 'recipe', component: RecipeListComponent },
   { path: 'createRecipe', component: RecipeCreateComponent },
   { path: 'editRecipe/:id', component: RecipeEditComponent },
+  { path: 'recipe/:id', component: RecipeDetailComponent },
   { path: 'episode', component: EpisodeListComponent },
   { path: 'createEpisode', component: EpisodeCreateComponent },
   { path: 'editEpisode/:id', component: EpisodeEditComponent },
-
+  { path: 'recipeLibrary', component: RecipeLibraryComponent },
+  { path: 'bookLibrary', component: BookLibraryComponent },
+  { path: 'restaurantLibrary', component: RestaurantLibraryComponent },
+  { path: 'book/:id', component: BookDetailComponent },
+  { path: 'dish/:id', component: DishDetailComponent },
   //
 ];
 
@@ -112,10 +123,16 @@ const appRoutes: Routes = [
     RecipeListComponent,
     RecipeCreateComponent,
     RecipeEditComponent,
+    RecipeDetailComponent,
     EpisodeListComponent,
     EpisodeCreateComponent,
     EpisodeEditComponent,
     CernovicComponent,
+    RecipeLibraryComponent,
+    BookLibraryComponent,
+    RestaurantLibraryComponent,
+    BookDetailComponent,
+    DishDetailComponent,
   ],
   imports: [
     BrowserModule,

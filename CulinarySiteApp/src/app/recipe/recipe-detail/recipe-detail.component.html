@@ -1,0 +1,29 @@
+<div class="A">
+  <div>
+    <h1 class="B">{{ recipeDetailModel.name }}</h1>
+
+    <img src="{{ recipeDetailModel.image?.url }}" alt="not found" />
+    <p><b>Количество порций</b> {{ recipeDetailModel.servingsNumber }}</p>
+
+    <p>
+      <b>Время приготовления</b>
+      {{ recipeDetailModel.cookingTime | date: "HH:mm" }} минут
+    </p>
+    <p><b>Уровень сложности</b> {{ recipeDetailModel.difficultyLevel }}</p>
+    <p>{{ recipeDetailModel.content }}</p>
+
+    <div
+      *ngFor="
+        let cookingStage of recipeDetailModel.cookingStages;
+        let idx = index
+      "
+    >
+      <p>
+        <b>
+          {{ idx + 1 }}
+        </b>
+        {{ cookingStage.content }}
+      </p>
+    </div>
+  </div>
+</div>

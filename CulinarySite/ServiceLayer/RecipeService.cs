@@ -66,7 +66,8 @@ namespace ServiceLayer
                     x => x.Ingredients,
                     x => x.OrganicMatters,
                     x => x.CookingStages,
-                    x => x.Tags
+                    x => x.Tags,
+                    x => x.Image
                     );
 
                 foreach (var recipe in recipes)
@@ -101,7 +102,8 @@ namespace ServiceLayer
                     x => x.Ingredients,
                     x => x.OrganicMatters,
                     x => x.CookingStages,
-                    x => x.Tags
+                    x => x.Tags,
+                    x => x.Image
                    );
 
                 recipeDetailDto = _mapper.Map<RecipeDetailDto>(recipe);

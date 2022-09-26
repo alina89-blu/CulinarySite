@@ -9,6 +9,10 @@ import { IEpisodeImageListModel } from '../interfaces/image/episode-image/episod
 import { IEpisodeDetailModel } from '../interfaces/episode/episode-detail-model.interface';
 import { CreateEpisodeImageModel } from '../viewmodels/image/episode-image/create-episode-image-model.class';
 import { UpdateEpisodeImageModel } from '../viewmodels/image/episode-image/update-episode-image-model.class';
+import { IRecipeImageListModel } from '../interfaces/image/recipe-image/recipe-image-list-model.interface';
+import { IRecipeDetailModel } from '../interfaces/recipe/recipe-detail-model.interface';
+import { CreateRecipeImageModel } from '../viewmodels/image/recipe-image/create-recipe-image-model.class';
+import { UpdateRecipeImageModel } from '../viewmodels/image/recipe-image/update-recipe-image-model.class';
 
 @Injectable()
 export class ImageService {
@@ -102,5 +106,40 @@ export class ImageService {
 
   public deleteImage(id: number): Observable<void> {
     return this.http.delete<void>(this.url + '/' + id);
+  }
+
+  public getRecipeImageList(
+    withRelated: boolean
+  ): Observable<IRecipeImageListModel[]> {
+    return this.http.get<IRecipeImageListModel[]>(
+      this.url + '/' + withRelated + '/' + 'recipe'
+    );
+  }
+
+  public getRecipeImage(
+    id: number,
+    withRelated: number
+  ): Observable<IRecipeDetailModel> {
+    return this.http.get<IRecipeDetailModel>(
+      this.url + '/' + id + '/' + withRelated + '/' + 'recipe'
+    );
+  }
+
+  public createRecipeImage(
+    createRecipeImageModel: CreateRecipeImageModel
+  ): Observable<void> {
+    return this.http.post<void>(
+      this.url + '/' + 'recipe',
+      createRecipeImageModel
+    );
+  }
+
+  public updateRecipeImage(
+    updateRecipeImageModel: UpdateRecipeImageModel
+  ): Observable<void> {
+    return this.http.put<void>(
+      this.url + '/' + 'recipe',
+      updateRecipeImageModel
+    );
   }
 }
