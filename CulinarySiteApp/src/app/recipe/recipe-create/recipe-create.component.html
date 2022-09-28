@@ -1,108 +1,105 @@
 <h3>Добавление нового рецепта</h3>
 
-<form [formGroup]="myForm">
-  <div>
-    <label>Название</label>
-    <input
-      type="text"
-      [(ngModel)]="createRecipeModel.name"
-      formControlName="name"
-    />
-  </div>
+<!---->
+<!--
+<div>
+  <label>Название</label>
+  <input type="text" [(ngModel)]="createBookModel.name" />
+</div>
 
-  <div>
-    <label>Количество порций</label>
-    <input
-      type="text"
-      [(ngModel)]="createRecipeModel.servingsNumber"
-      formControlName="servingsNumber"
-    />
-  </div>
-  <div>
-    <label>время готовки</label>
-    <input
-      type="time"
-      [(ngModel)]="createRecipeModel.cookingTime"
-      formControlName="cookingTime"
-    />
-  </div>
-  <div>
-    <label>сложный уровень</label>
-    <select
-      [(ngModel)]="createRecipeModel.difficultyLevel"
-      class="form-control"
-      formControlName="difficultyLevel"
-    >
-      <option *ngFor="let difficultyLevel of difficultyLevels">
-        {{ difficultyLevel }}
-      </option>
-    </select>
-  </div>
+<div>
+  <label>Автор</label>
+  <select [(ngModel)]="createBookModel.authorId" class="form-control">
+    <option *ngFor="let author of authors" [ngValue]="author.authorId">
+      {{ author.name }}
+    </option>
+  </select>
+</div>
+-->
 
-  <div>
-    <label>содержание</label>
-    <input
-      type="text"
-      [(ngModel)]="createRecipeModel.content"
-      formControlName="content"
-    />
-  </div>
+<div>
+  <label>Название</label>
+  <input type="text" [(ngModel)]="createRecipeModel.name" />
+</div>
 
-  <div>
-    <label>Author</label>
-    <select
-      [(ngModel)]="createRecipeModel.authorId"
-      class="form-control"
-      formControlName="author"
-    >
-      <option *ngFor="let author of authors" [ngValue]="author.authorId">
-        {{ author.name }}
-      </option>
-    </select>
-  </div>
+<div>
+  <label>Количество порций</label>
+  <input type="text" [(ngModel)]="createRecipeModel.servingsNumber" />
+</div>
 
-  <div>
-    <label>Book</label>
-    <select
-      [(ngModel)]="createRecipeModel.bookId"
-      class="form-control"
-      formControlName="book"
-    >
-      <option *ngFor="let book of books" [ngValue]="book.bookId">
-        {{ book.name }}
-      </option>
-    </select>
-  </div>
+<div>
+  <label>Время готовки</label>
+  <input type="time" [(ngModel)]="createRecipeModel.cookingTime" />
+</div>
 
-  <div>
-    <label>Категория блюда</label>
-    <select
-      [(ngModel)]="createRecipeModel.dishId"
-      class="form-control"
-      formControlName="dish"
-    >
-      <option *ngFor="let dish of dishes" [ngValue]="dish.dishId">
-        {{ dish.category }}
-      </option>
-    </select>
-  </div>
+<div>
+  <label> Уровень сложности</label>
+  <select [(ngModel)]="createRecipeModel.difficultyLevel" class="form-control">
+    <option *ngFor="let difficultyLevel of difficultyLevels">
+      {{ difficultyLevel }}
+    </option>
+  </select>
+</div>
 
+<div>
+  <label>Содержание</label>
+  <input type="text" [(ngModel)]="createRecipeModel.content" />
+</div>
+
+<div>
+  <label>Автор</label>
+  <select [(ngModel)]="createRecipeModel.authorId" class="form-control">
+    <option *ngFor="let author of authors" [ngValue]="author.authorId">
+      {{ author.name }}
+    </option>
+  </select>
+</div>
+
+<div>
+  <label>Название книги</label>
+  <select [(ngModel)]="createRecipeModel.bookId" class="form-control">
+    <option *ngFor="let book of books" [ngValue]="book.bookId">
+      {{ book.name }}
+    </option>
+  </select>
+</div>
+
+<div>
+  <label>Категория блюда</label>
+  <select [(ngModel)]="createRecipeModel.dishId" class="form-control">
+    <option *ngFor="let dish of dishes" [ngValue]="dish.dishId">
+      {{ dish.category }}
+    </option>
+  </select>
+</div>
+<div>
   <button class="btn info" (click)="addIngredients()">Add ingredients</button>
+</div>
 
+<div>
+  <button class="btn info" (click)="addOrganicMatters()">
+    Add organic matters
+  </button>
+</div>
+
+<form [formGroup]="myForm">
   <div *ngIf="showIngredients">
     <div
       formArrayName="ingredients"
-      *ngFor="let ingredient of getFormsControls()['controls']; let i = index"
+      *ngFor="
+        let ingredient of getIngredientsFormsControls()['controls'];
+        let i = index
+      "
     >
       <div [formGroupName]="i">
-        <label>Ingredient</label>
+        <label>Ингредиент</label>
         <input
           type="text"
           [(ngModel)]="createRecipeModel.ingredients[i].name"
           formControlName="name"
         />
 
-        <label>Unit</label>
+        <label>Единица измерения</label>
         <select
           [(ngModel)]="createRecipeModel.ingredients[i].unit"
           class="form-control"
@@ -114,7 +111,7 @@
           </option>
         </select>
 
-        <label>Quantity</label>
+        <label>Количество</label>
         <input
           type="number"
           min="0"
@@ -122,13 +119,64 @@
           formControlName="quantity"
         />
 
-        <button (click)="deleteIngredient(i)">delete</button>
+        <button (click)="deleteIngredient(i)">Удалить</button>
       </div>
     </div>
     <button class="btn info" (click)="addIngredient()">+</button>
   </div>
+  <!--OrganicMetters-->
 </form>
 
+<form [formGroup]="myForm">
+  <!--OrganicMetters-->
+
+  <div *ngIf="showOrganicMatters">
+    <div
+      formArrayName="organicMatters"
+      *ngFor="
+        let organicMatter of getOrganicMattersFormsControls()['controls'];
+        let i = index
+      "
+    >
+      <div [formGroupName]="i">
+        <label>Oрганическая материя</label>
+        <select
+          [(ngModel)]="createRecipeModel.organicMatters[i].name"
+          class="form-control"
+          formControlName="name"
+        >
+          <option></option>
+          <option *ngFor="let organicMatter of organicMatters">
+            {{ organicMatter }}
+          </option>
+        </select>
+
+        <label>Единица измерения</label>
+        <select
+          [(ngModel)]="createRecipeModel.organicMatters[i].unit"
+          class="form-control"
+          formControlName="unit"
+        >
+          <option></option>
+          <option *ngFor="let unit of units">
+            {{ unit }}
+          </option>
+        </select>
+
+        <label>Количество</label>
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="createRecipeModel.organicMatters[i].quantity"
+          formControlName="quantity"
+        />
+
+        <button (click)="deleteOrganicMatter(i)">Удалить</button>
+      </div>
+    </div>
+    <button class="btn info" (click)="addOrganicMatter()">+</button>
+  </div>
+</form>
 <div>
   <button class="btn info" (click)="createRecipe()">Создать</button>
 </div>

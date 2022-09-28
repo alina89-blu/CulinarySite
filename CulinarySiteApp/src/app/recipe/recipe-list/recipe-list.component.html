@@ -10,7 +10,7 @@
       <th colspan="6">Рецепты</th>
     </tr>
     <tr>
-      <td>Ид</td>
+      <td>№</td>
       <td>Название</td>
       <td>Количество порций</td>
       <td>Время приготовления</td>
@@ -36,11 +36,6 @@
       <td class="text-align-center">{{ recipe.dishCategory }}</td>
       <td class="text-align-center">{{ recipe.authorName }}</td>
       <td class="text-align-center">{{ recipe.bookName }}</td>
-      <td>
-        <li *ngFor="let recipeIngredient of recipe.ingredients">
-          <p>{{ recipeIngredient.name }}</p>
-        </li>
-      </td>
 
       <td>
         <a class="btn info" [routerLink]="['/editRecipe', recipe.recipeId]"

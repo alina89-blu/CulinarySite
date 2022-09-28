@@ -1,45 +1,47 @@
 <div>
-  <button class="btn info">
-    <a [routerLink]="['/createBook']">Добавить</a>
-  </button>
-</div>
-<table>
-  <thead>
-    <tr>
-      <td>Нр.</td>
-      <td>Название<button (click)="sortBooksByName()">^</button></td>
-      <!--<td>Название</td>
+  <div>
+    <button class="btn info">
+      <a [routerLink]="['/createBook']">Добавить</a>
+    </button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <td>Нр.</td>
+        <td>Название<button (click)="sortBooksByName()">^</button></td>
+        <!--<td>Название</td>
       <td class="A">Год создания</td>-->
-      <td>Год создания<button (click)="sortBooksByYear()">^</button></td>
-      <td>Автор</td>
-      <td>Описание</td>
-      <td>Действия</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let book of books; let idx = index">
-      <td>{{ idx + 1 }}</td>
-      <td>{{ book.name }}</td>
-      <td class="A">{{ book.creationYear }}</td>
-      <!-- <td>{{ book.author.name }}</td> -->
-      <td>{{ book.authorName }}</td>
-      <td class="textalign">{{ book.description }}</td>
+        <td>Год создания<button (click)="sortBooksByYear()">^</button></td>
+        <td>Автор</td>
+        <td>Описание</td>
+        <td>Действия</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books; let idx = index">
+        <td>{{ idx + 1 }}</td>
+        <td>{{ book.name }}</td>
+        <td class="A">{{ book.creationYear }}</td>
+        <!-- <td>{{ book.author.name }}</td> -->
+        <td>{{ book.authorName }}</td>
+        <td class="textalign">{{ book.description }}</td>
 
-      <td>
-        <a class="btn info" [routerLink]="['/editBook', book.bookId]"
-          >Редактировать</a
-        >
-        <button class="btn info" (click)="deleteBook(book.bookId)">
-          Удалить
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+        <td>
+          <a class="btn info" [routerLink]="['/editBook', book.bookId]"
+            >Редактировать</a
+          >
+          <button class="btn info" (click)="deleteBook(book.bookId)">
+            Удалить
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<p>
-  <a routerLink="/">На домашнюю страницу</a>
-</p>
+  <p>
+    <a routerLink="/">На домашнюю страницу</a>
+  </p>
 
-<!-- <button class="btn info" (click)="sortBooksByName()">Sort by name</button>
+  <!-- <button class="btn info" (click)="sortBooksByName()">Sort by name</button>
 <button class="btn info" (click)="sortBooksByYear()">Sort by year</button> -->
+</div>

@@ -6,24 +6,18 @@ import { DishService } from 'src/app/services/dish.service';
 import { CreateRecipeModel } from 'src/app/viewmodels/recipe/create-recipe-model.class';
 import { DishListModel } from 'src/app/viewmodels/dish/dish-list-model.class';
 import { IDishListModel } from 'src/app/interfaces/dish/dish-list-model.interface';
-import { IngredientService } from 'src/app/services/ingredient.service';
-import { IngredientListModel } from 'src/app/viewmodels/ingredient/ingredient-list-model.class';
 import { CreateIngredientModel } from 'src/app/viewmodels/ingredient/create-ingredient-model.class';
 import { Unit } from 'src/app/enums/unit.enum';
 import { AuthorService } from 'src/app/services/author.service';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookService } from 'src/app/services/book.service';
 import { IBookModel } from 'src/app/interfaces/book/book-model.interface';
 import { BookModel } from 'src/app/viewmodels/book/book-model.class';
 import { AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { AuthorListModel } from 'src/app/viewmodels/author/author-list-model.class';
 import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.interface';
+import { CreateOrganicMatterModel } from 'src/app/viewmodels/organic-matter/create-organic-matter-model.class';
+import { OrganicMatterName } from 'src/app/enums/organic-matter-name.enum';
 
 @Component({
   selector: 'app-recipe-create',
@@ -32,6 +26,11 @@ import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.in
 })
 export class RecipeCreateComponent implements OnInit, AfterViewChecked {
   public createRecipeModel: CreateRecipeModel = new CreateRecipeModel();
+  public dishes: DishListModel[] = [];
+  public authors: AuthorListModel[] = [];
+  public books: BookModel[] = [];
+  public showIngredients: boolean = false;
+  public showOrganicMatters: boolean = false;
 
   public difficultyLevels: DifficultyLevel[] = [
     DifficultyLevel.Лёгкий,
@@ -49,35 +48,32 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
     Unit.Миллилитр,
     Unit.Штука,
   ];
-  public dishes: DishListModel[] = [];
-  //public ingredients: IngredientListModel[] = [];
-  public authors: AuthorListModel[] = [];
-  public books: BookModel[] = [];
 
-  public showIngredients: boolean = false;
-
+  public organicMatters: OrganicMatterName[] = [
+    OrganicMatterName.Calories,
+    OrganicMatterName.Carbohydrates,
+    OrganicMatterName.Grease,
+    OrganicMatterName.Protein,
+    OrganicMatterName.Sugar,
+  ];
   public myForm: FormGroup;
-
   constructor(
     private recipeService: RecipeService,
-    private router: Router,
     private dishService: DishService,
-    private ingredientService: IngredientService,
     private authorService: AuthorService,
     private bookService: BookService,
-    private formBuilder: FormBuilder,
+    private router: Router,
     private readonly changeDetectorRef: ChangeDetectorRef
   ) {
     this.myForm = new FormGroup({
-      name: new FormControl('recept', Validators.required),
-      servingsNumber: new FormControl('', Validators.required),
-      cookingTime: new FormControl('', Validators.required),
-      difficultyLevel: new FormControl('', Validators.required),
-      content: new FormControl('', Validators.required),
-      dish: new FormControl('', Validators.required),
-      author: new FormControl('', Validators.required),
-      book: new FormControl('', Validators.required),
       ingredients: new FormArray([
+        new FormGroup({
+          name: new FormControl('', Validators.required),
+          unit: new FormControl('', Validators.required),
+          quantity: new FormControl('', Validators.required),
+        }),
+      ]),
+      organicMatters: new FormArray([
         new FormGroup({
           name: new FormControl('', Validators.required),
           unit: new FormControl('', Validators.required),
@@ -86,10 +82,15 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
       ]),
     });
     this.createRecipeModel.ingredients = [new CreateIngredientModel()];
+    this.createRecipeModel.organicMatters = [new CreateOrganicMatterModel()];
   }
 
-  public getFormsControls(): FormArray {
+  public getIngredientsFormsControls(): FormArray {
     return this.myForm.controls['ingredients'] as FormArray;
+  }
+
+  public getOrganicMattersFormsControls(): FormArray {
+    return this.myForm.controls['organicMatters'] as FormArray;
   }
 
   public addIngredient(): void {
@@ -100,7 +101,24 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
     this.createRecipeModel.ingredients.push(new CreateIngredientModel());
   }
 
+  public addOrganicMatter(): void {
+    (<FormArray>this.myForm.controls['organicMatters']).push(
+      this.createNewOrganicMatter()
+    );
+
+    this.createRecipeModel.organicMatters.push(new CreateOrganicMatterModel());
+  }
+
   public createNewIngredient(): FormGroup {
+    const group = new FormGroup({
+      name: new FormControl('', Validators.required),
+      unit: new FormControl('', Validators.required),
+      quantity: new FormControl('', Validators.required),
+    });
+    return group;
+  }
+
+  public createNewOrganicMatter(): FormGroup {
     const group = new FormGroup({
       name: new FormControl('', Validators.required),
       unit: new FormControl('', Validators.required),
@@ -117,6 +135,10 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
 
   public addIngredients() {
     this.showIngredients = !this.showIngredients;
+  }
+
+  public addOrganicMatters() {
+    this.showOrganicMatters = !this.showOrganicMatters;
   }
 
   ngAfterViewChecked(): void {
@@ -156,6 +178,10 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
   }
 
   public deleteIngredient(index: number) {
-    this.getFormsControls().removeAt(index);
+    this.getIngredientsFormsControls().removeAt(index);
+  }
+
+  public deleteOrganicMatter(index: number) {
+    this.getOrganicMattersFormsControls().removeAt(index);
   }
 }

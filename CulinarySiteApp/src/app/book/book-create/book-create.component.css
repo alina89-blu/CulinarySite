@@ -18,3 +18,10 @@ select {
   padding: 10px 20px;
   font-size: medium;
 }
+
+.A {
+  background-color: #afeeee;
+  border-radius: 10px;
+  block-size: 1000px;
+  padding: 20px;
+}

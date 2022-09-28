@@ -1,7 +1,7 @@
 export enum OrganicMatterName {
-  Calories = 'Calories',
-  Carbohydrates = 'Carbohydrates',
-  Sugar = 'Sugar',
-  Grease = 'Grease',
-  Protein = 'Protein',
+  Calories = 'Калории',
+  Carbohydrates = 'Углеводы',
+  Sugar = 'Сахар',
+  Grease = 'Жир',
+  Protein = 'Белок',
 }

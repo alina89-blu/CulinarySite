@@ -12,7 +12,7 @@ td {
 }
 
 tr:nth-child(even) {
-  background-color: pink;
+  background-color: #afeeee;
 }
 
 .btn {
@@ -21,6 +21,7 @@ tr:nth-child(even) {
   padding: 14px 20px;
   cursor: pointer;
   border-radius: 5px;
+  margin: 20px;
 }
 
 .info {

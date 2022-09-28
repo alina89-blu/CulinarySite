@@ -21,7 +21,6 @@ import { RestaurantService } from './services/restaurant.service';
 import { SubscriberService } from './services/subscriber.service';
 import { TagService } from './services/tag.service';
 import { TelephoneService } from './services/telephone.service';
-import { RecipeIngredientService } from './services/recipe-ingredient.service';
 import { RecipeOrganicMatterService } from './services/recipe-organic-matter.service';
 
 import { AppComponent } from './app.component';
@@ -36,7 +35,6 @@ import { AuthorEditComponent } from './author/author-edit/author-edit.component'
 import { BookListComponent } from './book/book-list/book-list.component';
 import { BookEditComponent } from './book/book-edit/book-edit.component';
 import { BookCreateComponent } from './book/book-create/book-create.component';
-import { BlaComponent } from './bla.component';
 import { CookingStageListComponent } from './cooking-stage/cooking-stage-list/cooking-stage-list.component';
 import { CookingStageCreateComponent } from './cooking-stage/cooking-stage-create/cooking-stage-create.component';
 import { CookingStageEditComponent } from './cooking-stage/cooking-stage-edit/cooking-stage-edit.component';
@@ -71,7 +69,6 @@ const appRoutes: Routes = [
   { path: 'book', component: BookListComponent },
   { path: 'editBook/:id', component: BookEditComponent },
   { path: 'createBook', component: BookCreateComponent },
-  { path: 'bla', component: BlaComponent },
   { path: 'cookingStage', component: CookingStageListComponent },
   { path: 'createCookingStage', component: CookingStageCreateComponent },
   { path: 'editCookingStage/:id', component: CookingStageEditComponent },
@@ -110,7 +107,6 @@ const appRoutes: Routes = [
     BookListComponent,
     BookEditComponent,
     BookCreateComponent,
-    BlaComponent,
     CookingStageListComponent,
     CookingStageCreateComponent,
     CookingStageEditComponent,
@@ -158,7 +154,6 @@ const appRoutes: Routes = [
     SubscriberService,
     TagService,
     TelephoneService,
-    RecipeIngredientService,
     RecipeOrganicMatterService,
   ],
   bootstrap: [AppComponent],

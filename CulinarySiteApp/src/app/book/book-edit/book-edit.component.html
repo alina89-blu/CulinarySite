@@ -1,36 +1,42 @@
-<h3>Изменение книги</h3>
-<div>
-  <label>Название</label>
-  <input type="text" [(ngModel)]="updateBookModel.name" />
+<div class="A">
+  <h3>Изменение книги</h3>
+  <div>
+    <label>Название</label>
+    <input type="text" [(ngModel)]="updateBookModel.name" />
+  </div>
+
+  <div>
+    <label>Год создания</label>
+    <input
+      type="number"
+      min="1990"
+      [(ngModel)]="updateBookModel.creationYear"
+    />
+  </div>
+
+  <div>
+    <label>Описание</label>
+    <input type="text" [(ngModel)]="updateBookModel.description" />
+  </div>
+
+  <div>
+    <label>Автор</label>
+    <select [(ngModel)]="updateBookModel.authorId" class="form-control">
+      <option *ngFor="let author of authors" [ngValue]="author.authorId">
+        {{ author.name }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <button class="btn info" (click)="updateBook()">Обновить</button>
+  </div>
+
+  <p>
+    <a [routerLink]="['/book']">Назад к списку книг</a>
+  </p>
+
+  <p>
+    <a routerLink="/">На домашнюю страницу</a>
+  </p>
 </div>
-
-<div>
-  <label>Год создания</label>
-  <input type="number" min="1990" [(ngModel)]="updateBookModel.creationYear" />
-</div>
-
-<div>
-  <label>Описание</label>
-  <input type="text" [(ngModel)]="updateBookModel.description" />
-</div>
-
-<div>
-  <label>Автор</label>
-  <select [(ngModel)]="updateBookModel.authorId" class="form-control">
-    <option *ngFor="let author of authors" [ngValue]="author.authorId">
-      {{ author.name }}
-    </option>
-  </select>
-</div>
-
-<div>
-  <button class="btn info" (click)="updateBook()">Обновить</button>
-</div>
-
-<p>
-  <a [routerLink]="['/book']">Назад к списку книг</a>
-</p>
-
-<p>
-  <a routerLink="/">На домашнюю страницу</a>
-</p>
