@@ -4,20 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.ViewModels.Recipe;
 using AutoMapper;
 using ServiceLayer.Dtos.Recipe;
-using ServiceLayer.Dtos.Ingredient;
 
 namespace CulinarySite.Controllers
 {
     public class RecipeController : BaseController
     {
         private readonly IRecipeService _recipeService;
-        private readonly IIngredientService _ingredientService;
         private readonly IMapper _mapper;
 
-        public RecipeController(IRecipeService recipeService, IIngredientService ingredientService, IMapper mapper)
+        public RecipeController(IRecipeService recipeService, IMapper mapper)
         {
             _recipeService = recipeService;
-            _ingredientService = ingredientService;
             _mapper = mapper;
         }
 

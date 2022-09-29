@@ -2,7 +2,7 @@
 using Database;
 using System.Collections.Generic;
 using System.Linq;
-
+using Database.Entities;
 
 namespace Repositories
 {

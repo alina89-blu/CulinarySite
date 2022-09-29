@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Database;
+using Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Repositories

@@ -23,7 +23,7 @@ namespace CulinarySite.Controllers
             IEnumerable<AddressListDto> addressListDtos = _addressService.GetAddressList();
             var addressListModels = new List<AddressListModel>();
 
-            foreach (AddressListDto addressListDto in addressListDtos)
+            foreach (var addressListDto in addressListDtos)
             {
                 addressListModels.Add(_mapper.Map<AddressListModel>(addressListDto));
             }

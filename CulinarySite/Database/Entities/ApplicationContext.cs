@@ -1,19 +1,20 @@
-﻿
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Database
+
+namespace Database.Entities
 {
-    public class ApplicationContext : DbContext
+    public class ApplicationContext : IdentityDbContext<User>
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
            : base(options)
-        {         
-             //Database.EnsureCreated();
+        {
+            //Database.EnsureCreated();
         }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<CookingStage> CookingStages { get; set; }
         public DbSet<Dish> Dishes { get; set; }
-        public DbSet<Ingredient> Ingredients { get; set; }        
+        public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Subscriber> Subscribers { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Author> Authors { get; set; }
@@ -29,23 +30,12 @@ namespace Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);      
+            // modelBuilder.Entity<User>().HasNoKey();
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
 
 
 
     }
 }
-
-
-
-
-//modelBuilder.Entity<Address>().HasKey(u => new { u.Name, u.Restaurants });
-
-/*modelBuilder.Entity<Address>()
-  .HasMany(x => x.Restaurants)
-  .WithOne(x => x.Address)
-  .OnDelete(DeleteBehavior.Cascade);*/
-
-//base.OnModelCreating(modelBuilder);
