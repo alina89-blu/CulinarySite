@@ -1,10 +1,9 @@
-﻿
+﻿using Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Database.Configurations
 {
-
     public class CookingStageConfiguration : IEntityTypeConfiguration<CookingStage>
     {
         public void Configure(EntityTypeBuilder<CookingStage> builder)

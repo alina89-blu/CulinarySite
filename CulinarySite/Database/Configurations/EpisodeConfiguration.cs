@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Database.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
 namespace Database.Configurations
-{
-    
+{    
     public class EpisodeConfiguration : IEntityTypeConfiguration<Episode>
     {
         public void Configure(EntityTypeBuilder<Episode> builder)

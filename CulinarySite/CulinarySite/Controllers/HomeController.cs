@@ -1,13 +1,11 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
+﻿using CulinarySite.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CulinaryApi.Controllers
 {
-    
-    public class HomeController : ApiController
+    public class HomeController : BaseController
     {
-       // [Authorize]
+        // [Authorize]
         public ActionResult Get()
         {
             return Ok("works");

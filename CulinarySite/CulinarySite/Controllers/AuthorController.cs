@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ServiceLayer.ViewModels.Author;
 using AutoMapper;
 using ServiceLayer.Dtos.Author;
+using System;
 
 namespace CulinarySite.Controllers
 {
@@ -27,7 +28,7 @@ namespace CulinarySite.Controllers
             {
                 authorListModels.Add(_mapper.Map<AuthorListModel>(authorListDto));
             }
-
+          
             return authorListModels;
         }
 

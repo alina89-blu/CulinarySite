@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Repositories;
-using Database;
-using ServiceLayer.ViewModels.CookingStage;
 using ServiceLayer.Dtos.CookingStage;
 using AutoMapper;
+using Database.Entities;
 
 namespace ServiceLayer
 {
@@ -24,7 +23,7 @@ namespace ServiceLayer
 
         public void CreateCookingStage(CreateCookingStageDto createCookingStageDto)
         {
-            CookingStage cookingStage= _mapper.Map<CookingStage>(createCookingStageDto);
+            CookingStage cookingStage = _mapper.Map<CookingStage>(createCookingStageDto);
 
             _cookingStageWriteRepository.Create(cookingStage);
             _cookingStageWriteRepository.Save();
@@ -46,7 +45,7 @@ namespace ServiceLayer
 
         public IEnumerable<CookingStageListDto> GetCookingStageList(bool withRelated)
         {
-            IEnumerable<CookingStage> cookingStages;           
+            IEnumerable<CookingStage> cookingStages;
             var cookingStageListDtos = new List<CookingStageListDto>();
             if (withRelated)
             {
@@ -60,18 +59,20 @@ namespace ServiceLayer
                 }
                 return cookingStageListDtos;
             }
+
             cookingStages = _cookingStageReadOnlyRepository.GetItemList();
 
             foreach (var cookingStage in cookingStages)
             {
                 cookingStageListDtos.Add(_mapper.Map<CookingStageListDto>(cookingStage));
             }
+
             return cookingStageListDtos;
         }
 
         public CookingStageDetailDto GetCookingStage(int id, bool withRelated)
         {
-            var cookingStage = new CookingStage();           
+            var cookingStage = new CookingStage();
             var cookingStageDetailDto = new CookingStageDetailDto();
 
             if (withRelated)
@@ -85,6 +86,7 @@ namespace ServiceLayer
 
                 return cookingStageDetailDto;
             }
+
             cookingStage = _cookingStageReadOnlyRepository.GetItem(id);
 
             cookingStageDetailDto = _mapper.Map<CookingStageDetailDto>(cookingStage);

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using Database;
+using Database.Entities;
 using Repositories;
 using ServiceLayer.Dtos.Episode;
 
@@ -84,14 +84,17 @@ namespace ServiceLayer
                 {
                     episodeListDtos.Add(_mapper.Map<EpisodeListDto>(episode));
                 }
+
                 return episodeListDtos;
             }
+
             episodes = _episodeReadOnlyRepository.GetItemList();
 
             foreach (var episode in episodes)
             {
                 episodeListDtos.Add(_mapper.Map<EpisodeListDto>(episode));
             }
+
             return episodeListDtos;
         }
     }

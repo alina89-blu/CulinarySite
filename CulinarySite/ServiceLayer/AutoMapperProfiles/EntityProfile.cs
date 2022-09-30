@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Database;
+using Database.Entities;
 using ServiceLayer.Dtos.Address;
 using ServiceLayer.Dtos.Author;
 using ServiceLayer.Dtos.Book;

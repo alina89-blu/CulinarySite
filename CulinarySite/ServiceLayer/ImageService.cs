@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Repositories;
-using Database;
 using AutoMapper;
 using ServiceLayer.Dtos.Image.DishImage;
 using ServiceLayer.Dtos.Image.EpisodeImage;
 using ServiceLayer.Dtos.Image.RecipeImage;
+using Database.Entities;
 
 namespace ServiceLayer
 {
@@ -160,9 +160,6 @@ namespace ServiceLayer
 
             return episodeImageDetailDto;
         }
-
-
-        ///
 
         public void CreateRecipeImage(CreateRecipeImageDto createRecipeImageDto)
         {

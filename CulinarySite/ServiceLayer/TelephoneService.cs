@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Database;
+using Database.Entities;
 using Repositories;
 using ServiceLayer.Dtos.Telephone;
 using System.Collections.Generic;

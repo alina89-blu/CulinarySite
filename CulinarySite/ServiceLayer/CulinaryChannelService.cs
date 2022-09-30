@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using Database;
+using Database.Entities;
 using Repositories;
 using ServiceLayer.Dtos.CulinaryChannel;
 
@@ -53,6 +53,7 @@ namespace ServiceLayer
                 {
                     culinaryChannelListDtos.Add(_mapper.Map<CulinaryChannelListDto>(culinaryChannel));
                 }
+
                 return culinaryChannelListDtos;
             }
             culinaryChannels = _culinaryChannelReadOnlyRepository.GetItemList();
@@ -61,6 +62,7 @@ namespace ServiceLayer
             {
                 culinaryChannelListDtos.Add(_mapper.Map<CulinaryChannelListDto>(culinaryChannel));
             }
+
             return culinaryChannelListDtos;
         }
 
@@ -79,6 +81,7 @@ namespace ServiceLayer
 
                 return culinaryChannelDetailDto;
             }
+
             culinaryChannel = _culinaryChannelReadOnlyRepository.GetItem(id);
 
             culinaryChannelDetailDto = _mapper.Map<CulinaryChannelDetailDto>(culinaryChannel);

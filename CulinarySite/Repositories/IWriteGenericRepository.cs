@@ -1,4 +1,5 @@
-﻿using Database;
+﻿
+using Database.Entities;
 using System.Collections.Generic;
 
 namespace Repositories

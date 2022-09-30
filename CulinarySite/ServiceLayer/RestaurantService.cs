@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using Database;
+using Database.Entities;
 using Repositories;
 using ServiceLayer.Dtos.Restaurant;
 

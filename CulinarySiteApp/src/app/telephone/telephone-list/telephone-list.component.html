@@ -1,0 +1,39 @@
+<h1>Таблица телефонов</h1>
+<div>
+  <button class="btn info">
+    <a [routerLink]="['/createTelephone']">Добавить</a>
+  </button>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">Авторы</th>
+    </tr>
+    <tr>
+      <td>Нр.</td>
+      <td>Номер</td>
+      <td>Название ресторана</td>
+      <td>Действия</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let telephone of telephones; let idx = index">
+      <td>{{ idx + 1 }}</td>
+      <td>{{ telephone.number }}</td>
+      <td>{{ telephone.restaurantName }}</td>
+      <td>
+        <a
+          class="btn info"
+          [routerLink]="['/editTelephone', telephone.telephoneId]"
+          >Редактировать</a
+        >
+        <button
+          class="btn info"
+          (click)="deleteTelephone(telephone.telephoneId)"
+        >
+          Удалить
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Database.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Database.Configurations
 {
-
     public class RecipeConfiguration : IEntityTypeConfiguration<Recipe>
     {
         public void Configure(EntityTypeBuilder<Recipe> builder)
@@ -16,12 +16,7 @@ namespace Database.Configurations
             builder.HasOne(x => x.Book)
                 .WithMany(x => x.Recipes)
                 .HasForeignKey(x => x.BookId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            /* builder.HasOne(x => x.Book)
-                 .WithMany(x => x.Recipes)
-                 .HasForeignKey(x => x.BookId)
-                 .OnDelete(DeleteBehavior.SetNull);*/
+                .OnDelete(DeleteBehavior.NoAction);          
 
             builder.HasOne(x => x.Dish)
                 .WithMany(x => x.Recipes)

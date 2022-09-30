@@ -1,0 +1,35 @@
+<div class="A">
+  <h3>Изменение телефона</h3>
+
+  <div>
+    <label>Номер телефона</label>
+    <input type="text" [(ngModel)]="updateTelephoneModel.number" />
+  </div>
+
+  <div>
+    <label>Название ресторана</label>
+    <select
+      [(ngModel)]="updateTelephoneModel.restaurantId"
+      class="form-control"
+    >
+      <option
+        *ngFor="let restaurant of restaurants"
+        [ngValue]="restaurant.restaurantId"
+      >
+        {{ restaurant.name }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <button class="btn info" (click)="updateTelephone()">Обновить</button>
+  </div>
+
+  <p>
+    <a [routerLink]="['/telephone']">Назад к списку телефонов</a>
+  </p>
+
+  <p>
+    <a routerLink="/">На домашнюю страницу</a>
+  </p>
+</div>

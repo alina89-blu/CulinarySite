@@ -1,8 +1,8 @@
-﻿using Database;
-using Repositories;
+﻿using Repositories;
 using System.Collections.Generic;
 using ServiceLayer.Dtos.Ingredient;
 using AutoMapper;
+using Database.Entities;
 
 namespace ServiceLayer
 {
@@ -53,6 +53,7 @@ namespace ServiceLayer
             {
                 ingredientListDtos.Add(_mapper.Map<IngredientListDto>(ingredient));
             }
+
             return ingredientListDtos;
         }
 
@@ -63,36 +64,6 @@ namespace ServiceLayer
 
             return ingredientDetailDto;
         }
-
-        /* public void UpdateIngredient(UpdateIngredientModel updateIngredientModel)//
-         {
-             var ingredientsId = ingredientReadOnlyRepository.GetItemList().Select(x => x.Id);
-             var ingredient = new Ingredient();
-
-             if (ingredientsId.Contains(updateIngredientModel.IngredientId))
-             {
-
-                 ingredient = new Ingredient
-                 {
-                     Id = updateIngredientModel.IngredientId,
-                     Name = updateIngredientModel.Name,
-                     Unit = updateIngredientModel.Unit,
-                     Quantity = updateIngredientModel.Quantity,
-                 };
-                 ingredientWriteRepository.Update(ingredient);
-                 ingredientWriteRepository.Save();
-             }
-             else
-             {
-                 ingredient = new Ingredient
-                 {
-                     Name = updateIngredientModel.Name,
-                     Unit = updateIngredientModel.Unit,
-                     Quantity = updateIngredientModel.Quantity,
-                 };
-                 ingredientWriteRepository.Create(ingredient);
-                 ingredientWriteRepository.Save();
-             }
-         }*/
+      
     }
 }

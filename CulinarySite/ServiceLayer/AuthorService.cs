@@ -1,25 +1,22 @@
 ﻿using System.Collections.Generic;
 using Repositories;
-using Database;
 using AutoMapper;
 using ServiceLayer.Dtos.Author;
+using Database.Entities;
 
 namespace ServiceLayer
 {
     public class AuthorService : IAuthorService
     {
         private readonly IReadOnlyGenericRepository<Author> _authorReadOnlyRepository;
-        private readonly IWriteGenericRepository<Book> _bookWriteRepository;
         private readonly IWriteGenericRepository<Author> _authorWriteRepository;
         private readonly IMapper _mapper;
         public AuthorService(
             IReadOnlyGenericRepository<Author> authorReadOnlyRepository,
-            IWriteGenericRepository<Book> bookWriteRepository,
             IWriteGenericRepository<Author> authorWriteRepository,
             IMapper mapper)
         {
             _authorReadOnlyRepository = authorReadOnlyRepository;
-            _bookWriteRepository = bookWriteRepository;
             _authorWriteRepository = authorWriteRepository;
             _mapper = mapper;
         }
@@ -62,6 +59,7 @@ namespace ServiceLayer
 
                 return authorDetailDto;
             }
+
             author = _authorReadOnlyRepository.GetItem(id);
 
             authorDetailDto = _mapper.Map<AuthorDetailDto>(author);
@@ -80,44 +78,6 @@ namespace ServiceLayer
             }
             return authorListDtos;
         }
-
-
-        /*public AuthorDetailModel GetAuthor(int id, bool withRelated)
-        {
-            var author = new Author();
-            AuthorDetailModel authorDetailModel = new AuthorDetailModel();
-            if (withRelated)
-            {
-                author = _authorReadOnlyRepository.GetItemWithInclude(
-                       x => x.Id == id,
-                       x => x.Books,
-                       x => x.Recipes);
-
-                List<BookModel> bookModels = new List<BookModel>();
-                foreach (var book in author.Books)
-                {
-                    bookModels.Add(new BookModel
-                    {
-                        BookId = book.Id,
-                        Name = book.Name
-                    });
-                }
-                authorDetailModel = new AuthorDetailModel
-                {
-                    AuthorId = author.Id,
-                    Name = author.Name,
-                    Books = bookModels
-                };
-                return authorDetailModel;
-            }
-            author = _authorReadOnlyRepository.GetItem(id);
-            authorDetailModel = new AuthorDetailModel
-            {
-                AuthorId = author.Id,
-                Name = author.Name
-            };
-            return authorDetailModel;
-        }*/
 
     }
 }

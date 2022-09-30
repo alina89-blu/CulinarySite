@@ -1,32 +1,23 @@
-﻿using Database;
-using Repositories;
+﻿using Repositories;
 using System.Collections.Generic;
 using AutoMapper;
 using ServiceLayer.Dtos.Recipe;
+using Database.Entities;
 
 namespace ServiceLayer
 {
     public class RecipeService : IRecipeService
     {
         private readonly IReadOnlyGenericRepository<Recipe> _recipeReadOnlyRepository;
-        private readonly IWriteGenericRepository<Recipe> _recipeWriteRepository;
-        private readonly IWriteGenericRepository<Ingredient> _ingredientWriteRepository;
-        // private readonly IReadOnlyGenericRepository<Ingredient> ingredientReadOnlyRepository;
-        private readonly IReadOnlyGenericRepository<Ingredient> _ingredientReadOnlyRepository;
+        private readonly IWriteGenericRepository<Recipe> _recipeWriteRepository;        
         private readonly IMapper _mapper;
         public RecipeService(
             IReadOnlyGenericRepository<Recipe> recipeReadOnlyRepository,
-            IWriteGenericRepository<Recipe> recipeWriteRepository,
-            IWriteGenericRepository<Ingredient> ingredientWriteRepository,
-            //IReadOnlyGenericRepository<Ingredient> ingredientReadOnlyRepository,
-            IReadOnlyGenericRepository<Ingredient> ingredientReadOnlyRepository,
+            IWriteGenericRepository<Recipe> recipeWriteRepository,        
             IMapper mapper)
         {
             _recipeReadOnlyRepository = recipeReadOnlyRepository;
-            _recipeWriteRepository = recipeWriteRepository;
-            _ingredientWriteRepository = ingredientWriteRepository;
-            // ingredientReadOnlyRepository = ingredientReadOnlyRepository;
-            _ingredientReadOnlyRepository = ingredientReadOnlyRepository;
+            _recipeWriteRepository = recipeWriteRepository;                      
             _mapper = mapper;
         }
 

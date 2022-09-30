@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Repositories;
-using Database;
 using AutoMapper;
 using ServiceLayer.Dtos.Subscriber;
+using Database.Entities;
 
 namespace ServiceLayer
 {
@@ -85,6 +85,7 @@ namespace ServiceLayer
 
                 return subscriberDetailDto;
             }
+
             subscriber = _subscriberReadOnlyRepository.GetItem(id);
 
             subscriberDetailDto = _mapper.Map<SubscriberDetailDto>(subscriber);

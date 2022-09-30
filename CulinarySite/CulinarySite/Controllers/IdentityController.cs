@@ -1,6 +1,6 @@
 ﻿
-
-using Database;
+using CulinarySite.Controllers;
+using Database.Entities;
 using Database.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +14,7 @@ using System.Threading.Tasks;
 
 namespace CulinaryApi.Controllers
 {
-
-    public  class IdentityController : ApiController
+    public class IdentityController : BaseController
     {
         private readonly UserManager<User> userManager;
         private readonly AppSettings appSettings;
@@ -32,7 +31,7 @@ namespace CulinaryApi.Controllers
             return Ok("Identity works !!!");
         }
 
-        [Route(nameof (Register))]
+        [Route(nameof(Register))]
         public async Task<ActionResult> Register(RegisterRequestModel model)
         {
             var user = new User
@@ -55,10 +54,12 @@ namespace CulinaryApi.Controllers
         public async Task<ActionResult<string>> Login(LoginRequestModel model)
         {
             var user = await this.userManager.FindByNameAsync(model.UserName);
+
             if (user == null)
             {
                 return Unauthorized();
             }
+
             var passwordValid = await this.userManager.CheckPasswordAsync(user, model.Password);
 
             if (!passwordValid)
@@ -67,7 +68,9 @@ namespace CulinaryApi.Controllers
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
+
             var key = Encoding.ASCII.GetBytes(this.appSettings.Secret);
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
@@ -75,9 +78,12 @@ namespace CulinaryApi.Controllers
                     new Claim(ClaimTypes.Name, user.Id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
+
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
+
             var encryptedToken = tokenHandler.WriteToken(token);
 
             return encryptedToken;

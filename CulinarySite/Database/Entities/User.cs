@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
-namespace Database
+namespace Database.Entities
 {
-   // [Keyless]
     public class User : IdentityUser
     {
     }

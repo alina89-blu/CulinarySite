@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Database;
+using Database.Entities;
 using Repositories;
 using ServiceLayer.Dtos.Book;
 using ServiceLayer.ViewModels.Book;
@@ -89,6 +89,7 @@ namespace ServiceLayer
             {
                 bookDetailListDtos.Add(_mapper.Map<BookDetailListDto>(book));
             }
+
             return bookDetailListDtos;
         }
 
@@ -101,6 +102,7 @@ namespace ServiceLayer
             {
                 bookDtos.Add(_mapper.Map<BookDto>(book));
             }
+
             return bookDtos;
         }
 
@@ -117,12 +119,6 @@ namespace ServiceLayer
             books.Sort(new BookYearComparer());
             return books;
         }
-
-        /*public IEnumerable<BookDetailListModel> GetSortedBooksByYear(bool withRelated)
-        {
-            List<BookDetailListModel> books = GetBookDetailList(withRelated).ToList();
-            books.Sort(new BookYearComparer());
-            return books;
-        }*/
+        
     }
 }

@@ -1,8 +1,8 @@
-﻿using Database;
-using Repositories;
+﻿using Repositories;
 using System.Collections.Generic;
 using ServiceLayer.Dtos.OrganicMatter;
 using AutoMapper;
+using Database.Entities;
 
 namespace ServiceLayer
 {
@@ -52,6 +52,7 @@ namespace ServiceLayer
             {
                 organicMatterListDtos.Add(_mapper.Map<OrganicMatterListDto>(organicMatter));
             }
+
             return organicMatterListDtos;
         }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Database
+namespace Database.Entities
 {
     public class Dish : BaseEntity
     {

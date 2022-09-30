@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Database.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Database.Configurations
-{
-    
+{    
     public class RestaurantConfiguration : IEntityTypeConfiguration<Restaurant>
     {
         public void Configure(EntityTypeBuilder<Restaurant> builder)
@@ -11,8 +11,7 @@ namespace Database.Configurations
             builder.HasOne(x => x.Address)
                 .WithMany(x => x.Restaurants)
                 .HasForeignKey(x => x.AddressId)
-                .OnDelete(DeleteBehavior.Cascade);
-           
+                .OnDelete(DeleteBehavior.Cascade);           
         }
     }
 }

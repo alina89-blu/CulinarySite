@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Repositories;
-using Database;
 using AutoMapper;
 using ServiceLayer.Dtos.Dish;
+using Database.Entities;
 
 namespace ServiceLayer
 {
@@ -81,14 +81,17 @@ namespace ServiceLayer
                 {
                     dishListDtos.Add(_mapper.Map<DishListDto>(dish));
                 }
+
                 return dishListDtos;
             }
+
             dishes = _dishReadOnlyRepository.GetItemList();
 
             foreach (var dish in dishes)
             {
                 dishListDtos.Add(_mapper.Map<DishListDto>(dish));
             }
+
             return dishListDtos;
         }
     }

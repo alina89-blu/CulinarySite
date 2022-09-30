@@ -1,8 +1,8 @@
-﻿using Database;
-using Repositories;
+﻿using Repositories;
 using System.Collections.Generic;
 using AutoMapper;
 using ServiceLayer.Dtos.Tag;
+using Database.Entities;
 
 namespace ServiceLayer
 {
@@ -57,6 +57,7 @@ namespace ServiceLayer
                 {
                     tagListDtos.Add(_mapper.Map<TagListDto>(tag));
                 }
+
                 return tagListDtos;
             }
 
@@ -66,6 +67,7 @@ namespace ServiceLayer
             {
                 tagListDtos.Add(_mapper.Map<TagListDto>(tag));
             }
+
             return tagListDtos;
         }
 

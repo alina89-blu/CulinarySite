@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Database;
 using System.Collections.Generic;
 using System.Linq;
 using Database.Entities;
@@ -8,47 +7,47 @@ namespace Repositories
 {
     public class EFWriteGenericRepository<TEntity> : IWriteGenericRepository<TEntity> where TEntity : BaseEntity
     {
-        private readonly ApplicationContext db;
-        private readonly DbSet<TEntity> dbSet;
+        private readonly ApplicationContext _db;
+        private readonly DbSet<TEntity> _dbSet;
         public EFWriteGenericRepository(ApplicationContext db)
         {
-            this.db = db;
-            this.dbSet = db.Set<TEntity>();
+            _db = db;
+            _dbSet = db.Set<TEntity>();
         }
 
         public void Create(TEntity item)
         {
-            this.dbSet.Add(item);
+            _dbSet.Add(item);
         }
 
         public void Update(TEntity item)
         {
-            this.db.Entry(item).State = EntityState.Modified;
+            _db.Entry(item).State = EntityState.Modified;
         }
 
         public void Delete(int id)
         {
-            TEntity item = dbSet.Find(id);
+            TEntity item = _dbSet.Find(id);
+
             if (item != null)
             {
-                this.dbSet.Remove(item);
+                _dbSet.Remove(item);
             }
         }
 
         public void Save()
         {
-            this.db.SaveChanges();
+            _db.SaveChanges();
         }
 
         public TEntity GetItem(int id)
         {
-            // return this.dbSet.Find(id);
-            return this.dbSet.FirstOrDefault(x => x.Id == id);
+            return _dbSet.FirstOrDefault(x => x.Id == id);
         }
 
         public IEnumerable<TEntity> GetItemList()
         {
-            return this.dbSet.ToList();
+            return _dbSet.ToList();
         }
 
     }

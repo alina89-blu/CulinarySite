@@ -1,8 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-
-//namespace CulinaryApi.Models.Identity
 namespace Database.Models.Identity
 {
     public class RegisterRequestModel

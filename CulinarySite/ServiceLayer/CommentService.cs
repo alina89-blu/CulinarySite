@@ -1,8 +1,8 @@
-﻿using Database;
-using Repositories;
+﻿using Repositories;
 using System.Collections.Generic;
 using AutoMapper;
 using ServiceLayer.Dtos.Comment;
+using Database.Entities;
 
 namespace ServiceLayer
 {
