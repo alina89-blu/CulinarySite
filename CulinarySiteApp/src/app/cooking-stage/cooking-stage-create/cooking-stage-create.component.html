@@ -1,27 +1,29 @@
-<h3>Adding a new cooking stage</h3>
-<div>
-  <label>Content</label>
-  <input type="text" [(ngModel)]="createCookingStageModel.content" />
+<div class="Pad">
+  <h3>Adding a new cooking stage</h3>
+  <div>
+    <label>Content</label>
+    <input type="text" [(ngModel)]="createCookingStageModel.content" />
+  </div>
+
+  <div>
+    <label>Recipe</label>
+
+    <select [(ngModel)]="createCookingStageModel.recipeId" class="form-control">
+      <option *ngFor="let recipe of recipes" [ngValue]="recipe.recipeId">
+        {{ recipe.name }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <button class="btn info" (click)="createCookingStage()">Create</button>
+  </div>
+
+  <p>
+    <a [routerLink]="['/cookingStage']">Back to cooking stage's list</a>
+  </p>
+
+  <p>
+    <a routerLink="/">Home</a>
+  </p>
 </div>
-
-<div>
-  <label>Recipe</label>
-
-  <select [(ngModel)]="createCookingStageModel.recipeId" class="form-control">
-    <option *ngFor="let recipe of recipes" [ngValue]="recipe.recipeId">
-      {{ recipe.name }}
-    </option>
-  </select>
-</div>
-
-<div>
-  <button class="btn info" (click)="createCookingStage()">Create</button>
-</div>
-
-<p>
-  <a [routerLink]="['/cookingStage']">Back to cooking stage's list</a>
-</p>
-
-<p>
-  <a routerLink="/">Home</a>
-</p>

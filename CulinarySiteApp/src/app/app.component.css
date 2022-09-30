@@ -1,0 +1,8 @@
+.block {
+  background: url("../assets/images/image4.jpg") round;
+  border-radius: 15px;
+  box-shadow: 0 0 20px cadetblue;
+  min-height: 1000px;
+
+  height: 100%;
+}

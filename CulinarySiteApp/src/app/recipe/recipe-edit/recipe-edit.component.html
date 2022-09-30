@@ -1,83 +1,85 @@
-<h3>Изменение рецепта</h3>
-<div>
-  <label>Название</label>
-  <input type="text" [(ngModel)]="updateRecipeModel.name" />
-</div>
-<div>
-  <label>Количество порций</label>
-  <input type="number" [(ngModel)]="updateRecipeModel.servingsNumber" />
-</div>
-<div>
-  <label>Время приготовления</label>
-  <input type="time " [(ngModel)]="updateRecipeModel.cookingTime" />
-</div>
-<div>
-  <label>Уровень сложности</label>
-  <select [(ngModel)]="updateRecipeModel.difficultyLevel">
-    <option *ngFor="let difficultyLevel of difficultyLevels">
-      {{ difficultyLevel }}
-    </option>
-  </select>
-</div>
-<div>
-  <label>Содержание</label>
-  <input type="text" [(ngModel)]="updateRecipeModel.content" />
-</div>
-<div>
-  <label>Категория блюда</label>
-  <select [(ngModel)]="updateRecipeModel.dishId" class="form-control">
-    <option *ngFor="let dish of dishes" [ngValue]="dish.dishId">
-      {{ dish.category }}
-    </option>
-  </select>
-</div>
-
-<form [formGroup]="myForm">
-  <div
-    formArrayName="ingredients"
-    *ngFor="let ingredient of getFormsControls()['controls']; let i = index"
-  >
-    <div [formGroupName]="i">
-      <label>Ingredient</label>
-
-      <input
-        type="text"
-        [(ngModel)]="updateRecipeModel.ingredients[i].name"
-        formControlName="name"
-      />
-
-      <label>Unit</label>
-      <select
-        [(ngModel)]="updateRecipeModel.ingredients[i].unit"
-        class="form-control"
-        formControlName="unit"
-      >
-        <option></option>
-        <option *ngFor="let unit of units">
-          {{ unit }}
-        </option>
-      </select>
-
-      <label>Quantity</label>
-      <input
-        type="number"
-        min="0"
-        [(ngModel)]="updateRecipeModel.ingredients[i].quantity"
-        formControlName="quantity"
-      />
-
-      <!--  <button (click)="deleteRecipeIngredient(i)">delete</button>-->
-    </div>
+<div class="Pad">
+  <h3>Изменение рецепта</h3>
+  <div>
+    <label>Название</label>
+    <input type="text" [(ngModel)]="updateRecipeModel.name" />
   </div>
-  <button class="btn info" (click)="addIngredient()">+</button>
-</form>
+  <div>
+    <label>Количество порций</label>
+    <input type="number" [(ngModel)]="updateRecipeModel.servingsNumber" />
+  </div>
+  <div>
+    <label>Время приготовления</label>
+    <input type="time " [(ngModel)]="updateRecipeModel.cookingTime" />
+  </div>
+  <div>
+    <label>Уровень сложности</label>
+    <select [(ngModel)]="updateRecipeModel.difficultyLevel">
+      <option *ngFor="let difficultyLevel of difficultyLevels">
+        {{ difficultyLevel }}
+      </option>
+    </select>
+  </div>
+  <div>
+    <label>Содержание</label>
+    <input type="text" [(ngModel)]="updateRecipeModel.content" />
+  </div>
+  <div>
+    <label>Категория блюда</label>
+    <select [(ngModel)]="updateRecipeModel.dishId" class="form-control">
+      <option *ngFor="let dish of dishes" [ngValue]="dish.dishId">
+        {{ dish.category }}
+      </option>
+    </select>
+  </div>
 
-<div>
-  <button class="btn info" (click)="updateRecipe()">обновить</button>
+  <form [formGroup]="myForm">
+    <div
+      formArrayName="ingredients"
+      *ngFor="let ingredient of getFormsControls()['controls']; let i = index"
+    >
+      <div [formGroupName]="i">
+        <label>Ingredient</label>
+
+        <input
+          type="text"
+          [(ngModel)]="updateRecipeModel.ingredients[i].name"
+          formControlName="name"
+        />
+
+        <label>Unit</label>
+        <select
+          [(ngModel)]="updateRecipeModel.ingredients[i].unit"
+          class="form-control"
+          formControlName="unit"
+        >
+          <option></option>
+          <option *ngFor="let unit of units">
+            {{ unit }}
+          </option>
+        </select>
+
+        <label>Quantity</label>
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="updateRecipeModel.ingredients[i].quantity"
+          formControlName="quantity"
+        />
+
+        <!--  <button (click)="deleteRecipeIngredient(i)">delete</button>-->
+      </div>
+    </div>
+    <button class="btn info" (click)="addIngredient()">+</button>
+  </form>
+
+  <div>
+    <button class="btn info" (click)="updateRecipe()">обновить</button>
+  </div>
+  <p>
+    <a [routerLink]="['/recipe']">Назад к списку рецептов</a>
+  </p>
+  <p>
+    <a routerLink="/">На домашнюю страницу</a>
+  </p>
 </div>
-<p>
-  <a [routerLink]="['/recipe']">Назад к списку рецептов</a>
-</p>
-<p>
-  <a routerLink="/">На домашнюю страницу</a>
-</p>

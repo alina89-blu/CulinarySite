@@ -1,16 +1,18 @@
-<h3>Добавление нового адреса</h3>
-<div>
-  <label>Название</label>
-  <input type="text" [(ngModel)]="createAddressModel.name" />
-</div>
-<div>
-  <button class="btn info" (click)="createAddress()">Создать</button>
-</div>
+<div class="Pad">
+  <h3>Добавление нового адреса</h3>
+  <div>
+    <label>Название</label>
+    <input type="text" [(ngModel)]="createAddressModel.name" />
+  </div>
+  <div>
+    <button class="btn info" (click)="createAddress()">Создать</button>
+  </div>
 
-<p>
-  <a [routerLink]="['/address']">Назад к списку адресов</a>
-</p>
+  <p>
+    <a [routerLink]="['/address']">Назад к списку адресов</a>
+  </p>
 
-<p>
-  <a routerLink="/">На домашнюю страницу</a>
-</p>
+  <p>
+    <a routerLink="/">На домашнюю страницу</a>
+  </p>
+</div>

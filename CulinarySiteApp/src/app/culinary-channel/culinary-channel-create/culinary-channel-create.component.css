@@ -17,4 +17,9 @@ input,
 select {
   padding: 10px 20px;
   font-size: medium;
+  margin: 5px;
+  border-radius: 5px;
+}
+.Pad {
+  padding: 30px;
 }
