@@ -9,6 +9,7 @@ namespace ServiceLayer
         void UpdateDish(UpdateDishDto updateDishDto);
         void DeleteDish(int id);
         DishDetailDto GetDish(int id, bool withRelated);
-        IEnumerable<DishListDto> GetDishList(bool withRelated);
+        IEnumerable<DishListDto> GetDishDetailList(bool withRelated);
+        IEnumerable<DishDto> GetDishList();
     }
 }

@@ -60,6 +60,9 @@ import { DishDetailComponent } from './dish/dish-detail/dish-detail.component';
 import { TelephoneCreateComponent } from './telephone/telephone-create/telephone-create.component';
 import { TelephoneEditComponent } from './telephone/telephone-edit/telephone-edit.component';
 import { TelephoneListComponent } from './telephone/telephone-list/telephone-list.component';
+import { RestaurantCreateComponent } from './restaurant/restaurant-create/restaurant-create.component';
+import { RestaurantEditComponent } from './restaurant/restaurant-update/restaurant-edit.component';
+import { RestaurantListComponent } from './restaurant/restaurant-list/restaurant-list.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -96,6 +99,9 @@ const appRoutes: Routes = [
   { path: 'telephone', component: TelephoneListComponent },
   { path: 'editTelephone/:id', component: TelephoneEditComponent },
   { path: 'createTelephone', component: TelephoneCreateComponent },
+  { path: 'restaurant', component: RestaurantListComponent },
+  { path: 'editRestaurant/:id', component: RestaurantEditComponent },
+  { path: 'createRestaurant', component: RestaurantCreateComponent },
   //
 ];
 
@@ -138,6 +144,9 @@ const appRoutes: Routes = [
     TelephoneCreateComponent,
     TelephoneEditComponent,
     TelephoneListComponent,
+    RestaurantCreateComponent,
+    RestaurantEditComponent,
+    RestaurantListComponent,
   ],
   imports: [
     BrowserModule,

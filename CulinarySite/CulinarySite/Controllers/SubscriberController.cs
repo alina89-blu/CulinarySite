@@ -5,9 +5,9 @@ using ServiceLayer.ViewModels.Subscriber;
 using AutoMapper;
 using ServiceLayer.Dtos.Subscriber;
 
-namespace CulinarySite.Controllers
+namespace CulinaryApi.Controllers
 {
-    public class SubscriberController : BaseController
+    public class SubscriberController : ApiController
     {
         private readonly ISubscriberService _subscriberService;
         private readonly IMapper _mapper;

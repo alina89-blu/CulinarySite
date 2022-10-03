@@ -14,12 +14,12 @@ export class DishListComponent implements OnInit {
   constructor(private dishService: DishService) {}
 
   public ngOnInit(): void {
-    this.getDishList();
+    this.getDishDetailList();
   }
 
-  public getDishList(): void {
+  public getDishDetailList(): void {
     this.dishService
-      .getDishList(true)
+      .getDishDetailList(true)
       .subscribe(
         (data: IDishListModel[]) =>
           (this.dishes = data.map((x) => new DishListModel(x)))
@@ -27,6 +27,6 @@ export class DishListComponent implements OnInit {
   }
 
   public deleteDish(id: number): void {
-    this.dishService.deleteDish(id).subscribe(() => this.getDishList());
+    this.dishService.deleteDish(id).subscribe(() => this.getDishDetailList());
   }
 }

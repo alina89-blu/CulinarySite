@@ -36,7 +36,7 @@ using ServiceLayer.ViewModels.Subscriber;
 using ServiceLayer.ViewModels.Tag;
 using ServiceLayer.ViewModels.Telephone;
 
-namespace CulinarySite.AutoMapperProfiles
+namespace CulinaryApi.AutoMapperProfiles
 {
     public class DtoProfile : Profile
     {
@@ -73,6 +73,8 @@ namespace CulinarySite.AutoMapperProfiles
             CreateMap<UpdateDishModel, UpdateDishDto>().ReverseMap();
             CreateMap<DishDetailModel, DishDetailDto>().ReverseMap();
             CreateMap<DishListModel, DishListDto>().ReverseMap();
+            CreateMap<DishModel, DishDto>().ReverseMap();
+
 
             CreateMap<CreateEpisodeModel, CreateEpisodeDto>().ReverseMap();
             CreateMap<UpdateEpisodeModel, UpdateEpisodeDto>().ReverseMap();
@@ -107,6 +109,7 @@ namespace CulinarySite.AutoMapperProfiles
             CreateMap<UpdateRestaurantModel, UpdateRestaurantDto>().ReverseMap();
             CreateMap<RestaurantDetailModel, RestaurantDetailDto>().ReverseMap();
             CreateMap<RestaurantListModel, RestaurantListDto>().ReverseMap();
+            CreateMap<RestaurantModel, RestaurantDto>().ReverseMap();
 
             CreateMap<CreateTelephoneModel, CreateTelephoneDto>().ReverseMap();
             CreateMap<UpdateTelephoneModel, UpdateTelephoneDto>().ReverseMap();

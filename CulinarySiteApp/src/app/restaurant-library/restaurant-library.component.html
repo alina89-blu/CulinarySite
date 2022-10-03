@@ -24,3 +24,13 @@
   <img src="https://jaymi-oliver.ru/images/spb.jpg" alt="not found" />
   <img src="https://jaymi-oliver.ru/images/msk.jpg" alt="not found" />
 </div>
+
+<div class="A" *ngFor="let restaurant of restaurants">
+  <h2>{{ restaurant.name }}</h2>
+  <b><P>АДРЕС</P></b>
+  <p>{{ restaurant.addressName }}</p>
+  <b><p>ТЕЛЕФОНЫ</p></b>
+  <div *ngFor="let telephone of restaurant.telephones">
+    <p>{{ telephone.number }}</p>
+  </div>
+</div>

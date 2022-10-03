@@ -9,9 +9,9 @@ using ServiceLayer.ViewModels.Image.DishImage;
 using ServiceLayer.ViewModels.Image.EpisodeImage;
 using ServiceLayer.ViewModels.Image.RecipeImage;
 
-namespace CulinarySite.Controllers
+namespace CulinaryApi.Controllers
 {
-    public class ImageController : BaseController
+    public class ImageController : ApiController
     {
         private readonly IImageService _imageService;
         private readonly IMapper _mapper;

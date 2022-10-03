@@ -5,9 +5,9 @@ using ServiceLayer.ViewModels.Ingredient;
 using AutoMapper;
 using ServiceLayer.Dtos.Ingredient;
 
-namespace CulinarySite.Controllers
+namespace CulinaryApi.Controllers
 {
-    public class IngredientController : BaseController
+    public class IngredientController : ApiController
     {
         private readonly IIngredientService _ingredientService;
         private readonly IMapper _mapper;

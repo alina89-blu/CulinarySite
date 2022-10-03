@@ -4,6 +4,7 @@ using AutoMapper;
 using ServiceLayer.Dtos.Author;
 using Database.Entities;
 
+
 namespace ServiceLayer
 {
     public class AuthorService : IAuthorService
@@ -30,7 +31,7 @@ namespace ServiceLayer
         }
 
         public void UpdateAuthor(UpdateAuthorDto updateAuthorDto)
-        {
+        {           
             Author author = _mapper.Map<Author>(updateAuthorDto);
 
             _authorWriteRepository.Update(author);

@@ -1,0 +1,38 @@
+<div>
+  <button class="btn info">
+    <a [routerLink]="['/createRestaurant']">Добавить</a>
+  </button>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th colspan="2"></th>
+    </tr>
+    <tr>
+      <td>Нр.</td>
+      <td>Название</td>
+      <td>Адрес</td>
+      <td>Действия</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let restaurant of restaurants; let idx = index">
+      <td>{{ idx + 1 }}</td>
+      <td>{{ restaurant.name }}</td>
+      <td>{{ restaurant.addressName }}</td>
+      <td>
+        <a
+          class="btn info"
+          [routerLink]="['/editRestaurant', restaurant.restaurantId]"
+          >Редактировать</a
+        >
+        <button
+          class="btn info"
+          (click)="deleteRestaurant(restaurant.restaurantId)"
+        >
+          Удалить
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

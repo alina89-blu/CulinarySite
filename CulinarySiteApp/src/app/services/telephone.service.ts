@@ -12,12 +12,19 @@ export class TelephoneService {
 
   constructor(private http: HttpClient) {}
 
-  public getTelephoneList(): Observable<ITelephoneListModel[]> {
-    return this.http.get<ITelephoneListModel[]>(this.url);
+  public getTelephoneList(
+    withRelated: boolean
+  ): Observable<ITelephoneListModel[]> {
+    return this.http.get<ITelephoneListModel[]>(this.url + '/' + withRelated);
   }
 
-  public getTelephone(id: number): Observable<ITelephoneDetailModel> {
-    return this.http.get<ITelephoneDetailModel>(this.url + '/' + id);
+  public getTelephone(
+    id: number,
+    withRelated: boolean
+  ): Observable<ITelephoneDetailModel> {
+    return this.http.get<ITelephoneDetailModel>(
+      this.url + '/' + id + '/' + withRelated
+    );
   }
 
   public createTelephone(

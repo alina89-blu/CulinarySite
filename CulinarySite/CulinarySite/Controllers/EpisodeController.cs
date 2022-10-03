@@ -5,9 +5,9 @@ using ServiceLayer;
 using ServiceLayer.Dtos.Episode;
 using ServiceLayer.ViewModels.Episode;
 
-namespace CulinarySite.Controllers
+namespace CulinaryApi.Controllers
 {
-    public class EpisodeController : BaseController
+    public class EpisodeController : ApiController
     {
         private readonly IEpisodeService _episodeService;
         private readonly IMapper _mapper;

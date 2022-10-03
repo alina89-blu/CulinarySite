@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IRestaurantListModel } from 'src/app/interfaces/restaurant/restaurant-list-model.interface';
+import { IRestaurantModel } from 'src/app/interfaces/restaurant/restaurant-model.interface';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { TelephoneService } from 'src/app/services/telephone.service';
-import { RestaurantListModel } from 'src/app/viewmodels/restaurant/restaurant-list-model.class';
+import { RestaurantModel } from 'src/app/viewmodels/restaurant/restaurant-model.class';
 import { CreateTelephoneModel } from 'src/app/viewmodels/telephone/create-telephone-model.class';
 
 @Component({
@@ -12,8 +12,9 @@ import { CreateTelephoneModel } from 'src/app/viewmodels/telephone/create-teleph
   styleUrls: ['./telephone-create.component.css'],
 })
 export class TelephoneCreateComponent implements OnInit {
-  public createTelephoneModel: CreateTelephoneModel;
-  public restaurants: RestaurantListModel[] = [];
+  public createTelephoneModel: CreateTelephoneModel =
+    new CreateTelephoneModel();
+  public restaurants: RestaurantModel[] = [];
 
   constructor(
     private telephoneService: TelephoneService,
@@ -32,10 +33,10 @@ export class TelephoneCreateComponent implements OnInit {
 
   public getRestaurantList(): void {
     this.restaurantService
-      .getRestaurantList(false)
+      .getRestaurantList()
       .subscribe(
-        (data: IRestaurantListModel[]) =>
-          (this.restaurants = data.map((x) => new RestaurantListModel(x)))
+        (data: IRestaurantModel[]) =>
+          (this.restaurants = data.map((x) => new RestaurantModel(x)))
       );
   }
 }

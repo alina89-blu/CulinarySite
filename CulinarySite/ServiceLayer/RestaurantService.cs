@@ -43,7 +43,7 @@ namespace ServiceLayer
             _restaurantWriteRepository.Save();
         }
 
-        public IEnumerable<RestaurantListDto> GetRestaurantList(bool withRelated)
+        public IEnumerable<RestaurantListDto> GetRestaurantDetailList(bool withRelated)
         {
             IEnumerable<Restaurant> restaurants;
             var restaurantListDtos = new List<RestaurantListDto>();
@@ -70,6 +70,20 @@ namespace ServiceLayer
             }
 
             return restaurantListDtos;
+        }
+
+        public IEnumerable<RestaurantDto> GetRestaurantList()
+        {            
+            IEnumerable<Restaurant> restaurants = _restaurantReadOnlyRepository.GetItemList();
+
+            var restaurantDtos = new List<RestaurantDto>();
+
+            foreach (var restaurant in restaurants)
+            {
+                restaurantDtos.Add(_mapper.Map<RestaurantDto>(restaurant));
+            }
+
+            return restaurantDtos;
         }
 
         public RestaurantDetailDto GetRestaurant(int id, bool withRelated)

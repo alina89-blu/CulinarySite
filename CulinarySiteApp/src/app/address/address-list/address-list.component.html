@@ -19,10 +19,10 @@
       <td>{{ idx + 1 }}</td>
       <td>{{ address.name }}</td>
       <td>
-        <a class="btn info" [routerLink]="['/editAddress', address.id]"
+        <a class="btn info" [routerLink]="['/editAddress', address.addressId]"
           >Редактировать</a
         >
-        <button class="btn info" (click)="deleteAddress(address.id)">
+        <button class="btn info" (click)="deleteAddress(address.addressId)">
           Удалить
         </button>
       </td>

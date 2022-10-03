@@ -5,9 +5,9 @@ using ServiceLayer;
 using ServiceLayer.Dtos.CookingStage;
 using ServiceLayer.ViewModels.CookingStage;
 
-namespace CulinarySite.Controllers
+namespace CulinaryApi.Controllers
 {
-    public class CookingStageController : BaseController
+    public class CookingStageController : ApiController
     {
         private readonly ICookingStageService _cookingStageService;
         private readonly IMapper _mapper;

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace CulinarySite
+namespace CulinaryApi
 {
     public class Program
     {
@@ -17,4 +17,7 @@ namespace CulinarySite
                     webBuilder.UseStartup<Startup>();
                 });
     }
+
+
+
 }

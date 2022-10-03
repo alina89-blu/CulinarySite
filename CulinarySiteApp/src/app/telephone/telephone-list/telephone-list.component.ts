@@ -19,7 +19,7 @@ export class TelephoneListComponent implements OnInit {
 
   public getTelephoneList(): void {
     this.telephoneService
-      .getTelephoneList()
+      .getTelephoneList(true)
       .subscribe(
         (data: ITelephoneListModel[]) =>
           (this.telephones = data.map((x) => new TelephoneListModel(x)))

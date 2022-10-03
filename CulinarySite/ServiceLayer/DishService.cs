@@ -66,7 +66,7 @@ namespace ServiceLayer
             return dishDetailDto;
         }
 
-        public IEnumerable<DishListDto> GetDishList(bool withRelated)
+        public IEnumerable<DishListDto> GetDishDetailList(bool withRelated)
         {
             IEnumerable<Dish> dishes;
             var dishListDtos = new List<DishListDto>();
@@ -93,6 +93,19 @@ namespace ServiceLayer
             }
 
             return dishListDtos;
+        }
+
+        public IEnumerable<DishDto> GetDishList()
+        {                       
+            IEnumerable<Dish> dishes = _dishReadOnlyRepository.GetItemList();
+            var dishDtos = new List<DishDto>();
+
+            foreach (var dish in dishes)
+            {
+                dishDtos.Add(_mapper.Map<DishDto>(dish));
+            }
+
+            return dishDtos;
         }
     }
 }

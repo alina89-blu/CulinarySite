@@ -1,6 +1,4 @@
-﻿
-using CulinarySite.Controllers;
-using Database.Entities;
+﻿using Database.Entities;
 using Database.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CulinaryApi.Controllers
 {
-    public class IdentityController : BaseController
+    public class IdentityController : ApiController
     {
         private readonly UserManager<User> userManager;
         private readonly AppSettings appSettings;

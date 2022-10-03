@@ -5,9 +5,9 @@ using ServiceLayer.ViewModels.Address;
 using AutoMapper;
 using ServiceLayer.Dtos.Address;
 
-namespace CulinarySite.Controllers
+namespace CulinaryApi.Controllers
 {
-    public class AddressController : BaseController
+    public class AddressController : ApiController
     {
         private readonly IAddressService _addressService;
         private readonly IMapper _mapper;

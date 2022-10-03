@@ -5,6 +5,7 @@ import { IDishListModel } from '../interfaces/dish/dish-list-model.interface';
 import { IDishDetailModel } from '../interfaces/dish/dish-detail-model.interface';
 import { CreateDishModel } from '../viewmodels/dish/create-dish-model.class';
 import { UpdateDishModel } from '../viewmodels/dish/update-dish-model.class';
+import { IDishModel } from '../interfaces/dish/dish-model.interface';
 
 @Injectable()
 export class DishService {
@@ -12,8 +13,12 @@ export class DishService {
 
   constructor(private http: HttpClient) {}
 
-  public getDishList(withRelated: boolean): Observable<IDishListModel[]> {
+  public getDishDetailList(withRelated: boolean): Observable<IDishListModel[]> {
     return this.http.get<IDishListModel[]>(this.url + '/' + withRelated);
+  }
+
+  public getDishList(): Observable<IDishModel[]> {
+    return this.http.get<IDishModel[]>(this.url);
   }
 
   public getDish(

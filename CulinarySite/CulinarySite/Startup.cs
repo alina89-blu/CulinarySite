@@ -1,6 +1,5 @@
-using CulinaryApi;
+using CulinaryApi.AutoMapperProfiles;
 using CulinaryApi.Infrastructure.Extensions;
-using CulinarySite.AutoMapperProfiles;
 using Database.Entities;
 using Database.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -12,12 +11,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Repositories;
 using ServiceLayer;
 using ServiceLayer.AutoMapperProfiles;
+using System.Linq;
 using System.Text;
 
-namespace CulinarySite
+namespace CulinaryApi
 {
     public class Startup
     {
@@ -75,11 +76,20 @@ namespace CulinarySite
             services.AddControllers()
            .AddNewtonsoftJson(options =>
            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+          
+           // services.AddSwaggerGen();
+
+            /*services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Culinary", Version = "v1" });
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+            });*/
 
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "CulinarySiteApp/dist";
             });
+           
 
             services.AddAutoMapper(typeof(DtoProfile), typeof(EntityProfile));
 
@@ -103,16 +113,17 @@ namespace CulinarySite
             services.AddScoped(typeof(ITelephoneService), typeof(TelephoneService));
 
 
-
+            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {            
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();                
             }
 
+          
             app.UseExceptionHandling();
 
             app.UseStaticFiles();
@@ -121,6 +132,13 @@ namespace CulinarySite
             {
                 app.UseSpaStaticFiles();
             }
+
+            /*app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Culinary API V1");                
+            });*/
+           
 
             app.UseRouting();
 
@@ -139,7 +157,10 @@ namespace CulinarySite
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+               // endpoints.MapSwagger();
             });
+
+          
 
             app.UseSpa(spa =>
             {

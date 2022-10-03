@@ -5,9 +5,9 @@ using ServiceLayer.ViewModels.Book;
 using AutoMapper;
 using ServiceLayer.Dtos.Book;
 
-namespace CulinarySite.Controllers
+namespace CulinaryApi.Controllers
 {
-    public class BookController : BaseController
+    public class BookController : ApiController
     {
         private readonly IBookService _bookService;
         private readonly IMapper _mapper;

@@ -5,9 +5,9 @@ using ServiceLayer.ViewModels.OrganicMatter;
 using AutoMapper;
 using ServiceLayer.Dtos.OrganicMatter;
 
-namespace CulinarySite.Controllers
+namespace CulinaryApi.Controllers
 {
-    public class OrganicMatterController : BaseController
+    public class OrganicMatterController : ApiController
     {
         private readonly IOrganicMatterService _organicMatterService;
         private readonly IMapper _mapper;

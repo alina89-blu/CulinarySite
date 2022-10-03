@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-
 namespace CulinaryApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
+ //   [Consumes("application/json")]
     public abstract class ApiController : ControllerBase
     {
-       
+      
     }
 }

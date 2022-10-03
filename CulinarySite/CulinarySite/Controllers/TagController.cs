@@ -5,9 +5,9 @@ using ServiceLayer.ViewModels.Tag;
 using AutoMapper;
 using ServiceLayer.Dtos.Tag;
 
-namespace CulinarySite.Controllers
+namespace CulinaryApi.Controllers
 {
-    public class TagController : BaseController
+    public class TagController : ApiController
     {
         private readonly ITagService _tagService;
         private readonly IMapper _mapper;

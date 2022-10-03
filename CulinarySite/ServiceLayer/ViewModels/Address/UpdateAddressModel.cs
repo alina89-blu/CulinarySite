@@ -3,6 +3,6 @@ namespace ServiceLayer.ViewModels.Address
 {
     public class UpdateAddressModel : CreateUpdateAddressBaseModel
     {
-        public int Id { get; set; }
+        public int AddressId { get; set; }
     }
 }

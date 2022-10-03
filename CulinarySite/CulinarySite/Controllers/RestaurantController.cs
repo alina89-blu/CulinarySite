@@ -5,9 +5,10 @@ using ServiceLayer.ViewModels.Restaurant;
 using AutoMapper;
 using ServiceLayer.Dtos.Restaurant;
 
-namespace CulinarySite.Controllers
+
+namespace CulinaryApi.Controllers
 {
-    public class RestaurantController : BaseController
+    public class RestaurantController : ApiController
     {
         private readonly IRestaurantService _restaurantService;
         private readonly IMapper _mapper;
@@ -18,9 +19,9 @@ namespace CulinarySite.Controllers
         }
 
         [HttpGet("{withRelated}")]
-        public IEnumerable<RestaurantListModel> GetRestaurantList(bool withRelated)
+        public IEnumerable<RestaurantListModel> GetRestaurantDetailList(bool withRelated)
         {
-            IEnumerable<RestaurantListDto> restaurantListDtos = _restaurantService.GetRestaurantList(withRelated);
+            IEnumerable<RestaurantListDto> restaurantListDtos = _restaurantService.GetRestaurantDetailList(withRelated);
             var restaurantListModels = new List<RestaurantListModel>();
 
             foreach (var restaurantListDto in restaurantListDtos)
@@ -29,6 +30,20 @@ namespace CulinarySite.Controllers
             }
 
             return restaurantListModels;
+        }
+
+        [HttpGet]
+        public IEnumerable<RestaurantModel> GetRestaurantList()
+        {
+            IEnumerable<RestaurantDto> restaurantDtos = _restaurantService.GetRestaurantList();
+            var restaurantModels = new List<RestaurantModel>();
+
+            foreach (var restaurantDto in restaurantDtos)
+            {
+                restaurantModels.Add(_mapper.Map<RestaurantModel>(restaurantDto));
+            }
+
+            return restaurantModels;
         }
 
         [HttpGet("{id}/{withRelated}")]

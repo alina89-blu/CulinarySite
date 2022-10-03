@@ -12,10 +12,14 @@ export class RestaurantService {
 
   constructor(private http: HttpClient) {}
 
-  public getRestaurantList(
+  public getRestaurantDetailList(
     withRelated: boolean
   ): Observable<IRestaurantListModel[]> {
     return this.http.get<IRestaurantListModel[]>(this.url + '/' + withRelated);
+  }
+
+  public getRestaurantList(): Observable<IRestaurantListModel[]> {
+    return this.http.get<IRestaurantListModel[]>(this.url);
   }
 
   public getRestaurant(

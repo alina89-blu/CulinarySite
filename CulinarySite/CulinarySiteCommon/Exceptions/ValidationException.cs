@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CulinaryApi.Infrastructure.Exceptions
+namespace Common.Exceptions
 {
     public class ValidationException : Exception
     {

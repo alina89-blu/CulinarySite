@@ -29,6 +29,8 @@ import { CreateIngredientModel } from 'src/app/viewmodels/ingredient/create-ingr
 import { ICreateIngredientModel } from 'src/app/interfaces/ingredient/create-ingredient-model.interface';
 import { AuthorListModel } from 'src/app/viewmodels/author/author-list-model.class';
 import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.interface';
+import { DishModel } from 'src/app/viewmodels/dish/dish-model.class';
+import { IDishModel } from 'src/app/interfaces/dish/dish-model.interface';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -54,7 +56,7 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
     Unit.Миллилитр,
     Unit.Штука,
   ];
-  public dishes: DishListModel[] = [];
+  public dishes: DishModel[] = [];
 
   public authors: AuthorListModel[] = [];
   public books: BookModel[] = [];
@@ -136,10 +138,10 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
 
   public getDishList(): void {
     this.dishService
-      .getDishList(false)
+      .getDishList()
       .subscribe(
-        (data: IDishListModel[]) =>
-          (this.dishes = data.map((x) => new DishListModel(x)))
+        (data: IDishModel[]) =>
+          (this.dishes = data.map((x) => new DishModel(x)))
       );
   }
 

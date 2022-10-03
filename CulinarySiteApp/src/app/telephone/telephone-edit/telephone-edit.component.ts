@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IRestaurantListModel } from 'src/app/interfaces/restaurant/restaurant-list-model.interface';
+import { IRestaurantModel } from 'src/app/interfaces/restaurant/restaurant-model.interface';
 import { ITelephoneDetailModel } from 'src/app/interfaces/telephone/telephone-detail-model.interface';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { TelephoneService } from 'src/app/services/telephone.service';
-import { RestaurantListModel } from 'src/app/viewmodels/restaurant/restaurant-list-model.class';
+import { RestaurantModel } from 'src/app/viewmodels/restaurant/restaurant-model.class';
 import { UpdateTelephoneModel } from 'src/app/viewmodels/telephone/update-telephone-model.class';
 
 @Component({
@@ -16,7 +16,7 @@ export class TelephoneEditComponent implements OnInit {
   private id: number;
   public updateTelephoneModel: UpdateTelephoneModel =
     new UpdateTelephoneModel();
-  public restaurants: RestaurantListModel[] = [];
+  public restaurants: RestaurantModel[] = [];
 
   constructor(
     private telephoneService: TelephoneService,
@@ -30,7 +30,7 @@ export class TelephoneEditComponent implements OnInit {
   public ngOnInit(): void {
     if (this.id) {
       this.telephoneService
-        .getTelephone(this.id)
+        .getTelephone(this.id, true)
         .subscribe(
           (data: ITelephoneDetailModel) =>
             (this.updateTelephoneModel = new UpdateTelephoneModel(data))
@@ -47,10 +47,10 @@ export class TelephoneEditComponent implements OnInit {
 
   public getRestaurantList(): void {
     this.restaurantService
-      .getRestaurantList(false)
+      .getRestaurantList()
       .subscribe(
-        (data: IRestaurantListModel[]) =>
-          (this.restaurants = data.map((x) => new RestaurantListModel(x)))
+        (data: IRestaurantModel[]) =>
+          (this.restaurants = data.map((x) => new RestaurantModel(x)))
       );
   }
 }

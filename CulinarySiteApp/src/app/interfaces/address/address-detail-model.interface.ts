@@ -1,4 +1,4 @@
 export interface IAddressDetailModel {
-  id: number;
+  addressId: number;
   name: string;
 }

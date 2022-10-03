@@ -1,4 +1,4 @@
 export interface IUpdateAddressModel {
-  id: number;
+  addressId: number;
   name: string;
 }

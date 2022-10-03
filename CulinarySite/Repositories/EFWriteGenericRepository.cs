@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Database.Entities;
+using Common.Exceptions;
 
 namespace Repositories
 {
@@ -29,10 +30,12 @@ namespace Repositories
         {
             TEntity item = _dbSet.Find(id);
 
-            if (item != null)
+            if (item == null)
             {
-                _dbSet.Remove(item);
+                throw new NotFoundException($"Object of type {typeof(TEntity)} with id { id } not found");
             }
+
+            _dbSet.Remove(item);
         }
 
         public void Save()
@@ -41,7 +44,7 @@ namespace Repositories
         }
 
         public TEntity GetItem(int id)
-        {
+        {           
             return _dbSet.FirstOrDefault(x => x.Id == id);
         }
 

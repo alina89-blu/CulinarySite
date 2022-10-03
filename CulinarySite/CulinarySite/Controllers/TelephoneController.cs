@@ -5,9 +5,9 @@ using ServiceLayer;
 using ServiceLayer.Dtos.Telephone;
 using ServiceLayer.ViewModels.Telephone;
 
-namespace CulinarySite.Controllers
+namespace CulinaryApi.Controllers
 {
-    public class TelephoneController : BaseController
+    public class TelephoneController : ApiController
     {
         private readonly ITelephoneService _telephoneService;
         private readonly IMapper _mapper;
@@ -17,10 +17,10 @@ namespace CulinarySite.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public IEnumerable<TelephoneListModel> GetTelephoneList()
+        [HttpGet("{withRelated}")]
+        public IEnumerable<TelephoneListModel> GetTelephoneList(bool withRelated)
         {
-            IEnumerable<TelephoneListDto> telephoneListDtos = _telephoneService.GetTelephoneList();
+            IEnumerable<TelephoneListDto> telephoneListDtos = _telephoneService.GetTelephoneList(withRelated);
             var telephoneListModels = new List<TelephoneListModel>();
 
             foreach (var telephoneListDto in telephoneListDtos)
@@ -30,10 +30,10 @@ namespace CulinarySite.Controllers
             return telephoneListModels;
         }
 
-        [HttpGet("{id}")]
-        public TelephoneDetailModel GetTelephone(int id)
+        [HttpGet("{id}/{withRelated}")]
+        public TelephoneDetailModel GetTelephone(int id, bool withRelated)
         {
-            TelephoneDetailDto telephoneDetailDto = _telephoneService.GetTelephone(id);
+            TelephoneDetailDto telephoneDetailDto = _telephoneService.GetTelephone(id, withRelated);
             TelephoneDetailModel telephoneDetailModel = _mapper.Map<TelephoneDetailModel>(telephoneDetailDto);
 
             return telephoneDetailModel;

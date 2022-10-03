@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using ServiceLayer.ViewModels.Author;
 using AutoMapper;
 using ServiceLayer.Dtos.Author;
-using System;
 
-namespace CulinarySite.Controllers
+namespace CulinaryApi.Controllers
 {
-    public class AuthorController : BaseController
+    public class AuthorController : ApiController
     {
         private readonly IAuthorService _authorService;
         private readonly IMapper _mapper;
@@ -45,6 +44,7 @@ namespace CulinarySite.Controllers
         {
             var сreateAuthorDto = _mapper.Map<CreateAuthorDto>(createAuthorModel);
             _authorService.CreateAuthor(сreateAuthorDto);
+
         }
 
         [HttpPut]

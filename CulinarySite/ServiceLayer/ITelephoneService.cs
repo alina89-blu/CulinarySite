@@ -9,7 +9,7 @@ namespace ServiceLayer
         void CreateTelephone(CreateTelephoneDto createTelephoneDto);
         void UpdateTelephone(UpdateTelephoneDto updateTelephoneDto);
         void DeleteTelephone(int id);
-        IEnumerable<TelephoneListDto> GetTelephoneList();
-        TelephoneDetailDto GetTelephone(int id);
+        IEnumerable<TelephoneListDto> GetTelephoneList(bool withRelated);
+        TelephoneDetailDto GetTelephone(int id, bool withRelated);
     }
 }

@@ -5,9 +5,9 @@ using ServiceLayer;
 using ServiceLayer.Dtos.CulinaryChannel;
 using ServiceLayer.ViewModels.CulinaryChannel;
 
-namespace CulinarySite.Controllers
+namespace CulinaryApi.Controllers
 {
-    public class CulinaryChannelController : BaseController
+    public class CulinaryChannelController : ApiController
     {
         private readonly ICulinaryChannelService _culinaryChannelService;
         private readonly IMapper _mapper;

@@ -1,0 +1,28 @@
+<div class="Pad">
+  <h3>Добавление новой ресторана</h3>
+  <div>
+    <label>Название</label>
+    <input type="text" [(ngModel)]="createRestaurantModel.name" />
+  </div>
+
+  <div>
+    <label>Адрес</label>
+    <select [(ngModel)]="createRestaurantModel.addressId" class="form-control">
+      <option *ngFor="let address of addresses" [ngValue]="address.addressId">
+        {{ address.name }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <button class="btn info" (click)="createRestaurant()">Создать</button>
+  </div>
+
+  <p>
+    <a [routerLink]="['/restaurant']">Назад к списку ресторанов</a>
+  </p>
+
+  <p>
+    <a routerLink="/">На домашнюю страницу</a>
+  </p>
+</div>

@@ -9,8 +9,8 @@ namespace ServiceLayer
         void UpdateBook(UpdateBookDto updateBookDto);
         void DeleteBook(int id);
         IEnumerable<BookDetailListDto> GetBookDetailList(bool withRelated);
-        BookDetailDto GetBook(int id, bool withRelated);
         IEnumerable<BookDto> GetBookList();
+        BookDetailDto GetBook(int id, bool withRelated);        
         IEnumerable<BookDetailListDto> GetSortedBooksByName(bool withRelated);
         IEnumerable<BookDetailListDto> GetSortedBooksByYear(bool withRelated);
     }

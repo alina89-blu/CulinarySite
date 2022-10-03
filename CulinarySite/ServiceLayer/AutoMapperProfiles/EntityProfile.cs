@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Database;
 using Database.Entities;
 using ServiceLayer.Dtos.Address;
 using ServiceLayer.Dtos.Author;
@@ -28,9 +27,14 @@ namespace ServiceLayer.AutoMapperProfiles
         public EntityProfile()
         {
             CreateMap<CreateAddressDto, Address>().ReverseMap();
-            CreateMap<UpdateAddressDto, Address>().ReverseMap();
-            CreateMap<AddressListDto, Address>().ReverseMap();
-            CreateMap<AddressDetailDto, Address>().ReverseMap();
+            CreateMap<UpdateAddressDto, Address>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AddressId)).ReverseMap();
+
+            CreateMap<AddressListDto, Address>()
+                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AddressId)).ReverseMap();
+            CreateMap<AddressDetailDto, Address>()
+                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AddressId)).ReverseMap();
+
 
             CreateMap<CreateAuthorDto, Author>().ReverseMap();
             CreateMap<UpdateAuthorDto, Author>()
@@ -95,6 +99,9 @@ namespace ServiceLayer.AutoMapperProfiles
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DishId)).ReverseMap();
 
             CreateMap<DishListDto, Dish>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DishId)).ReverseMap();
+
+            CreateMap<DishDto, Dish>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DishId)).ReverseMap();
 
 
@@ -174,6 +181,9 @@ namespace ServiceLayer.AutoMapperProfiles
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RestaurantId)).ReverseMap();
 
             CreateMap<RestaurantDetailDto, Restaurant>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RestaurantId)).ReverseMap();
+
+            CreateMap<RestaurantDto, Restaurant>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RestaurantId)).ReverseMap();
 
             CreateMap<RestaurantListDto, Restaurant>()

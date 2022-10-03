@@ -5,9 +5,9 @@ using ServiceLayer.ViewModels.Comment;
 using AutoMapper;
 using ServiceLayer.Dtos.Comment;
 
-namespace CulinarySite.Controllers
+namespace CulinaryApi.Controllers
 {
-    public class CommentController : BaseController
+    public class CommentController : ApiController
     {
         private readonly ICommentService _commentService;
         private readonly IMapper _mapper;

@@ -21,7 +21,7 @@ export class RecipeLibraryComponent implements OnInit {
 
   public ngOnInit(): void {
     this.getRecipeList();
-    this.getDishList();
+    this.getDishDetailList();
   }
 
   public getRecipeList(): void {
@@ -33,9 +33,9 @@ export class RecipeLibraryComponent implements OnInit {
       );
   }
 
-  public getDishList(): void {
+  public getDishDetailList(): void {
     this.dishService
-      .getDishList(true)
+      .getDishDetailList(true)
       .subscribe(
         (data: IDishListModel[]) =>
           (this.dishes = data.map((x) => new DishListModel(x)))

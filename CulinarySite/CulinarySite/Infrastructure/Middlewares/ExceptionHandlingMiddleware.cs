@@ -1,4 +1,4 @@
-﻿using CulinaryApi.Infrastructure.Exceptions;
+﻿using Common.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
@@ -33,11 +33,14 @@ namespace CulinaryApi.Infrastructure.Middlewares
                     case ValidationException _:
                         context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                         break;
+                    case NotFoundException _:
+                        context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                        break;
                     default:
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;
                 }
-
+                
                 await CreateExceptionResponseAsync(context, ex);
 
             }
@@ -50,9 +53,10 @@ namespace CulinaryApi.Infrastructure.Middlewares
             return context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
-                Message = ex.Message
+                Message = ex.Message + "Hello Alina!!!"
             }.ToString());
         }
+
     }
 }
 
