@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.Dtos.Book;
+using CulinarySite.Common.ViewModels.Book;
+using CulinarySite.Dal.Interfaces;
+using CulinarySite.Domain.Entities;
 
-
-namespace CulinarySite.Bll.Sevices
+namespace CulinarySite.Bll.Services
 {
     public class BookService : IBookService
     {

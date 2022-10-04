@@ -1,5 +1,5 @@
-﻿using Database.Entities;
-using Database.Models.Identity;
+﻿using CulinarySite.Domain.Entities;
+using CulinarySite.Domain.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;

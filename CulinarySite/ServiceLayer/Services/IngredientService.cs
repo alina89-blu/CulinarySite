@@ -1,10 +1,11 @@
-﻿using Repositories;
-using System.Collections.Generic;
-using ServiceLayer.Dtos.Ingredient;
+﻿using System.Collections.Generic;
 using AutoMapper;
-using Database.Entities;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.Dtos.Ingredient;
+using CulinarySite.Dal.Interfaces;
+using CulinarySite.Domain.Entities;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Services
 {
     public class IngredientService : IIngredientService
     {

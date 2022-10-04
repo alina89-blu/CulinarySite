@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using Common.Exceptions;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using CulinarySite.Common.Exceptions;
 
 namespace CulinarySite.Dal.Repositories
 {

@@ -1,6 +1,12 @@
 using CulinaryApi.AutoMapperProfiles;
 using CulinaryApi.Infrastructure.Extensions;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Bll.Services;
+using CulinarySite.Dal;
 using CulinarySite.Dal.Extensions;
+using CulinarySite.Dal.Interfaces;
+using CulinarySite.Dal.Repositories;
+using CulinarySite.Domain.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,7 +16,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using ServiceLayer;
 using ServiceLayer.AutoMapperProfiles;
 using System.Text;
 

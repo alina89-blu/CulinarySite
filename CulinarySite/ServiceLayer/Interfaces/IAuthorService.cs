@@ -1,9 +1,7 @@
-﻿
+﻿using CulinarySite.Common.Dtos.Author;
 using System.Collections.Generic;
-using ServiceLayer.ViewModels.Author;
-using ServiceLayer.Dtos.Author;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Interfaces
 {
     public interface IAuthorService
     {

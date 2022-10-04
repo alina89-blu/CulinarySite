@@ -1,5 +1,5 @@
 ﻿
-using ServiceLayer.ViewModels.Image.DishImage;
+using CulinarySite.Common.ViewModels.Image.DishImage;
 
 namespace CulinarySite.Common.ViewModels.Dish
 {

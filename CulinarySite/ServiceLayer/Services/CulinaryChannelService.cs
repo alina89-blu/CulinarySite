@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using Database.Entities;
-using Repositories;
-using ServiceLayer.Dtos.CulinaryChannel;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.Dtos.CulinaryChannel;
+using CulinarySite.Dal.Interfaces;
+using CulinarySite.Domain.Entities;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Services
 {
     public class CulinaryChannelService : ICulinaryChannelService
     {

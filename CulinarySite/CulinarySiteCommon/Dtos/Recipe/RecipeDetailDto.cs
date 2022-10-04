@@ -1,7 +1,10 @@
-﻿using ServiceLayer.Dtos.Tag;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using ServiceLayer.Dtos.Image.RecipeImage;
+using CulinarySite.Common.Dtos.Ingredient;
+using CulinarySite.Common.Dtos.OrganicMatter;
+using CulinarySite.Common.Dtos.Image.RecipeImage;
+using CulinarySite.Common.Dtos.Tag;
+using CulinarySite.Common.Dtos.CookingStage;
 
 namespace CulinarySite.Common.Dtos.Recipe
 {

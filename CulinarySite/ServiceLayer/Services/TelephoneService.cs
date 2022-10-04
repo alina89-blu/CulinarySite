@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
-using Database.Entities;
-using Repositories;
-using ServiceLayer.Dtos.Telephone;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.Dtos.Telephone;
+using CulinarySite.Dal.Interfaces;
+using CulinarySite.Domain.Entities;
 using System.Collections.Generic;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Services
 {
     public class TelephoneService : ITelephoneService
     {

@@ -1,4 +1,5 @@
 ﻿
+using CulinarySite.Common.ViewModels.Book;
 using System.Collections.Generic;
 
 namespace CulinarySite.Common.ViewModels.Author

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using ServiceLayer.Dtos.Book;
+﻿using CulinarySite.Common.Dtos.Book;
+using System.Collections.Generic;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Interfaces
 {
     public interface IBookService
     {

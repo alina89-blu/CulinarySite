@@ -1,5 +1,6 @@
 ﻿
-using ServiceLayer.Dtos.Image.DishImage;
+
+using CulinarySite.Common.Dtos.Image.DishImage;
 
 namespace CulinarySite.Common.Dtos.Dish
 {

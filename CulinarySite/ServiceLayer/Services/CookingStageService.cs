@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.Dtos.CookingStage;
+using CulinarySite.Dal.Interfaces;
+using CulinarySite.Domain.Entities;
 
-
-namespace CulinarySite.Bll.Sevices
+namespace CulinarySite.Bll.Services
 {
     public class CookingStageService : ICookingStageService
     {

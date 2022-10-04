@@ -1,5 +1,5 @@
 ﻿
-using ServiceLayer.Dtos.Image.RecipeImage;
+using CulinarySite.Common.Dtos.Image.RecipeImage;
 
 namespace CulinarySite.Common.Dtos.Recipe
 {

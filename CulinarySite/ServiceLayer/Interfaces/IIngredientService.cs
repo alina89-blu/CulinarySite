@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using ServiceLayer.Dtos.Ingredient;
+﻿using CulinarySite.Common.Dtos.Ingredient;
+using System.Collections.Generic;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Interfaces
 {
     public interface IIngredientService
     {

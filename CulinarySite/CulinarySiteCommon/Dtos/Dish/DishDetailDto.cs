@@ -1,5 +1,4 @@
-﻿
-using ServiceLayer.Dtos.Recipe;
+﻿using CulinarySite.Common.Dtos.Recipe;
 using System.Collections.Generic;
 
 namespace CulinarySite.Common.Dtos.Dish

@@ -1,8 +1,7 @@
-﻿
-using ServiceLayer.Dtos.Telephone;
+﻿using CulinarySite.Common.Dtos.Telephone;
 using System.Collections.Generic;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Interfaces
 {
     public interface ITelephoneService
     {

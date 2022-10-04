@@ -1,7 +1,7 @@
-﻿using ServiceLayer.Dtos.Subscriber;
+﻿using CulinarySite.Common.Dtos.Subscriber;
 using System.Collections.Generic;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Interfaces
 {
     public interface ISubscriberService
     {

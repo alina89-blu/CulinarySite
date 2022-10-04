@@ -1,5 +1,5 @@
 ﻿
-using ServiceLayer.Dtos.Telephone;
+using CulinarySite.Common.Dtos.Telephone;
 using System.Collections.Generic;
 
 namespace CulinarySite.Common.Dtos.Restaurant

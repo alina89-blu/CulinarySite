@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using ServiceLayer.Dtos.Dish;
+﻿using CulinarySite.Common.Dtos.Dish;
+using System.Collections.Generic;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Interfaces
 {
     public interface IDishService
     {

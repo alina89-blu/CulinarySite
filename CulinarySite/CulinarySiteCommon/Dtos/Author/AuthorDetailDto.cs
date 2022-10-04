@@ -1,4 +1,4 @@
-﻿using ServiceLayer.Dtos.Book;
+﻿using CulinarySite.Common.Dtos.Book;
 using System.Collections.Generic;
 
 namespace CulinarySite.Common.Dtos.Author

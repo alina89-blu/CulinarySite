@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
-using Repositories;
 using AutoMapper;
-using ServiceLayer.Dtos.Subscriber;
-using Database.Entities;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.Dtos.Subscriber;
+using CulinarySite.Dal.Interfaces;
+using CulinarySite.Domain.Entities;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Services
 {
     public class SubscriberService : ISubscriberService
     {

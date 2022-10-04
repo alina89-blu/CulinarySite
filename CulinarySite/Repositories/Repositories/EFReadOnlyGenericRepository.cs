@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Common.Exceptions;
+using CulinarySite.Common.Exceptions;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
 using Microsoft.EntityFrameworkCore;

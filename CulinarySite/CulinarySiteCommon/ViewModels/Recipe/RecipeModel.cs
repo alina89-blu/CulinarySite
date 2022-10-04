@@ -1,4 +1,6 @@
 ﻿
+using CulinarySite.Common.ViewModels.Image.RecipeImage;
+
 namespace CulinarySite.Common.ViewModels.Recipe
 {
     public class RecipeModel

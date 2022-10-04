@@ -1,7 +1,7 @@
-﻿using ServiceLayer.Dtos.Address;
+﻿using CulinarySite.Common.Dtos.Address;
 using System.Collections.Generic;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Interfaces
 {
     public interface IAddressService
     {

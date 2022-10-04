@@ -1,7 +1,10 @@
-﻿using ServiceLayer.ViewModels.Tag;
+﻿using CulinarySite.Common.ViewModels.CookingStage;
+using CulinarySite.Common.ViewModels.Image.RecipeImage;
+using CulinarySite.Common.ViewModels.Ingredient;
+using CulinarySite.Common.ViewModels.OrganicMatter;
+using CulinarySite.Common.ViewModels.Tag;
 using System;
 using System.Collections.Generic;
-using ServiceLayer.ViewModels.Image.RecipeImage;
 
 namespace CulinarySite.Common.ViewModels.Recipe
 {

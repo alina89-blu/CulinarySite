@@ -1,4 +1,7 @@
-﻿using ServiceLayer.ViewModels.Tag;
+﻿using CulinarySite.Common.ViewModels.CookingStage;
+using CulinarySite.Common.ViewModels.Ingredient;
+using CulinarySite.Common.ViewModels.OrganicMatter;
+using CulinarySite.Common.ViewModels.Tag;
 using System.Collections.Generic;
 
 namespace CulinarySite.Common.ViewModels.Recipe

@@ -1,8 +1,7 @@
-﻿
-using ServiceLayer.Dtos.Recipe;
+﻿using CulinarySite.Common.Dtos.Recipe;
 using System.Collections.Generic;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Interfaces
 {
     public interface IRecipeService
     {

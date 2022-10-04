@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using ServiceLayer.Dtos.Image.DishImage;
-using ServiceLayer.Dtos.Image.EpisodeImage;
-using ServiceLayer.Dtos.Image.RecipeImage;
+﻿using CulinarySite.Common.Dtos.Image.DishImage;
+using CulinarySite.Common.Dtos.Image.EpisodeImage;
+using CulinarySite.Common.Dtos.Image.RecipeImage;
+using System.Collections.Generic;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Interfaces
 {
     public interface IImageService
     {

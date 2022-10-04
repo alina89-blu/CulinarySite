@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CulinarySite.Bll.Sevices
+namespace CulinarySite.Bll.Interfaces
 {
     class Class1
     {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CulinarySite.Common.ViewModels.Telephone;
+using System.Collections.Generic;
 
 namespace CulinarySite.Common.ViewModels.Restaurant
 {

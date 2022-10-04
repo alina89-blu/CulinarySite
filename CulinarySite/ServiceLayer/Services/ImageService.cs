@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
-using Repositories;
 using AutoMapper;
-using ServiceLayer.Dtos.Image.DishImage;
-using ServiceLayer.Dtos.Image.EpisodeImage;
-using ServiceLayer.Dtos.Image.RecipeImage;
-using Database.Entities;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.Dtos.Image.DishImage;
+using CulinarySite.Common.Dtos.Image.EpisodeImage;
+using CulinarySite.Common.Dtos.Image.RecipeImage;
+using CulinarySite.Dal.Interfaces;
+using CulinarySite.Domain.Entities;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Services
 {
     public class ImageService : IImageService
     {

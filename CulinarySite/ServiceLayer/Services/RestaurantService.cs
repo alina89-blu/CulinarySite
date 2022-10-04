@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using Database.Entities;
-using Repositories;
-using ServiceLayer.Dtos.Restaurant;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.Dtos.Restaurant;
+using CulinarySite.Dal.Interfaces;
+using CulinarySite.Domain.Entities;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Services
 {
     public class RestaurantService : IRestaurantService
     {

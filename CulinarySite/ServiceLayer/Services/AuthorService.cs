@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Repositories;
 using AutoMapper;
-using ServiceLayer.Dtos.Author;
-using Database.Entities;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.Dtos.Author;
+using CulinarySite.Dal.Interfaces;
+using CulinarySite.Domain.Entities;
 
-
-namespace CulinarySite.Bll.Sevices
+namespace CulinarySite.Bll.Services
 {
     public class AuthorService : IAuthorService
     {

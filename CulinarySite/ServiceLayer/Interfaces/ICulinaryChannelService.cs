@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using ServiceLayer.Dtos.CulinaryChannel;
+﻿using CulinarySite.Common.Dtos.CulinaryChannel;
+using System.Collections.Generic;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Interfaces
 {
     public interface ICulinaryChannelService
     {

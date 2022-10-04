@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using ServiceLayer.Dtos.OrganicMatter;
+﻿using CulinarySite.Common.Dtos.OrganicMatter;
+using System.Collections.Generic;
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Interfaces
 {
     public interface IOrganicMatterService
     {

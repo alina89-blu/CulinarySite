@@ -1,4 +1,8 @@
 ﻿using AutoMapper;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.Dtos.Address;
+using CulinarySite.Dal.Interfaces;
+using CulinarySite.Domain.Entities;
 using System.Collections.Generic;
 
 
@@ -60,54 +64,6 @@ namespace CulinarySite.Bll.Services
             return addressDetailDto;
         }
 
-        /*public void CreateAddress(CreateAddressModel createAddressModel )
-        {
-            var address = new Address
-            {
-                Name = createAddressModel.Name
-            };
-            this.addressWriteRepository.Create(address);
-            this.addressWriteRepository.Save();
-        }*/
-
-        /*public void UpdateAddress(UpdateAddressModel updateAddressModel )
-       {
-           var address = new Address
-           {
-               Id = updateAddressModel.Id,
-               Name = updateAddressModel.Name
-           };
-           this.addressWriteRepository.Update(address);
-           this.addressWriteRepository.Save();
-       }*/
-
-        /* public IEnumerable<AddressListModel> GetAddressList()
-         {
-             IEnumerable<Address> addresses = this._addressReadOnlyRepository.GetItemList();
-             List<AddressListModel> addressListModels = new List<AddressListModel>();
-
-             foreach(var address in addresses)
-             {
-                 addressListModels.Add(new AddressListModel
-                 {
-                     Id = address.Id,
-                     Name = address.Name
-                 });
-             }
-             return addressListModels;
-         }*/
-
-        /* public AddressDetailModel GetAddress(int id)
-        {
-            Address address = this._addressReadOnlyRepository.GetItem(id);
-            AddressDetailModel addressDetailModel = new AddressDetailModel
-            {
-                Id = address.Id,
-                Name = address.Name
-            };
-            return addressDetailModel;
-        }*/
-
-
+        
     }
 }

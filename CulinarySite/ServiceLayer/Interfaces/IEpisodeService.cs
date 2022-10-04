@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using ServiceLayer.Dtos.Episode;
-
-namespace ServiceLayer
+﻿using CulinarySite.Common.Dtos.Episode;
+using System.Collections.Generic;
+namespace CulinarySite.Bll.Interfaces
 {
     public interface IEpisodeService
     {
