@@ -11,11 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using Repositories;
 using ServiceLayer;
 using ServiceLayer.AutoMapperProfiles;
-using System.Linq;
 using System.Text;
 
 namespace CulinaryApi
@@ -31,7 +29,7 @@ namespace CulinaryApi
           
             string connectionString = "Server=DESKTOP-N5BQGM7\\SQLEXPRESS;Database=culinarysitedb;Trusted_Connection=True;";                        
 
-            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<CulinarySiteDbContext>(options => options.UseSqlServer(connectionString));
 
             //Token
 
@@ -44,7 +42,7 @@ namespace CulinaryApi
                 options.Password.RequireUppercase = false;
 
             })
-               .AddEntityFrameworkStores<ApplicationContext>();
+               .AddEntityFrameworkStores<CulinarySiteDbContext>();
 
             var applicationSettingsConfiguration = this.Configuration.GetSection("ApplicationSettings");
             services.Configure<AppSettings>(applicationSettingsConfiguration);
@@ -75,15 +73,7 @@ namespace CulinaryApi
 
             services.AddControllers()
            .AddNewtonsoftJson(options =>
-           options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-          
-           // services.AddSwaggerGen();
-
-            /*services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Culinary", Version = "v1" });
-                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-            });*/
+           options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);                    
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -111,8 +101,6 @@ namespace CulinaryApi
             services.AddScoped(typeof(ISubscriberService), typeof(SubscriberService));
             services.AddScoped(typeof(ITagService), typeof(TagService));
             services.AddScoped(typeof(ITelephoneService), typeof(TelephoneService));
-
-
             
         }
 
@@ -122,7 +110,6 @@ namespace CulinaryApi
             {
                 app.UseDeveloperExceptionPage();                
             }
-
           
             app.UseExceptionHandling();
 
@@ -131,14 +118,7 @@ namespace CulinaryApi
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
-            }
-
-            /*app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Culinary API V1");                
-            });*/
-           
+            }            
 
             app.UseRouting();
 
@@ -156,12 +136,9 @@ namespace CulinaryApi
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-               // endpoints.MapSwagger();
+                endpoints.MapControllers();             
             });
-
           
-
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "CulinarySiteApp";

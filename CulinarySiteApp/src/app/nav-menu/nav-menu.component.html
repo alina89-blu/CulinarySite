@@ -1,3 +1,4 @@
+<!--
 <div class="navbar">
   <a bold [routerLink]="['/']">ГЛАВНАЯ</a>
   <div class="dropdown">
@@ -19,3 +20,106 @@
   <a bold [routerLink]="['/bookLibrary']">КНИГИ</a>
   <a bold [routerLink]="['/restaurantLibrary']">РЕСТОРАНЫ</a>
 </div>
+
+-->
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <!-- 
+             <li class="nav-item active">
+        <a class="nav-link" href="#"
+          >Home <span class="sr-only">(current)</span></a
+        >
+      </li>
+        -->
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/']">ГЛАВНАЯ</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          АДМИН МЕНЮ
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/address']">Адреса</a>
+          <a class="dropdown-item" [routerLink]="['/author']">Авторы</a>
+          <a class="dropdown-item" [routerLink]="['/book']">Книги</a>
+          <a class="dropdown-item" [routerLink]="['/cookingStage']"
+            >Этапы приготовления</a
+          >
+          <a class="dropdown-item" [routerLink]="['/culinaryChannel']"
+            >Кулинарные каналы</a
+          >
+          <a class="dropdown-item" [routerLink]="['/dish']">Блюда</a>
+          <a class="dropdown-item" [routerLink]="['/episode']">Эпизоды</a>
+          <a class="dropdown-item" [routerLink]="['/recipe']">Рецепты</a>
+          <a class="dropdown-item" [routerLink]="['/telephone']">Телефоны</a>
+          <a class="dropdown-item" [routerLink]="['/restaurant']">Рестораны</a>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/recipeLibrary']">РЕЦЕПТЫ</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/bookLibrary']">КНИГИ</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/restaurantLibrary']">РЕСТОРАНЫ</a>
+      </li>
+
+      <!--
+        <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
+          >Disabled</a
+        >
+      </li>
+-->
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="поиск..."
+        aria-label="Search"
+      />
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        Найти
+      </button>
+    </form>
+
+    <div *ngIf="hide">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/login']">Вход</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

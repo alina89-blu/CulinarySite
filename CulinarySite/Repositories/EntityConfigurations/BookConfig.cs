@@ -1,10 +1,10 @@
-﻿using Database.Entities;
+﻿using CulinarySite.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Database.Configurations
+namespace CulinarySite.Dal.EntityConfigurations
 {
-    public class BookConfiguration : IEntityTypeConfiguration<Book>
+    public class BookConfig : IEntityTypeConfiguration<Book>
     {
         public void Configure(EntityTypeBuilder<Book> builder)
         {

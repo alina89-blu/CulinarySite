@@ -1,8 +1,7 @@
-﻿
-using Database.Entities;
+﻿using CulinarySite.Domain.Entities;
 using System.Collections.Generic;
 
-namespace Repositories
+namespace CulinarySite.Dal.Interfaces
 {
     public interface IWriteGenericRepository<TEntity> where TEntity : BaseEntity
     {

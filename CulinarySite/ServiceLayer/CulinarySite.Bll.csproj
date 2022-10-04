@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Database\Database.csproj" />
-    <ProjectReference Include="..\Repositories\Repositories.csproj" />
+    <ProjectReference Include="..\Database\CulinarySite.Domain.csproj" />
+    <ProjectReference Include="..\Repositories\CulinarySite.Dal.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Database.Entities
+namespace CulinarySite.Domain.Entities
 {
     public class User : IdentityUser
     {

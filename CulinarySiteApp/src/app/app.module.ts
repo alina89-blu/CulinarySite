@@ -22,6 +22,7 @@ import { SubscriberService } from './services/subscriber.service';
 import { TagService } from './services/tag.service';
 import { TelephoneService } from './services/telephone.service';
 import { RecipeOrganicMatterService } from './services/recipe-organic-matter.service';
+import { AuthService } from './services/auth.service';
 
 import { AppComponent } from './app.component';
 import { AddressListComponent } from './address/address-list/address-list.component';
@@ -63,6 +64,9 @@ import { TelephoneListComponent } from './telephone/telephone-list/telephone-lis
 import { RestaurantCreateComponent } from './restaurant/restaurant-create/restaurant-create.component';
 import { RestaurantEditComponent } from './restaurant/restaurant-update/restaurant-edit.component';
 import { RestaurantListComponent } from './restaurant/restaurant-list/restaurant-list.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -74,6 +78,13 @@ const appRoutes: Routes = [
   { path: 'editAuthor/:id', component: AuthorEditComponent },
   { path: 'book', component: BookListComponent },
   { path: 'editBook/:id', component: BookEditComponent },
+
+  /* {
+    path: 'createBook',
+    component: BookCreateComponent,
+    canActivate: [AuthGuardService],
+  },*/
+
   { path: 'createBook', component: BookCreateComponent },
   { path: 'cookingStage', component: CookingStageListComponent },
   { path: 'createCookingStage', component: CookingStageCreateComponent },
@@ -102,6 +113,9 @@ const appRoutes: Routes = [
   { path: 'restaurant', component: RestaurantListComponent },
   { path: 'editRestaurant/:id', component: RestaurantEditComponent },
   { path: 'createRestaurant', component: RestaurantCreateComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+
   //
 ];
 
@@ -147,13 +161,16 @@ const appRoutes: Routes = [
     RestaurantCreateComponent,
     RestaurantEditComponent,
     RestaurantListComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
+    //ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
+    ReactiveFormsModule,
   ],
   providers: [
     AddressService,
@@ -173,6 +190,8 @@ const appRoutes: Routes = [
     TagService,
     TelephoneService,
     RecipeOrganicMatterService,
+    AuthService,
+    AuthGuardService,
   ],
   bootstrap: [AppComponent],
 })

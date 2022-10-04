@@ -1,10 +1,10 @@
-﻿using Database.Entities;
+﻿using CulinarySite.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Database.Configurations
+namespace CulinarySite.Dal.EntityConfigurations
 {
-    public class CookingStageConfiguration : IEntityTypeConfiguration<CookingStage>
+    public class CookingStageConfig : IEntityTypeConfiguration<CookingStage>
     {
         public void Configure(EntityTypeBuilder<CookingStage> builder)
         {

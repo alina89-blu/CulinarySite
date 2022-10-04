@@ -1,7 +1,6 @@
 ﻿using CulinaryApi.Infrastructure.Middlewares;
 using Microsoft.AspNetCore.Builder;
 
-
 namespace CulinaryApi.Infrastructure.Extensions
 {
     public static class MiddlewareExtensions

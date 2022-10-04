@@ -3,6 +3,7 @@ using Database.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Repositories;
 
 namespace Database.Infrastructure
 {
@@ -12,7 +13,7 @@ namespace Database.Infrastructure
         {
             using var services = app.ApplicationServices.CreateScope();
 
-            var dbContext = services.ServiceProvider.GetService<ApplicationContext>();
+            var dbContext = services.ServiceProvider.GetService<CulinarySiteDbContext>();
 
             dbContext.Database.Migrate();
 

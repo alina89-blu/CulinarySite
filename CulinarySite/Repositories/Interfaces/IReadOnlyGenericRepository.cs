@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CulinarySite.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Database.Entities;
 
-namespace Repositories
+
+namespace CulinarySite.Dal.Interfaces
 {
     public interface IReadOnlyGenericRepository<TEntity> where TEntity : BaseEntity
     {

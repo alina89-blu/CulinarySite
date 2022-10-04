@@ -1,4 +1,4 @@
-﻿namespace Database.Entities
+﻿namespace CulinarySite.Domain.Entities
 {
     public enum DishCategory
     {

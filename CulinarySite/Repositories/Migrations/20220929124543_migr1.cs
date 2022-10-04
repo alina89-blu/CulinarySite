@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Database.Migrations
+namespace CulinarySite.Dal.Migrations
 {
     public partial class migr1 : Migration
     {

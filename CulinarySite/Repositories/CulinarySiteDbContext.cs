@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CulinarySite.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Database.Entities
+namespace CulinarySite.Dal
 {
-    public class ApplicationContext : IdentityDbContext<User>
+    public class CulinarySiteDbContext : IdentityDbContext<User>
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+        public CulinarySiteDbContext(DbContextOptions<CulinarySiteDbContext> options)
            : base(options)
         {
-            //Database.EnsureCreated();
+
         }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<CookingStage> CookingStages { get; set; }

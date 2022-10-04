@@ -3,8 +3,7 @@
 namespace CulinaryApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
- //   [Consumes("application/json")]
+    [Route("api/[controller]")] 
     public abstract class ApiController : ControllerBase
     {
       

@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CulinaryApi", "CulinarySite\CulinaryApi.csproj", "{55CC6784-55E3-4516-9ECD-902170C89A70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CulinarySite.Api", "CulinarySite\CulinarySite.Api.csproj", "{55CC6784-55E3-4516-9ECD-902170C89A70}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{4DAC08F7-1A83-40C1-A0B2-3FC9B15E2E3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CulinarySite.Domain", "Database\CulinarySite.Domain.csproj", "{4DAC08F7-1A83-40C1-A0B2-3FC9B15E2E3C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{70F55EF6-7A00-46C6-8F0E-26B31BF9606A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CulinarySite.Dal", "Repositories\CulinarySite.Dal.csproj", "{70F55EF6-7A00-46C6-8F0E-26B31BF9606A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{1DB86AB7-1FDC-4C44-86BC-6225BCE7E71F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CulinarySite.Bll", "ServiceLayer\CulinarySite.Bll.csproj", "{1DB86AB7-1FDC-4C44-86BC-6225BCE7E71F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "CulinarySiteCommon\Common.csproj", "{C47E71E1-CEC1-45CF-8EA7-E078C863B0E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CulinarySite.Common", "CulinarySiteCommon\CulinarySite.Common.csproj", "{C47E71E1-CEC1-45CF-8EA7-E078C863B0E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,10 +1,10 @@
-﻿using Database.Entities;
+﻿using CulinarySite.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Database.Configurations
+namespace CulinarySite.Dal.EntityConfigurations
 {
-    public class TelephoneConfiguration : IEntityTypeConfiguration<Telephone>
+    public class TelephoneConfig : IEntityTypeConfiguration<Telephone>
     {
         public void Configure(EntityTypeBuilder<Telephone> builder)
         {

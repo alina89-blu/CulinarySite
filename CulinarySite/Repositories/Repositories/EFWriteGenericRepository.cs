@@ -1,16 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using Database.Entities;
 using Common.Exceptions;
 
-namespace Repositories
+namespace CulinarySite.Dal.Repositories
 {
     public class EFWriteGenericRepository<TEntity> : IWriteGenericRepository<TEntity> where TEntity : BaseEntity
     {
-        private readonly ApplicationContext _db;
+        private readonly CulinarySiteDbContext _db;
         private readonly DbSet<TEntity> _dbSet;
-        public EFWriteGenericRepository(ApplicationContext db)
+        public EFWriteGenericRepository(CulinarySiteDbContext db)
         {
             _db = db;
             _dbSet = db.Set<TEntity>();

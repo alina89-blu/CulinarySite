@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Database.Entities
+namespace CulinarySite.Domain.Entities
 {
     public class CookingStage : BaseEntity
     {

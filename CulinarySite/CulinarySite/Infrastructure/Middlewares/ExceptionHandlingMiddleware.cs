@@ -28,21 +28,13 @@ namespace CulinaryApi.Infrastructure.Middlewares
             {
                 _logger.LogError(ex, "An exception has occured");
 
-                switch (ex)
+                context.Response.StatusCode = ex switch
                 {
-                    case ValidationException _:
-                        context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        break;
-                    case NotFoundException _:
-                        context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                        break;
-                    default:
-                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        break;
-                }
-                
+                    ValidationException _ => (int)HttpStatusCode.BadRequest,
+                    NotFoundException _ => (int)HttpStatusCode.NotFound,
+                    _ => (int)HttpStatusCode.InternalServerError,
+                };
                 await CreateExceptionResponseAsync(context, ex);
-
             }
         }
 
@@ -53,8 +45,9 @@ namespace CulinaryApi.Infrastructure.Middlewares
             return context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
-                Message = ex.Message + "Hello Alina!!!"
-            }.ToString());
+                Message = ex.Message + "@@@"
+            }
+            .ToString());
         }
 
     }

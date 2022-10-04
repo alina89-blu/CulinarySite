@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Common.Exceptions;
-using Database.Entities;
+using CulinarySite.Dal.Interfaces;
+using CulinarySite.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Repositories
+namespace CulinarySite.Dal.Repositories
 {
     public class EFReadOnlyGenericRepository<TEntity> : IReadOnlyGenericRepository<TEntity> where TEntity : BaseEntity
     {
-        private readonly ApplicationContext _db;
+        private readonly CulinarySiteDbContext _db;
         private readonly DbSet<TEntity> _dbSet;
-        public EFReadOnlyGenericRepository(ApplicationContext db)
+        public EFReadOnlyGenericRepository(CulinarySiteDbContext db)
         {
             _db = db;
             _dbSet = db.Set<TEntity>();
