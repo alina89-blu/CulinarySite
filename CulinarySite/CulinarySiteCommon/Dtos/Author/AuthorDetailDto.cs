@@ -1,7 +1,7 @@
 ﻿using ServiceLayer.Dtos.Book;
 using System.Collections.Generic;
 
-namespace ServiceLayer.Dtos.Author
+namespace CulinarySite.Common.Dtos.Author
 {
     public class AuthorDetailDto
     {

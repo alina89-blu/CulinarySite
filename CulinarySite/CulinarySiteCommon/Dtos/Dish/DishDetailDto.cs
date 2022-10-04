@@ -2,7 +2,7 @@
 using ServiceLayer.Dtos.Recipe;
 using System.Collections.Generic;
 
-namespace ServiceLayer.Dtos.Dish
+namespace CulinarySite.Common.Dtos.Dish
 {
     public class DishDetailDto
     {

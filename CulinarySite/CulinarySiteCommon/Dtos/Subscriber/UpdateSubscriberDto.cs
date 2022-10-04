@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.Dtos.Subscriber
+namespace CulinarySite.Common.Dtos.Subscriber
 {
     public class UpdateSubscriberDto
     {

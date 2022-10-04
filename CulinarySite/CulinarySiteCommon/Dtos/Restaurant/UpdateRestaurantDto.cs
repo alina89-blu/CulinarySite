@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.Dtos.Restaurant
+namespace CulinarySite.Common.Dtos.Restaurant
 {
     public class UpdateRestaurantDto 
     {

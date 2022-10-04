@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.ViewModels.Image.DishImage
+namespace CulinarySite.Common.ViewModels.Image.DishImage
 {
     public class DishImageListModel
     {

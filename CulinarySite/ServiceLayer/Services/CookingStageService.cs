@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using Repositories;
-using ServiceLayer.Dtos.CookingStage;
 using AutoMapper;
-using Database.Entities;
 
-namespace ServiceLayer
+
+namespace CulinarySite.Bll.Sevices
 {
     public class CookingStageService : ICookingStageService
     {

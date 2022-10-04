@@ -1,7 +1,5 @@
 ﻿
-using System;
-
-namespace ServiceLayer.ViewModels.Book
+namespace CulinarySite.Common.ViewModels.Book
 {
     public class CreateUpdateBookBaseModel
     {

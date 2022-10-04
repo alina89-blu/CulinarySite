@@ -1,7 +1,7 @@
 ﻿
 using ServiceLayer.Dtos.Image.DishImage;
 
-namespace ServiceLayer.Dtos.Dish
+namespace CulinarySite.Common.Dtos.Dish
 {
     public class DishListDto
     {

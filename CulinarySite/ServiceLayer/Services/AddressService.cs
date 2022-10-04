@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
-using Database;
-using Database.Entities;
-using Repositories;
-using ServiceLayer.Dtos.Address;
 using System.Collections.Generic;
 
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Services
 {
     public class AddressService : IAddressService
     {

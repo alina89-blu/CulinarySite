@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ServiceLayer;
 using System.Collections.Generic;
-using ServiceLayer.ViewModels.Address;
 using AutoMapper;
-using ServiceLayer.Dtos.Address;
+
 
 namespace CulinaryApi.Controllers
 {

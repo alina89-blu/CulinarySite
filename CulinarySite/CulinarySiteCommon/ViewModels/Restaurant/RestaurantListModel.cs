@@ -1,8 +1,6 @@
-﻿
-using ServiceLayer.ViewModels.Telephone;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace ServiceLayer.ViewModels.Restaurant
+namespace CulinarySite.Common.ViewModels.Restaurant
 {
     public class RestaurantListModel
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.Dtos.Image.EpisodeImage
+namespace CulinarySite.Common.Dtos.Image.EpisodeImage
 {
     public class EpisodeImageListDto
     {

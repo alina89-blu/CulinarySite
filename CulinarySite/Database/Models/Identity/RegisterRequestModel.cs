@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace Database.Models.Identity
+namespace CulinarySite.Domain.Models.Identity
 {
     public class RegisterRequestModel
     {

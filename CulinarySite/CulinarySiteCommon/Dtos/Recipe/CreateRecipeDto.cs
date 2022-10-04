@@ -1,12 +1,8 @@
-﻿
-using ServiceLayer.Dtos.OrganicMatter;
-using ServiceLayer.Dtos.CookingStage;
-using ServiceLayer.Dtos.Tag;
+﻿using ServiceLayer.Dtos.Tag;
 using System.Collections.Generic;
 using System;
-using ServiceLayer.Dtos.Ingredient;
 
-namespace ServiceLayer.Dtos.Recipe
+namespace CulinarySite.Common.Dtos.Recipe
 {
     public class CreateRecipeDto 
     {

@@ -1,6 +1,5 @@
 ﻿
-
-namespace ServiceLayer.ViewModels.Tag
+namespace CulinarySite.Common.ViewModels.Tag
 {
     public class CreateTagModel : CreateUpdateTagBaseModel
     {

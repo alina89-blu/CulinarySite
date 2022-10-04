@@ -1,8 +1,6 @@
-﻿
-using ServiceLayer.ViewModels.Recipe;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace ServiceLayer.ViewModels.Dish
+namespace CulinarySite.Common.ViewModels.Dish
 {
     public class DishDetailModel
     {

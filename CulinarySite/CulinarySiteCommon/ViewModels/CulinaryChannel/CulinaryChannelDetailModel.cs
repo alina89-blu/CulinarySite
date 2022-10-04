@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.ViewModels.CulinaryChannel
+namespace CulinarySite.Common.ViewModels.CulinaryChannel
 {
     public class CulinaryChannelDetailModel
     {

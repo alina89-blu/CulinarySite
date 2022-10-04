@@ -1,9 +1,8 @@
-﻿using ServiceLayer.Dtos.Book;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 
-namespace ServiceLayer.ViewModels.Book
+namespace CulinarySite.Common.ViewModels.Book
 {
     public class BookNameComparer : IComparer<BookDetailListDto>
     {

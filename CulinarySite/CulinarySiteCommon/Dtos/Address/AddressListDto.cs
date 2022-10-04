@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.Dtos.Address
+namespace CulinarySite.Common.Dtos.Address
 {
     public class AddressListDto
     {

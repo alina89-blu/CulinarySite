@@ -1,6 +1,5 @@
 ﻿
-
-namespace ServiceLayer.ViewModels.CookingStage
+namespace CulinarySite.Common.ViewModels.CookingStage
 {
     public class CookingStageModel
     {

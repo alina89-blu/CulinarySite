@@ -1,7 +1,7 @@
 ﻿
 using ServiceLayer.Dtos.Image.RecipeImage;
 
-namespace ServiceLayer.Dtos.Recipe
+namespace CulinarySite.Common.Dtos.Recipe
 {
     public class RecipeDto
     {

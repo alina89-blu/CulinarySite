@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.Dtos.Episode
+namespace CulinarySite.Common.Dtos.Episode
 {
     public class CreateEpisodeDto 
     {

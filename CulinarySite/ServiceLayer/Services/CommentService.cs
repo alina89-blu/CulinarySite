@@ -1,10 +1,8 @@
-﻿using Repositories;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AutoMapper;
-using ServiceLayer.Dtos.Comment;
-using Database.Entities;
 
-namespace ServiceLayer
+
+namespace CulinarySite.Bll.Sevices
 {
     public class CommentService : ICommentService
     {

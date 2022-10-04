@@ -1,11 +1,9 @@
-﻿
-using Database.Entities;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Repositories;
 
-namespace Database.Infrastructure
+
+namespace CulinarySite.Dal.Extensions
 {
     public static class ApplicationBuilderExtensions
     {

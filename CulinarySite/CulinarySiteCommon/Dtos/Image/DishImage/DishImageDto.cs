@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.Dtos.Image.DishImage
+namespace CulinarySite.Common.Dtos.Image.DishImage
 {
     public class DishImageDto
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.Dtos.Image.RecipeImage
+namespace CulinarySite.Common.Dtos.Image.RecipeImage
 {
     public class CreateRecipeImageDto
     {

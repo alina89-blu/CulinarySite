@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.ViewModels.OrganicMatter
+namespace CulinarySite.Common.ViewModels.OrganicMatter
 {
     public class CreateUpdateOrganicMatterBaseModel
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.ViewModels.Dish
+namespace CulinarySite.Common.ViewModels.Dish
 {
     public class UpdateDishModel : CreateUpdateDishBaseModel
     {

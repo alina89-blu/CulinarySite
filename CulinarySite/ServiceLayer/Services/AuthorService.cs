@@ -5,7 +5,7 @@ using ServiceLayer.Dtos.Author;
 using Database.Entities;
 
 
-namespace ServiceLayer
+namespace CulinarySite.Bll.Sevices
 {
     public class AuthorService : IAuthorService
     {

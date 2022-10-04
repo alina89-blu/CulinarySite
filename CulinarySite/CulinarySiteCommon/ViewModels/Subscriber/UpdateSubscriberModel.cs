@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.ViewModels.Subscriber
+namespace CulinarySite.Common.ViewModels.Subscriber
 {
     public class UpdateSubscriberModel : CreateUpdateSubscriberBaseModel
     {

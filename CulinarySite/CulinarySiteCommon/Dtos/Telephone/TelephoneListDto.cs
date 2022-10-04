@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.Dtos.Telephone
+namespace CulinarySite.Common.Dtos.Telephone
 {
     public class TelephoneListDto
     {

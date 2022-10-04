@@ -1,6 +1,5 @@
 ﻿
-
-namespace ServiceLayer.Dtos.Tag
+namespace CulinarySite.Common.Dtos.Tag
 {
    public class TagDto
     {

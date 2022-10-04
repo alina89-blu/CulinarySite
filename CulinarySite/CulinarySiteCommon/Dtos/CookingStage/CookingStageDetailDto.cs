@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.Dtos.CookingStage
+namespace CulinarySite.Common.Dtos.CookingStage
 {
     public class CookingStageDetailDto
     {

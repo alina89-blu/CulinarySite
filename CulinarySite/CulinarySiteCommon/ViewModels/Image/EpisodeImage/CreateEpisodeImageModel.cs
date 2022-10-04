@@ -1,6 +1,6 @@
 ﻿
 
-namespace ServiceLayer.ViewModels.Image.EpisodeImage
+namespace CulinarySite.Common.ViewModels.Image.EpisodeImage
 {
     public class CreateEpisodeImageModel : CreateUpdateEpisodeImageBaseModel
     {

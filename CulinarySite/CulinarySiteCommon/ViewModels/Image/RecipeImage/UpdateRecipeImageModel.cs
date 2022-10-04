@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.ViewModels.Image.RecipeImage
+namespace CulinarySite.Common.ViewModels.Image.RecipeImage
 {
     public class UpdateRecipeImageModel : CreateUpdateRecipeImageBaseModel
     {

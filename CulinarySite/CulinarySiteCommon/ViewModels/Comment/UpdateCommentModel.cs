@@ -1,6 +1,5 @@
 ﻿
-
-namespace ServiceLayer.ViewModels.Comment
+namespace CulinarySite.Common.ViewModels.Comment
 {
     public class UpdateCommentModel : CreateUpdateCommentBaseModel
     {

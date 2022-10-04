@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.Dtos.CulinaryChannel
+namespace CulinarySite.Common.Dtos.CulinaryChannel
 {
     public class UpdateCulinaryChannelDto 
     {

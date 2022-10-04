@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.Dtos.Comment
+namespace CulinarySite.Common.Dtos.Comment
 {
     public class CreateCommentDto
     {

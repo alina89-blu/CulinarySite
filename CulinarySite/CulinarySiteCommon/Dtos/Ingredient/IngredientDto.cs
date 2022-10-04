@@ -1,6 +1,5 @@
 ﻿
-
-namespace ServiceLayer.Dtos.Ingredient
+namespace CulinarySite.Common.Dtos.Ingredient
 {
     public class IngredientDto
     {

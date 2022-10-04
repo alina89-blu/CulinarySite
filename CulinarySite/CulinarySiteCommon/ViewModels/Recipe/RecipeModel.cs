@@ -1,7 +1,5 @@
 ﻿
-using ServiceLayer.ViewModels.Image.RecipeImage;
-
-namespace ServiceLayer.ViewModels.Recipe
+namespace CulinarySite.Common.ViewModels.Recipe
 {
     public class RecipeModel
     {

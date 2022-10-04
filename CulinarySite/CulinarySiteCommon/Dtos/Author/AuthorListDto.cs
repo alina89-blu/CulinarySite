@@ -1,6 +1,5 @@
 ﻿
-
-namespace ServiceLayer.Dtos.Author
+namespace CulinarySite.Common.Dtos.Author
 {
     public class AuthorListDto
     {

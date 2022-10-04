@@ -1,6 +1,5 @@
 ﻿
-
-namespace ServiceLayer.ViewModels.Ingredient
+namespace CulinarySite.Common.ViewModels.Ingredient
 {
     public class IngredientModel
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.ViewModels.Address
+namespace CulinarySite.Common.ViewModels.Address
 {
     public class CreateAddressModel : CreateUpdateAddressBaseModel
     {

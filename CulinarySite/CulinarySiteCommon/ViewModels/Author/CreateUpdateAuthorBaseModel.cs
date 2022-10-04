@@ -1,6 +1,6 @@
 ﻿
 
-namespace ServiceLayer.ViewModels.Author
+namespace CulinarySite.Common.ViewModels.Author
 {
     public class CreateUpdateAuthorBaseModel
     {

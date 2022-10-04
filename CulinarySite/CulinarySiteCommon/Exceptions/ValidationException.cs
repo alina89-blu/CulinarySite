@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Exceptions
+namespace CulinarySite.Common.Exceptions
 {
     public class ValidationException : Exception
     {

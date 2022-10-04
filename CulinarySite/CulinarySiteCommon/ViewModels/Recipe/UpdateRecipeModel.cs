@@ -1,12 +1,7 @@
-﻿
-
-using ServiceLayer.ViewModels.CookingStage;
-using ServiceLayer.ViewModels.Ingredient;
-using ServiceLayer.ViewModels.OrganicMatter;
-using ServiceLayer.ViewModels.Tag;
+﻿using ServiceLayer.ViewModels.Tag;
 using System.Collections.Generic;
 
-namespace ServiceLayer.ViewModels.Recipe
+namespace CulinarySite.Common.ViewModels.Recipe
 {
     public class UpdateRecipeModel : CreateUpdateRecipeBaseModel
     {

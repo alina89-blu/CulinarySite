@@ -2,7 +2,7 @@
 using ServiceLayer.Dtos.Telephone;
 using System.Collections.Generic;
 
-namespace ServiceLayer.Dtos.Restaurant
+namespace CulinarySite.Common.Dtos.Restaurant
 {
     public class RestaurantListDto
     {

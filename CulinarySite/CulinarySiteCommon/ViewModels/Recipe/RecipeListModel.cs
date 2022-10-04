@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using ServiceLayer.ViewModels.Ingredient;
-using ServiceLayer.ViewModels.OrganicMatter;
-using ServiceLayer.ViewModels.CookingStage;
 using ServiceLayer.ViewModels.Tag;
 
-namespace ServiceLayer.ViewModels.Recipe
+namespace CulinarySite.Common.ViewModels.Recipe
 {
     public class RecipeListModel
     {

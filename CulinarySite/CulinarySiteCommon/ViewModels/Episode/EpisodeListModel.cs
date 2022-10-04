@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.ViewModels.Episode
+namespace CulinarySite.Common.ViewModels.Episode
 {
     public class EpisodeListModel
     {

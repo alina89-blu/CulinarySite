@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.Dtos.Book
+namespace CulinarySite.Common.Dtos.Book
 {
     public class UpdateBookDto
     {

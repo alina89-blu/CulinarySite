@@ -1,8 +1,7 @@
 ﻿
-using ServiceLayer.ViewModels.Book;
 using System.Collections.Generic;
 
-namespace ServiceLayer.ViewModels.Author
+namespace CulinarySite.Common.ViewModels.Author
 {
     public class AuthorDetailModel
     {

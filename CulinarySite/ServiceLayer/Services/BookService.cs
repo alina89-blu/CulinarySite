@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Database.Entities;
-using Repositories;
-using ServiceLayer.Dtos.Book;
-using ServiceLayer.ViewModels.Book;
 
-namespace ServiceLayer
+
+namespace CulinarySite.Bll.Sevices
 {
     public class BookService : IBookService
     {

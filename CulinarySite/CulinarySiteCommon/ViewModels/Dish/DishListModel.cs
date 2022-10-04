@@ -1,7 +1,7 @@
 ﻿
 using ServiceLayer.ViewModels.Image.DishImage;
 
-namespace ServiceLayer.ViewModels.Dish
+namespace CulinarySite.Common.ViewModels.Dish
 {
     public class DishListModel
     {

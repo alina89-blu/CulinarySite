@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace ServiceLayer.ViewModels.Restaurant
+namespace CulinarySite.Common.ViewModels.Restaurant
 {
     public class CreateUpdateRestaurantBaseModel
     {

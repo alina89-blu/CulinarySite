@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace ServiceLayer.ViewModels.Recipe
+namespace CulinarySite.Common.ViewModels.Recipe
 {
     public class CreateUpdateRecipeBaseModel
     {

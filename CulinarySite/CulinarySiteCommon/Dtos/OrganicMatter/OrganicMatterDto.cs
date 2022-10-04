@@ -1,5 +1,5 @@
 ﻿
-namespace ServiceLayer.Dtos.OrganicMatter
+namespace CulinarySite.Common.Dtos.OrganicMatter
 {
    public class OrganicMatterDto
     {

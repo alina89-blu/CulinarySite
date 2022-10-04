@@ -1,13 +1,9 @@
-﻿using Database;
-using ServiceLayer.ViewModels.Ingredient;
-using ServiceLayer.ViewModels.OrganicMatter;
-using ServiceLayer.ViewModels.CookingStage;
-using ServiceLayer.ViewModels.Tag;
+﻿using ServiceLayer.ViewModels.Tag;
 using System;
 using System.Collections.Generic;
 using ServiceLayer.ViewModels.Image.RecipeImage;
 
-namespace ServiceLayer.ViewModels.Recipe
+namespace CulinarySite.Common.ViewModels.Recipe
 {
     public class RecipeDetailModel
     {
