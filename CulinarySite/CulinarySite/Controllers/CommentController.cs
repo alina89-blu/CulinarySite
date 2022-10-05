@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using ServiceLayer;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer.ViewModels.Comment;
 using AutoMapper;
-using ServiceLayer.Dtos.Comment;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.ViewModels.Comment;
+using CulinarySite.Common.Dtos.Comment;
 
 namespace CulinaryApi.Controllers
 {

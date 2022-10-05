@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using ServiceLayer;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer.ViewModels.OrganicMatter;
 using AutoMapper;
-using ServiceLayer.Dtos.OrganicMatter;
+using CulinarySite.Common.ViewModels.OrganicMatter;
+using CulinarySite.Common.Dtos.OrganicMatter;
+using CulinarySite.Bll.Interfaces;
 
 namespace CulinaryApi.Controllers
 {

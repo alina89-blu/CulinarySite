@@ -11,12 +11,10 @@ using Microsoft.EntityFrameworkCore;
 namespace CulinarySite.Dal.Repositories
 {
     public class EFReadOnlyGenericRepository<TEntity> : IReadOnlyGenericRepository<TEntity> where TEntity : BaseEntity
-    {
-        private readonly CulinarySiteDbContext _db;
+    {        
         private readonly DbSet<TEntity> _dbSet;
         public EFReadOnlyGenericRepository(CulinarySiteDbContext db)
-        {
-            _db = db;
+        {          
             _dbSet = db.Set<TEntity>();
         }
 

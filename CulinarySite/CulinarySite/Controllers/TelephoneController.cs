@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.Dtos.Telephone;
+using CulinarySite.Common.ViewModels.Telephone;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer;
-using ServiceLayer.Dtos.Telephone;
-using ServiceLayer.ViewModels.Telephone;
 
 namespace CulinaryApi.Controllers
 {

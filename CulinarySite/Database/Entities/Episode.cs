@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace CulinarySite.Domain.Entities
 {
     public class Episode : BaseEntity
-    {
-        [Required]
+    {    
         public string Name { get; set; }
-
         public int CulinaryChannelId { get; set; }
         public CulinaryChannel CulinaryChannel { get; set; }
         public Image Image { get; set; }

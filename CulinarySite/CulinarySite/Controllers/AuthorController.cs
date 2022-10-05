@@ -1,9 +1,9 @@
-﻿using ServiceLayer;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using ServiceLayer.ViewModels.Author;
 using AutoMapper;
-using ServiceLayer.Dtos.Author;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.ViewModels.Author;
+using CulinarySite.Common.Dtos.Author;
 
 namespace CulinaryApi.Controllers
 {
@@ -21,7 +21,7 @@ namespace CulinaryApi.Controllers
         public IEnumerable<AuthorListModel> GetAuthorList()
         {
             IEnumerable<AuthorListDto> authorListDtos = _authorService.GetAuthorList();
-            List<AuthorListModel> authorListModels = new List<AuthorListModel>();
+            var authorListModels = new List<AuthorListModel>();
 
             foreach (var authorListDto in authorListDtos)
             {

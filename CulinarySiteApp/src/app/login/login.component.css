@@ -2,8 +2,21 @@ form {
   border: 1px solid grey;
   padding: 10% 15%;
   margin-top: 20%;
+  font-family: Bradley Hand, cursive;
 }
 
 button {
   margin: 10px;
+}
+
+.textAlignCenter {
+  text-align: center;
+}
+
+.textColor {
+  color: grey;
+}
+
+a {
+  color: grey;
 }

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.Dtos.Episode;
+using CulinarySite.Common.ViewModels.Episode;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer;
-using ServiceLayer.Dtos.Episode;
-using ServiceLayer.ViewModels.Episode;
 
 namespace CulinaryApi.Controllers
 {

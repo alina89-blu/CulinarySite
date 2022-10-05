@@ -1,47 +1,48 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-4"></div>
-    <div class="col-lg-4">
-      <form [formGroup]="loginForm" (ngSubmit)="login()">
-        <div class="form-group">
-          <label for="exampleInputEmail1">UserName</label>
-          <input type="text" class="form-control" formControlName="username" />
-        </div>
+<div class="textColor">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <h4 class="textAlignCenter">Авторизация</h4>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Логин</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="username"
+            />
+          </div>
 
-        <div
-          *ngIf="username?.touched && username?.errors?.['required']"
-          class="alert alert-danger"
-        >
-          This field is required!
-        </div>
+          <div
+            *ngIf="username?.touched && username?.errors?.['required']"
+            class="alert alert-danger"
+          >
+            Это поле обязательно к заполнению!
+          </div>
 
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            formControlName="password"
-          />
-        </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Пароль</label>
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+            />
+          </div>
 
-        <div
-          *ngIf="password?.touched && password?.errors?.['required']"
-          class="alert alert-danger"
-        >
-          This field is required!
-        </div>
+          <div
+            *ngIf="password?.touched && password?.errors?.['required']"
+            class="alert alert-danger"
+          >
+            Это поле обязательно к заполнению!
+          </div>
 
-        <button type="submit" class="btn btn-primary">Войти</button>
+          <button type="submit" class="btn btn-secondary">Войти</button>
 
-        <a
-          [routerLink]="['/register']"
-          class="btn btn-success"
-          role="button"
-          aria-pressed="true"
-          >Регистрация</a
-        >
-      </form>
+          <a [routerLink]="['/register']">Зарегистрироваться</a>
+        </form>
+      </div>
+      <div class="col-lg-4"></div>
     </div>
-    <div class="col-lg-4"></div>
   </div>
 </div>

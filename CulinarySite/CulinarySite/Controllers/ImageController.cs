@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
+using CulinarySite.Bll.Interfaces;
+using CulinarySite.Common.Dtos.Image.DishImage;
+using CulinarySite.Common.Dtos.Image.EpisodeImage;
+using CulinarySite.Common.Dtos.Image.RecipeImage;
+using CulinarySite.Common.ViewModels.Image.DishImage;
+using CulinarySite.Common.ViewModels.Image.EpisodeImage;
+using CulinarySite.Common.ViewModels.Image.RecipeImage;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer;
-using ServiceLayer.Dtos.Image.DishImage;
-using ServiceLayer.Dtos.Image.EpisodeImage;
-using ServiceLayer.Dtos.Image.RecipeImage;
-using ServiceLayer.ViewModels.Image.DishImage;
-using ServiceLayer.ViewModels.Image.EpisodeImage;
-using ServiceLayer.ViewModels.Image.RecipeImage;
+
 
 namespace CulinaryApi.Controllers
 {

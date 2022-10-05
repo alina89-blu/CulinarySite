@@ -71,7 +71,7 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<AuthorListDto> GetAuthorList()
         {
             IEnumerable<Author> authors = _authorReadOnlyRepository.GetItemList();
-            List<AuthorListDto> authorListDtos = new List<AuthorListDto>();
+            var authorListDtos = new List<AuthorListDto>();
 
             foreach (var author in authors)
             {

@@ -30,8 +30,7 @@ namespace CulinarySite.Dal
         public DbSet<Tag> Tags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // modelBuilder.Entity<User>().HasNoKey();
+        {            
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }

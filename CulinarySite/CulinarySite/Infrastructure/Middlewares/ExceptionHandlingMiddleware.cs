@@ -1,4 +1,4 @@
-﻿using Common.Exceptions;
+﻿using CulinarySite.Common.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
