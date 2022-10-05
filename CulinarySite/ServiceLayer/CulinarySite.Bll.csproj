@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CulinarySiteCommon\CulinarySite.Common.csproj" />
     <ProjectReference Include="..\Database\CulinarySite.Domain.csproj" />
     <ProjectReference Include="..\Repositories\CulinarySite.Dal.csproj" />
   </ItemGroup>

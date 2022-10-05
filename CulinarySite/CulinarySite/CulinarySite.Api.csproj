@@ -24,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CulinarySiteCommon\CulinarySite.Common.csproj" />
+    <ProjectReference Include="..\Database\CulinarySite.Domain.csproj" />
+    <ProjectReference Include="..\Repositories\CulinarySite.Dal.csproj" />
     <ProjectReference Include="..\ServiceLayer\CulinarySite.Bll.csproj" />
   </ItemGroup>
 
