@@ -5,7 +5,7 @@ using CulinarySite.Common.ViewModels.Restaurant;
 using CulinarySite.Common.Dtos.Restaurant;
 using CulinarySite.Bll.Interfaces;
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class RestaurantController : ApiController
     {

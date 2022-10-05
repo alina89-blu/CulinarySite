@@ -36,7 +36,7 @@ using CulinarySite.Common.ViewModels.Subscriber;
 using CulinarySite.Common.ViewModels.Tag;
 using CulinarySite.Common.ViewModels.Telephone;
 
-namespace CulinaryApi.AutoMapperProfiles
+namespace CulinarySite.Api.AutoMapperProfiles
 {
     public class DtoProfile : Profile
     {

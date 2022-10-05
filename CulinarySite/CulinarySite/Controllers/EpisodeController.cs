@@ -5,7 +5,7 @@ using CulinarySite.Common.Dtos.Episode;
 using CulinarySite.Common.ViewModels.Episode;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class EpisodeController : ApiController
     {

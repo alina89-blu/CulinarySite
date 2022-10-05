@@ -10,7 +10,7 @@ using CulinarySite.Common.ViewModels.Image.RecipeImage;
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class ImageController : ApiController
     {

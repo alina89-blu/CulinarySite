@@ -5,7 +5,7 @@ using CulinarySite.Common.Dtos.Telephone;
 using CulinarySite.Common.ViewModels.Telephone;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class TelephoneController : ApiController
     {

@@ -1,5 +1,5 @@
-using CulinaryApi.AutoMapperProfiles;
-using CulinaryApi.Infrastructure.Extensions;
+using CulinarySite.Api.AutoMapperProfiles;
+using CulinarySite.Api.Infrastructure.Extensions;
 using CulinarySite.Bll.Interfaces;
 using CulinarySite.Bll.Services;
 using CulinarySite.Dal;
@@ -19,7 +19,7 @@ using Microsoft.IdentityModel.Tokens;
 using ServiceLayer.AutoMapperProfiles;
 using System.Text;
 
-namespace CulinaryApi
+namespace CulinarySite.Api
 {
     public class Startup
     {

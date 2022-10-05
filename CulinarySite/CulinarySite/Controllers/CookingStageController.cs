@@ -5,7 +5,7 @@ using CulinarySite.Common.Dtos.CookingStage;
 using CulinarySite.Common.ViewModels.CookingStage;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class CookingStageController : ApiController
     {

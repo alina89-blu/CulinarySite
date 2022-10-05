@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CulinaryApi.Infrastructure.Middlewares
+namespace CulinarySite.Api.Infrastructure.Middlewares
 {
     public class ErrorDetails
     {

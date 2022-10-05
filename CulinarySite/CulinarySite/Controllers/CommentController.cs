@@ -5,7 +5,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.ViewModels.Comment;
 using CulinarySite.Common.Dtos.Comment;
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class CommentController : ApiController
     {

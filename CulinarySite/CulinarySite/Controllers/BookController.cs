@@ -5,7 +5,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.ViewModels.Book;
 using CulinarySite.Common.Dtos.Book;
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class BookController : ApiController
     {

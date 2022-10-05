@@ -5,7 +5,7 @@ using CulinarySite.Common.ViewModels.Ingredient;
 using CulinarySite.Common.Dtos.Ingredient;
 using CulinarySite.Bll.Interfaces;
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class IngredientController : ApiController
     {

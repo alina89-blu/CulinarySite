@@ -5,7 +5,7 @@ using CulinarySite.Common.ViewModels.Tag;
 using CulinarySite.Common.Dtos.Tag;
 using CulinarySite.Bll.Interfaces;
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class TagController : ApiController
     {

@@ -5,7 +5,7 @@ using CulinarySite.Common.ViewModels.Dish;
 using CulinarySite.Common.Dtos.Dish;
 using CulinarySite.Bll.Interfaces;
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class DishController : ApiController
     {

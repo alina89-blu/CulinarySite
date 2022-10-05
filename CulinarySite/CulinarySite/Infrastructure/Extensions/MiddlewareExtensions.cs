@@ -1,7 +1,7 @@
-﻿using CulinaryApi.Infrastructure.Middlewares;
+﻿using CulinarySite.Api.Infrastructure.Middlewares;
 using Microsoft.AspNetCore.Builder;
 
-namespace CulinaryApi.Infrastructure.Extensions
+namespace CulinarySite.Api.Infrastructure.Extensions
 {
     public static class MiddlewareExtensions
     {

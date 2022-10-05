@@ -5,7 +5,7 @@ using CulinarySite.Common.ViewModels.Subscriber;
 using CulinarySite.Common.Dtos.Subscriber;
 using CulinarySite.Bll.Interfaces;
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class SubscriberController : ApiController
     {

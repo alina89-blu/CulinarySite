@@ -5,7 +5,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.ViewModels.Author;
 using CulinarySite.Common.Dtos.Author;
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class AuthorController : ApiController
     {

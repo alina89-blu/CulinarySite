@@ -5,7 +5,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.ViewModels.Address;
 using CulinarySite.Common.Dtos.Address;
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class AddressController : ApiController
     {

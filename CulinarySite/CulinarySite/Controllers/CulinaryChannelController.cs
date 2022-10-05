@@ -5,7 +5,7 @@ using CulinarySite.Common.Dtos.CulinaryChannel;
 using CulinarySite.Common.ViewModels.CulinaryChannel;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class CulinaryChannelController : ApiController
     {

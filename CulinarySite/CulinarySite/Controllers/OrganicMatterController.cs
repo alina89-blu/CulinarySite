@@ -5,7 +5,7 @@ using CulinarySite.Common.ViewModels.OrganicMatter;
 using CulinarySite.Common.Dtos.OrganicMatter;
 using CulinarySite.Bll.Interfaces;
 
-namespace CulinaryApi.Controllers
+namespace CulinarySite.Api.Controllers
 {
     public class OrganicMatterController : ApiController
     {

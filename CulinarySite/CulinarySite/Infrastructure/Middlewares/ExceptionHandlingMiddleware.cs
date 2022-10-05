@@ -5,7 +5,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace CulinaryApi.Infrastructure.Middlewares
+namespace CulinarySite.Api.Infrastructure.Middlewares
 {
     public class ExceptionHandlingMiddleware
     {
