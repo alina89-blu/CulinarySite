@@ -4,6 +4,7 @@ using AutoMapper;
 using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.ViewModels.Address;
 using CulinarySite.Common.Dtos.Address;
+using System.Linq;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -21,12 +22,7 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<AddressListModel> GetAddressList()
         {
             IEnumerable<AddressListDto> addressListDtos = _addressService.GetAddressList();
-            var addressListModels = new List<AddressListModel>();
-
-            foreach (var addressListDto in addressListDtos)
-            {
-                addressListModels.Add(_mapper.Map<AddressListModel>(addressListDto));
-            }
+            var addressListModels = addressListDtos.Select(x => _mapper.Map<AddressListModel>(x));
 
             return addressListModels;
         }

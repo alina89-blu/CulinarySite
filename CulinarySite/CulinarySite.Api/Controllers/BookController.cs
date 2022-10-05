@@ -4,6 +4,7 @@ using AutoMapper;
 using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.ViewModels.Book;
 using CulinarySite.Common.Dtos.Book;
+using System.Linq;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -20,13 +21,8 @@ namespace CulinarySite.Api.Controllers
         [HttpGet("{withRelated}")]
         public IEnumerable<BookDetailListModel> GetBookDetailList(bool withRelated)
         {
-            IEnumerable<BookDetailListDto> bookDetailListDtos = _bookService.GetBookDetailList(withRelated);
-            var bookDetailListModels = new List<BookDetailListModel>();
-
-            foreach (var bookDetailListDto in bookDetailListDtos)
-            {
-                bookDetailListModels.Add(_mapper.Map<BookDetailListModel>(bookDetailListDto));
-            }
+            IEnumerable<BookDetailListDto> bookDetailListDtos = _bookService.GetBookDetailList(withRelated);          
+            var bookDetailListModels = bookDetailListDtos.Select(x => _mapper.Map<BookDetailListModel>(x));
 
             return bookDetailListModels;
         }
@@ -35,14 +31,9 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<BookModel> GetBookList()
         {
             IEnumerable<BookDto> bookDtos = _bookService.GetBookList();
-            var bookModels = new List<BookModel>();
+            var bookModels = bookDtos.Select(x => _mapper.Map<BookModel>(x));
 
-            foreach (var bookDto in bookDtos)
-            {
-                bookModels.Add(_mapper.Map<BookModel>(bookDto));
-            }
-
-            return bookModels;
+            return bookModels;                      
         }
 
         [HttpGet("{id}/{withRelated}")]
@@ -78,12 +69,8 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<BookDetailListModel> GetSortedBooksByName(bool withRelated)
         {
             IEnumerable<BookDetailListDto> bookDetailListDtos = _bookService.GetSortedBooksByName(withRelated);
-            var bookDetailListModels = new List<BookDetailListModel>();
-
-            foreach (var bookDetailListDto in bookDetailListDtos)
-            {
-                bookDetailListModels.Add(_mapper.Map<BookDetailListModel>(bookDetailListDto));
-            }
+            var bookDetailListModels = bookDetailListDtos.Select(x => _mapper.Map<BookDetailListModel>(x));
+            
             return bookDetailListModels;
         }
 
@@ -91,12 +78,8 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<BookDetailListModel> GetSortedBooksByYear(bool withRelated)
         {
             IEnumerable<BookDetailListDto> bookDetailListDtos = _bookService.GetSortedBooksByYear(withRelated);
-            var bookDetailListModels = new List<BookDetailListModel>();
-
-            foreach (var bookDetailListDto in bookDetailListDtos)
-            {
-                bookDetailListModels.Add(_mapper.Map<BookDetailListModel>(bookDetailListDto));
-            }
+            var bookDetailListModels = bookDetailListDtos.Select(x => _mapper.Map<BookDetailListModel>(x));
+           
             return bookDetailListModels;
         }
     }

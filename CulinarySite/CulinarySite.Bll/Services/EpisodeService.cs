@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Episode;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
@@ -72,7 +73,7 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<EpisodeListDto> GetEpisodeList(bool withRelated)
         {
             IEnumerable<Episode> episodes;
-            var episodeListDtos = new List<EpisodeListDto>();
+            IEnumerable<EpisodeListDto> episodeListDtos = new List<EpisodeListDto>();
 
             if (withRelated)
             {
@@ -81,20 +82,14 @@ namespace CulinarySite.Bll.Services
                                 x => x.Image,
                                 x => x.Tags);
 
-                foreach (var episode in episodes)
-                {
-                    episodeListDtos.Add(_mapper.Map<EpisodeListDto>(episode));
-                }
+                episodeListDtos = episodes.Select(x => _mapper.Map<EpisodeListDto>(x));
 
                 return episodeListDtos;
             }
 
             episodes = _episodeReadOnlyRepository.GetItemList();
 
-            foreach (var episode in episodes)
-            {
-                episodeListDtos.Add(_mapper.Map<EpisodeListDto>(episode));
-            }
+            episodeListDtos = episodes.Select(x => _mapper.Map<EpisodeListDto>(x));
 
             return episodeListDtos;
         }

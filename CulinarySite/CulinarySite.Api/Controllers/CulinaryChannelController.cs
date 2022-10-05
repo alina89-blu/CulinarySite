@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.CulinaryChannel;
 using CulinarySite.Common.ViewModels.CulinaryChannel;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -21,13 +22,8 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<CulinaryChannelListModel> GetCulinaryChannelList(bool withRelated)
         {
             IEnumerable<CulinaryChannelListDto> culinaryChannelListDtos = _culinaryChannelService.GetCulinaryChannelList(withRelated);
-            var culinaryChannelListModels = new List<CulinaryChannelListModel>();
-
-            foreach (var culinaryChannelListDto in culinaryChannelListDtos)
-            {
-                culinaryChannelListModels.Add(_mapper.Map<CulinaryChannelListModel>(culinaryChannelListDto));
-            }
-
+            var culinaryChannelListModels = culinaryChannelListDtos.Select(x => _mapper.Map<CulinaryChannelListModel>(x));
+           
             return culinaryChannelListModels;
         }
 

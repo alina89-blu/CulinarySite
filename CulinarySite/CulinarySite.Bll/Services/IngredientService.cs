@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Ingredient;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
@@ -47,13 +48,7 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<IngredientListDto> GetIngredientList()
         {
             IEnumerable<Ingredient> ingredients = _ingredientReadOnlyRepository.GetItemList();
-
-            var ingredientListDtos = new List<IngredientListDto>();
-
-            foreach (var ingredient in ingredients)
-            {
-                ingredientListDtos.Add(_mapper.Map<IngredientListDto>(ingredient));
-            }
+            var ingredientListDtos = ingredients.Select(x => _mapper.Map<IngredientListDto>(x));            
 
             return ingredientListDtos;
         }

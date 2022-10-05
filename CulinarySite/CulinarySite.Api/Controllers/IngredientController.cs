@@ -4,6 +4,7 @@ using AutoMapper;
 using CulinarySite.Common.ViewModels.Ingredient;
 using CulinarySite.Common.Dtos.Ingredient;
 using CulinarySite.Bll.Interfaces;
+using System.Linq;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -21,12 +22,7 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<IngredientListModel> GetIngredientList()
         {
             IEnumerable<IngredientListDto> ingredientListDtos = _ingredientService.GetIngredientList();
-            var ingredientListModels = new List<IngredientListModel>();
-
-            foreach (var ingredientListDto in ingredientListDtos)
-            {
-                ingredientListModels.Add(_mapper.Map<IngredientListModel>(ingredientListDto));
-            }
+            var ingredientListModels = ingredientListDtos.Select(x => _mapper.Map<IngredientListModel>(x));           
 
             return ingredientListModels;
         }

@@ -4,6 +4,7 @@ using AutoMapper;
 using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.ViewModels.Comment;
 using CulinarySite.Common.Dtos.Comment;
+using System.Linq;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -21,12 +22,7 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<CommentListModel> GetCommentList(bool withRelated)
         {
             IEnumerable<CommentListDto> commentListDtos = _commentService.GetCommentList(withRelated);
-            var commentListModels = new List<CommentListModel>();
-
-            foreach (var commentListDto in commentListDtos)
-            {
-                commentListModels.Add(_mapper.Map<CommentListModel>(commentListDto));
-            }
+            var commentListModels = commentListDtos.Select(x => _mapper.Map<CommentListModel>(x));           
 
             return commentListModels;
         }

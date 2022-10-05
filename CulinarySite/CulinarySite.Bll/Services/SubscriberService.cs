@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Subscriber;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
@@ -47,26 +48,18 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<SubscriberListDto> GetSubscriberList(bool withRelated)
         {
             IEnumerable<Subscriber> subscribers;
-            var subscriberListDtos = new List<SubscriberListDto>();
+            IEnumerable<SubscriberListDto> subscriberListDtos ;
 
             if (withRelated)
             {
                 subscribers = _subscriberReadOnlyRepository.GetItemListWithInclude(x => x.Comments);
-
-                foreach (var subscriber in subscribers)
-                {
-                    subscriberListDtos.Add(_mapper.Map<SubscriberListDto>(subscriber));
-                }
-
+                subscriberListDtos = subscribers.Select(x => _mapper.Map<SubscriberListDto>(x));
+               
                 return subscriberListDtos;
             }
 
             subscribers = _subscriberReadOnlyRepository.GetItemList();
-
-            foreach (var subscriber in subscribers)
-            {
-                subscriberListDtos.Add(_mapper.Map<SubscriberListDto>(subscriber));
-            }
+            subscriberListDtos = subscribers.Select(x => _mapper.Map<SubscriberListDto>(x));
 
             return subscriberListDtos;
         }

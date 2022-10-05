@@ -4,6 +4,7 @@ using AutoMapper;
 using CulinarySite.Common.ViewModels.Tag;
 using CulinarySite.Common.Dtos.Tag;
 using CulinarySite.Bll.Interfaces;
+using System.Linq;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -21,12 +22,7 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<TagListModel> GetTagList(bool withRelated)
         {
             IEnumerable<TagListDto> tagListDtos = _tagService.GetTagList(withRelated);
-            var tagListModels = new List<TagListModel>();
-
-            foreach (var tagListDto in tagListDtos)
-            {
-                tagListModels.Add(_mapper.Map<TagListModel>(tagListDto));
-            }
+            var tagListModels = tagListDtos.Select(x => _mapper.Map<TagListModel>(x));            
 
             return tagListModels;
         }

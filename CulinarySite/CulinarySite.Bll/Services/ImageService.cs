@@ -6,6 +6,7 @@ using CulinarySite.Common.Dtos.Image.EpisodeImage;
 using CulinarySite.Common.Dtos.Image.RecipeImage;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
@@ -49,26 +50,18 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<DishImageListDto> GetDishImageList(bool withRelated)
         {
             IEnumerable<Image> images;
-            var dishImageListDtos = new List<DishImageListDto>();
+            IEnumerable<DishImageListDto> dishImageListDtos;
 
             if (withRelated)
             {
                 images = _imageReadOnlyRepository.GetItemListWithInclude(x => x.Dish);
-
-                foreach (var image in images)
-                {
-                    dishImageListDtos.Add(_mapper.Map<DishImageListDto>(image));
-                }
-
+                dishImageListDtos = images.Select(x => _mapper.Map<DishImageListDto>(x));
+                
                 return dishImageListDtos;
             }
 
             images = _imageReadOnlyRepository.GetItemList();
-
-            foreach (var image in images)
-            {
-                dishImageListDtos.Add(_mapper.Map<DishImageListDto>(image));
-            }
+            dishImageListDtos = images.Select(x => _mapper.Map<DishImageListDto>(x));
 
             return dishImageListDtos;
         }
@@ -115,26 +108,18 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<EpisodeImageListDto> GetEpisodeImageList(bool withRelated)
         {
             IEnumerable<Image> images;
-            var episodeImageListDtos = new List<EpisodeImageListDto>();
+            IEnumerable<EpisodeImageListDto> episodeImageListDtos ;
 
             if (withRelated)
             {
                 images = _imageReadOnlyRepository.GetItemListWithInclude(x => x.Episode);
-
-                foreach (var image in images)
-                {
-                    episodeImageListDtos.Add(_mapper.Map<EpisodeImageListDto>(image));
-                }
+                episodeImageListDtos = images.Select(x => _mapper.Map<EpisodeImageListDto>(x));                
 
                 return episodeImageListDtos;
             }
 
             images = _imageReadOnlyRepository.GetItemList();
-
-            foreach (var image in images)
-            {
-                episodeImageListDtos.Add(_mapper.Map<EpisodeImageListDto>(image));
-            }
+            episodeImageListDtos = images.Select(x => _mapper.Map<EpisodeImageListDto>(x));
 
             return episodeImageListDtos;
         }
@@ -181,26 +166,18 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<RecipeImageListDto> GetRecipeImageList(bool withRelated)
         {
             IEnumerable<Image> images;
-            var recipeImageListDtos = new List<RecipeImageListDto>();
+            IEnumerable<RecipeImageListDto> recipeImageListDtos ;
 
             if (withRelated)
             {
                 images = _imageReadOnlyRepository.GetItemListWithInclude(x => x.Recipe);
-
-                foreach (var image in images)
-                {
-                    recipeImageListDtos.Add(_mapper.Map<RecipeImageListDto>(image));
-                }
+                recipeImageListDtos=images.Select(x=> _mapper.Map<RecipeImageListDto>(x));                
 
                 return recipeImageListDtos;
             }
 
             images = _imageReadOnlyRepository.GetItemList();
-
-            foreach (var image in images)
-            {
-                recipeImageListDtos.Add(_mapper.Map<RecipeImageListDto>(image));
-            }
+            recipeImageListDtos = images.Select(x => _mapper.Map<RecipeImageListDto>(x));
 
             return recipeImageListDtos;
         }

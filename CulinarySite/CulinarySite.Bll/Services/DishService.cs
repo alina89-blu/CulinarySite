@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Dish;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
@@ -70,7 +71,7 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<DishListDto> GetDishDetailList(bool withRelated)
         {
             IEnumerable<Dish> dishes;
-            var dishListDtos = new List<DishListDto>();
+            IEnumerable<DishListDto> dishListDtos;
 
             if (withRelated)
             {
@@ -78,33 +79,22 @@ namespace CulinarySite.Bll.Services
                     x => x.Recipes,
                     x => x.Image);
 
-                foreach (var dish in dishes)
-                {
-                    dishListDtos.Add(_mapper.Map<DishListDto>(dish));
-                }
+                dishListDtos = dishes.Select(x => _mapper.Map<DishListDto>(x));
 
                 return dishListDtos;
             }
 
             dishes = _dishReadOnlyRepository.GetItemList();
 
-            foreach (var dish in dishes)
-            {
-                dishListDtos.Add(_mapper.Map<DishListDto>(dish));
-            }
+            dishListDtos = dishes.Select(x => _mapper.Map<DishListDto>(x));
 
             return dishListDtos;
         }
 
         public IEnumerable<DishDto> GetDishList()
-        {                       
+        {
             IEnumerable<Dish> dishes = _dishReadOnlyRepository.GetItemList();
-            var dishDtos = new List<DishDto>();
-
-            foreach (var dish in dishes)
-            {
-                dishDtos.Add(_mapper.Map<DishDto>(dish));
-            }
+            var dishDtos = dishes.Select(x => _mapper.Map<DishDto>(x));
 
             return dishDtos;
         }

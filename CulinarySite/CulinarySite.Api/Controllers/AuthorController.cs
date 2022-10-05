@@ -4,6 +4,7 @@ using AutoMapper;
 using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.ViewModels.Author;
 using CulinarySite.Common.Dtos.Author;
+using System.Linq;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -21,12 +22,7 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<AuthorListModel> GetAuthorList()
         {
             IEnumerable<AuthorListDto> authorListDtos = _authorService.GetAuthorList();
-            var authorListModels = new List<AuthorListModel>();
-
-            foreach (var authorListDto in authorListDtos)
-            {
-                authorListModels.Add(_mapper.Map<AuthorListModel>(authorListDto));
-            }
+            var authorListModels = authorListDtos.Select(x => _mapper.Map<AuthorListModel>(x));            
 
             return authorListModels;
         }

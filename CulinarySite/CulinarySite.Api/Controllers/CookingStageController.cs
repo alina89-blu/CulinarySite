@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.CookingStage;
 using CulinarySite.Common.ViewModels.CookingStage;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -21,12 +22,7 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<CookingStageListModel> GetCookingStageList(bool withRelated)
         {
             IEnumerable < CookingStageListDto > cookingStageListDtos= _cookingStageService.GetCookingStageList(withRelated);
-            var cookingStageListModels = new List<CookingStageListModel>();
-
-            foreach(var cookingStageListDto in cookingStageListDtos)
-            {
-                cookingStageListModels.Add(_mapper.Map<CookingStageListModel>(cookingStageListDto));
-            }
+            var cookingStageListModels = cookingStageListDtos.Select(x => _mapper.Map<CookingStageListModel>(x));
 
             return cookingStageListModels;
         }

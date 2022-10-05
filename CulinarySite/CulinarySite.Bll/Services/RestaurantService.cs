@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Restaurant;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
@@ -47,42 +48,28 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<RestaurantListDto> GetRestaurantDetailList(bool withRelated)
         {
             IEnumerable<Restaurant> restaurants;
-            var restaurantListDtos = new List<RestaurantListDto>();
+            IEnumerable<RestaurantListDto> restaurantListDtos;
             if (withRelated)
             {
                 restaurants = _restaurantReadOnlyRepository.GetItemListWithInclude(
                    x => x.Telephones,
                    x => x.Address,
                    x => x.Comments);
-
-                foreach (var restaurant in restaurants)
-                {
-                    restaurantListDtos.Add(_mapper.Map<RestaurantListDto>(restaurant));
-                }
+                restaurantListDtos = restaurants.Select(x => _mapper.Map<RestaurantListDto>(x));
 
                 return restaurantListDtos;
             }
 
             restaurants = _restaurantReadOnlyRepository.GetItemList();
-
-            foreach (var restaurant in restaurants)
-            {
-                restaurantListDtos.Add(_mapper.Map<RestaurantListDto>(restaurant));
-            }
+            restaurantListDtos = restaurants.Select(x => _mapper.Map<RestaurantListDto>(x));
 
             return restaurantListDtos;
         }
 
         public IEnumerable<RestaurantDto> GetRestaurantList()
-        {            
+        {
             IEnumerable<Restaurant> restaurants = _restaurantReadOnlyRepository.GetItemList();
-
-            var restaurantDtos = new List<RestaurantDto>();
-
-            foreach (var restaurant in restaurants)
-            {
-                restaurantDtos.Add(_mapper.Map<RestaurantDto>(restaurant));
-            }
+            var restaurantDtos = restaurants.Select(x => _mapper.Map<RestaurantDto>(x));
 
             return restaurantDtos;
         }

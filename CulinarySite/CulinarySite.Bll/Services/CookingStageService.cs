@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.CookingStage;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
@@ -47,26 +48,22 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<CookingStageListDto> GetCookingStageList(bool withRelated)
         {
             IEnumerable<CookingStage> cookingStages;
-            var cookingStageListDtos = new List<CookingStageListDto>();
+            IEnumerable<CookingStageListDto> cookingStageListDtos;
+
             if (withRelated)
             {
                 cookingStages = _cookingStageReadOnlyRepository.GetItemListWithInclude(
                     x => x.Recipe,
                     x => x.Images);
 
-                foreach (var cookingStage in cookingStages)
-                {
-                    cookingStageListDtos.Add(_mapper.Map<CookingStageListDto>(cookingStage));
-                }
+                cookingStageListDtos = cookingStages.Select(x => _mapper.Map<CookingStageListDto>(x));
+                
                 return cookingStageListDtos;
             }
 
             cookingStages = _cookingStageReadOnlyRepository.GetItemList();
 
-            foreach (var cookingStage in cookingStages)
-            {
-                cookingStageListDtos.Add(_mapper.Map<CookingStageListDto>(cookingStage));
-            }
+            cookingStageListDtos = cookingStages.Select(x => _mapper.Map<CookingStageListDto>(x));
 
             return cookingStageListDtos;
         }

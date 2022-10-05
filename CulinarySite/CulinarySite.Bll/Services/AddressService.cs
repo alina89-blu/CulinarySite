@@ -4,7 +4,7 @@ using CulinarySite.Common.Dtos.Address;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
@@ -48,12 +48,8 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<AddressListDto> GetAddressList()
         {
             IEnumerable<Address> addresses = _addressReadOnlyRepository.GetItemList();
-            var addressListDtos = new List<AddressListDto>();
-
-            foreach (var address in addresses)
-            {
-                addressListDtos.Add(_mapper.Map<AddressListDto>(address));
-            }
+            var addressListDtos = addresses.Select(x => _mapper.Map<AddressListDto>(x));
+            
             return addressListDtos;
         }
 

@@ -8,6 +8,7 @@ using CulinarySite.Common.ViewModels.Image.DishImage;
 using CulinarySite.Common.ViewModels.Image.EpisodeImage;
 using CulinarySite.Common.ViewModels.Image.RecipeImage;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 
 namespace CulinarySite.Api.Controllers
@@ -26,12 +27,7 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<DishImageListModel> GetDishImageList(bool withRelated)
         {
             IEnumerable<DishImageListDto> dishImageListDtos = _imageService.GetDishImageList(withRelated);
-            var dishImageListModels = new List<DishImageListModel>();
-
-            foreach (var dishImageListDto in dishImageListDtos)
-            {
-                dishImageListModels.Add(_mapper.Map<DishImageListModel>(dishImageListDto));
-            }
+            var dishImageListModels = dishImageListDtos.Select(x => _mapper.Map<DishImageListModel>(x));           
 
             return dishImageListModels;
         }
@@ -63,12 +59,7 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<EpisodeImageListModel> GetEpisodeImageList(bool withRelated)
         {
             IEnumerable<EpisodeImageListDto> episodeImageListDtos = _imageService.GetEpisodeImageList(withRelated);
-            var episodeImageListModels = new List<EpisodeImageListModel>();
-
-            foreach (var episodeImageListDto in episodeImageListDtos)
-            {
-                episodeImageListModels.Add(_mapper.Map<EpisodeImageListModel>(episodeImageListDto));
-            }
+            var episodeImageListModels = episodeImageListDtos.Select(x => _mapper.Map<EpisodeImageListModel>(x));            
 
             return episodeImageListModels;
         }
@@ -106,12 +97,7 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<RecipeImageListModel> GetRecipeImageList(bool withRelated)
         {
             IEnumerable<RecipeImageListDto> recipeImageListDtos = _imageService.GetRecipeImageList(withRelated);
-            var recipeImageListModels = new List<RecipeImageListModel>();
-
-            foreach (var recipeImageListDto in recipeImageListDtos)
-            {
-                recipeImageListModels.Add(_mapper.Map<RecipeImageListModel>(recipeImageListDto));
-            }
+            var recipeImageListModels = recipeImageListDtos.Select(x => _mapper.Map<RecipeImageListModel>(x));           
 
             return recipeImageListModels;
         }

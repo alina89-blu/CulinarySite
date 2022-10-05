@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Author;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
@@ -71,12 +72,8 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<AuthorListDto> GetAuthorList()
         {
             IEnumerable<Author> authors = _authorReadOnlyRepository.GetItemList();
-            var authorListDtos = new List<AuthorListDto>();
-
-            foreach (var author in authors)
-            {
-                authorListDtos.Add(_mapper.Map<AuthorListDto>(author));
-            }
+            var authorListDtos = authors.Select(x => _mapper.Map<AuthorListDto>(x));
+           
             return authorListDtos;
         }
 

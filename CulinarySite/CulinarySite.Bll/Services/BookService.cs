@@ -70,26 +70,21 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<BookDetailListDto> GetBookDetailList(bool withRelated)
         {
             IEnumerable<Book> books;
-            var bookDetailListDtos = new List<BookDetailListDto>();
+            IEnumerable<BookDetailListDto> bookDetailListDtos;
 
             if (withRelated)
             {
                 books = _bookReadOnlyRepository.GetItemListWithInclude(
                 x => x.Author);
 
-                foreach (var book in books)
-                {
-                    bookDetailListDtos.Add(_mapper.Map<BookDetailListDto>(book));
-                }
+                bookDetailListDtos = books.Select(x => _mapper.Map<BookDetailListDto>(x));
+                
                 return bookDetailListDtos;
             }
 
             books = _bookReadOnlyRepository.GetItemList();
 
-            foreach (var book in books)
-            {
-                bookDetailListDtos.Add(_mapper.Map<BookDetailListDto>(book));
-            }
+            bookDetailListDtos = books.Select(x => _mapper.Map<BookDetailListDto>(x));
 
             return bookDetailListDtos;
         }
@@ -97,12 +92,7 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<BookDto> GetBookList()
         {
             IEnumerable<Book> books = _bookReadOnlyRepository.GetItemList();
-            var bookDtos = new List<BookDto>();
-
-            foreach (var book in books)
-            {
-                bookDtos.Add(_mapper.Map<BookDto>(book));
-            }
+            var bookDtos = books.Select(x => _mapper.Map<BookDto>(x));           
 
             return bookDtos;
         }

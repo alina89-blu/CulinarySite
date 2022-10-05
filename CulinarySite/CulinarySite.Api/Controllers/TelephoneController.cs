@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Telephone;
 using CulinarySite.Common.ViewModels.Telephone;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -21,12 +22,8 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<TelephoneListModel> GetTelephoneList(bool withRelated)
         {
             IEnumerable<TelephoneListDto> telephoneListDtos = _telephoneService.GetTelephoneList(withRelated);
-            var telephoneListModels = new List<TelephoneListModel>();
-
-            foreach (var telephoneListDto in telephoneListDtos)
-            {
-                telephoneListModels.Add(_mapper.Map<TelephoneListModel>(telephoneListDto));
-            }
+            var telephoneListModels = telephoneListDtos.Select(x => _mapper.Map<TelephoneListModel>(x));
+           
             return telephoneListModels;
         }
 

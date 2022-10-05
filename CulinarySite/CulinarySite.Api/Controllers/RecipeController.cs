@@ -4,6 +4,7 @@ using AutoMapper;
 using CulinarySite.Common.ViewModels.Recipe;
 using CulinarySite.Common.Dtos.Recipe;
 using CulinarySite.Bll.Interfaces;
+using System.Linq;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -22,12 +23,7 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<RecipeListModel> GetRecipeList(bool withRelated)
         {
             IEnumerable<RecipeListDto> recipeListDtos = _recipeService.GetRecipeList(withRelated);
-            var recipeListModels = new List<RecipeListModel>();
-
-            foreach (var recipeListDto in recipeListDtos)
-            {
-                recipeListModels.Add(_mapper.Map<RecipeListModel>(recipeListDto));
-            }
+            var recipeListModels = recipeListDtos.Select(x => _mapper.Map<RecipeListModel>(x));           
 
             return recipeListModels;
         }

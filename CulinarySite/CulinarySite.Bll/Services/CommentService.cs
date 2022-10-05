@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Comment;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
@@ -70,7 +71,7 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<CommentListDto> GetCommentList(bool withRelated)
         {
             IEnumerable<Comment> comments;
-            var commentListDtos = new List<CommentListDto>();
+            IEnumerable < CommentListDto > commentListDtos;
 
             if (withRelated)
             {
@@ -78,20 +79,14 @@ namespace CulinarySite.Bll.Services
                 x => x.Restaurants,
                 x => x.Subscriber);
 
-                foreach (var comment in comments)
-                {
-                    commentListDtos.Add(_mapper.Map<CommentListDto>(comment));
-                }
-
+                commentListDtos = comments.Select(x => _mapper.Map<CommentListDto>(x));
+                
                 return commentListDtos;
             }
 
             comments = _commentReadOnlyRepository.GetItemList();
 
-            foreach (var comment in comments)
-            {
-                commentListDtos.Add(_mapper.Map<CommentListDto>(comment));
-            }
+            commentListDtos = comments.Select(x => _mapper.Map<CommentListDto>(x));
 
             return commentListDtos;
         }

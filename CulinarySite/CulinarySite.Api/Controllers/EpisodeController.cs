@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Episode;
 using CulinarySite.Common.ViewModels.Episode;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -21,12 +22,7 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<EpisodeListModel> GetEpisodeList(bool withRelated)
         {
             IEnumerable<EpisodeListDto> episodeListDtos = _episodeService.GetEpisodeList(withRelated);
-            var episodeListModels = new List<EpisodeListModel>();
-
-            foreach (var episodeListDto in episodeListDtos)
-            {
-                episodeListModels.Add(_mapper.Map<EpisodeListModel>(episodeListDto));
-            }
+            var episodeListModels = episodeListDtos.Select(x => _mapper.Map<EpisodeListModel>(x));            
 
             return episodeListModels;
         }

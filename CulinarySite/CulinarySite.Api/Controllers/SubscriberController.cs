@@ -4,6 +4,7 @@ using AutoMapper;
 using CulinarySite.Common.ViewModels.Subscriber;
 using CulinarySite.Common.Dtos.Subscriber;
 using CulinarySite.Bll.Interfaces;
+using System.Linq;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -21,12 +22,7 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<SubscriberListModel> GetSubscriberList(bool withRelated)
         {
             IEnumerable<SubscriberListDto> subscriberListDtos = _subscriberService.GetSubscriberList(withRelated);
-            var subscriberListModels = new List<SubscriberListModel>();
-
-            foreach (var subscriberListDto in subscriberListDtos)
-            {
-                subscriberListModels.Add(_mapper.Map<SubscriberListModel>(subscriberListDto));
-            }
+            var subscriberListModels = subscriberListDtos.Select(x => _mapper.Map<SubscriberListModel>(x));           
 
             return subscriberListModels;
         }

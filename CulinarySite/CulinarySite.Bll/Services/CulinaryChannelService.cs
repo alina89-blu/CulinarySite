@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.CulinaryChannel;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
@@ -45,24 +46,19 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<CulinaryChannelListDto> GetCulinaryChannelList(bool withRelated)
         {
             IEnumerable<CulinaryChannel> culinaryChannels;
-            var culinaryChannelListDtos = new List<CulinaryChannelListDto>();
+            IEnumerable<CulinaryChannelListDto> culinaryChannelListDtos;
 
             if (withRelated)
             {
                 culinaryChannels = _culinaryChannelReadOnlyRepository.GetItemListWithInclude(x => x.Episodes);
-                foreach (var culinaryChannel in culinaryChannels)
-                {
-                    culinaryChannelListDtos.Add(_mapper.Map<CulinaryChannelListDto>(culinaryChannel));
-                }
+
+                culinaryChannelListDtos = culinaryChannels.Select(x => _mapper.Map<CulinaryChannelListDto>(x));                
 
                 return culinaryChannelListDtos;
             }
             culinaryChannels = _culinaryChannelReadOnlyRepository.GetItemList();
 
-            foreach (var culinaryChannel in culinaryChannels)
-            {
-                culinaryChannelListDtos.Add(_mapper.Map<CulinaryChannelListDto>(culinaryChannel));
-            }
+            culinaryChannelListDtos = culinaryChannels.Select(x => _mapper.Map<CulinaryChannelListDto>(x));
 
             return culinaryChannelListDtos;
         }

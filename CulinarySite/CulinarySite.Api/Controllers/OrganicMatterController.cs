@@ -4,6 +4,7 @@ using AutoMapper;
 using CulinarySite.Common.ViewModels.OrganicMatter;
 using CulinarySite.Common.Dtos.OrganicMatter;
 using CulinarySite.Bll.Interfaces;
+using System.Linq;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -21,12 +22,7 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<OrganicMatterListModel> GetOrganicMatterList()
         {
             IEnumerable<OrganicMatterListDto> organicMatterListDtos = _organicMatterService.GetOrganicMatterList();
-            var organicMatterListModels = new List<OrganicMatterListModel>();
-
-            foreach (var organicMatterListDto in organicMatterListDtos)
-            {
-                organicMatterListModels.Add(_mapper.Map<OrganicMatterListModel>(organicMatterListDto));
-            }
+            var organicMatterListModels = organicMatterListDtos.Select(x => _mapper.Map<OrganicMatterListModel>(x));         
 
             return organicMatterListModels;
         }

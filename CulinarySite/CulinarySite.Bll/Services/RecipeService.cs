@@ -4,21 +4,22 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Recipe;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
     public class RecipeService : IRecipeService
     {
         private readonly IReadOnlyGenericRepository<Recipe> _recipeReadOnlyRepository;
-        private readonly IWriteGenericRepository<Recipe> _recipeWriteRepository;        
+        private readonly IWriteGenericRepository<Recipe> _recipeWriteRepository;
         private readonly IMapper _mapper;
         public RecipeService(
             IReadOnlyGenericRepository<Recipe> recipeReadOnlyRepository,
-            IWriteGenericRepository<Recipe> recipeWriteRepository,        
+            IWriteGenericRepository<Recipe> recipeWriteRepository,
             IMapper mapper)
         {
             _recipeReadOnlyRepository = recipeReadOnlyRepository;
-            _recipeWriteRepository = recipeWriteRepository;                      
+            _recipeWriteRepository = recipeWriteRepository;
             _mapper = mapper;
         }
 
@@ -47,7 +48,7 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<RecipeListDto> GetRecipeList(bool withRelated)
         {
             IEnumerable<Recipe> recipes;
-            var recipeListDtos = new List<RecipeListDto>();
+            IEnumerable<RecipeListDto> recipeListDtos;
 
             if (withRelated)
             {
@@ -61,21 +62,14 @@ namespace CulinarySite.Bll.Services
                     x => x.Tags,
                     x => x.Image
                     );
-
-                foreach (var recipe in recipes)
-                {
-                    recipeListDtos.Add(_mapper.Map<RecipeListDto>(recipe));
-                }
+                recipeListDtos = recipes.Select(x => _mapper.Map<RecipeListDto>(x));
 
                 return recipeListDtos;
             }
 
             recipes = _recipeReadOnlyRepository.GetItemList();
+            recipeListDtos = recipes.Select(x => _mapper.Map<RecipeListDto>(x));
 
-            foreach (var recipe in recipes)
-            {
-                recipeListDtos.Add(_mapper.Map<RecipeListDto>(recipe));
-            }
             return recipeListDtos;
         }
 

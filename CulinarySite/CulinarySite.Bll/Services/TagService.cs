@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Tag;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
@@ -47,27 +48,20 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<TagListDto> GetTagList(bool withRelated)
         {
             IEnumerable<Tag> tags;
-            var tagListDtos = new List<TagListDto>();
+            IEnumerable<TagListDto> tagListDtos;
 
             if (withRelated)
             {
                 tags = _tagReadOnlyRepository.GetItemListWithInclude(
                                 x => x.Recipes,
                                 x => x.Episodes);
-                foreach (var tag in tags)
-                {
-                    tagListDtos.Add(_mapper.Map<TagListDto>(tag));
-                }
+                tagListDtos = tags.Select(x => _mapper.Map<TagListDto>(x));
 
                 return tagListDtos;
             }
 
             tags = _tagReadOnlyRepository.GetItemList();
-
-            foreach (var tag in tags)
-            {
-                tagListDtos.Add(_mapper.Map<TagListDto>(tag));
-            }
+            tagListDtos = tags.Select(x => _mapper.Map<TagListDto>(x));
 
             return tagListDtos;
         }

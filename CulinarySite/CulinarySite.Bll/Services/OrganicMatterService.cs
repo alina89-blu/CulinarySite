@@ -4,6 +4,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.OrganicMatter;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
@@ -47,12 +48,7 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<OrganicMatterListDto> GetOrganicMatterList()
         {
             IEnumerable<OrganicMatter> organicMatters = _organicMatterReadOnlyRepository.GetItemList();
-            var organicMatterListDtos = new List<OrganicMatterListDto>();
-
-            foreach (var organicMatter in organicMatters)
-            {
-                organicMatterListDtos.Add(_mapper.Map<OrganicMatterListDto>(organicMatter));
-            }
+            var organicMatterListDtos = organicMatters.Select(x => _mapper.Map<OrganicMatterListDto>(x));           
 
             return organicMatterListDtos;
         }

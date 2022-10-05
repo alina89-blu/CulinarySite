@@ -4,6 +4,7 @@ using CulinarySite.Common.Dtos.Telephone;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CulinarySite.Bll.Services
 {
@@ -47,26 +48,18 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<TelephoneListDto> GetTelephoneList(bool withRelated)
         {
             IEnumerable<Telephone> telephones;
-            var telephoneListDtos = new List<TelephoneListDto>();
+            IEnumerable<TelephoneListDto> telephoneListDtos ;
 
             if (withRelated)
             {
                 telephones = _telephoneReadOnlyRepository.GetItemListWithInclude(x => x.Restaurant);
-
-                foreach (var telephone in telephones)
-                {
-                    telephoneListDtos.Add(_mapper.Map<TelephoneListDto>(telephone));
-                }
+                telephoneListDtos = telephones.Select(x => _mapper.Map<TelephoneListDto>(x));
 
                 return telephoneListDtos;
             }
 
             telephones = _telephoneReadOnlyRepository.GetItemList();
-
-            foreach (var telephone in telephones)
-            {
-                telephoneListDtos.Add(_mapper.Map<TelephoneListDto>(telephone));
-            }
+            telephoneListDtos = telephones.Select(x => _mapper.Map<TelephoneListDto>(x));
 
             return telephoneListDtos;
         }

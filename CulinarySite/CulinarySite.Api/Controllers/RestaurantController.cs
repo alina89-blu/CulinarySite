@@ -4,6 +4,7 @@ using AutoMapper;
 using CulinarySite.Common.ViewModels.Restaurant;
 using CulinarySite.Common.Dtos.Restaurant;
 using CulinarySite.Bll.Interfaces;
+using System.Linq;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -21,13 +22,8 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<RestaurantListModel> GetRestaurantDetailList(bool withRelated)
         {
             IEnumerable<RestaurantListDto> restaurantListDtos = _restaurantService.GetRestaurantDetailList(withRelated);
-            var restaurantListModels = new List<RestaurantListModel>();
-
-            foreach (var restaurantListDto in restaurantListDtos)
-            {
-                restaurantListModels.Add(_mapper.Map<RestaurantListModel>(restaurantListDto));
-            }
-
+            var restaurantListModels = restaurantListDtos.Select(x => _mapper.Map<RestaurantListModel>(x));
+            
             return restaurantListModels;
         }
 
@@ -35,12 +31,7 @@ namespace CulinarySite.Api.Controllers
         public IEnumerable<RestaurantModel> GetRestaurantList()
         {
             IEnumerable<RestaurantDto> restaurantDtos = _restaurantService.GetRestaurantList();
-            var restaurantModels = new List<RestaurantModel>();
-
-            foreach (var restaurantDto in restaurantDtos)
-            {
-                restaurantModels.Add(_mapper.Map<RestaurantModel>(restaurantDto));
-            }
+            var restaurantModels = restaurantDtos.Select(x => _mapper.Map<RestaurantModel>(x));
 
             return restaurantModels;
         }
