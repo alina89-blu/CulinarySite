@@ -24,10 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CulinarySiteCommon\CulinarySite.Common.csproj" />
-    <ProjectReference Include="..\Database\CulinarySite.Domain.csproj" />
-    <ProjectReference Include="..\Repositories\CulinarySite.Dal.csproj" />
-    <ProjectReference Include="..\ServiceLayer\CulinarySite.Bll.csproj" />
+    <ProjectReference Include="..\CulinarySite.Common\CulinarySite.Common.csproj" />
+    <ProjectReference Include="..\CulinarySite.Domain\CulinarySite.Domain.csproj" />
+    <ProjectReference Include="..\CulinarySite.Dal\CulinarySite.Dal.csproj" />
+    <ProjectReference Include="..\CulinarySite.Bll\CulinarySite.Bll.csproj" />
   </ItemGroup>
 
 </Project>

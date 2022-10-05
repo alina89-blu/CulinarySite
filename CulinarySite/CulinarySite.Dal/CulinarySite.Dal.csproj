@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CulinarySiteCommon\CulinarySite.Common.csproj" />
-    <ProjectReference Include="..\Database\CulinarySite.Domain.csproj" />
+    <ProjectReference Include="..\CulinarySite.Common\CulinarySite.Common.csproj" />
+    <ProjectReference Include="..\CulinarySite.Domain\CulinarySite.Domain.csproj" />
   </ItemGroup>
 
 </Project>
