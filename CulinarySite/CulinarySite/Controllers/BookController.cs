@@ -27,7 +27,7 @@ namespace CulinarySite.Api.Controllers
             {
                 bookDetailListModels.Add(_mapper.Map<BookDetailListModel>(bookDetailListDto));
             }
-            
+
             return bookDetailListModels;
         }
 

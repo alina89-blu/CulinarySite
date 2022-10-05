@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CulinarySite.Bll\CulinarySite.Bll.csproj" />
+    <ProjectReference Include="..\ServiceLayer\CulinarySite.Bll.csproj" />
   </ItemGroup>
 
 </Project>

@@ -19,7 +19,7 @@ using CulinarySite.Common.Dtos.Tag;
 using CulinarySite.Common.Dtos.Telephone;
 using CulinarySite.Domain.Entities;
 
-namespace ServiceLayer.AutoMapperProfiles
+namespace CulinarySite.Bll.AutoMapperProfiles
 {
 
     public class EntityProfile : Profile

@@ -1,5 +1,6 @@
 using CulinarySite.Api.AutoMapperProfiles;
 using CulinarySite.Api.Infrastructure.Extensions;
+using CulinarySite.Bll.AutoMapperProfiles;
 using CulinarySite.Bll.Interfaces;
 using CulinarySite.Bll.Services;
 using CulinarySite.Dal;
@@ -16,7 +17,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using ServiceLayer.AutoMapperProfiles;
 using System.Text;
 
 namespace CulinarySite.Api
