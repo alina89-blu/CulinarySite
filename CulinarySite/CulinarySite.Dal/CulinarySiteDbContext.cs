@@ -1,4 +1,5 @@
 ﻿using CulinarySite.Domain.Entities;
+using CulinarySite.Domain.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

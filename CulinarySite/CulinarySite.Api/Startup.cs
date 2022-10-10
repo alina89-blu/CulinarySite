@@ -7,17 +7,12 @@ using CulinarySite.Dal;
 using CulinarySite.Dal.Extensions;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Dal.Repositories;
-using CulinarySite.Domain.Entities;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 namespace CulinarySite.Api
 {
@@ -29,60 +24,21 @@ namespace CulinarySite.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-          
-            string connectionString = "Server=DESKTOP-N5BQGM7\\SQLEXPRESS;Database=culinarysitedb;Trusted_Connection=True;";                        
+            string connectionString = "Server=DESKTOP-N5BQGM7\\SQLEXPRESS;Database=culinarysitedb;Trusted_Connection=True;";
 
-            services.AddDbContext<CulinarySiteDbContext>(options => options.UseSqlServer(connectionString));
-
-            //Token
-
-            services.AddIdentity<User, IdentityRole>(options =>
-            {
-                options.Password.RequiredLength = 6;
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-
-            })
-               .AddEntityFrameworkStores<CulinarySiteDbContext>();
-
-            var applicationSettingsConfiguration = this.Configuration.GetSection("ApplicationSettings");
-            services.Configure<AppSettings>(applicationSettingsConfiguration);
-
-            var appSettings = applicationSettingsConfiguration.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-
-           .AddJwtBearer(x =>
-           {
-               x.RequireHttpsMetadata = false;
-               x.SaveToken = true;
-               x.TokenValidationParameters = new TokenValidationParameters
-               {
-                   ValidateIssuerSigningKey = true,
-                   IssuerSigningKey = new SymmetricSecurityKey(key),
-                   ValidateIssuer = false,
-                   ValidateAudience = false
-               };
-           });
-
-            //Token
-
+            services.AddDbContext<CulinarySiteDbContext>(options => options
+            .UseSqlServer(connectionString))
+            .AddIdentity()
+            .AddJwtAuthentication(services.GetApplicationSettings(this.Configuration));
+           
             services.AddControllers()
            .AddNewtonsoftJson(options =>
-           options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);                    
+           options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "CulinarySiteApp/dist";
             });
-           
 
             services.AddAutoMapper(typeof(DtoProfile), typeof(EntityProfile));
 
@@ -104,16 +60,16 @@ namespace CulinarySite.Api
             services.AddScoped(typeof(ISubscriberService), typeof(SubscriberService));
             services.AddScoped(typeof(ITagService), typeof(TagService));
             services.AddScoped(typeof(ITelephoneService), typeof(TelephoneService));
-            
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {            
+        {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();                
+                app.UseDeveloperExceptionPage();
             }
-          
+
             app.UseExceptionHandling();
 
             app.UseStaticFiles();
@@ -121,7 +77,7 @@ namespace CulinarySite.Api
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
-            }            
+            }
 
             app.UseRouting();
 
@@ -139,15 +95,15 @@ namespace CulinarySite.Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();             
+                endpoints.MapControllers();
             });
-          
+
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "CulinarySiteApp";
 
                 if (env.IsDevelopment())
-                {                    
+                {
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });

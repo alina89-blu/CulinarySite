@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CulinarySite.Tests", "CulinarySite.Tests\CulinarySite.Tests.csproj", "{A6ADFCE5-4EFC-4D0F-8489-8C65C1DA9F46}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CulinarySite.Domain", "CulinarySite.Domain\CulinarySite.Domain.csproj", "{9FC7F815-0284-41E6-A919-8E9743925F08}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CulinarySite.Common", "CulinarySite.Common\CulinarySite.Common.csproj", "{F6604D4B-54AC-43F4-90A5-DD27D64D989B}"
@@ -21,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A6ADFCE5-4EFC-4D0F-8489-8C65C1DA9F46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A6ADFCE5-4EFC-4D0F-8489-8C65C1DA9F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A6ADFCE5-4EFC-4D0F-8489-8C65C1DA9F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A6ADFCE5-4EFC-4D0F-8489-8C65C1DA9F46}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9FC7F815-0284-41E6-A919-8E9743925F08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9FC7F815-0284-41E6-A919-8E9743925F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FC7F815-0284-41E6-A919-8E9743925F08}.Release|Any CPU.ActiveCfg = Release|Any CPU

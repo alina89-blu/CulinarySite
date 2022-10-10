@@ -115,6 +115,7 @@ const appRoutes: Routes = [
   { path: 'createRestaurant', component: RestaurantCreateComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'cernovic', component: CernovicComponent },
 
   //
 ];

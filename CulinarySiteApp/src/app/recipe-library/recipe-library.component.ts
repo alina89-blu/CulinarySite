@@ -12,25 +12,11 @@ import { RecipeListModel } from '../viewmodels/recipe/recipe-list-model.class';
   styleUrls: ['./recipe-library.component.css'],
 })
 export class RecipeLibraryComponent implements OnInit {
-  public recipes: RecipeListModel[] = [];
   public dishes: DishListModel[] = [];
-  constructor(
-    private recipeService: RecipeService,
-    private dishService: DishService
-  ) {}
+  constructor(private dishService: DishService) {}
 
   public ngOnInit(): void {
-    this.getRecipeList();
     this.getDishDetailList();
-  }
-
-  public getRecipeList(): void {
-    this.recipeService
-      .getRecipeList(true)
-      .subscribe(
-        (data: IRecipeListModel[]) =>
-          (this.recipes = data.map((x) => new RecipeListModel(x)))
-      );
   }
 
   public getDishDetailList(): void {

@@ -1,11 +1,15 @@
-.A {
-  font-family: Bradley Hand, cursive;
-  margin: 50px 10px 50px 20px;
-  text-align: justify;
-  width: 900px;
-  line-height: 2;
-}
-
 .B {
   text-align: center;
+}
+
+.color-green {
+  color: green;
+}
+
+.block {
+  width: 600px;
+}
+
+.img-marg {
+  margin: 30px;
 }

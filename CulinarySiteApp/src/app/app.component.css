@@ -1,5 +1,12 @@
 .block {
-  background: url("../assets/images/image4.jpg") round;
+  background: url("../assets/images/wallpaper1.png") round;
   border-radius: 15px;
   box-shadow: 0 0 20px cadetblue;
+}
+
+* {
+  font-family: Bradley Hand, cursive;
+
+  text-align: justify;
+  font-size: large;
 }

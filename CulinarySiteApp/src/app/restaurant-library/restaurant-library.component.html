@@ -1,5 +1,5 @@
 <div class="A">
-  <h1>Рестораны Джейми Оливера в России</h1>
+  <h2>Рестораны Джейми Оливера в России</h2>
 
   <div>
     Джейми Оливер еще с раннего детства был одурманен страстью к итальянскому
@@ -18,19 +18,23 @@
     столице нашей страны. Подробнее об этих заведениях можно узнать выбрав
     необходимый из предложенных ниже.
   </div>
-</div>
 
-<div>
-  <img src="https://jaymi-oliver.ru/images/spb.jpg" alt="not found" />
-  <img src="https://jaymi-oliver.ru/images/msk.jpg" alt="not found" />
-</div>
+  <div class="A">
+    <img
+      src="https://jaymi-oliver.ru/images/spb.jpg"
+      alt="not found"
+      style="margin: 0px 80px 0px 80px"
+    />
+    <img src="https://jaymi-oliver.ru/images/msk.jpg" alt="not found" />
+  </div>
 
-<div class="A" *ngFor="let restaurant of restaurants">
-  <h2>{{ restaurant.name }}</h2>
-  <b><P>АДРЕС</P></b>
-  <p>{{ restaurant.addressName }}</p>
-  <b><p>ТЕЛЕФОНЫ</p></b>
-  <div *ngFor="let telephone of restaurant.telephones">
-    <p>{{ telephone.number }}</p>
+  <div *ngFor="let restaurant of restaurants">
+    <h2>{{ restaurant.name }}</h2>
+    <b><P>АДРЕС</P></b>
+    <p>{{ restaurant.addressName }}</p>
+    <b><p>ТЕЛЕФОНЫ</p></b>
+    <div *ngFor="let telephone of restaurant.telephones">
+      <p>{{ telephone.number }}</p>
+    </div>
   </div>
 </div>

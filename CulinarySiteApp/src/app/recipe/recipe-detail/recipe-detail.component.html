@@ -1,17 +1,76 @@
-<div class="A">
+<div class="container">
+  <div class="row">
+    <div>
+      <em
+        ><h1 class="B color-green">{{ recipeDetailModel.name }}</h1>
+      </em>
+      <br />
+      <img
+        src="{{ recipeDetailModel.image?.url }}"
+        alt="not found"
+        style="float: left; margin: 0px 15px 0px 0px"
+      />
+
+      <hr />
+      <p>
+        <img
+          class="img-marg"
+          src="https://jaymi-oliver.ru/images/vilka.png"
+          width="50"
+          height="50"
+          alt=""
+        />
+
+        <img
+          class="img-marg"
+          src="https://jaymi-oliver.ru/images/chasi.png"
+          alt=""
+          width="50"
+          height="50"
+        />
+
+        <img
+          class="img-marg"
+          src="https://jaymi-oliver.ru/images/slogno.png"
+          alt=""
+          width="50"
+          height="50"
+        />
+      </p>
+      <p>
+        На {{ recipeDetailModel.servingsNumber }} порций
+        {{ recipeDetailModel.cookingTime | date: "HH:mm" }} минут
+        {{ recipeDetailModel.difficultyLevel }}
+      </p>
+      <div>
+        <p>
+          <b> {{ recipeDetailModel.content }}</b>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="container">
   <div>
-    <h1 class="B">{{ recipeDetailModel.name }}</h1>
+    <h3 class="color-green"><em> Ингредиенты</em></h3>
+    <div
+      *ngFor="let ingredient of recipeDetailModel.ingredients; let idx = index"
+    >
+      <strong>
+        <em>
+          <p>
+            {{ ingredient.name }} {{ ingredient.quantity }}
+            {{ ingredient.unit }}
+          </p>
+        </em>
+      </strong>
+    </div>
+  </div>
+</div>
 
-    <img src="{{ recipeDetailModel.image?.url }}" alt="not found" />
-    <p><b>Количество порций</b> {{ recipeDetailModel.servingsNumber }}</p>
-
-    <p>
-      <b>Время приготовления</b>
-      {{ recipeDetailModel.cookingTime | date: "HH:mm" }} минут
-    </p>
-    <p><b>Уровень сложности</b> {{ recipeDetailModel.difficultyLevel }}</p>
-    <p>{{ recipeDetailModel.content }}</p>
-
+<div class="container">
+  <div>
     <div
       *ngFor="
         let cookingStage of recipeDetailModel.cookingStages;
@@ -19,10 +78,18 @@
       "
     >
       <p>
-        <b>
+        <b class="color-green">
           {{ idx + 1 }}
         </b>
         {{ cookingStage.content }}
+      </p>
+    </div>
+
+    <h2 class="color-green">Пищевая ценность</h2>
+    <div *ngFor="let organicMatter of recipeDetailModel.organicMatters">
+      <p>
+        <b>{{ organicMatter.name }}</b> {{ organicMatter.quantity }}
+        {{ organicMatter.unit }}
       </p>
     </div>
   </div>

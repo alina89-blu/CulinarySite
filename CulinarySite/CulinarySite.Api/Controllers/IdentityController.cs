@@ -1,5 +1,4 @@
-﻿using CulinarySite.Domain.Entities;
-using CulinarySite.Domain.Models.Identity;
+﻿using CulinarySite.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -16,18 +15,11 @@ namespace CulinarySite.Api.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly AppSettings appSettings;
-        public IdentityController(
-            UserManager<User> userManager,
-            IOptions<AppSettings> appSettings)
+        public IdentityController(UserManager<User> userManager, IOptions<AppSettings> appSettings)
         {
             this.userManager = userManager;
             this.appSettings = appSettings.Value;
-        }
-
-        public ActionResult Get()
-        {
-            return Ok("Identity works !!!");
-        }
+        }       
 
         [Route(nameof(Register))]
         public async Task<ActionResult> Register(RegisterRequestModel model)
