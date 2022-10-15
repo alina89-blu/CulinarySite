@@ -7,6 +7,7 @@ export class UpdateBookModel {
   public name: string;
   public creationYear: number;
   public description: string;
+  public imageUrl: string;
 
   constructor(public updateBookModel?: IUpdateBookModel | IBookDetailModel) {
     if (updateBookModel) {
@@ -15,6 +16,7 @@ export class UpdateBookModel {
       this.name = updateBookModel.name;
       this.creationYear = updateBookModel.creationYear;
       this.description = updateBookModel.description;
+      this.imageUrl = updateBookModel.imageUrl;
     }
   }
 }

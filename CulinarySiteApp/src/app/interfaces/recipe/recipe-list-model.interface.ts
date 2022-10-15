@@ -18,4 +18,5 @@ export interface IRecipeListModel {
   organicMatters: OrganicMatterModel[];
   cookingStages: CookingStageModel[];
   tags: TagModel[];
+  imageUrl: string;
 }

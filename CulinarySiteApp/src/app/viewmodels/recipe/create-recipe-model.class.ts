@@ -18,6 +18,7 @@ export class CreateRecipeModel {
   public organicMatters: CreateOrganicMatterModel[];
   public cookingStages: CreateCookingStageModel[];
   public tags: CreateTagModel[];
+  public imageUrl: string;
 
   constructor(public createRecipeModel?: ICreateRecipeModel) {
     if (createRecipeModel) {
@@ -33,6 +34,7 @@ export class CreateRecipeModel {
       this.organicMatters = createRecipeModel.organicMatters;
       this.cookingStages = createRecipeModel.cookingStages;
       this.tags = createRecipeModel.tags;
+      this.imageUrl = createRecipeModel.imageUrl;
     }
   }
 }

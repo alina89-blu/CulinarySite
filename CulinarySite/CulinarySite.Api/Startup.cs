@@ -52,7 +52,6 @@ namespace CulinarySite.Api
             services.AddScoped(typeof(ICulinaryChannelService), typeof(CulinaryChannelService));
             services.AddScoped(typeof(IDishService), typeof(DishService));
             services.AddScoped(typeof(IEpisodeService), typeof(EpisodeService));
-            services.AddScoped(typeof(IImageService), typeof(ImageService));
             services.AddScoped(typeof(IIngredientService), typeof(IngredientService));
             services.AddScoped(typeof(IOrganicMatterService), typeof(OrganicMatterService));
             services.AddScoped(typeof(IRecipeService), typeof(RecipeService));
@@ -60,7 +59,7 @@ namespace CulinarySite.Api
             services.AddScoped(typeof(ISubscriberService), typeof(SubscriberService));
             services.AddScoped(typeof(ITagService), typeof(TagService));
             services.AddScoped(typeof(ITelephoneService), typeof(TelephoneService));
-
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -68,6 +67,8 @@ namespace CulinarySite.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseExceptionHandling();

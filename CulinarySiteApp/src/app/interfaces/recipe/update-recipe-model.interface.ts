@@ -18,4 +18,5 @@ export interface IUpdateRecipeModel {
   organicMatters: UpdateOrganicMatterModel[];
   cookingStages: UpdateCookingStageModel[];
   tags: UpdateTagModel[];
+  imageUrl: string;
 }

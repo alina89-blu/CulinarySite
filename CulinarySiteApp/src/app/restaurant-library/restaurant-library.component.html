@@ -19,19 +19,25 @@
     необходимый из предложенных ниже.
   </div>
 
-  <div class="A">
+  <div>
     <img
-      src="https://jaymi-oliver.ru/images/spb.jpg"
+      src="https://tokyostreet.ru/wp-content/uploads/vse-lyubyat-dzhejmi-olivera-sekret-populyarnosti-znamenitogo-shefa-foto-4.jpg"
       alt="not found"
-      style="margin: 0px 80px 0px 80px"
+      style="float: left; margin: 20px 15px 0px 0px"
     />
-    <img src="https://jaymi-oliver.ru/images/msk.jpg" alt="not found" />
   </div>
+  <hr />
+  <!--<img
+    src="https://hollywoodlifenews.com/wp-content/uploads/2019/05/718A2F1A-B202-4630-89E8-BA94045B8662.jpeg"
+    alt="not found"
+    style="float: left; margin: 0px 15px 0px 0px"
+  />-->
 
   <div *ngFor="let restaurant of restaurants">
     <h2>{{ restaurant.name }}</h2>
-    <b><P>АДРЕС</P></b>
-    <p>{{ restaurant.addressName }}</p>
+    <hr />
+    <p><b>АДРЕС:</b> {{ restaurant.addressName }}</p>
+    <p></p>
     <b><p>ТЕЛЕФОНЫ</p></b>
     <div *ngFor="let telephone of restaurant.telephones">
       <p>{{ telephone.number }}</p>

@@ -7,6 +7,6 @@ namespace CulinarySite.Common.ViewModels.Book
         public string Name { get; set; }
         public int CreationYear { get; set; }
         public string Description { get; set; }
-     
+        public string ImageUrl { get; set; }
     }
 }

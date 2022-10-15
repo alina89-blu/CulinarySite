@@ -19,6 +19,7 @@ select {
   font-size: medium;
   margin: 5px;
   border-radius: 5px;
+  width: max-content;
 }
 .Pad {
   padding: 30px;

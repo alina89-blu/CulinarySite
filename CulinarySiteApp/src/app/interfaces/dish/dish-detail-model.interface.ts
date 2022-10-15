@@ -6,6 +6,7 @@ export interface IDishDetailModel {
   dishId: number;
   category: DishCategory;
   //recipes: RecipeModel[];
+  imageUrl: string;
 
   recipes: RecipeDetailModel[];
 }

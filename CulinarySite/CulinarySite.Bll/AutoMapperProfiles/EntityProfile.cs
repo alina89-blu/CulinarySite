@@ -7,9 +7,6 @@ using CulinarySite.Common.Dtos.CookingStage;
 using CulinarySite.Common.Dtos.CulinaryChannel;
 using CulinarySite.Common.Dtos.Dish;
 using CulinarySite.Common.Dtos.Episode;
-using CulinarySite.Common.Dtos.Image.DishImage;
-using CulinarySite.Common.Dtos.Image.EpisodeImage;
-using CulinarySite.Common.Dtos.Image.RecipeImage;
 using CulinarySite.Common.Dtos.Ingredient;
 using CulinarySite.Common.Dtos.OrganicMatter;
 using CulinarySite.Common.Dtos.Recipe;
@@ -162,18 +159,22 @@ namespace CulinarySite.Bll.AutoMapperProfiles
 
 
             CreateMap<CreateRecipeDto, Recipe>().ReverseMap();
+
             CreateMap<UpdateRecipeDto, Recipe>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeId)).ReverseMap();
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeId))
+                .ReverseMap();
 
             CreateMap<RecipeDetailDto, Recipe>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeId)).ReverseMap();
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeId))
+                .ReverseMap();
 
             CreateMap<RecipeListDto, Recipe>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeId)).ReverseMap();
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeId))
+                .ReverseMap();
 
             CreateMap<RecipeDto, Recipe>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeId)).ReverseMap();
-               
+
 
 
             CreateMap<CreateRestaurantDto, Restaurant>().ReverseMap();
@@ -230,49 +231,6 @@ namespace CulinarySite.Bll.AutoMapperProfiles
             CreateMap<CommentListDto, Comment>()
                 .ForPath(dest => dest.Subscriber.Name, opt => opt.MapFrom(src => src.SubscriberName))
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CommentId)).ReverseMap();
-
-
-            CreateMap<CreateDishImageDto, Image>().ReverseMap();
-            CreateMap<UpdateDishImageDto, Image>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DishImageId)).ReverseMap();
-
-            CreateMap<DishImageDetailDto, Image>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DishImageId)).ReverseMap();
-
-            CreateMap<DishImageListDto, Image>()
-                .ForPath(dest => dest.Dish.Category, opt => opt.MapFrom(src => src.DishCategory))
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DishImageId)).ReverseMap();
-
-            CreateMap<DishImageDto, Image>()                
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DishImageId)).ReverseMap();
-
-
-            CreateMap<CreateEpisodeImageDto, Image>().ReverseMap();
-            CreateMap<UpdateEpisodeImageDto, Image>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.EpisodeImageId)).ReverseMap();
-
-            CreateMap<EpisodeImageDetailDto, Image>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.EpisodeImageId)).ReverseMap();
-
-            CreateMap<EpisodeImageListDto, Image>()
-                .ForPath(dest => dest.Episode.Name, opt => opt.MapFrom(src => src.EpisodeName))
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.EpisodeImageId)).ReverseMap();
-
-
-            ///
-            CreateMap<CreateRecipeImageDto, Image>().ReverseMap();
-            CreateMap<UpdateRecipeImageDto, Image>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeImageId)).ReverseMap();
-
-            CreateMap<RecipeImageDetailDto, Image>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeImageId)).ReverseMap();
-
-            CreateMap<RecipeImageListDto, Image>()
-                .ForPath(dest => dest.Recipe.Name, opt => opt.MapFrom(src => src.RecipeName))
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeImageId)).ReverseMap();
-
-            CreateMap<RecipeImageDto, Image>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeImageId)).ReverseMap();
         }
     }
 }

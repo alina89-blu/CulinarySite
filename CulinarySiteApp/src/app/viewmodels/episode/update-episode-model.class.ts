@@ -5,6 +5,8 @@ export class UpdateEpisodeModel {
   public episodeId: number;
   public name: string;
   public culinaryChannelId: number;
+  public imageUrl: string;
+  public videoUrl: string;
 
   constructor(
     public updateEpisodeModel?: IUpdateEpisodeModel | IEpisodeDetailModel
@@ -13,6 +15,8 @@ export class UpdateEpisodeModel {
       this.episodeId = updateEpisodeModel.episodeId;
       this.name = updateEpisodeModel.name;
       this.culinaryChannelId = updateEpisodeModel.culinaryChannelId;
+      this.imageUrl = updateEpisodeModel.imageUrl;
+      this.videoUrl = updateEpisodeModel.videoUrl;
     }
   }
 }

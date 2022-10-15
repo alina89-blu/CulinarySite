@@ -92,7 +92,8 @@ namespace CulinarySite.Dal.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -291,6 +292,7 @@ namespace CulinarySite.Dal.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationYear = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AuthorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -311,7 +313,8 @@ namespace CulinarySite.Dal.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CulinaryChannelId = table.Column<int>(type: "int", nullable: false)
+                    CulinaryChannelId = table.Column<int>(type: "int", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -377,7 +380,8 @@ namespace CulinarySite.Dal.Migrations
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AuthorId = table.Column<int>(type: "int", nullable: false),
                     BookId = table.Column<int>(type: "int", nullable: true),
-                    DishId = table.Column<int>(type: "int", nullable: false)
+                    DishId = table.Column<int>(type: "int", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -456,7 +460,8 @@ namespace CulinarySite.Dal.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RecipeId = table.Column<int>(type: "int", nullable: false)
+                    RecipeId = table.Column<int>(type: "int", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -541,68 +546,6 @@ namespace CulinarySite.Dal.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Images",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DishId = table.Column<int>(type: "int", nullable: true),
-                    EpisodeId = table.Column<int>(type: "int", nullable: true),
-                    CookingStageId = table.Column<int>(type: "int", nullable: true),
-                    RecipeId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Images", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Images_CookingStages_CookingStageId",
-                        column: x => x.CookingStageId,
-                        principalTable: "CookingStages",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Images_Dishes_DishId",
-                        column: x => x.DishId,
-                        principalTable: "Dishes",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Images_Episodes_EpisodeId",
-                        column: x => x.EpisodeId,
-                        principalTable: "Episodes",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Images_Recipes_RecipeId",
-                        column: x => x.RecipeId,
-                        principalTable: "Recipes",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BookImage",
-                columns: table => new
-                {
-                    BooksId = table.Column<int>(type: "int", nullable: false),
-                    ImagesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookImage", x => new { x.BooksId, x.ImagesId });
-                    table.ForeignKey(
-                        name: "FK_BookImage_Books_BooksId",
-                        column: x => x.BooksId,
-                        principalTable: "Books",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BookImage_Images_ImagesId",
-                        column: x => x.ImagesId,
-                        principalTable: "Images",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -643,11 +586,6 @@ namespace CulinarySite.Dal.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookImage_ImagesId",
-                table: "BookImage",
-                column: "ImagesId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Books_AuthorId",
                 table: "Books",
                 column: "AuthorId");
@@ -676,32 +614,6 @@ namespace CulinarySite.Dal.Migrations
                 name: "IX_EpisodeTag_TagsId",
                 table: "EpisodeTag",
                 column: "TagsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Images_CookingStageId",
-                table: "Images",
-                column: "CookingStageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Images_DishId",
-                table: "Images",
-                column: "DishId",
-                unique: true,
-                filter: "[DishId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Images_EpisodeId",
-                table: "Images",
-                column: "EpisodeId",
-                unique: true,
-                filter: "[EpisodeId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Images_RecipeId",
-                table: "Images",
-                column: "RecipeId",
-                unique: true,
-                filter: "[RecipeId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_IngredientRecipe_RecipesId",
@@ -762,10 +674,10 @@ namespace CulinarySite.Dal.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "BookImage");
+                name: "CommentRestaurant");
 
             migrationBuilder.DropTable(
-                name: "CommentRestaurant");
+                name: "CookingStages");
 
             migrationBuilder.DropTable(
                 name: "EpisodeTag");
@@ -789,10 +701,10 @@ namespace CulinarySite.Dal.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Images");
+                name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "Episodes");
 
             migrationBuilder.DropTable(
                 name: "Ingredients");
@@ -801,25 +713,16 @@ namespace CulinarySite.Dal.Migrations
                 name: "OrganicMatters");
 
             migrationBuilder.DropTable(
+                name: "Recipes");
+
+            migrationBuilder.DropTable(
                 name: "Tags");
 
             migrationBuilder.DropTable(
                 name: "Restaurants");
 
             migrationBuilder.DropTable(
-                name: "CookingStages");
-
-            migrationBuilder.DropTable(
-                name: "Episodes");
-
-            migrationBuilder.DropTable(
                 name: "Subscribers");
-
-            migrationBuilder.DropTable(
-                name: "Addresses");
-
-            migrationBuilder.DropTable(
-                name: "Recipes");
 
             migrationBuilder.DropTable(
                 name: "CulinaryChannels");
@@ -829,6 +732,9 @@ namespace CulinarySite.Dal.Migrations
 
             migrationBuilder.DropTable(
                 name: "Dishes");
+
+            migrationBuilder.DropTable(
+                name: "Addresses");
 
             migrationBuilder.DropTable(
                 name: "Authors");

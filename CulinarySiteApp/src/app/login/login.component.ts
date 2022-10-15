@@ -27,15 +27,15 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.loginForm.value).subscribe(
       (data) => {
-        this.authService.saveToken(data['token']);
+        this.authService.saveToken(data.token);
+        this.router.navigateByUrl('');
         //this.router.navigateByUrl('book');
-      },
-      () => this.router.navigateByUrl('')
+      }
+      // () => this.router.navigateByUrl('')
     );
   }
 
   public get username() {
-    console.log(this.loginForm.get('username'));
     return this.loginForm.get('username');
   }
 

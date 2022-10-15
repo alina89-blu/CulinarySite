@@ -19,6 +19,7 @@ export class RecipeListModel {
   public organicMatters: OrganicMatterModel[];
   public cookingStages: CookingStageModel[];
   public tags: TagModel[];
+  public imageUrl: string;
 
   constructor(public recipeListModel?: IRecipeListModel) {
     if (recipeListModel) {
@@ -35,6 +36,7 @@ export class RecipeListModel {
       this.organicMatters = recipeListModel.organicMatters;
       this.cookingStages = recipeListModel.cookingStages;
       this.tags = recipeListModel.tags;
+      this.imageUrl = recipeListModel.imageUrl;
     }
   }
 }

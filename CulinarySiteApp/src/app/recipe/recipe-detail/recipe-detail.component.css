@@ -13,3 +13,7 @@
 .img-marg {
   margin: 30px;
 }
+
+#img {
+  border: 4px solid rgb(73, 172, 73);
+}

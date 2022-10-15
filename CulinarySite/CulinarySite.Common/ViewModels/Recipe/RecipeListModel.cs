@@ -22,5 +22,6 @@ namespace CulinarySite.Common.ViewModels.Recipe
         public List<OrganicMatterModel> OrganicMatters { get; set; } = new List<OrganicMatterModel>();
         public List<CookingStageModel> CookingStages { get; set; } = new List<CookingStageModel>();
         public List<TagModel> Tags { get; set; } = new List<TagModel>();
+        public string ImageUrl { get; set; }
     }
 }

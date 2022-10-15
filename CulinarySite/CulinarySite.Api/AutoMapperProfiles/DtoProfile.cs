@@ -7,9 +7,6 @@ using CulinarySite.Common.Dtos.CookingStage;
 using CulinarySite.Common.Dtos.CulinaryChannel;
 using CulinarySite.Common.Dtos.Dish;
 using CulinarySite.Common.Dtos.Episode;
-using CulinarySite.Common.Dtos.Image.DishImage;
-using CulinarySite.Common.Dtos.Image.EpisodeImage;
-using CulinarySite.Common.Dtos.Image.RecipeImage;
 using CulinarySite.Common.Dtos.Ingredient;
 using CulinarySite.Common.Dtos.OrganicMatter;
 using CulinarySite.Common.Dtos.Recipe;
@@ -25,9 +22,6 @@ using CulinarySite.Common.ViewModels.CookingStage;
 using CulinarySite.Common.ViewModels.CulinaryChannel;
 using CulinarySite.Common.ViewModels.Dish;
 using CulinarySite.Common.ViewModels.Episode;
-using CulinarySite.Common.ViewModels.Image.DishImage;
-using CulinarySite.Common.ViewModels.Image.EpisodeImage;
-using CulinarySite.Common.ViewModels.Image.RecipeImage;
 using CulinarySite.Common.ViewModels.Ingredient;
 using CulinarySite.Common.ViewModels.OrganicMatter;
 using CulinarySite.Common.ViewModels.Recipe;
@@ -126,23 +120,6 @@ namespace CulinarySite.Api.AutoMapperProfiles
             CreateMap<UpdateCommentModel, UpdateCommentDto>().ReverseMap();
             CreateMap<CommentListModel, CommentListDto>().ReverseMap();
             CreateMap<CommentDetailModel, CommentDetailDto>().ReverseMap();
-
-            CreateMap<CreateDishImageModel, CreateDishImageDto>().ReverseMap();
-            CreateMap<UpdateDishImageModel, UpdateDishImageDto>().ReverseMap();
-            CreateMap<DishImageListModel, DishImageListDto>().ReverseMap();
-            CreateMap<DishImageDetailModel, DishImageDetailDto>().ReverseMap();
-            CreateMap<DishImageModel, DishImageDto>().ReverseMap();
-
-            CreateMap<CreateEpisodeImageModel, CreateEpisodeImageDto>().ReverseMap();
-            CreateMap<UpdateEpisodeImageModel, UpdateEpisodeImageDto>().ReverseMap();
-            CreateMap<EpisodeImageListModel, EpisodeImageListDto>().ReverseMap();
-            CreateMap<EpisodeImageDetailModel, EpisodeImageDetailDto>().ReverseMap();
-
-            CreateMap<CreateRecipeImageModel, CreateRecipeImageDto>().ReverseMap();
-            CreateMap<UpdateRecipeImageModel, UpdateRecipeImageDto>().ReverseMap();
-            CreateMap<RecipeImageListModel, RecipeImageListDto>().ReverseMap();
-            CreateMap<RecipeImageDetailModel, RecipeImageDetailDto>().ReverseMap();
-            CreateMap<RecipeImageModel, RecipeImageDto>().ReverseMap();
 
 
             // CreateMap<List<AddressListModel>, List<AddressListDto>>().ReverseMap();

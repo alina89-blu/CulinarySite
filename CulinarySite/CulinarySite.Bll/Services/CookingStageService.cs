@@ -52,12 +52,10 @@ namespace CulinarySite.Bll.Services
 
             if (withRelated)
             {
-                cookingStages = _cookingStageReadOnlyRepository.GetItemListWithInclude(
-                    x => x.Recipe,
-                    x => x.Images);
+                cookingStages = _cookingStageReadOnlyRepository.GetItemListWithInclude(x => x.Recipe);
 
                 cookingStageListDtos = cookingStages.Select(x => _mapper.Map<CookingStageListDto>(x));
-                
+
                 return cookingStageListDtos;
             }
 
@@ -77,8 +75,7 @@ namespace CulinarySite.Bll.Services
             {
                 cookingStage = _cookingStageReadOnlyRepository.GetItemWithInclude(
                 x => x.Id == id,
-                x => x.Recipe,
-                x => x.Images);
+                x => x.Recipe);
 
                 cookingStageDetailDto = _mapper.Map<CookingStageDetailDto>(cookingStage);
 

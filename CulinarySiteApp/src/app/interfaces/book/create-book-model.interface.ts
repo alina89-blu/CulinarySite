@@ -3,4 +3,5 @@ export interface ICreateBookModel {
   name: string;
   creationYear: number;
   description: string;
+  imageUrl: string;
 }

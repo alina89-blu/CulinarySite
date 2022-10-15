@@ -9,6 +9,7 @@
       <td>Id</td>
       <td>Content</td>
       <td>Recipe</td>
+      <td>Image</td>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +17,14 @@
       <td>{{ idx + 1 }}</td>
       <td>{{ cookingStage.content }}</td>
       <td>{{ cookingStage.recipeName }}</td>
+      <td>
+        <img
+          src="{{ cookingStage.imageUrl }}"
+          alt="not found"
+          width="60px"
+          height="50px"
+        />
+      </td>
       <td>
         <a
           class="btn info"

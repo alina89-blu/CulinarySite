@@ -4,4 +4,5 @@ export interface IBookDetailListModel {
   creationYear: number;
   authorName: string;
   description: string;
+  imageUrl: string;
 }

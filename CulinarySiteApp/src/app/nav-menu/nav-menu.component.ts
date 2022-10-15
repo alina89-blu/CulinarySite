@@ -10,14 +10,14 @@ export class NavMenuComponent {
   public hide: boolean = this.authService.isAuthenticated();
   constructor(private authService: AuthService) {}
 
-  /* public showss() {
-    if (this.authService.isAuthenticated()) {
-      this.hide = true;
-    }
-    this.hide = false;
+  public isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 
-  met() {
+  public logout(): void {
+    this.authService.logout();
+  }
+  /*met() {
     this.hide = !this.hide;
   }*/
 }

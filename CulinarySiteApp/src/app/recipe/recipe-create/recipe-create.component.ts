@@ -41,6 +41,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
     DifficultyLevel['Выше cреднего'],
     DifficultyLevel.Сложный,
   ];
+
   public units: Unit[] = [
     Unit.Грамм,
     Unit.Калории,

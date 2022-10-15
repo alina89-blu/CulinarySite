@@ -23,5 +23,7 @@ namespace CulinarySite.Common.Dtos.Recipe
         public List<UpdateCookingStageDto> CookingStages { get; set; } = new List<UpdateCookingStageDto>();
         public List<UpdateTagDto> Tags { get; set; } = new List<UpdateTagDto>();
 
+        public string ImageUrl { get; set; }
+
     }
 }

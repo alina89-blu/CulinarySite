@@ -19,9 +19,10 @@ namespace CulinarySite.Api.Controllers
         {
             this.userManager = userManager;
             this.appSettings = appSettings.Value;
-        }       
+        }
 
         [Route(nameof(Register))]
+        [HttpPost]
         public async Task<ActionResult> Register(RegisterRequestModel model)
         {
             var user = new User
@@ -41,7 +42,8 @@ namespace CulinarySite.Api.Controllers
         }
 
         [Route(nameof(Login))]
-        public async Task<ActionResult<string>> Login(LoginRequestModel model)
+        [HttpPost]
+        public async Task<ActionResult<LoginResult>> Login(LoginRequestModel model)
         {
             var user = await this.userManager.FindByNameAsync(model.UserName);
 
@@ -76,7 +78,7 @@ namespace CulinarySite.Api.Controllers
 
             var encryptedToken = tokenHandler.WriteToken(token);
 
-            return encryptedToken;
+            return new LoginResult() { Token = encryptedToken };
         }
     }
 }

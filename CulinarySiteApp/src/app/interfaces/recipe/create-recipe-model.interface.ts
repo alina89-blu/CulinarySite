@@ -17,4 +17,5 @@ export interface ICreateRecipeModel {
   organicMatters: CreateOrganicMatterModel[];
   cookingStages: CreateCookingStageModel[];
   tags: CreateTagModel[];
+  imageUrl: string;
 }

@@ -14,6 +14,8 @@ namespace CulinarySite.Common.ViewModels.Recipe
         public int AuthorId { get; set; }
         public int BookId { get; set; }
 
+        public string ImageUrl { get; set; }
+
 
     }
 }

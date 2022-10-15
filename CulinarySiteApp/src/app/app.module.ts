@@ -67,6 +67,7 @@ import { RestaurantListComponent } from './restaurant/restaurant-list/restaurant
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { EpisodeDetailComponent } from './episode/episode-detail/episode-detail.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -79,13 +80,13 @@ const appRoutes: Routes = [
   { path: 'book', component: BookListComponent },
   { path: 'editBook/:id', component: BookEditComponent },
 
-  /* {
+  {
     path: 'createBook',
     component: BookCreateComponent,
     canActivate: [AuthGuardService],
-  },*/
+  },
 
-  { path: 'createBook', component: BookCreateComponent },
+  //  { path: 'createBook', component: BookCreateComponent },
   { path: 'cookingStage', component: CookingStageListComponent },
   { path: 'createCookingStage', component: CookingStageCreateComponent },
   { path: 'editCookingStage/:id', component: CookingStageEditComponent },
@@ -116,6 +117,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'cernovic', component: CernovicComponent },
+  { path: 'episode/:id', component: EpisodeDetailComponent },
 
   //
 ];
@@ -164,6 +166,7 @@ const appRoutes: Routes = [
     RestaurantListComponent,
     LoginComponent,
     RegisterComponent,
+    EpisodeDetailComponent,
   ],
   imports: [
     BrowserModule,

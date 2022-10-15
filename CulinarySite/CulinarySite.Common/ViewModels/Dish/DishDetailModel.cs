@@ -9,5 +9,6 @@ namespace CulinarySite.Common.ViewModels.Dish
         public string Category { get; set; }
         //public List<RecipeModel> Recipes { get; set; }
         public List<RecipeDetailModel> Recipes { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

@@ -54,8 +54,8 @@ namespace CulinarySite.Bll.Services
             {
                 dish = _dishReadOnlyRepository.GetItemWithInclude(
                                 x => x.Id == id,
-                                x => x.Recipes,
-                                x => x.Image);
+                                x => x.Recipes
+                                );
 
                 dishDetailDto = _mapper.Map<DishDetailDto>(dish);
 
@@ -75,9 +75,7 @@ namespace CulinarySite.Bll.Services
 
             if (withRelated)
             {
-                dishes = _dishReadOnlyRepository.GetItemListWithInclude(
-                    x => x.Recipes,
-                    x => x.Image);
+                dishes = _dishReadOnlyRepository.GetItemListWithInclude(x => x.Recipes);
 
                 dishListDtos = dishes.Select(x => _mapper.Map<DishListDto>(x));
 

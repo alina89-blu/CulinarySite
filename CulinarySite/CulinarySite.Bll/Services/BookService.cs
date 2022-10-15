@@ -78,7 +78,7 @@ namespace CulinarySite.Bll.Services
                 x => x.Author);
 
                 bookDetailListDtos = books.Select(x => _mapper.Map<BookDetailListDto>(x));
-                
+
                 return bookDetailListDtos;
             }
 
@@ -92,7 +92,7 @@ namespace CulinarySite.Bll.Services
         public IEnumerable<BookDto> GetBookList()
         {
             IEnumerable<Book> books = _bookReadOnlyRepository.GetItemList();
-            var bookDtos = books.Select(x => _mapper.Map<BookDto>(x));           
+            var bookDtos = books.Select(x => _mapper.Map<BookDto>(x));
 
             return bookDtos;
         }
@@ -110,6 +110,6 @@ namespace CulinarySite.Bll.Services
             books.Sort(new BookYearComparer());
             return books;
         }
-        
+
     }
 }

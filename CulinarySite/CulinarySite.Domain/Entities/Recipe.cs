@@ -20,8 +20,6 @@ namespace CulinarySite.Domain.Entities
         public Book Book { get; set; }
         public int DishId { get; set; }
         public Dish Dish { get; set; }
-        public Image Image { get; set; }
-
-
+        public string ImageUrl { get; set; }
     }
 }

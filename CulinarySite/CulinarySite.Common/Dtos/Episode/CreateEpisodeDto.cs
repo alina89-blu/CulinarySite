@@ -5,5 +5,7 @@ namespace CulinarySite.Common.Dtos.Episode
     {
         public string Name { get; set; }
         public int CulinaryChannelId { get; set; }
+        public string ImageUrl { get; set; }
+        public string VideoUrl { get; set; }
     }
 }

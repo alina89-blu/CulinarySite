@@ -6,7 +6,8 @@
       </em>
       <br />
       <img
-        src="{{ recipeDetailModel.image?.url }}"
+        id="img"
+        src="{{ recipeDetailModel.imageUrl }}"
         alt="not found"
         style="float: left; margin: 0px 15px 0px 0px"
       />
@@ -53,18 +54,17 @@
 <br />
 <div class="container">
   <div>
-    <h3 class="color-green"><em> Ингредиенты</em></h3>
+    <h3 class="color-green"><em> Ингредиенты </em></h3>
+    <br />
     <div
       *ngFor="let ingredient of recipeDetailModel.ingredients; let idx = index"
     >
-      <strong>
-        <em>
-          <p>
-            {{ ingredient.name }} {{ ingredient.quantity }}
-            {{ ingredient.unit }}
-          </p>
-        </em>
-      </strong>
+      <em>
+        <p>
+          <b> {{ ingredient.name }}</b> {{ ingredient.quantity }}
+          {{ ingredient.unit }}
+        </p>
+      </em>
     </div>
   </div>
 </div>
@@ -81,16 +81,36 @@
         <b class="color-green">
           {{ idx + 1 }}
         </b>
+
         {{ cookingStage.content }}
+      </p>
+      <p>
+        <img
+          *ngIf="cookingStage.imageUrl"
+          src="{{ cookingStage.imageUrl }}"
+          width="755px"
+          height="391px"
+        />
       </p>
     </div>
 
-    <h2 class="color-green">Пищевая ценность</h2>
-    <div *ngFor="let organicMatter of recipeDetailModel.organicMatters">
-      <p>
-        <b>{{ organicMatter.name }}</b> {{ organicMatter.quantity }}
-        {{ organicMatter.unit }}
-      </p>
-    </div>
+    <em>
+      <h2 class="color-green">Пищевая ценность</h2>
+    </em>
+  </div>
+
+  <div>
+    <table class="table table-success">
+      <thead></thead>
+      <tbody>
+        <tr *ngFor="let organicMatter of recipeDetailModel.organicMatters">
+          <div *ngIf="recipeDetailModel.organicMatters">
+            <td>{{ organicMatter.name }}</td>
+            <td>{{ organicMatter.quantity }}</td>
+            <td>{{ organicMatter.unit }}</td>
+          </div>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -6,5 +6,6 @@ namespace CulinarySite.Common.Dtos.CookingStage
         public int CookingStageId { get; set; }
         public string Content { get; set; }
         public string RecipeName { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

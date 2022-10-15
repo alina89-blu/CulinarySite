@@ -1,46 +1,47 @@
-<html>
-  <body>
-    <div class="Pad">
-      <h3>Добавление новой книги</h3>
-      <div>
-        <label>Название</label>
-        <input type="text" [(ngModel)]="createBookModel.name" />
-      </div>
+<div class="Pad">
+  <h3>Добавление новой книги</h3>
+  <div>
+    <label>Название</label>
+    <input type="text" [(ngModel)]="createBookModel.name" />
+  </div>
 
-      <div>
-        <label>Год создания</label>
-        <input
-          type="number"
-          min="1990"
-          [(ngModel)]="createBookModel.creationYear"
-        />
-      </div>
+  <div>
+    <label>Год создания</label>
+    <input
+      type="number"
+      min="1990"
+      [(ngModel)]="createBookModel.creationYear"
+    />
+  </div>
 
-      <div>
-        <label>Описание</label>
-        <input type="text" [(ngModel)]="createBookModel.description" />
-      </div>
+  <div>
+    <label>Описание</label>
+    <input type="text" [(ngModel)]="createBookModel.description" />
+  </div>
 
-      <div>
-        <label>Автор</label>
-        <select [(ngModel)]="createBookModel.authorId" class="form-control">
-          <option *ngFor="let author of authors" [ngValue]="author.authorId">
-            {{ author.name }}
-          </option>
-        </select>
-      </div>
+  <div>
+    <label>Автор</label>
+    <select [(ngModel)]="createBookModel.authorId" class="form-control">
+      <option *ngFor="let author of authors" [ngValue]="author.authorId">
+        {{ author.name }}
+      </option>
+    </select>
+  </div>
 
-      <div>
-        <button class="btn info" (click)="createBook()">Создать</button>
-      </div>
+  <div>
+    <label>Изображение</label>
+    <input type="text" [(ngModel)]="createBookModel.imageUrl" />
+  </div>
 
-      <p>
-        <a [routerLink]="['/book']">Назад к списку книг</a>
-      </p>
+  <div>
+    <button class="btn info" (click)="createBook()">Создать</button>
+  </div>
 
-      <p>
-        <a routerLink="/">На домашнюю страницу</a>
-      </p>
-    </div>
-  </body>
-</html>
+  <p>
+    <a [routerLink]="['/book']">Назад к списку книг</a>
+  </p>
+
+  <p>
+    <a routerLink="/">На домашнюю страницу</a>
+  </p>
+</div>

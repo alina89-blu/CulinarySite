@@ -20,6 +20,7 @@ export class UpdateRecipeModel {
   public organicMatters: UpdateOrganicMatterModel[];
   public cookingStages: UpdateCookingStageModel[];
   public tags: UpdateTagModel[];
+  public imageUrl: string;
 
   constructor(
     public updateRecipeModel?: IUpdateRecipeModel | IRecipeDetailModel
@@ -38,6 +39,7 @@ export class UpdateRecipeModel {
       this.organicMatters = updateRecipeModel.organicMatters;
       this.cookingStages = updateRecipeModel.cookingStages;
       this.tags = updateRecipeModel.tags;
+      this.imageUrl = updateRecipeModel.imageUrl;
     }
   }
 }

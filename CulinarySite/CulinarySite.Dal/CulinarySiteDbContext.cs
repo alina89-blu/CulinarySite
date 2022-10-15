@@ -27,7 +27,6 @@ namespace CulinarySite.Dal
         public DbSet<OrganicMatter> OrganicMatters { get; set; }
         public DbSet<CulinaryChannel> CulinaryChannels { get; set; }
         public DbSet<Episode> Episodes { get; set; }
-        public DbSet<Image> Images { get; set; }
         public DbSet<Tag> Tags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

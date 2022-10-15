@@ -8,10 +8,13 @@
     <thead>
       <tr>
         <td>Нр.</td>
-        <td>Название<button (click)="sortBooksByName()">^</button></td>
+        <!-- <td>Название<button (click)="sortBooksByName()"></button></td>  -->
+        <td (click)="sortBooksByName()">Название</td>
+
         <!--<td>Название</td>
       <td class="A">Год создания</td>-->
-        <td>Год создания<button (click)="sortBooksByYear()">^</button></td>
+        <!--<td>Год создания<button (click)="sortBooksByYear()"></button></td> -->
+        <td (click)="sortBooksByYear()">Год создания</td>
         <td>Автор</td>
         <td>Описание</td>
         <td>Действия</td>

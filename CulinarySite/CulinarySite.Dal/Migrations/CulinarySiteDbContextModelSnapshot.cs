@@ -19,21 +19,6 @@ namespace CulinarySite.Dal.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BookImage", b =>
-                {
-                    b.Property<int>("BooksId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ImagesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BooksId", "ImagesId");
-
-                    b.HasIndex("ImagesId");
-
-                    b.ToTable("BookImage");
-                });
-
             modelBuilder.Entity("CommentRestaurant", b =>
                 {
                     b.Property<int>("CommentsId")
@@ -95,6 +80,9 @@ namespace CulinarySite.Dal.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -135,6 +123,9 @@ namespace CulinarySite.Dal.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("RecipeId")
                         .HasColumnType("int");
 
@@ -173,6 +164,9 @@ namespace CulinarySite.Dal.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Dishes");
@@ -188,7 +182,13 @@ namespace CulinarySite.Dal.Migrations
                     b.Property<int>("CulinaryChannelId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VideoUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -196,50 +196,6 @@ namespace CulinarySite.Dal.Migrations
                     b.HasIndex("CulinaryChannelId");
 
                     b.ToTable("Episodes");
-                });
-
-            modelBuilder.Entity("CulinarySite.Domain.Entities.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CookingStageId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DishId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EpisodeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("RecipeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CookingStageId");
-
-                    b.HasIndex("DishId")
-                        .IsUnique()
-                        .HasFilter("[DishId] IS NOT NULL");
-
-                    b.HasIndex("EpisodeId")
-                        .IsUnique()
-                        .HasFilter("[EpisodeId] IS NOT NULL");
-
-                    b.HasIndex("RecipeId")
-                        .IsUnique()
-                        .HasFilter("[RecipeId] IS NOT NULL");
-
-                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("CulinarySite.Domain.Entities.Ingredient", b =>
@@ -308,6 +264,9 @@ namespace CulinarySite.Dal.Migrations
 
                     b.Property<int>("DishId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -399,7 +358,7 @@ namespace CulinarySite.Dal.Migrations
                     b.ToTable("Telephones");
                 });
 
-            modelBuilder.Entity("CulinarySite.Domain.Entities.User", b =>
+            modelBuilder.Entity("CulinarySite.Domain.Identity.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -655,21 +614,6 @@ namespace CulinarySite.Dal.Migrations
                     b.ToTable("RecipeTag");
                 });
 
-            modelBuilder.Entity("BookImage", b =>
-                {
-                    b.HasOne("CulinarySite.Domain.Entities.Book", null)
-                        .WithMany()
-                        .HasForeignKey("BooksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CulinarySite.Domain.Entities.Image", null)
-                        .WithMany()
-                        .HasForeignKey("ImagesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("CommentRestaurant", b =>
                 {
                     b.HasOne("CulinarySite.Domain.Entities.Comment", null)
@@ -727,37 +671,6 @@ namespace CulinarySite.Dal.Migrations
                         .IsRequired();
 
                     b.Navigation("CulinaryChannel");
-                });
-
-            modelBuilder.Entity("CulinarySite.Domain.Entities.Image", b =>
-                {
-                    b.HasOne("CulinarySite.Domain.Entities.CookingStage", "CookingStage")
-                        .WithMany("Images")
-                        .HasForeignKey("CookingStageId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("CulinarySite.Domain.Entities.Dish", "Dish")
-                        .WithOne("Image")
-                        .HasForeignKey("CulinarySite.Domain.Entities.Image", "DishId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("CulinarySite.Domain.Entities.Episode", "Episode")
-                        .WithOne("Image")
-                        .HasForeignKey("CulinarySite.Domain.Entities.Image", "EpisodeId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("CulinarySite.Domain.Entities.Recipe", "Recipe")
-                        .WithOne("Image")
-                        .HasForeignKey("CulinarySite.Domain.Entities.Image", "RecipeId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("CookingStage");
-
-                    b.Navigation("Dish");
-
-                    b.Navigation("Episode");
-
-                    b.Navigation("Recipe");
                 });
 
             modelBuilder.Entity("CulinarySite.Domain.Entities.Recipe", b =>
@@ -849,7 +762,7 @@ namespace CulinarySite.Dal.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("CulinarySite.Domain.Entities.User", null)
+                    b.HasOne("CulinarySite.Domain.Identity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -858,7 +771,7 @@ namespace CulinarySite.Dal.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("CulinarySite.Domain.Entities.User", null)
+                    b.HasOne("CulinarySite.Domain.Identity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -873,7 +786,7 @@ namespace CulinarySite.Dal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CulinarySite.Domain.Entities.User", null)
+                    b.HasOne("CulinarySite.Domain.Identity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -882,7 +795,7 @@ namespace CulinarySite.Dal.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("CulinarySite.Domain.Entities.User", null)
+                    b.HasOne("CulinarySite.Domain.Identity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -936,11 +849,6 @@ namespace CulinarySite.Dal.Migrations
                     b.Navigation("Recipes");
                 });
 
-            modelBuilder.Entity("CulinarySite.Domain.Entities.CookingStage", b =>
-                {
-                    b.Navigation("Images");
-                });
-
             modelBuilder.Entity("CulinarySite.Domain.Entities.CulinaryChannel", b =>
                 {
                     b.Navigation("Episodes");
@@ -948,21 +856,12 @@ namespace CulinarySite.Dal.Migrations
 
             modelBuilder.Entity("CulinarySite.Domain.Entities.Dish", b =>
                 {
-                    b.Navigation("Image");
-
                     b.Navigation("Recipes");
-                });
-
-            modelBuilder.Entity("CulinarySite.Domain.Entities.Episode", b =>
-                {
-                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("CulinarySite.Domain.Entities.Recipe", b =>
                 {
                     b.Navigation("CookingStages");
-
-                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("CulinarySite.Domain.Entities.Restaurant", b =>

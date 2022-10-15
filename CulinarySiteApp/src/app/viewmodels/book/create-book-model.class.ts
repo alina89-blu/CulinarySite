@@ -5,6 +5,7 @@ export class CreateBookModel {
   public name: string;
   public creationYear: number;
   public description: string;
+  public imageUrl: string;
 
   constructor(public createBookModel?: ICreateBookModel) {
     if (createBookModel) {
@@ -12,6 +13,7 @@ export class CreateBookModel {
       this.name = createBookModel.name;
       this.creationYear = createBookModel.creationYear;
       this.description = createBookModel.description;
+      this.imageUrl = createBookModel.imageUrl;
     }
   }
 }

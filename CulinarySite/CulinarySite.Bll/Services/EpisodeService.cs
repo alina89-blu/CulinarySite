@@ -55,7 +55,6 @@ namespace CulinarySite.Bll.Services
                 episode = _episodeReadOnlyRepository.GetItemWithInclude(
                                 x => x.Id == id,
                                 x => x.CulinaryChannel,
-                                x => x.Image,
                                 x => x.Tags
                                );
 
@@ -79,7 +78,6 @@ namespace CulinarySite.Bll.Services
             {
                 episodes = _episodeReadOnlyRepository.GetItemListWithInclude(
                                 x => x.CulinaryChannel,
-                                x => x.Image,
                                 x => x.Tags);
 
                 episodeListDtos = episodes.Select(x => _mapper.Map<EpisodeListDto>(x));

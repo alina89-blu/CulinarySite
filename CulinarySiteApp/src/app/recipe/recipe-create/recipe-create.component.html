@@ -12,6 +12,11 @@
   </div>
 
   <div>
+    <label>Image</label>
+    <input type="text" [(ngModel)]="createRecipeModel.imageUrl" />
+  </div>
+
+  <div>
     <label>Время готовки</label>
     <input type="time" [(ngModel)]="createRecipeModel.cookingTime" />
   </div>
@@ -63,12 +68,6 @@
     <button class="btn info" (click)="addIngredients()">Add ingredients</button>
   </div>
 
-  <div>
-    <button class="btn info" (click)="addOrganicMatters()">
-      Add organic matters
-    </button>
-  </div>
-
   <form [formGroup]="myForm">
     <div *ngIf="showIngredients">
       <div
@@ -85,7 +84,7 @@
             [(ngModel)]="createRecipeModel.ingredients[i].name"
             formControlName="name"
           />
-
+          <br />
           <label>Единица измерения</label>
           <select
             [(ngModel)]="createRecipeModel.ingredients[i].unit"
@@ -97,6 +96,7 @@
               {{ unit }}
             </option>
           </select>
+          <br />
 
           <label>Количество</label>
           <input
@@ -113,6 +113,12 @@
     </div>
     <!--OrganicMetters-->
   </form>
+
+  <div>
+    <button class="btn info" (click)="addOrganicMatters()">
+      Add organic matters
+    </button>
+  </div>
 
   <form [formGroup]="myForm">
     <!--OrganicMetters-->
@@ -164,6 +170,7 @@
       <button class="btn info" (click)="addOrganicMatter()">+</button>
     </div>
   </form>
+
   <div>
     <button class="btn info" (click)="createRecipe()">Создать</button>
   </div>

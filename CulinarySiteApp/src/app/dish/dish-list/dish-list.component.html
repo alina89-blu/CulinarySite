@@ -8,12 +8,16 @@
     <tr>
       <td>Number</td>
       <td>Category</td>
+      <td>Изображение</td>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let dish of dishes; let idx = index">
       <td>{{ idx + 1 }}</td>
       <td>{{ dish?.category }}</td>
+      <td>
+        <img src="{{ dish.imageUrl }}" alt="" width="60px" height="50px" />
+      </td>
       <td>
         <a class="btn info" [routerLink]="['/editDish', dish.dishId]">Edit</a>
         <button class="btn info" (click)="deleteDish(dish.dishId)">

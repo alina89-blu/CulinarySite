@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -26,10 +26,11 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  isAuthenticated() {
-    if (this.getToken()) {
-      return true;
-    }
-    return false;
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
+
+  logout() {
+    return localStorage.removeItem('token');
   }
 }

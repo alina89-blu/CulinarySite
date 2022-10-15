@@ -1,10 +1,18 @@
 <div class="A">
   <div>
     <h2>{{ bookDetailModel.name }}</h2>
+    <br />
+    <img
+      src="{{ bookDetailModel.imageUrl }}"
+      alt=""
+      style="float: left; margin: 0px 15px 0px 0px"
+    />
     <p><b class="C">Автор:</b> Джейми Оливер</p>
     <p><b class="C">Название:</b> {{ bookDetailModel.name }}</p>
     <p><b class="C">Год:</b> {{ bookDetailModel.creationYear }}</p>
     <p><b class="C">Перевод:</b> отсутствует</p>
+    <hr />
+
     <p>{{ bookDetailModel.description }}</p>
   </div>
 </div>

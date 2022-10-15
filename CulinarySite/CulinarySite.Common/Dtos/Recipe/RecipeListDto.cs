@@ -22,5 +22,6 @@ namespace CulinarySite.Common.Dtos.Recipe
         public List<OrganicMatterDto> OrganicMatters { get; set; } = new List<OrganicMatterDto>();
         public List<CookingStageDto> CookingStages { get; set; } = new List<CookingStageDto>();
         public List<TagDto> Tags { get; set; } = new List<TagDto>();
+        public string ImageUrl { get; set; }
     }
 }

@@ -12,14 +12,26 @@
       <td>Ид</td>
       <td>Название</td>
       <td>Кулинарный канал</td>
+      <td>image</td>
+      <td>video</td>
       <td>Действия</td>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let episode of episodes; let idx = index">
       <td>{{ idx + 1 }}</td>
-      <td>{{ episode.name }}</td>
+      <td>
+        <a [routerLink]="['/episode', episode.episodeId]">{{ episode.name }}</a>
+      </td>
+
       <td>{{ episode.culinaryChannelName }}</td>
+      <td>
+        <img src="{{ episode.imageUrl }}" alt="" width="60px" height="50px" />
+      </td>
+
+      <td>
+        <video src="{{ episode.videoUrl }}"></video>
+      </td>
       <td>
         <a class="btn info" [routerLink]="['/editEpisode', episode.episodeId]"
           >Редактировать</a

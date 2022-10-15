@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using CulinarySite.Common.Dtos.Ingredient;
 using CulinarySite.Common.Dtos.OrganicMatter;
-using CulinarySite.Common.Dtos.Image.RecipeImage;
 using CulinarySite.Common.Dtos.Tag;
 using CulinarySite.Common.Dtos.CookingStage;
 
@@ -23,6 +22,6 @@ namespace CulinarySite.Common.Dtos.Recipe
         public List<OrganicMatterDto> OrganicMatters { get; set; } = new List<OrganicMatterDto>();
         public List<CookingStageDto> CookingStages { get; set; } = new List<CookingStageDto>();
         public List<TagDto> Tags { get; set; } = new List<TagDto>();
-        public RecipeImageDto Image { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

@@ -6,6 +6,6 @@ namespace CulinarySite.Domain.Entities
     {        
         public string Category { get; set; }
         public List<Recipe> Recipes { get; set; } = new List<Recipe>();
-        public Image Image { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

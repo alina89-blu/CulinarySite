@@ -19,7 +19,14 @@ select {
   font-size: medium;
   margin: 5px;
   border-radius: 5px;
+  width: 200px;
 }
 .Pad {
   padding: 30px;
+}
+
+select.form-control {
+  display: inline-block;
+
+  width: 200px;
 }

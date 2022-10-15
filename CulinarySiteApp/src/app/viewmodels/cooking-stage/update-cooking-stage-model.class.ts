@@ -5,6 +5,7 @@ export class UpdateCookingStageModel {
   public cookingStageId: number;
   public content: string;
   public recipeId: number;
+  public imageUrl: string;
 
   constructor(
     public updateCookingStageModel?:
@@ -15,6 +16,7 @@ export class UpdateCookingStageModel {
       this.cookingStageId = updateCookingStageModel.cookingStageId;
       this.content = updateCookingStageModel.content;
       this.recipeId = updateCookingStageModel.recipeId;
+      this.imageUrl = updateCookingStageModel.imageUrl;
     }
   }
 }

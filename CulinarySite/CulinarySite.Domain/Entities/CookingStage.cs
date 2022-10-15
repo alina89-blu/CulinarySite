@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace CulinarySite.Domain.Entities
+﻿namespace CulinarySite.Domain.Entities
 {
     public class CookingStage : BaseEntity
     {
@@ -8,6 +6,6 @@ namespace CulinarySite.Domain.Entities
 
         public int RecipeId { get; set; }
         public Recipe Recipe { get; set; }
-        public List<Image> Images { get; set; } = new List<Image>();
+        public string ImageUrl { get; set; }
     }
 }

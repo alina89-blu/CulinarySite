@@ -15,6 +15,9 @@ td {
 tr:nth-child(even) {
   background-color: #afeeee;
 }
+thead {
+  background-color: #afeeee;
+}
 
 .btn {
   border: none;

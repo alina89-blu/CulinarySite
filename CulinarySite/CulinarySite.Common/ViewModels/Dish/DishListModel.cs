@@ -1,12 +1,9 @@
-﻿
-using CulinarySite.Common.ViewModels.Image.DishImage;
-
-namespace CulinarySite.Common.ViewModels.Dish
+﻿namespace CulinarySite.Common.ViewModels.Dish
 {
     public class DishListModel
     {
         public int DishId { get; set; }
         public string Category { get; set; }
-        public DishImageModel Image { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

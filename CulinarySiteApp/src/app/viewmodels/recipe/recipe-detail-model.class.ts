@@ -1,7 +1,6 @@
 import { DifficultyLevel } from 'src/app/enums/difficulty-level.enum';
 import { IRecipeDetailModel } from 'src/app/interfaces/recipe/recipe-detail-model.interface';
 import { CookingStageModel } from '../cooking-stage/cooking-stage-model.class';
-import { RecipeImageModel } from '../image/recipe-image/recipe-image-model.class';
 import { IngredientModel } from '../ingredient/ingredient-model.class';
 import { OrganicMatterModel } from '../organic-matter/organic-matter-model.class';
 import { TagModel } from '../tag/tag-model.class';
@@ -20,7 +19,7 @@ export class RecipeDetailModel {
   public organicMatters: OrganicMatterModel[];
   public cookingStages: CookingStageModel[];
   public tags: TagModel[];
-  public image: RecipeImageModel;
+  public imageUrl: string;
 
   constructor(public recipeDetailModel?: IRecipeDetailModel) {
     if (recipeDetailModel) {
@@ -37,7 +36,7 @@ export class RecipeDetailModel {
       this.organicMatters = recipeDetailModel.organicMatters;
       this.cookingStages = recipeDetailModel.cookingStages;
       this.tags = recipeDetailModel.tags;
-      this.image = recipeDetailModel.image;
+      this.imageUrl = recipeDetailModel.imageUrl;
     }
   }
 }

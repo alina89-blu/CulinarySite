@@ -8,6 +8,7 @@ export class DishDetailModel {
   public category: DishCategory;
   //public recipes: RecipeModel[];
   public recipes: RecipeDetailModel[];
+  public imageUrl: string;
 
   constructor(public dishDetailModel?: IDishDetailModel) {
     if (dishDetailModel) {
@@ -15,6 +16,7 @@ export class DishDetailModel {
       this.category = dishDetailModel.category;
       //this.recipes = dishDetailModel.recipes;
       this.recipes = dishDetailModel.recipes;
+      this.imageUrl = dishDetailModel.imageUrl;
     }
   }
 }
