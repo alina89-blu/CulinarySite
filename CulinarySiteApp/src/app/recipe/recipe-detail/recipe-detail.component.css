@@ -17,3 +17,7 @@
 #img {
   border: 4px solid rgb(73, 172, 73);
 }
+
+.line-height {
+  line-height: 45px;
+}

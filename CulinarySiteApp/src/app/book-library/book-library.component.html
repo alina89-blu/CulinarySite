@@ -71,7 +71,7 @@
   </div>
   <br />
 
-  <div class="A" *ngFor="let book of books; let idx = index">
+  <div *ngFor="let book of books; let idx = index">
     <h3>
       <a [routerLink]="['/book', book.bookId]">
         <p>{{ book.name }}</p>

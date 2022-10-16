@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
     <div>
+      <br />
       <em
         ><h1 class="B color-green">{{ recipeDetailModel.name }}</h1>
       </em>
@@ -44,7 +45,7 @@
         {{ recipeDetailModel.difficultyLevel }}
       </p>
       <div>
-        <p>
+        <p class="line-height">
           <b> {{ recipeDetailModel.content }}</b>
         </p>
       </div>
@@ -97,20 +98,15 @@
     <em>
       <h2 class="color-green">Пищевая ценность</h2>
     </em>
+    <br />
   </div>
 
-  <div>
-    <table class="table table-success">
-      <thead></thead>
-      <tbody>
-        <tr *ngFor="let organicMatter of recipeDetailModel.organicMatters">
-          <div *ngIf="recipeDetailModel.organicMatters">
-            <td>{{ organicMatter.name }}</td>
-            <td>{{ organicMatter.quantity }}</td>
-            <td>{{ organicMatter.unit }}</td>
-          </div>
-        </tr>
-      </tbody>
-    </table>
+  <div *ngFor="let organicMatter of recipeDetailModel.organicMatters">
+    <p>
+      <em>
+        <b>{{ organicMatter.name }} </b> {{ organicMatter.quantity }}
+        {{ organicMatter.unit }}
+      </em>
+    </p>
   </div>
 </div>
