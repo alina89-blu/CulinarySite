@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IAddressListModel } from 'src/app/interfaces/address/address-list-model.interface';
 import { AddressService } from 'src/app/services/address.service';
@@ -15,12 +16,19 @@ export class RestaurantCreateComponent implements OnInit {
   public createRestaurantModel: CreateRestaurantModel =
     new CreateRestaurantModel();
   public addresses: AddressListModel[] = [];
+  myForm: FormGroup;
 
   constructor(
     private restaurantService: RestaurantService,
     private router: Router,
-    private addressService: AddressService
-  ) {}
+    private addressService: AddressService,
+    private formBuilder: FormBuilder
+  ) {
+    this.myForm = formBuilder.group({
+      restaurantName: ['', [Validators.minLength(7), Validators.required]],
+      addressName: ['', Validators.required],
+    });
+  }
 
   public createRestaurant(): void {
     this.restaurantService
@@ -38,5 +46,10 @@ export class RestaurantCreateComponent implements OnInit {
         (data: IAddressListModel[]) =>
           (this.addresses = data.map((x) => new AddressListModel(x)))
       );
+  }
+
+  public submit() {
+    console.log(this.myForm);
+    //  this.createRestaurant();
   }
 }

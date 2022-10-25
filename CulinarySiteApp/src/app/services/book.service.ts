@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IBookDetailListModel } from '../interfaces/book/book-detail-list-model.interface';
 import { IBookDetailModel } from '../interfaces/book/book-detail-model.interface';
@@ -59,4 +59,13 @@ export class BookService {
       this.url + '/' + withRelated + '/' + 'sortedByYear'
     );
   }
+
+  /* public getBook1(id: number): Observable<IBookDetailModel> {
+    let params = new HttpParams();
+    if (id) {
+      params = params.set('getBook', id);
+    }
+
+    return this.http.get<IBookDetailModel>(this.url, { params });
+  }*/
 }

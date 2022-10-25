@@ -1,90 +1,208 @@
 <div class="Pad">
   <h3>Добавление нового рецепта</h3>
-
-  <div>
-    <label>Название</label>
-    <input type="text" [(ngModel)]="createRecipeModel.name" />
-  </div>
-
-  <div>
-    <label>Количество порций</label>
-    <input type="text" [(ngModel)]="createRecipeModel.servingsNumber" />
-  </div>
-
-  <div>
-    <label>Image</label>
-    <input type="text" [(ngModel)]="createRecipeModel.imageUrl" />
-  </div>
-
-  <div>
-    <label>Время готовки</label>
-    <input type="time" [(ngModel)]="createRecipeModel.cookingTime" />
-  </div>
-
-  <div>
-    <label> Уровень сложности</label>
-    <select
-      [(ngModel)]="createRecipeModel.difficultyLevel"
-      class="form-control"
-    >
-      <option *ngFor="let difficultyLevel of difficultyLevels">
-        {{ difficultyLevel }}
-      </option>
-    </select>
-  </div>
-
-  <div>
-    <label>Содержание</label>
-    <input type="text" [(ngModel)]="createRecipeModel.content" />
-  </div>
-
-  <div>
-    <label>Автор</label>
-    <select [(ngModel)]="createRecipeModel.authorId" class="form-control">
-      <option *ngFor="let author of authors" [ngValue]="author.authorId">
-        {{ author.name }}
-      </option>
-    </select>
-  </div>
-
-  <div>
-    <label>Название книги</label>
-    <select [(ngModel)]="createRecipeModel.bookId" class="form-control">
-      <option *ngFor="let book of books" [ngValue]="book.bookId">
-        {{ book.name }}
-      </option>
-    </select>
-  </div>
-
-  <div>
-    <label>Категория блюда</label>
-    <select [(ngModel)]="createRecipeModel.dishId" class="form-control">
-      <option *ngFor="let dish of dishes" [ngValue]="dish.dishId">
-        {{ dish.category }}
-      </option>
-    </select>
-  </div>
-  <div>
-    <button class="btn info" (click)="addIngredients()">Add ingredients</button>
-  </div>
-
-  <form [formGroup]="myForm">
-    <div *ngIf="showIngredients">
+  <form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+    <div class="form-group">
+      <label>Название</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="createRecipeModel.name"
+        formControlName="name"
+      />
       <div
-        formArrayName="ingredients"
-        *ngFor="
-          let ingredient of getIngredientsFormsControls()['controls'];
-          let i = index
+        class="alert alert-danger"
+        *ngIf="
+          myForm.controls['name'].invalid && myForm.controls['name'].touched
         "
       >
-        <div [formGroupName]="i">
-          <label>Ингредиент</label>
+        Не указано название рецепта
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Количество порций</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="createRecipeModel.servingsNumber"
+        formControlName="servingsNumber"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="servingsNumber?.invalid && servingsNumber?.touched"
+      >
+        <div [hidden]="!servingsNumber?.errors?.['required']">
+          Не указано количество порций
+        </div>
+        <div [hidden]="!servingsNumber?.errors?.['min']">
+          Количество порций меньше чем 3
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Image</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="createRecipeModel.imageUrl"
+        formControlName="imageUrl"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          myForm.controls['imageUrl'].invalid &&
+          myForm.controls['imageUrl'].touched
+        "
+      >
+        Не указан УРЛ картинки
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Время готовки</label>
+      <input
+        type="time"
+        class="form-control"
+        [(ngModel)]="createRecipeModel.cookingTime"
+        formControlName="cookingTime"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          myForm.controls['cookingTime'].invalid &&
+          myForm.controls['cookingTime'].touched
+        "
+      >
+        Не указано время готовки
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label> Уровень сложности</label>
+      <select
+        [(ngModel)]="createRecipeModel.difficultyLevel"
+        class="form-control"
+        formControlName="difficultyLevel"
+      >
+        <option *ngFor="let difficultyLevel of difficultyLevels">
+          {{ difficultyLevel }}
+        </option>
+      </select>
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          myForm.controls['difficultyLevel'].invalid &&
+          myForm.controls['difficultyLevel'].touched
+        "
+      >
+        Не указан уровень сложности
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Содержание</label>
+      <input
+        type="text"
+        [(ngModel)]="createRecipeModel.content"
+        class="form-control"
+        formControlName="content"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          myForm.controls['content'].invalid &&
+          myForm.controls['content'].touched
+        "
+      >
+        Не указано содержание
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Автор</label>
+      <select
+        [(ngModel)]="createRecipeModel.authorId"
+        class="form-control"
+        formControlName="authorId"
+      >
+        <option *ngFor="let author of authors" [ngValue]="author.authorId">
+          {{ author.name }}
+        </option>
+      </select>
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          myForm.controls['authorId'].invalid &&
+          myForm.controls['authorId'].touched
+        "
+      >
+        Не указано имя автора
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Название книги</label>
+      <select
+        [(ngModel)]="createRecipeModel.bookId"
+        class="form-control"
+        formControlName="bookId"
+      >
+        <option *ngFor="let book of books" [ngValue]="book.bookId">
+          {{ book.name }}
+        </option>
+      </select>
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          myForm.controls['bookId'].invalid && myForm.controls['bookId'].touched
+        "
+      >
+        Не указано название книги
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Категория блюда</label>
+      <select
+        [(ngModel)]="createRecipeModel.dishId"
+        class="form-control"
+        formControlName="dishId"
+      >
+        <option *ngFor="let dish of dishes" [ngValue]="dish.dishId">
+          {{ dish.category }}
+        </option>
+      </select>
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          myForm.controls['dishId'].invalid && myForm.controls['dishId'].touched
+        "
+      >
+        Не указано категория блюда
+      </div>
+    </div>
+    <h3>Добавление ингредиентов</h3>
+    <div
+      formArrayName="ingredients"
+      *ngFor="
+        let ingredient of getIngredientsFormsControls()['controls'];
+        let i = index
+      "
+    >
+      <div [formGroupName]="i">
+        <div class="form-group">
+          <label>Название</label>
           <input
+            class="form-control"
             type="text"
             [(ngModel)]="createRecipeModel.ingredients[i].name"
+            name="name"
             formControlName="name"
           />
-          <br />
+        </div>
+
+        <div class="form-group">
           <label>Единица измерения</label>
           <select
             [(ngModel)]="createRecipeModel.ingredients[i].unit"
@@ -96,43 +214,41 @@
               {{ unit }}
             </option>
           </select>
-          <br />
+        </div>
 
+        <div class="form-group">
           <label>Количество</label>
           <input
             type="number"
+            class="form-control"
             min="0"
             [(ngModel)]="createRecipeModel.ingredients[i].quantity"
             formControlName="quantity"
           />
-
-          <button (click)="deleteIngredient(i)">Удалить</button>
         </div>
+
+        <!--  <button (click)="deleteIngredient(i)">Удалить</button>-->
       </div>
-      <button class="btn info" (click)="addIngredient()">+</button>
     </div>
-    <!--OrganicMetters-->
-  </form>
 
-  <div>
-    <button class="btn info" (click)="addOrganicMatters()">
-      Add organic matters
-    </button>
-  </div>
+    <!---->
+    <div class="form-group">
+      <button class="btn info" (click)="addIngredient()">
+        Добавить ингредиент
+      </button>
+    </div>
 
-  <form [formGroup]="myForm">
-    <!--OrganicMetters-->
-
-    <div *ngIf="showOrganicMatters">
-      <div
-        formArrayName="organicMatters"
-        *ngFor="
-          let organicMatter of getOrganicMattersFormsControls()['controls'];
-          let i = index
-        "
-      >
-        <div [formGroupName]="i">
-          <label>Oрганическая материя</label>
+    <h3>Добавление органических материй</h3>
+    <div
+      formArrayName="organicMatters"
+      *ngFor="
+        let organicMatter of getOrganicMattersFormsControls()['controls'];
+        let i = index
+      "
+    >
+      <div [formGroupName]="i">
+        <div class="form-group">
+          <label>Название</label>
           <select
             [(ngModel)]="createRecipeModel.organicMatters[i].name"
             class="form-control"
@@ -143,7 +259,9 @@
               {{ organicMatter }}
             </option>
           </select>
+        </div>
 
+        <div class="form-group">
           <label>Единица измерения</label>
           <select
             [(ngModel)]="createRecipeModel.organicMatters[i].unit"
@@ -155,23 +273,35 @@
               {{ unit }}
             </option>
           </select>
+        </div>
 
+        <div class="form-group">
           <label>Количество</label>
           <input
             type="number"
+            class="form-control"
             min="0"
             [(ngModel)]="createRecipeModel.organicMatters[i].quantity"
             formControlName="quantity"
           />
-
-          <button (click)="deleteOrganicMatter(i)">Удалить</button>
         </div>
+
+        <!--  <button (click)="deleteOrganicMatter(i)">Удалить</button>-->
       </div>
-      <button class="btn info" (click)="addOrganicMatter()">+</button>
+    </div>
+
+    <div class="form-group">
+      <button class="btn info" (click)="addOrganicMatter()">
+        Добавить органическую материю
+      </button>
+    </div>
+
+    <div class="form-group">
+      <button class="btn info" [disabled]="myForm.invalid">Отправить</button>
     </div>
   </form>
 
-  <div>
+  <!--  <div>
     <button class="btn info" (click)="createRecipe()">Создать</button>
   </div>
-</div>
+--></div>

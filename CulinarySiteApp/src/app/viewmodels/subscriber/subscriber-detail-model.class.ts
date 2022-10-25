@@ -1,5 +1,5 @@
 import { ISubscriberDetailModel } from 'src/app/interfaces/subscriber/subscriber-detail-model.interface';
-import { Comment } from '../comment.class';
+
 
 export class SubscriberDetailModel {
   public subscriberId: number;

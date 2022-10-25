@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AddressService } from '../../services/address.service';
 import { AddressListModel } from 'src/app/viewmodels/address/address-list-model.class';
 import { IAddressListModel } from 'src/app/interfaces/address/address-list-model.interface';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-address',
@@ -21,13 +22,18 @@ export class AddressListComponent implements OnInit {
   public getAddressList(): void {
     this.addressService
       .getAddressList()
-      .subscribe(
-        (data: IAddressListModel[]) =>
-          (this.addresses = data.map((x) => new AddressListModel(x)))
-      );
+      .subscribe((data: IAddressListModel[]) => {
+        this.addresses = data.map((x) => new AddressListModel(x));
+        this.dataSource = new MatTableDataSource<IAddressListModel>(
+          this.addresses
+        );
+      });
   }
 
   public deleteAddress(id: number) {
     this.addressService.delete(id).subscribe(() => this.getAddressList());
   }
+
+  displayedColumns: string[] = ['id', 'name', 'action'];
+  dataSource: MatTableDataSource<IAddressListModel>;
 }

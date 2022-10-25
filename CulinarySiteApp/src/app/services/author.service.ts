@@ -12,12 +12,6 @@ export class AuthorService {
 
   constructor(private http: HttpClient) {}
 
-  /* public getAuthorDetailList(
-    withRelated: boolean
-  ): Observable<IAuthorListModel[]> {
-    return this.http.get<IAuthorListModel[]>(this.url + '/' + withRelated);
-  }*/
-
   public getAuthorList(): Observable<IAuthorListModel[]> {
     return this.http.get<IAuthorListModel[]>(this.url);
   }

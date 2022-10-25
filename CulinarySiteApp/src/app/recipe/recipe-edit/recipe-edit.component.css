@@ -13,8 +13,7 @@
   background: #386488;
 }
 
-input,
-select {
+input {
   padding: 10px 20px;
   font-size: medium;
   margin: 5px;

@@ -5,3 +5,15 @@
 .C {
   padding: 50px 150px 50px 150px;
 }
+
+.example-card {
+  width: 400px;
+  margin-bottom: 8px;
+  margin: 15px;
+}
+
+.D {
+  height: 80px;
+  overflow-y: hidden;
+  text-overflow: ellipsis; /* Добавляем многоточие */
+}

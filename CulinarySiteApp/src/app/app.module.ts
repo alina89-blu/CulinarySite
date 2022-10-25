@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './material/material.module';
 
 import { AddressService } from './services/address.service';
 import { AuthorService } from './services/author.service';
@@ -86,7 +87,6 @@ const appRoutes: Routes = [
     canActivate: [AuthGuardService],
   },
 
-  //  { path: 'createBook', component: BookCreateComponent },
   { path: 'cookingStage', component: CookingStageListComponent },
   { path: 'createCookingStage', component: CookingStageCreateComponent },
   { path: 'editCookingStage/:id', component: CookingStageEditComponent },
@@ -175,6 +175,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     //ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     ReactiveFormsModule,
+    MaterialModule,
   ],
   providers: [
     AddressService,

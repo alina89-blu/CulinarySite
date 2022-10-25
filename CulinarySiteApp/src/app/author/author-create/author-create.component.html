@@ -1,17 +1,32 @@
-<h3>Добавление нового автора</h3>
-<div>
-  <label>Имя</label>
-  <input type="text" [(ngModel)]="createAuthorModel.name" />
+<div class="Pad">
+  <h3>Добавление нового автора</h3>
+  <br />
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Имя</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="name"
+        [(ngModel)]="createAuthorModel.name"
+        placeholder="Имя"
+      />
+      <mat-error *ngIf="name.hasError('required')"> Не указано имя </mat-error>
+    </mat-form-field>
+  </form>
+
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="createAuthor()">
+      Добавить
+    </button>
+  </div>
+
+  <p>
+    <a [routerLink]="['/author']">Назад к списку авторов</a>
+  </p>
+
+  <p>
+    <a routerLink="/">На домашнюю страницу</a>
+  </p>
 </div>
-
-<div>
-  <button class="btn info" (click)="createAuthor()">Добавить</button>
-</div>
-
-<p>
-  <a [routerLink]="['/author']">Назад к списку авторов</a>
-</p>
-
-<p>
-  <a routerLink="/">На домашнюю страницу</a>
-</p>

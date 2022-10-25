@@ -13,8 +13,7 @@
   background: #0b7dda;
 }
 
-input,
-select {
+input {
   padding: 10px 20px;
   font-size: medium;
   margin: 5px;
@@ -25,8 +24,24 @@ select {
   padding: 30px;
 }
 
-select.form-control {
-  display: inline-block;
+input.ng-touched.ng-invalid {
+  border: solid red 2px;
+}
+input.ng-touched.ng-valid {
+  border: solid rgb(26, 26, 124) 2px;
+}
 
+select.ng-touched.ng-invalid {
+  border: solid red 2px;
+}
+select.ng-touched.ng-valid {
+  border: solid rgb(26, 26, 124) 2px;
+}
+
+select {
   width: 200px;
+}
+
+h3 {
+  color: rgb(28, 16, 138);
 }

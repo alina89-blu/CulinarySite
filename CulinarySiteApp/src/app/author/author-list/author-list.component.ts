@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.interface';
 import { AuthorService } from 'src/app/services/author.service';
 import { AuthorListModel } from 'src/app/viewmodels/author/author-list-model.class';
@@ -18,15 +19,21 @@ export class AuthorListComponent implements OnInit {
   }
 
   public getAuthorList(): void {
-    this.authorService
-      .getAuthorList()
-      .subscribe(
-        (data: IAuthorListModel[]) =>
-          (this.authors = data.map((x) => new AuthorListModel(x)))
-      );
+    this.authorService.getAuthorList().subscribe((data: IAuthorListModel[]) => {
+      this.authors = data.map((x) => new AuthorListModel(x));
+      this.dataSource = new MatTableDataSource<IAuthorListModel>(this.authors);
+    });
   }
 
   public deleteAuthor(id: number): void {
     this.authorService.deleteAuthor(id).subscribe(() => this.getAuthorList());
   }
+
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'action',
+    /* 'description',*/
+  ];
+  dataSource: any;
 }

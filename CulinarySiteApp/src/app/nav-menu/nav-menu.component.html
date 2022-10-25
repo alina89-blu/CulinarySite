@@ -1,109 +1,49 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<mat-toolbar color="primary" class="mat-elevation-z8">
+  <span><mat-icon>microwave</mat-icon> </span>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/']">ГЛАВНАЯ</a>
-      </li>
+  <span> <a mat-button [routerLink]="['/']"> ГЛАВНАЯ</a></span>
+  <div class="spacer"></div>
 
-      <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle"
-          href="#"
-          id="navbarDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          АДМИН МЕНЮ
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/address']">Адреса</a>
-          <a class="dropdown-item" [routerLink]="['/author']">Авторы</a>
-          <a class="dropdown-item" [routerLink]="['/book']">Книги</a>
-          <a class="dropdown-item" [routerLink]="['/cookingStage']"
-            >Этапы приготовления</a
-          >
-          <a class="dropdown-item" [routerLink]="['/culinaryChannel']"
-            >Кулинарные каналы</a
-          >
-          <a class="dropdown-item" [routerLink]="['/dish']">Блюда</a>
-          <a class="dropdown-item" [routerLink]="['/episode']">Эпизоды</a>
-          <a class="dropdown-item" [routerLink]="['/recipe']">Рецепты</a>
-          <a class="dropdown-item" [routerLink]="['/telephone']">Телефоны</a>
-          <a class="dropdown-item" [routerLink]="['/restaurant']">Рестораны</a>
-        </div>
-      </li>
+  <span><a mat-button [routerLink]="['/recipeLibrary']">РЕЦЕПТЫ</a></span>
 
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/recipeLibrary']">РЕЦЕПТЫ</a>
-      </li>
+  <button mat-button [matMenuTriggerFor]="menu">АДМИН МЕНЮ</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item><a [routerLink]="['/address']">Адреса</a></button>
+    <button mat-menu-item><a [routerLink]="['/author']">Авторы</a></button>
+    <button mat-menu-item>
+      <a [routerLink]="['/recipe']">Рецепты</a>
+    </button>
+    <button mat-menu-item><a [routerLink]="['/book']">Книги</a></button>
+    <button mat-menu-item>
+      <a [routerLink]="['/cookingStage']">Этапы приготовления</a>
+    </button>
+    <button mat-menu-item>
+      <a [routerLink]="['/culinaryChannel']">Кулинарные каналы</a>
+    </button>
+    <button mat-menu-item>
+      <a [routerLink]="['/dish']">Блюда</a>
+    </button>
+    <button mat-menu-item>
+      <a [routerLink]="['/episode']">Эпизоды</a>
+    </button>
 
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/bookLibrary']">КНИГИ</a>
-      </li>
+    <button mat-menu-item>
+      <a [routerLink]="['/telephone']">Телефоны</a>
+    </button>
+    <button mat-menu-item>
+      <a [routerLink]="['/restaurant']">Рестораны</a>
+    </button>
+  </mat-menu>
 
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/restaurantLibrary']">РЕСТОРАНЫ</a>
-      </li>
+  <span><a mat-button [routerLink]="['/bookLibrary']">КНИГИ</a></span>
 
-      <!--
-        <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
-          >Disabled</a
-        >
-      </li>
--->
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input
-        class="form-control mr-sm-2"
-        type="search"
-        placeholder="поиск..."
-        aria-label="Search"
-      />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-        Найти
-      </button>
-    </form>
+  <span><a mat-button [routerLink]="['/restaurantLibrary']">РЕСТОРАНЫ</a></span>
 
-    <div *ngIf="!isAuthenticated()">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']">Вход</a>
-        </li>
-      </ul>
-    </div>
+  <span *ngIf="!isAuthenticated()">
+    <a mat-flat-button [routerLink]="['/login']">Вход</a>
+  </span>
 
-    <div *ngIf="isAuthenticated()">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" (click)="logout()" [routerLink]="['/login']">
-            Выход
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <div>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/cernovic']">cernovic</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  <span *ngIf="isAuthenticated()">
+    <a mat-flat-button (click)="logout()" [routerLink]="['/login']"> Выход </a>
+  </span>
+</mat-toolbar>

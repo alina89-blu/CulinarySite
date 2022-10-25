@@ -4,8 +4,6 @@ import { RecipeService } from 'src/app/services/recipe.service';
 import { DifficultyLevel } from 'src/app/enums/difficulty-level.enum';
 import { DishService } from 'src/app/services/dish.service';
 import { CreateRecipeModel } from 'src/app/viewmodels/recipe/create-recipe-model.class';
-import { DishListModel } from 'src/app/viewmodels/dish/dish-list-model.class';
-import { IDishListModel } from 'src/app/interfaces/dish/dish-list-model.interface';
 import { CreateIngredientModel } from 'src/app/viewmodels/ingredient/create-ingredient-model.class';
 import { Unit } from 'src/app/enums/unit.enum';
 import { AuthorService } from 'src/app/services/author.service';
@@ -31,8 +29,6 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
   public dishes: DishModel[] = [];
   public authors: AuthorListModel[] = [];
   public books: BookModel[] = [];
-  public showIngredients: boolean = false;
-  public showOrganicMatters: boolean = false;
 
   public difficultyLevels: DifficultyLevel[] = [
     DifficultyLevel.Лёгкий,
@@ -69,6 +65,24 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
     private readonly changeDetectorRef: ChangeDetectorRef
   ) {
     this.myForm = new FormGroup({
+      name: new FormControl('recipe1', [
+        Validators.required,
+        Validators.minLength(5),
+      ]),
+
+      servingsNumber: new FormControl('', [
+        Validators.required,
+        Validators.min(3),
+        //this.servingNumberValidator,
+      ]),
+      imageUrl: new FormControl('', Validators.required),
+      cookingTime: new FormControl('', Validators.required),
+      difficultyLevel: new FormControl('Лёгкий', Validators.required),
+      content: new FormControl('', Validators.required),
+      authorId: new FormControl('', Validators.required),
+      bookId: new FormControl('', Validators.required),
+      dishId: new FormControl('', Validators.required),
+
       ingredients: new FormArray([
         new FormGroup({
           name: new FormControl('', Validators.required),
@@ -136,14 +150,6 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
     this.getBookList();
   }
 
-  public addIngredients() {
-    this.showIngredients = !this.showIngredients;
-  }
-
-  public addOrganicMatters() {
-    this.showOrganicMatters = !this.showOrganicMatters;
-  }
-
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();
   }
@@ -186,5 +192,23 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
 
   public deleteOrganicMatter(index: number) {
     this.getOrganicMattersFormsControls().removeAt(index);
+  }
+
+  public submit() {
+    console.log(this.myForm);
+    // this.createRecipe();
+  }
+
+  get servingsNumber() {
+    return this.myForm.get('servingsNumber');
+  }
+
+  servingNumberValidator(
+    control: FormControl
+  ): { [s: string]: boolean } | null {
+    if (control.value < 10) {
+      return { servingsNumber: true };
+    }
+    return null;
   }
 }

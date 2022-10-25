@@ -71,7 +71,7 @@
   </div>
   <br />
 
-  <div *ngFor="let book of books; let idx = index">
+  <!--<div *ngFor="let book of books; let idx = index">
     <h3>
       <a [routerLink]="['/book', book.bookId]">
         <p>{{ book.name }}</p>
@@ -81,9 +81,25 @@
     <img
       src="{{ book.imageUrl }}"
       alt=""
-      style="float: left; margin: 0px 15px 0px 0px"
+      style="float: left; margin: 0px 15px 15px 0px"
     />
 
     <p>{{ book.description }}</p>
+    <mat-divider></mat-divider>
+  </div>-->
+
+  <div style="display: flex; flex-wrap: wrap; flex-basis: 33.333333%">
+    <mat-card class="example-card" *ngFor="let book of books; let idx = index">
+      <mat-card-title-group>
+        <mat-card-title class="B">
+          <a [routerLink]="['/book', book.bookId]"> {{ book.name }} </a>
+        </mat-card-title>
+
+        <img mat-card-lg-image src="{{ book.imageUrl }}" />
+      </mat-card-title-group>
+      <mat-card-content>
+        <p class="D">{{ book.description }}</p>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

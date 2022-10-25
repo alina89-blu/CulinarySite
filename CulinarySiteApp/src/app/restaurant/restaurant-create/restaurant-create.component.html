@@ -1,28 +1,56 @@
-<div class="Pad">
-  <h3>Добавление новой ресторана</h3>
-  <div>
-    <label>Название</label>
-    <input type="text" [(ngModel)]="createRestaurantModel.name" />
+<h3>Добавление новой ресторана</h3>
+<form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+  <div class="form-group">
+    <label>Имя</label>
+    <input
+      class="form-control"
+      formControlName="restaurantName"
+      type="text"
+      [(ngModel)]="createRestaurantModel.name"
+    />
+
+    <div
+      class="alert alert-danger"
+      *ngIf="
+        myForm.controls['restaurantName'].invalid &&
+        myForm.controls['restaurantName'].touched
+      "
+    >
+      Не указано название ресторана
+    </div>
   </div>
 
   <div>
     <label>Адрес</label>
-    <select [(ngModel)]="createRestaurantModel.addressId" class="form-control">
+    <select
+      [(ngModel)]="createRestaurantModel.addressId"
+      class="form-control"
+      formControlName="addressName"
+    >
       <option *ngFor="let address of addresses" [ngValue]="address.addressId">
         {{ address.name }}
       </option>
     </select>
+    <div
+      class="alert alert-danger"
+      *ngIf="
+        myForm.controls['addressName'].invalid &&
+        myForm.controls['addressName'].touched
+      "
+    >
+      Не указан адрес
+    </div>
   </div>
 
-  <div>
-    <button class="btn info" (click)="createRestaurant()">Создать</button>
+  <div class="form-group">
+    <button class="btn info" [disabled]="myForm.invalid">Отправить</button>
   </div>
+</form>
 
-  <p>
-    <a [routerLink]="['/restaurant']">Назад к списку ресторанов</a>
-  </p>
+<p>
+  <a [routerLink]="['/restaurant']">Назад к списку ресторанов</a>
+</p>
 
-  <p>
-    <a routerLink="/">На домашнюю страницу</a>
-  </p>
-</div>
+<p>
+  <a routerLink="/">На домашнюю страницу</a>
+</p>

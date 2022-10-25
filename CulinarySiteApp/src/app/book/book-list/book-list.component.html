@@ -8,12 +8,9 @@
     <thead>
       <tr>
         <td>Нр.</td>
-        <!-- <td>Название<button (click)="sortBooksByName()"></button></td>  -->
+
         <td (click)="sortBooksByName()">Название</td>
 
-        <!--<td>Название</td>
-      <td class="A">Год создания</td>-->
-        <!--<td>Год создания<button (click)="sortBooksByYear()"></button></td> -->
         <td (click)="sortBooksByYear()">Год создания</td>
         <td>Автор</td>
         <td>Описание</td>
@@ -25,7 +22,6 @@
         <td>{{ idx + 1 }}</td>
         <td>{{ book.name }}</td>
         <td class="A">{{ book.creationYear }}</td>
-        <!-- <td>{{ book.author.name }}</td> -->
         <td>{{ book.authorName }}</td>
         <td class="textalign">{{ book.description }}</td>
 
@@ -44,7 +40,4 @@
   <p>
     <a routerLink="/">На домашнюю страницу</a>
   </p>
-
-  <!-- <button class="btn info" (click)="sortBooksByName()">Sort by name</button>
-<button class="btn info" (click)="sortBooksByYear()">Sort by year</button> -->
 </div>
