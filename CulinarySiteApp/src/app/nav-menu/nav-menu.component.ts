@@ -17,7 +17,4 @@ export class NavMenuComponent {
   public logout(): void {
     this.authService.logout();
   }
-  /*met() {
-    this.hide = !this.hide;
-  }*/
 }

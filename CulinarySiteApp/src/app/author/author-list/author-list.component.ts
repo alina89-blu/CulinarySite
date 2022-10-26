@@ -11,6 +11,8 @@ import { AuthorListModel } from 'src/app/viewmodels/author/author-list-model.cla
 })
 export class AuthorListComponent implements OnInit {
   authors: AuthorListModel[] = [];
+  displayedColumns: string[] = ['id', 'name', 'action'];
+  dataSource: MatTableDataSource<IAuthorListModel>;
 
   constructor(private authorService: AuthorService) {}
 
@@ -28,12 +30,4 @@ export class AuthorListComponent implements OnInit {
   public deleteAuthor(id: number): void {
     this.authorService.deleteAuthor(id).subscribe(() => this.getAuthorList());
   }
-
-  displayedColumns: string[] = [
-    'id',
-    'name',
-    'action',
-    /* 'description',*/
-  ];
-  dataSource: any;
 }

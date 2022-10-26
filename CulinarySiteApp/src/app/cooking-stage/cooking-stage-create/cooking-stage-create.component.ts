@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IRecipeListModel } from 'src/app/interfaces/recipe/recipe-list-model.interface';
+import { IRecipeModel } from 'src/app/interfaces/recipe/recipe-model.interface';
 import { CookingStageService } from 'src/app/services/cooking-stage.service';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { CreateCookingStageModel } from 'src/app/viewmodels/cooking-stage/create-cooking-stage-model.class';
-import { RecipeListModel } from 'src/app/viewmodels/recipe/recipe-list-model.class';
+import { RecipeModel } from 'src/app/viewmodels/recipe/recipe-model.class';
 
 @Component({
   selector: 'app-cooking-stage-create',
@@ -14,7 +15,11 @@ import { RecipeListModel } from 'src/app/viewmodels/recipe/recipe-list-model.cla
 export class CookingStageCreateComponent implements OnInit {
   public createCookingStageModel: CreateCookingStageModel =
     new CreateCookingStageModel();
-  public recipes: RecipeListModel[] = [];
+  public recipes: RecipeModel[] = [];
+
+  content = new FormControl('', Validators.required);
+  imageUrl = new FormControl('', Validators.required);
+  recipeId = new FormControl('', Validators.required);
 
   constructor(
     private cookingStageService: CookingStageService,
@@ -34,10 +39,10 @@ export class CookingStageCreateComponent implements OnInit {
 
   public getRecipeList(): void {
     this.recipeService
-      .getRecipeList(false)
+      .getRecipeList()
       .subscribe(
-        (data: IRecipeListModel[]) =>
-          (this.recipes = data.map((x) => new RecipeListModel(x)))
+        (data: IRecipeModel[]) =>
+          (this.recipes = data.map((x) => new RecipeModel(x)))
       );
   }
 }

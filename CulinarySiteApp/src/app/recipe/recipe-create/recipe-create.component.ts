@@ -29,6 +29,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
   public dishes: DishModel[] = [];
   public authors: AuthorListModel[] = [];
   public books: BookModel[] = [];
+  // name = new FormControl('', Validators.required); //
 
   public difficultyLevels: DifficultyLevel[] = [
     DifficultyLevel.Лёгкий,
@@ -65,19 +66,15 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
     private readonly changeDetectorRef: ChangeDetectorRef
   ) {
     this.myForm = new FormGroup({
-      name: new FormControl('recipe1', [
-        Validators.required,
-        Validators.minLength(5),
-      ]),
+      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
 
       servingsNumber: new FormControl('', [
         Validators.required,
         Validators.min(3),
-        //this.servingNumberValidator,
       ]),
       imageUrl: new FormControl('', Validators.required),
       cookingTime: new FormControl('', Validators.required),
-      difficultyLevel: new FormControl('Лёгкий', Validators.required),
+      difficultyLevel: new FormControl('', Validators.required),
       content: new FormControl('', Validators.required),
       authorId: new FormControl('', Validators.required),
       bookId: new FormControl('', Validators.required),
@@ -194,21 +191,8 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
     this.getOrganicMattersFormsControls().removeAt(index);
   }
 
-  public submit() {
-    console.log(this.myForm);
-    // this.createRecipe();
-  }
-
-  get servingsNumber() {
-    return this.myForm.get('servingsNumber');
-  }
-
-  servingNumberValidator(
-    control: FormControl
-  ): { [s: string]: boolean } | null {
-    if (control.value < 10) {
-      return { servingsNumber: true };
-    }
-    return null;
-  }
+  /*public submit() {
+    //console.log(this.myForm);
+    this.createRecipe();
+  }*/
 }

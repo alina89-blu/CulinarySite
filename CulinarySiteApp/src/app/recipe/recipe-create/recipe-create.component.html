@@ -1,7 +1,7 @@
 <div class="Pad">
   <h3>Добавление нового рецепта</h3>
-  <form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
-    <div class="form-group">
+  <form [formGroup]="myForm" class="example-form">
+    <!--  <div class="form-group">
       <label>Название</label>
       <input
         type="text"
@@ -17,9 +17,24 @@
       >
         Не указано название рецепта
       </div>
-    </div>
+    </div>-->
 
-    <div class="form-group">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Название</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        formControlName="name"
+        [(ngModel)]="createRecipeModel.name"
+        placeholder="Название"
+      />
+      <mat-error *ngIf="myForm.controls['name'].hasError('required')">
+        Не указано название книги</mat-error
+      >
+    </mat-form-field>
+
+    <!--  <div class="form-group">
       <label>Количество порций</label>
       <input
         type="number"
@@ -29,18 +44,31 @@
       />
       <div
         class="alert alert-danger"
-        *ngIf="servingsNumber?.invalid && servingsNumber?.touched"
+        *ngIf="
+          myForm.controls['servingsNumber'].invalid &&
+          myForm.controls['servingsNumber'].touched
+        "
       >
-        <div [hidden]="!servingsNumber?.errors?.['required']">
-          Не указано количество порций
-        </div>
-        <div [hidden]="!servingsNumber?.errors?.['min']">
-          Количество порций меньше чем 3
-        </div>
+        Не указано количество порций
       </div>
-    </div>
+    </div>-->
 
-    <div class="form-group">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Количество порций</mat-label>
+      <br />
+      <input
+        type="number"
+        matInput
+        formControlName="servingsNumber"
+        [(ngModel)]="createRecipeModel.servingsNumber"
+        placeholder="Количество порций"
+      />
+      <mat-error *ngIf="myForm.controls['servingsNumber'].hasError('required')">
+        Не указано количество порций</mat-error
+      >
+    </mat-form-field>
+
+    <!--    <div class="form-group">
       <label>Image</label>
       <input
         type="text"
@@ -57,9 +85,24 @@
       >
         Не указан УРЛ картинки
       </div>
-    </div>
+    </div>-->
 
-    <div class="form-group">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>УРЛ картинки</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        formControlName="imageUrl"
+        [(ngModel)]="createRecipeModel.imageUrl"
+        placeholder="УРЛ картинки"
+      />
+      <mat-error *ngIf="myForm.controls['imageUrl'].hasError('required')">
+        Не указан УРЛ картинки</mat-error
+      >
+    </mat-form-field>
+
+    <!--<div class="form-group">
       <label>Время готовки</label>
       <input
         type="time"
@@ -76,9 +119,24 @@
       >
         Не указано время готовки
       </div>
-    </div>
+    </div>-->
 
-    <div class="form-group">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Время готовки</mat-label>
+      <br />
+      <input
+        type="time"
+        matInput
+        formControlName="cookingTime"
+        [(ngModel)]="createRecipeModel.cookingTime"
+        placeholder="Время готовки"
+      />
+      <mat-error *ngIf="myForm.controls['cookingTime'].hasError('required')">
+        Не указано время готовки</mat-error
+      >
+    </mat-form-field>
+
+    <!--     <div class="form-group">
       <label> Уровень сложности</label>
       <select
         [(ngModel)]="createRecipeModel.difficultyLevel"
@@ -98,9 +156,31 @@
       >
         Не указан уровень сложности
       </div>
-    </div>
+    </div>-->
 
-    <div class="form-group">
+    <mat-form-field appearance="fill">
+      <mat-label>Уровень сложности</mat-label>
+      <br />
+      <mat-select
+        formControlName="difficultyLevel"
+        [(ngModel)]="createRecipeModel.difficultyLevel"
+        placeholder="Уровень сложности"
+      >
+        <mat-option
+          *ngFor="let difficultyLevel of difficultyLevels"
+          [value]="difficultyLevel"
+        >
+          {{ difficultyLevel }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="myForm.controls['difficultyLevel'].hasError('required')"
+      >
+        Не указан уровень сложности
+      </mat-error>
+    </mat-form-field>
+
+    <!--  <div class="form-group">
       <label>Содержание</label>
       <input
         type="text"
@@ -117,9 +197,24 @@
       >
         Не указано содержание
       </div>
-    </div>
+    </div>-->
 
-    <div class="form-group">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Содержание</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        formControlName="content"
+        [(ngModel)]="createRecipeModel.content"
+        placeholder="Содержание"
+      />
+      <mat-error *ngIf="myForm.controls['content'].hasError('required')">
+        Не указано содержание</mat-error
+      >
+    </mat-form-field>
+
+    <!--   <div class="form-group">
       <label>Автор</label>
       <select
         [(ngModel)]="createRecipeModel.authorId"
@@ -139,9 +234,28 @@
       >
         Не указано имя автора
       </div>
-    </div>
+    </div>-->
 
-    <div class="form-group">
+    <mat-form-field appearance="fill">
+      <mat-label>Автор</mat-label>
+      <br />
+      <mat-select
+        formControlName="authorId"
+        [(ngModel)]="createRecipeModel.authorId"
+        placeholder="Автор"
+      >
+        <mat-option *ngFor="let author of authors" [value]="author.authorId">
+          {{ author.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="myForm.controls['difficultyLevel'].hasError('required')"
+      >
+        Не указан автор книги
+      </mat-error>
+    </mat-form-field>
+
+    <!--  <div class="form-group">
       <label>Название книги</label>
       <select
         [(ngModel)]="createRecipeModel.bookId"
@@ -160,9 +274,26 @@
       >
         Не указано название книги
       </div>
-    </div>
+    </div>-->
 
-    <div class="form-group">
+    <mat-form-field appearance="fill">
+      <mat-label>Название книги</mat-label>
+      <br />
+      <mat-select
+        formControlName="bookId"
+        [(ngModel)]="createRecipeModel.bookId"
+        placeholder="Название книги"
+      >
+        <mat-option *ngFor="let book of books" [value]="book.bookId">
+          {{ book.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="myForm.controls['bookId'].hasError('required')">
+        Не указано название книги
+      </mat-error>
+    </mat-form-field>
+
+    <!--   <div class="form-group">
       <label>Категория блюда</label>
       <select
         [(ngModel)]="createRecipeModel.dishId"
@@ -181,7 +312,25 @@
       >
         Не указано категория блюда
       </div>
-    </div>
+    </div>-->
+
+    <mat-form-field appearance="fill">
+      <mat-label>Категория блюда</mat-label>
+      <br />
+      <mat-select
+        formControlName="dishId"
+        [(ngModel)]="createRecipeModel.dishId"
+        placeholder="Категория блюда"
+      >
+        <mat-option *ngFor="let dish of dishes" [value]="dish.dishId">
+          {{ dish.category }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="myForm.controls['dishId'].hasError('required')">
+        Не указано категория блюда
+      </mat-error>
+    </mat-form-field>
+
     <h3>Добавление ингредиентов</h3>
     <div
       formArrayName="ingredients"
@@ -191,7 +340,7 @@
       "
     >
       <div [formGroupName]="i">
-        <div class="form-group">
+        <!--     <div class="form-group">
           <label>Название</label>
           <input
             class="form-control"
@@ -200,9 +349,24 @@
             name="name"
             formControlName="name"
           />
-        </div>
+        </div>-->
 
-        <div class="form-group">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Название</mat-label>
+          <br />
+          <input
+            type="text"
+            matInput
+            formControlName="name"
+            [(ngModel)]="createRecipeModel.ingredients[i].name"
+            placeholder="Название"
+          />
+          <!--     <mat-error *ngIf="myForm.controls['name'].hasError('required')">
+            Не указано название книги</mat-error
+          >-->
+        </mat-form-field>
+
+        <!--   <div class="form-group">
           <label>Единица измерения</label>
           <select
             [(ngModel)]="createRecipeModel.ingredients[i].unit"
@@ -215,8 +379,26 @@
             </option>
           </select>
         </div>
+-->
 
-        <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Единица измерения</mat-label>
+          <br />
+          <mat-select
+            formControlName="unit"
+            [(ngModel)]="createRecipeModel.ingredients[i].unit"
+            placeholder="Категория блюда"
+          >
+            <mat-option *ngFor="let unit of units" [value]="unit">
+              {{ unit }}
+            </mat-option>
+          </mat-select>
+          <!--    <mat-error *ngIf="myForm.controls['unit'].hasError('required')">
+            Не указано категория блюда
+          </mat-error>-->
+        </mat-form-field>
+
+        <!--    <div class="form-group">
           <label>Количество</label>
           <input
             type="number"
@@ -225,7 +407,22 @@
             [(ngModel)]="createRecipeModel.ingredients[i].quantity"
             formControlName="quantity"
           />
-        </div>
+        </div>-->
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Количество</mat-label>
+          <br />
+          <input
+            type="number"
+            matInput
+            formControlName="quantity"
+            [(ngModel)]="createRecipeModel.ingredients[i].quantity"
+            placeholder="Количество"
+          />
+          <!--   <mat-error *ngIf="myForm.controls['quantity'].hasError('required')">
+            Не указано название книги</mat-error
+          >-->
+        </mat-form-field>
 
         <!--  <button (click)="deleteIngredient(i)">Удалить</button>-->
       </div>
@@ -233,7 +430,7 @@
 
     <!---->
     <div class="form-group">
-      <button class="btn info" (click)="addIngredient()">
+      <button mat-raised-button color="primary" (click)="addIngredient()">
         Добавить ингредиент
       </button>
     </div>
@@ -247,7 +444,7 @@
       "
     >
       <div [formGroupName]="i">
-        <div class="form-group">
+        <!--  <div class="form-group">
           <label>Название</label>
           <select
             [(ngModel)]="createRecipeModel.organicMatters[i].name"
@@ -260,8 +457,29 @@
             </option>
           </select>
         </div>
+-->
 
-        <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Название</mat-label>
+          <br />
+          <mat-select
+            formControlName="name"
+            [(ngModel)]="createRecipeModel.organicMatters[i].name"
+            placeholder="Название"
+          >
+            <mat-option
+              *ngFor="let organicMatter of organicMatters"
+              [value]="organicMatter"
+            >
+              {{ organicMatter }}
+            </mat-option>
+          </mat-select>
+          <!--    <mat-error *ngIf="myForm.controls['unit'].hasError('required')">
+            Не указано категория блюда
+          </mat-error>-->
+        </mat-form-field>
+
+        <!--     <div class="form-group">
           <label>Единица измерения</label>
           <select
             [(ngModel)]="createRecipeModel.organicMatters[i].unit"
@@ -273,9 +491,23 @@
               {{ unit }}
             </option>
           </select>
-        </div>
+        </div>-->
 
-        <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Единица измерения</mat-label>
+          <br />
+          <mat-select
+            formControlName="unit"
+            [(ngModel)]="createRecipeModel.organicMatters[i].unit"
+            placeholder="Единица измерения"
+          >
+            <mat-option *ngFor="let unit of units" [value]="unit">
+              {{ unit }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!--     <div class="form-group">
           <label>Количество</label>
           <input
             type="number"
@@ -284,24 +516,48 @@
             [(ngModel)]="createRecipeModel.organicMatters[i].quantity"
             formControlName="quantity"
           />
-        </div>
+        </div>-->
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Количество</mat-label>
+          <br />
+          <input
+            type="number"
+            matInput
+            formControlName="quantity"
+            [(ngModel)]="createRecipeModel.organicMatters[i].quantity"
+            placeholder="Количество"
+          />
+          <!--   <mat-error *ngIf="myForm.controls['quantity'].hasError('required')">
+            Не указано название книги</mat-error
+          >-->
+        </mat-form-field>
 
         <!--  <button (click)="deleteOrganicMatter(i)">Удалить</button>-->
       </div>
     </div>
 
     <div class="form-group">
-      <button class="btn info" (click)="addOrganicMatter()">
+      <button mat-raised-button color="primary" (click)="addOrganicMatter()">
         Добавить органическую материю
       </button>
     </div>
 
-    <div class="form-group">
+    <!--  <div class="form-group">
       <button class="btn info" [disabled]="myForm.invalid">Отправить</button>
     </div>
+
+    -->
   </form>
 
-  <!--  <div>
-    <button class="btn info" (click)="createRecipe()">Создать</button>
+  <div class="example-button-row">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="myForm.invalid"
+      (click)="createRecipe()"
+    >
+      Создать
+    </button>
   </div>
---></div>
+</div>

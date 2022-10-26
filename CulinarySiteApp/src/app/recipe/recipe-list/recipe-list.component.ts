@@ -17,7 +17,6 @@ export class RecipeListComponent implements OnInit {
     'servingsNumber',
     'cookingTime',
     'difficultyLevel',
-    // 'content',
     'dishCategory',
     'authorName',
     'bookName',
@@ -43,7 +42,7 @@ export class RecipeListComponent implements OnInit {
 
   public getRecipeList(): void {
     this.recipeService
-      .getRecipeList(true)
+      .getRecipeDetailList(true)
       .subscribe((data: IRecipeListModel[]) => {
         this.recipes = data.map((x) => new RecipeListModel(x));
         this.dataSource = new MatTableDataSource<IRecipeListModel>(

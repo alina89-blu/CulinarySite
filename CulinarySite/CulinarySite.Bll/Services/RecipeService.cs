@@ -45,7 +45,7 @@ namespace CulinarySite.Bll.Services
             _recipeWriteRepository.Save();
         }
 
-        public IEnumerable<RecipeListDto> GetRecipeList(bool withRelated)
+        public IEnumerable<RecipeListDto> GetRecipeDetailList(bool withRelated)
         {
             IEnumerable<Recipe> recipes;
             IEnumerable<RecipeListDto> recipeListDtos;
@@ -72,6 +72,14 @@ namespace CulinarySite.Bll.Services
             return recipeListDtos;
         }
 
+        public IEnumerable<RecipeDto> GetRecipeList()
+        {
+            IEnumerable<Recipe> recipes = _recipeReadOnlyRepository.GetItemList();
+            var recipeDtos = recipes.Select(x => _mapper.Map<RecipeDto>(x));
+
+            return recipeDtos;
+        }
+     
         public RecipeDetailDto GetRecipe(int id, bool withRelated)
         {
             var recipe = new Recipe();

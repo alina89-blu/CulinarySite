@@ -8,7 +8,9 @@ namespace CulinarySite.Bll.Interfaces
         void CreateRecipe(CreateRecipeDto createRecipeDto);
         void UpdateRecipe(UpdateRecipeDto updateRecipeDto);
         void DeleteRecipe(int id);
-        IEnumerable<RecipeListDto> GetRecipeList(bool withRelated);
+        IEnumerable<RecipeListDto> GetRecipeDetailList(bool withRelated);
+        IEnumerable<RecipeDto> GetRecipeList();
         RecipeDetailDto GetRecipe(int id, bool withRelated);
+
     }
 }

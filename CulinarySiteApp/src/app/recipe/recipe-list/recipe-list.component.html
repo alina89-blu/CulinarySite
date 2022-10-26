@@ -1,76 +1,18 @@
-<!--<h1>Таблица рецептов</h1>
-<div class="example-button-row">
-  <a mat-stroked-button color="primary" [routerLink]="['/createRecipe']"
-    >Добавить</a
-  >
-</div>
-<table>
-  <thead>
-    
-    <tr>
-      <td>№</td>
-      <td>Название</td>
-      <td>Количество порций</td>
-      <td>Время приготовления</td>
-      <td>Уровень сложности</td>
-     
-      <td>Категория блюда</td>
-      <td>Автор</td>
-      <td>Название книги</td>
-      <td>Действия</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let recipe of recipes; let idx = index">
-      <td class="text-align-center">{{ idx + 1 }}</td>
-      <td>{{ recipe.name }}</td>
-      <td class="text-align-center">{{ recipe.servingsNumber }}</td>
-      <td>
-        {{ recipe.cookingTime | date: "HH" }} час
-        {{ recipe.cookingTime | date: "mm" }} мин.
-      </td>
-      <td class="text-align-center">{{ recipe.difficultyLevel }}</td>
-    
-      <td class="text-align-center">{{ recipe.dishCategory }}</td>
-      <td class="text-align-center">{{ recipe.authorName }}</td>
-      <td class="text-align-center">{{ recipe.bookName }}</td>
-
-      <td class="example-button-row">
-        <a
-          mat-stroked-button
-          color="primary"
-          [routerLink]="['/editRecipe', recipe.recipeId]"
-          >Редактировать</a
-        >
-        <button
-          mat-stroked-button
-          color="warn"
-          (click)="deleteRecipe(recipe.recipeId)"
-        >
-          Удалить
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>-->
-
-<h1>Таблица рецептов</h1>
+<br />
+<h3>Таблица рецептов</h3>
 <div class="content">
   <div class="example-button-row">
     <a mat-stroked-button color="primary" [routerLink]="['/createRecipe']"
       >Добавить</a
     >
   </div>
-
   <br />
-
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>No.</th>
       <td mat-cell *matCellDef="let element">{{ element.recipeId }}</td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Название</th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
@@ -93,11 +35,6 @@
       <th mat-header-cell *matHeaderCellDef>Уровень сложности</th>
       <td mat-cell *matCellDef="let element">{{ element.difficultyLevel }}</td>
     </ng-container>
-
-    <!--  <ng-container matColumnDef="content">
-    <th mat-header-cell *matHeaderCellDef>Содержание</th>
-    <td mat-cell *matCellDef="let element">{{ element.content }}</td>
-  </ng-container>-->
 
     <ng-container matColumnDef="dishCategory">
       <th mat-header-cell *matHeaderCellDef>Категория блюда</th>

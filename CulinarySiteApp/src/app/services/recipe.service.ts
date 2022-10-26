@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IRecipeDetailModel } from '../interfaces/recipe/recipe-detail-model.interface';
 import { IRecipeListModel } from '../interfaces/recipe/recipe-list-model.interface';
+import { IRecipeModel } from '../interfaces/recipe/recipe-model.interface';
 import { CreateRecipeModel } from '../viewmodels/recipe/create-recipe-model.class';
 import { UpdateRecipeModel } from '../viewmodels/recipe/update-recipe-model.class';
 
@@ -12,8 +13,14 @@ export class RecipeService {
 
   constructor(private http: HttpClient) {}
 
-  public getRecipeList(withRelated: boolean): Observable<IRecipeListModel[]> {
+  public getRecipeDetailList(
+    withRelated: boolean
+  ): Observable<IRecipeListModel[]> {
     return this.http.get<IRecipeListModel[]>(this.url + '/' + withRelated);
+  }
+
+  public getRecipeList(): Observable<IRecipeModel[]> {
+    return this.http.get<IRecipeModel[]>(this.url);
   }
 
   public getRecipe(

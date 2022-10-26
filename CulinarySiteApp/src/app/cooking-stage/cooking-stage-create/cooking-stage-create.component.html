@@ -1,34 +1,69 @@
 <div class="Pad">
-  <h3>Adding a new cooking stage</h3>
-  <div>
-    <label>Content</label>
-    <input type="text" [(ngModel)]="createCookingStageModel.content" />
-  </div>
+  <h3>Добавление нового этапа приготовления</h3>
+  <br />
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Содержание</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="content"
+        [(ngModel)]="createCookingStageModel.content"
+        placeholder="Содержание"
+      />
+      <mat-error *ngIf="content.hasError('required')">
+        Не указано содержание</mat-error
+      >
+    </mat-form-field>
 
-  <div>
-    <label>Image</label>
-    <input type="text" [(ngModel)]="createCookingStageModel.imageUrl" />
-  </div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Картинка</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="imageUrl"
+        [(ngModel)]="createCookingStageModel.imageUrl"
+        placeholder="Имя"
+      />
+      <mat-error *ngIf="imageUrl.hasError('required')">
+        Не указан УРЛ картинки
+      </mat-error>
+    </mat-form-field>
 
-  <div>
-    <label>Recipe</label>
+    <mat-form-field appearance="fill">
+      <mat-label>Рецепт</mat-label>
+      <br />
+      <mat-select
+        [formControl]="recipeId"
+        [(ngModel)]="createCookingStageModel.recipeId"
+        placeholder="Рецепт"
+      >
+        <mat-option *ngFor="let recipe of recipes" [value]="recipe.recipeId">
+          {{ recipe.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="recipeId.hasError('required')">
+        Не указано название рецепта
+      </mat-error>
+    </mat-form-field>
+  </form>
 
-    <select [(ngModel)]="createCookingStageModel.recipeId" class="form-control">
-      <option *ngFor="let recipe of recipes" [ngValue]="recipe.recipeId">
-        {{ recipe.name }}
-      </option>
-    </select>
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="createCookingStage()">
+      Добавить
+    </button>
   </div>
-
-  <div>
-    <button class="btn info" (click)="createCookingStage()">Create</button>
-  </div>
+  <br />
 
   <p>
-    <a [routerLink]="['/cookingStage']">Back to cooking stage's list</a>
+    <a [routerLink]="['/cookingStage']"
+      >Назад на страницу с этапами приготовления</a
+    >
   </p>
 
   <p>
-    <a routerLink="/">Home</a>
+    <a routerLink="/">На домашнюю страницу</a>
   </p>
 </div>

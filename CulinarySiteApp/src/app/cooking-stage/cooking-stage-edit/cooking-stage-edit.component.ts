@@ -4,8 +4,8 @@ import { CookingStageService } from 'src/app/services/cooking-stage.service';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { ICookingStageDetailModel } from 'src/app/interfaces/cooking-stage/cooking-stage-detail-model.interface';
 import { UpdateCookingStageModel } from 'src/app/viewmodels/cooking-stage/update-cooking-stage-model.class';
-import { RecipeListModel } from 'src/app/viewmodels/recipe/recipe-list-model.class';
-import { IRecipeListModel } from 'src/app/interfaces/recipe/recipe-list-model.interface';
+import { IRecipeModel } from 'src/app/interfaces/recipe/recipe-model.interface';
+import { RecipeModel } from 'src/app/viewmodels/recipe/recipe-model.class';
 
 @Component({
   selector: 'app-cooking-stage-edit',
@@ -16,7 +16,7 @@ export class CookingStageEditComponent implements OnInit {
   private id: number;
   public updateCookingStageModel: UpdateCookingStageModel =
     new UpdateCookingStageModel();
-  recipes: RecipeListModel[] = [];
+  recipes: RecipeModel[] = [];
 
   constructor(
     private cookingStageService: CookingStageService,
@@ -47,10 +47,10 @@ export class CookingStageEditComponent implements OnInit {
 
   public getRecipeList() {
     this.recipeService
-      .getRecipeList(false)
+      .getRecipeList()
       .subscribe(
-        (data: IRecipeListModel[]) =>
-          (this.recipes = data.map((x) => new RecipeListModel(x)))
+        (data: IRecipeModel[]) =>
+          (this.recipes = data.map((x) => new RecipeModel(x)))
       );
   }
 }

@@ -47,9 +47,4 @@ export class BookCreateComponent implements OnInit {
           (this.authors = data.map((x) => new AuthorListModel(x)))
       );
   }
-
-  public onSubmit(form: NgForm) {
-    console.log(form);
-    // this.createBook();
-  }
 }

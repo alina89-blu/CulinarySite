@@ -91,14 +91,14 @@
   <div style="display: flex; flex-wrap: wrap; flex-basis: 33.333333%">
     <mat-card class="example-card" *ngFor="let book of books; let idx = index">
       <mat-card-title-group>
-        <mat-card-title class="B">
+        <mat-card-title class="text-align-size">
           <a [routerLink]="['/book', book.bookId]"> {{ book.name }} </a>
         </mat-card-title>
 
         <img mat-card-lg-image src="{{ book.imageUrl }}" />
       </mat-card-title-group>
       <mat-card-content>
-        <p class="D">{{ book.description }}</p>
+        <p class="text-display">{{ book.description }}</p>
       </mat-card-content>
     </mat-card>
   </div>

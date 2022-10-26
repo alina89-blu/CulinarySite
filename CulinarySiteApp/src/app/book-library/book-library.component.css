@@ -1,5 +1,7 @@
-.B {
+.text-align-size {
   text-align: left;
+  font-size: medium;
+  font-weight: bold;
 }
 
 .C {
@@ -12,8 +14,17 @@
   margin: 15px;
 }
 
-.D {
+.text-display {
   height: 80px;
   overflow-y: hidden;
   text-overflow: ellipsis; /* Добавляем многоточие */
+}
+
+mat-card {
+  background-color: #dadbdd;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }

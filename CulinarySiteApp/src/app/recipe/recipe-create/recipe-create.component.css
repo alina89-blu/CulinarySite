@@ -1,47 +1,27 @@
-.btn {
-  border: none;
-  color: white;
-  padding: 14px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.info {
-  background-color: #2196f3;
-}
-.info:hover {
-  background: #0b7dda;
-}
-
-input {
-  padding: 10px 20px;
-  font-size: medium;
-  margin: 5px;
-  border-radius: 5px;
-  width: 200px;
-}
 .Pad {
   padding: 30px;
 }
 
-input.ng-touched.ng-invalid {
-  border: solid red 2px;
-}
-input.ng-touched.ng-valid {
-  border: solid rgb(26, 26, 124) 2px;
+input {
+  background-color: white;
+  height: 50px;
 }
 
-select.ng-touched.ng-invalid {
-  border: solid red 2px;
-}
-select.ng-touched.ng-valid {
-  border: solid rgb(26, 26, 124) 2px;
-}
-
-select {
-  width: 200px;
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
 }
 
-h3 {
-  color: rgb(28, 16, 138);
+.example-full-width {
+  width: 100%;
+}
+
+mat-select {
+  background-color: white;
+  height: 50px;
+}
+
+button {
+  height: 50px;
 }

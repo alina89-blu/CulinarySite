@@ -20,12 +20,21 @@ namespace CulinarySite.Api.Controllers
         }
 
         [HttpGet("{withRelated}")]
-        public IEnumerable<RecipeListModel> GetRecipeList(bool withRelated)
+        public IEnumerable<RecipeListModel> GetRecipeDetailList(bool withRelated)
         {
-            IEnumerable<RecipeListDto> recipeListDtos = _recipeService.GetRecipeList(withRelated);
+            IEnumerable<RecipeListDto> recipeListDtos = _recipeService.GetRecipeDetailList(withRelated);
             var recipeListModels = recipeListDtos.Select(x => _mapper.Map<RecipeListModel>(x));           
 
             return recipeListModels;
+        }
+
+        [HttpGet]
+        public IEnumerable<RecipeModel> GetRecipeList()
+        {
+            IEnumerable<RecipeDto> recipeDtos = _recipeService.GetRecipeList();
+            var recipeModels = recipeDtos.Select(x => _mapper.Map<RecipeModel>(x));
+
+            return recipeModels;
         }
 
         [HttpGet("{id}/{withRelated}")]
