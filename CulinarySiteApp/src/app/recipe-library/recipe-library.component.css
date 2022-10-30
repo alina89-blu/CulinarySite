@@ -1,9 +1,13 @@
 .B {
   margin: 15px;
 }
+.Pad {
+  padding: 50px 100px 50px 250px;
+}
 
 img {
   border-radius: 5px;
+  margin: 15px;
 }
 
 .hover-image-scale {
@@ -16,4 +20,28 @@ img {
 }
 .hover-image-scale img:hover {
   transform: scale(1.2); /* Увеличиваем масштаб */
+}
+
+.mat-grid-tile .mat-grid-tile-header,
+.mat-grid-tile .mat-grid-tile-footer {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  color: #fff;
+  background: none;
+  overflow: hidden;
+  padding: 0 16px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+a:hover {
+  color: white;
+  text-decoration: none;
 }

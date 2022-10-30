@@ -1,5 +1,6 @@
 <div class="C">
   <h2 class="B">Книги Джейми Оливера</h2>
+  <br />
 
   <div>
     Джейми Оливер является очень талантливым человеком. Он показал себя не
@@ -95,7 +96,7 @@
           <a [routerLink]="['/book', book.bookId]"> {{ book.name }} </a>
         </mat-card-title>
 
-        <img mat-card-lg-image src="{{ book.imageUrl }}" />
+        <img mat-card-md-image src="{{ book.imageUrl }}" />
       </mat-card-title-group>
       <mat-card-content>
         <p class="text-display">{{ book.description }}</p>

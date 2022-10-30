@@ -1,3 +1,7 @@
 .Pad {
-  padding: 0px 150px 150px 150px;
+  padding: 50px 100px 50px 250px;
+}
+
+img {
+  border-radius: 5px;
 }

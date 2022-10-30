@@ -1,7 +1,9 @@
 .block {
-  background: url("../assets/images/wallpaper1.png") round;
+  background: url("../assets/images/image19.jpg") 0 0/200px 511px repeat-y;
+
+  background-color: #c3fdb8;
   border-radius: 15px;
-  box-shadow: 0 0 20px cadetblue;
+  /* box-shadow: 0 0 20px cadetblue;*/
 }
 
 * {
@@ -10,3 +12,5 @@
   text-align: justify;
   font-size: large;
 }
+
+/*url("../assets/images/image19.jpg") no-repeat,*/

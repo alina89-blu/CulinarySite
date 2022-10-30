@@ -1,7 +1,5 @@
-<div class="B">
-  <div class="container">
-    <div class="row">
-      <!--<div>
+<div class="Pad">
+  <!--<div>
         <img
         src="https://img5.goodfon.com/wallpaper/nbig/f/c1/red-hot-chilli-pepper-eda-fon.jpg"
         width="700px"
@@ -10,21 +8,20 @@
       />
     </div>-->
 
-      <h2>Рецепты от Джейми Оливера</h2>
+  <h2>Рецепты от Джейми Оливера</h2>
+  <br />
 
-      <div>
-        Джейми Оливер, рецепты которого представляются образцом утилитарности и
-        элегантности, выбирает более доступные ингредиенты, помогая очень сильно
-        сократить время готовки. Именно благодаря своим великолепным рецептам
-        Джейми Оливер стал столь известен во всем мире. Они просты и
-        оригинальны. Этого и хочет достичь Джейми Оливер, рецепты которого могут
-        быть использованы абсолютно любым, пусть даже самым неподготовленным,
-        человеком. Само собой при условии, что в результате выйдет полезное и
-        вкуснейшее блюдо, настоящий шедевр, которым не стыдно похвастать перед
-        гостями.
-      </div>
-    </div>
+  <div>
+    Джейми Оливер, рецепты которого представляются образцом утилитарности и
+    элегантности, выбирает более доступные ингредиенты, помогая очень сильно
+    сократить время готовки. Именно благодаря своим великолепным рецептам Джейми
+    Оливер стал столь известен во всем мире. Они просты и оригинальны. Этого и
+    хочет достичь Джейми Оливер, рецепты которого могут быть использованы
+    абсолютно любым, пусть даже самым неподготовленным, человеком. Само собой
+    при условии, что в результате выйдет полезное и вкуснейшее блюдо, настоящий
+    шедевр, которым не стыдно похвастать перед гостями.
   </div>
+  <br /><br />
 
   <!--<div *ngFor="let dish of dishes; let idx = index">
   <img src="{{ dish.image?.url }}" alt="not found" />
@@ -34,8 +31,8 @@
   </a>
 </div>-->
 
-  <div class="B">
-    <div class="container">
+  <!-- <div class="B">
+      <div class="container">
       <div class="row">
         <div class="col-sm" *ngFor="let dish of dishes; let idx = index">
           <div class="hover-image-scale">
@@ -52,5 +49,31 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
+
+  <mat-grid-list cols="4" rowHeight="300px" gutterSize="20px">
+    <mat-grid-tile
+      *ngFor="let dish of dishes; let idx = index"
+      class="hover-image-scale"
+      ><img
+        src="{{ dish.imageUrl }}"
+        alt="not found"
+        class="hover-image-scale"
+      />
+      <!--   <a [routerLink]="['/dish', dish.dishId]">
+        <h3>{{ dish.category }}</h3>
+      </a>-->
+
+      <mat-grid-tile-footer>
+        <a [routerLink]="['/dish', dish.dishId]">
+          <h3>{{ dish.category }}</h3>
+        </a>
+      </mat-grid-tile-footer>
+    </mat-grid-tile>
+    <!--   <mat-grid-tile *ngFor="let dish of dishes; let idx = index"
+      ><a [routerLink]="['/dish', dish.dishId]">
+        <h3>{{ dish.category }}</h3>
+      </a></mat-grid-tile
+    >-->
+  </mat-grid-list>
 </div>

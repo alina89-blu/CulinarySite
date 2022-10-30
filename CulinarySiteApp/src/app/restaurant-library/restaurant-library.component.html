@@ -1,6 +1,6 @@
 <div class="A">
   <h2>Рестораны Джейми Оливера в России</h2>
-
+  <br />
   <div>
     Джейми Оливер еще с раннего детства был одурманен страстью к итальянскому
     стилю жизни, к семейным традициям, поэтому и решил создать Jamie's Italian.
@@ -18,22 +18,22 @@
     столице нашей страны. Подробнее об этих заведениях можно узнать выбрав
     необходимый из предложенных ниже.
   </div>
-
-  <div>
+  <br />
+  <!--  <div>
     <img
       src="https://tokyostreet.ru/wp-content/uploads/vse-lyubyat-dzhejmi-olivera-sekret-populyarnosti-znamenitogo-shefa-foto-4.jpg"
       alt="not found"
       style="float: left; margin: 20px 15px 0px 0px"
     />
-  </div>
-  <hr />
+  </div>-->
+
   <!--<img
     src="https://hollywoodlifenews.com/wp-content/uploads/2019/05/718A2F1A-B202-4630-89E8-BA94045B8662.jpeg"
     alt="not found"
     style="float: left; margin: 0px 15px 0px 0px"
   />-->
 
-  <div *ngFor="let restaurant of restaurants">
+  <!--  <div *ngFor="let restaurant of restaurants">
     <h2>{{ restaurant.name }}</h2>
     <hr />
     <p><b>АДРЕС:</b> {{ restaurant.addressName }}</p>
@@ -42,5 +42,83 @@
     <div *ngFor="let telephone of restaurant.telephones">
       <p>{{ telephone.number }}</p>
     </div>
+  </div>-->
+
+  <!--   <div style="display: flex; flex-wrap: wrap; flex-basis: 33.333333%">
+    <mat-card
+      class="example-card"
+      *ngFor="let restaurant of restaurants; let idx = index"
+    >
+      <mat-card-title-group>
+        <mat-card-title class="text-align-size">
+          {{ restaurant.name }}
+        </mat-card-title>
+        <mat-card-subtitle> {{ restaurant.addressName }}</mat-card-subtitle>
+        <div *ngIf="idx == 0">
+          <img
+            mat-card-image
+            src="https://hollywoodlifenews.com/wp-content/uploads/2019/05/718A2F1A-B202-4630-89E8-BA94045B8662.jpeg"
+          />
+        </div>
+        <div *ngIf="idx == 1">
+          <img
+            mat-card-image
+            src="https://tokyostreet.ru/wp-content/uploads/vse-lyubyat-dzhejmi-olivera-sekret-populyarnosti-znamenitogo-shefa-foto-4.jpg"
+          />
+        </div>
+      </mat-card-title-group>
+      <p>ТЕЛЕФОНЫ</p>
+      <mat-card-content *ngFor="let telephone of restaurant.telephones">
+        <p class="text-display">{{ telephone.number }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>-->
+
+  <div style="display: flex; flex-wrap: wrap; flex-basis: 33.333333%">
+    <mat-card
+      class="example-card"
+      *ngFor="let restaurant of restaurants; let idx = index"
+    >
+      <mat-card-header>
+        <mat-icon mat-card-avatar>restaurant</mat-icon>
+        <mat-card-title class="text-align-center">
+          <b>{{ restaurant.name }} </b>
+        </mat-card-title>
+        <mat-card-subtitle class="text-align-center">{{
+          restaurant.addressName
+        }}</mat-card-subtitle>
+      </mat-card-header>
+      <div *ngIf="idx == 0">
+        <img
+          mat-card-image
+          src="https://hollywoodlifenews.com/wp-content/uploads/2019/05/718A2F1A-B202-4630-89E8-BA94045B8662.jpeg"
+        />
+      </div>
+      <div *ngIf="idx == 1">
+        <img
+          mat-card-image
+          src="https://tokyostreet.ru/wp-content/uploads/vse-lyubyat-dzhejmi-olivera-sekret-populyarnosti-znamenitogo-shefa-foto-4.jpg"
+        />
+      </div>
+      <b><p>ТЕЛЕФОНЫ</p> </b>
+      <mat-card-content *ngFor="let telephone of restaurant.telephones">
+        <p>
+          {{ telephone.number }}
+        </p>
+      </mat-card-content>
+      <!--   <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>-->
+    </mat-card>
   </div>
+  <br />
+  <p>
+    Перейти на официальный сайт
+    <a href="https://jaymi-oliver.ru/spb/">Джеймис Италиан Петербург</a>
+  </p>
+  <p>
+    Перейти на официальный сайт
+    <a href="https://jaymi-oliver.ru/msk/">Джеймис Италиан Москва</a>
+  </p>
 </div>

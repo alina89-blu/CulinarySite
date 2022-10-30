@@ -13,3 +13,7 @@
 img {
   border: 4px solid white;
 }
+
+.Pad {
+  padding: 50px 100px 50px 250px;
+}

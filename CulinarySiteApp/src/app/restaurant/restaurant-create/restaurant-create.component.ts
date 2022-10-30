@@ -49,7 +49,7 @@ export class RestaurantCreateComponent implements OnInit {
   }
 
   public submit() {
-    console.log(this.myForm);
-    //  this.createRestaurant();
+    // console.log(this.myForm);
+    this.createRestaurant();
   }
 }
