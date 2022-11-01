@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { IRestaurantListModel } from 'src/app/interfaces/restaurant/restaurant-list-model.interface';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { RestaurantListModel } from 'src/app/viewmodels/restaurant/restaurant-list-model.class';
@@ -10,6 +11,8 @@ import { RestaurantListModel } from 'src/app/viewmodels/restaurant/restaurant-li
 })
 export class RestaurantListComponent implements OnInit {
   public restaurants: RestaurantListModel[] = [];
+  displayedColumns: string[] = ['id', 'name', 'address', 'actions'];
+  dataSource: MatTableDataSource<IRestaurantListModel>;
 
   constructor(private restaurantService: RestaurantService) {}
 
@@ -20,10 +23,12 @@ export class RestaurantListComponent implements OnInit {
   public getRestaurantDetailList(): void {
     this.restaurantService
       .getRestaurantDetailList(true)
-      .subscribe(
-        (data: IRestaurantListModel[]) =>
-          (this.restaurants = data.map((x) => new RestaurantListModel(x)))
-      );
+      .subscribe((data: IRestaurantListModel[]) => {
+        this.restaurants = data.map((x) => new RestaurantListModel(x));
+        this.dataSource = new MatTableDataSource<IRestaurantListModel>(
+          this.restaurants
+        );
+      });
   }
 
   public deleteRestaurant(id: number): void {

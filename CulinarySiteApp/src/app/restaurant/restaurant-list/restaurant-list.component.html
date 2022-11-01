@@ -1,38 +1,47 @@
-<div>
-  <button class="btn info">
-    <a [routerLink]="['/createRestaurant']">Добавить</a>
-  </button>
-</div>
-<table>
-  <thead>
-    <tr>
-      <th colspan="2"></th>
-    </tr>
-    <tr>
-      <td>Нр.</td>
-      <td>Название</td>
-      <td>Адрес</td>
-      <td>Действия</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let restaurant of restaurants; let idx = index">
-      <td>{{ idx + 1 }}</td>
-      <td>{{ restaurant.name }}</td>
-      <td>{{ restaurant.addressName }}</td>
-      <td>
+<div class="Pad">
+  <div class="example-button-row">
+    <a mat-stroked-button color="primary" [routerLink]="['/createRestaurant']"
+      >Добавить</a
+    >
+  </div>
+  <br />
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element">{{ element.restaurantId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Название</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef>Адрес</th>
+      <td mat-cell *matCellDef="let element">{{ element.addressName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Действия</th>
+      <td class="example-button-row" mat-cell *matCellDef="let element">
         <a
-          class="btn info"
-          [routerLink]="['/editRestaurant', restaurant.restaurantId]"
+          mat-stroked-button
+          color="primary"
+          [routerLink]="['/editRestaurant', element.restaurantId]"
           >Редактировать</a
         >
+
         <button
-          class="btn info"
-          (click)="deleteRestaurant(restaurant.restaurantId)"
+          mat-stroked-button
+          color="warn"
+          (click)="deleteRestaurant(element.restaurantId)"
         >
           Удалить
         </button>
       </td>
-    </tr>
-  </tbody>
-</table>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

@@ -1,21 +1,33 @@
-<h3>Изменение автора</h3>
-<div>
-  <label>Имя</label>
-  <input type="text" [(ngModel)]="updateAuthorModel.name" />
+<div class="Pad">
+  <h3>Изменение автора</h3>
+  <br />
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Имя</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="name"
+        [(ngModel)]="updateAuthorModel.name"
+        placeholder="Имя"
+      />
+      <mat-error *ngIf="name.hasError('required')"> Не указано имя </mat-error>
+    </mat-form-field>
+  </form>
+
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="updateAuthor()">
+      Обновить
+    </button>
+  </div>
+  <br />
+
+  <p>
+    <a [routerLink]="['/author']">Назад к списку авторов</a>
+  </p>
+
+  <p>
+    <a routerLink="/">На домашнюю страницу</a>
+  </p>
 </div>
-
-<div>
-  <button class="btn info" (click)="updateAuthor()">Обновить</button>
-</div>
-
-<p>
-  <a [routerLink]="['/author']">Назад к списку авторов</a>
-</p>
-
-<p>
-  <a [routerLink]="['/book']">К списку книг</a>
-</p>
-
-<p>
-  <a routerLink="/">На домашнюю страницу</a>
-</p>

@@ -7,7 +7,7 @@ table {
   width: 100%;
 }
 th {
-  background-color: #5e6dc4;
+  background-color: #ff4081;
   font-weight: bold;
 }
 
@@ -18,4 +18,8 @@ th {
   /*max-width: 960px;*/
   flex-direction: column;
   align-items: center;
+}
+
+.Pad {
+  padding: 50px 100px 50px 250px;
 }

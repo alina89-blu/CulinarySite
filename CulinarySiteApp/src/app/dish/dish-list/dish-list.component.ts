@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DishService } from 'src/app/services/dish.service';
 import { DishListModel } from 'src/app/viewmodels/dish/dish-list-model.class';
 import { IDishListModel } from 'src/app/interfaces/dish/dish-list-model.interface';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-dish-list',
@@ -10,6 +11,8 @@ import { IDishListModel } from 'src/app/interfaces/dish/dish-list-model.interfac
 })
 export class DishListComponent implements OnInit {
   public dishes: DishListModel[] = [];
+  displayedColumns: string[] = ['id', 'category', 'image', 'actions'];
+  dataSource: MatTableDataSource<IDishListModel>;
 
   constructor(private dishService: DishService) {}
 
@@ -20,10 +23,10 @@ export class DishListComponent implements OnInit {
   public getDishDetailList(): void {
     this.dishService
       .getDishDetailList(true)
-      .subscribe(
-        (data: IDishListModel[]) =>
-          (this.dishes = data.map((x) => new DishListModel(x)))
-      );
+      .subscribe((data: IDishListModel[]) => {
+        this.dishes = data.map((x) => new DishListModel(x));
+        this.dataSource = new MatTableDataSource<IDishListModel>(this.dishes);
+      });
   }
 
   public deleteDish(id: number): void {

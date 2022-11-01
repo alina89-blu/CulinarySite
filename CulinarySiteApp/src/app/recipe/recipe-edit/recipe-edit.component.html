@@ -1,4 +1,4 @@
-<div class="Pad">
+<!--<div class="Pad">
   <h3>Изменение рецепта</h3>
   <div>
     <label>Название</label>
@@ -73,7 +73,7 @@
           formControlName="quantity"
         />
 
-        <!--  <button (click)="deleteRecipeIngredient(i)">delete</button>-->
+        
       </div>
     </div>
     <button class="btn info" (click)="addIngredient()">+</button>
@@ -85,6 +85,316 @@
   <p>
     <a [routerLink]="['/recipe']">Назад к списку рецептов</a>
   </p>
+  <p>
+    <a routerLink="/">На домашнюю страницу</a>
+  </p>
+</div>
+-->
+
+<div class="Pad">
+  <h3>Изменение рецепта</h3>
+  <br />
+  <form [formGroup]="myForm" class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Название</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        formControlName="name"
+        [(ngModel)]="updateRecipeModel.name"
+        placeholder="Название"
+      />
+      <mat-error *ngIf="myForm.controls['name'].hasError('required')">
+        Не указано название рецепта</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Количество порций</mat-label>
+      <br />
+      <input
+        type="number"
+        matInput
+        formControlName="servingsNumber"
+        [(ngModel)]="updateRecipeModel.servingsNumber"
+        placeholder="Количество порций"
+      />
+      <mat-error *ngIf="myForm.controls['servingsNumber'].hasError('required')">
+        Не указано количество порций</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>УРЛ картинки</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        formControlName="imageUrl"
+        [(ngModel)]="updateRecipeModel.imageUrl"
+        placeholder="УРЛ картинки"
+      />
+      <mat-error *ngIf="myForm.controls['imageUrl'].hasError('required')">
+        Не указан УРЛ картинки</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Время готовки</mat-label>
+      <br />
+      <input
+        type="time"
+        matInput
+        formControlName="cookingTime"
+        [(ngModel)]="updateRecipeModel.cookingTime"
+        placeholder="Время готовки"
+      />
+      <mat-error
+        *ngIf="
+          myForm.controls['cookingTime'].hasError('required') ||
+          myForm.controls['cookingTime'].touched
+        "
+      >
+        Не указано время готовки</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 500px">
+      <mat-label>Уровень сложности</mat-label>
+      <br />
+      <mat-select
+        formControlName="difficultyLevel"
+        [(ngModel)]="updateRecipeModel.difficultyLevel"
+        placeholder="Уровень сложности"
+      >
+        <mat-option
+          *ngFor="let difficultyLevel of difficultyLevels"
+          [value]="difficultyLevel"
+        >
+          {{ difficultyLevel }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="myForm.controls['difficultyLevel'].hasError('required')"
+      >
+        Не указан уровень сложности
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Содержание</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        formControlName="content"
+        [(ngModel)]="updateRecipeModel.content"
+        placeholder="Содержание"
+      />
+      <mat-error *ngIf="myForm.controls['content'].hasError('required')">
+        Не указано содержание</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 500px">
+      <mat-label>Автор</mat-label>
+      <br />
+      <mat-select
+        formControlName="authorId"
+        [(ngModel)]="updateRecipeModel.authorId"
+        placeholder="Автор"
+      >
+        <mat-option *ngFor="let author of authors" [value]="author.authorId">
+          {{ author.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="myForm.controls['difficultyLevel'].hasError('required')"
+      >
+        Не указан автор рецепта
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 500px">
+      <mat-label>Название книги</mat-label>
+      <br />
+      <mat-select
+        formControlName="bookId"
+        [(ngModel)]="updateRecipeModel.bookId"
+        placeholder="Название книги"
+      >
+        <mat-option *ngFor="let book of books" [value]="book.bookId">
+          {{ book.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="myForm.controls['bookId'].hasError('required')">
+        Не указано название книги
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 500px">
+      <mat-label>Категория блюда</mat-label>
+      <br />
+      <mat-select
+        formControlName="dishId"
+        [(ngModel)]="updateRecipeModel.dishId"
+        placeholder="Категория блюда"
+      >
+        <mat-option *ngFor="let dish of dishes" [value]="dish.dishId">
+          {{ dish.category }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="myForm.controls['dishId'].hasError('required')">
+        Не указано категория блюда
+      </mat-error>
+    </mat-form-field>
+
+    <!--   <h3>Добавление ингредиентов</h3>
+    <div
+      formArrayName="ingredients"
+      *ngFor="
+        let ingredient of getIngredientsFormsControls()['controls'];
+        let i = index
+      "
+    >
+      <div [formGroupName]="i">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Название</mat-label>
+          <br />
+          <input
+            type="text"
+            matInput
+            formControlName="name"
+            [(ngModel)]="updateRecipeModel.ingredients[i].name"
+            placeholder="Название"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 500px">
+          <mat-label>Единица измерения</mat-label>
+          <br />
+          <mat-select
+            formControlName="unit"
+            [(ngModel)]="updateRecipeModel.ingredients[i].unit"
+            placeholder="Категория блюда"
+          >
+            <mat-option *ngFor="let unit of units" [value]="unit">
+              {{ unit }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Количество</mat-label>
+          <br />
+          <input
+            type="number"
+            matInput
+            formControlName="quantity"
+            [(ngModel)]="updateRecipeModel.ingredients[i].quantity"
+            placeholder="Количество"
+          />
+        </mat-form-field>
+
+       
+      </div>
+    </div>
+    -->
+
+    <!---->
+    <!--  <div class="form-group">
+      <button mat-raised-button color="primary" (click)="addIngredient()">
+        Добавить ингредиент
+      </button>
+    </div>-->
+
+    <!--    <h3>Добавление органических материй</h3>
+    <div
+      formArrayName="organicMatters"
+      *ngFor="
+        let organicMatter of getOrganicMattersFormsControls()['controls'];
+        let i = index
+      "
+    >
+      <div [formGroupName]="i">
+        <mat-form-field appearance="fill" style="width: 500px">
+          <mat-label>Название</mat-label>
+          <br />
+          <mat-select
+            formControlName="name"
+            [(ngModel)]="updateRecipeModel.organicMatters[i].name"
+            placeholder="Название"
+          >
+            <mat-option
+              *ngFor="let organicMatter of organicMatters"
+              [value]="organicMatter"
+            >
+              {{ organicMatter }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 500px">
+          <mat-label>Единица измерения</mat-label>
+          <br />
+          <mat-select
+            formControlName="unit"
+            [(ngModel)]="updateRecipeModel.organicMatters[i].unit"
+            placeholder="Единица измерения"
+          >
+            <mat-option *ngFor="let unit of units" [value]="unit">
+              {{ unit }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Количество</mat-label>
+          <br />
+          <input
+            type="number"
+            matInput
+            formControlName="quantity"
+            [(ngModel)]="updateRecipeModel.organicMatters[i].quantity"
+            placeholder="Количество"
+          />
+      
+        </mat-form-field>
+
+        
+      </div>
+    </div>
+    
+
+    <div class="form-group">
+      <button mat-raised-button color="primary" (click)="addOrganicMatter()">
+        Добавить органическую материю
+      </button>
+    </div>-->
+
+    <!--  <div class="form-group">
+      <button class="btn info" [disabled]="myForm.invalid">Отправить</button>
+    </div>
+
+    -->
+  </form>
+
+  <div class="example-button-row">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="myForm.invalid"
+      (click)="updateRecipe()"
+    >
+      Обновить
+    </button>
+  </div>
+  <br />
+  <p>
+    <a [routerLink]="['/recipe']">Назад к списку рецептов</a>
+  </p>
+
   <p>
     <a routerLink="/">На домашнюю страницу</a>
   </p>

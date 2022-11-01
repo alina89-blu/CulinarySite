@@ -6,6 +6,7 @@ import { ICookingStageDetailModel } from 'src/app/interfaces/cooking-stage/cooki
 import { UpdateCookingStageModel } from 'src/app/viewmodels/cooking-stage/update-cooking-stage-model.class';
 import { IRecipeModel } from 'src/app/interfaces/recipe/recipe-model.interface';
 import { RecipeModel } from 'src/app/viewmodels/recipe/recipe-model.class';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cooking-stage-edit',
@@ -17,6 +18,10 @@ export class CookingStageEditComponent implements OnInit {
   public updateCookingStageModel: UpdateCookingStageModel =
     new UpdateCookingStageModel();
   recipes: RecipeModel[] = [];
+
+  content = new FormControl('', Validators.required);
+  imageUrl = new FormControl('', Validators.required);
+  recipeId = new FormControl('', Validators.required);
 
   constructor(
     private cookingStageService: CookingStageService,

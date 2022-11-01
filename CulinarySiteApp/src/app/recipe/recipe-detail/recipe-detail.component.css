@@ -21,3 +21,7 @@
 .line-height {
   line-height: 45px;
 }
+
+.Pad {
+  padding: 50px 100px 50px 250px;
+}

@@ -77,15 +77,28 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
     this.myForm = new FormGroup({
-      ingredients: new FormArray([
+      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+
+      servingsNumber: new FormControl('', [
+        Validators.required,
+        Validators.min(3),
+      ]),
+      imageUrl: new FormControl('', Validators.required),
+      cookingTime: new FormControl('', Validators.required),
+      difficultyLevel: new FormControl('', Validators.required),
+      content: new FormControl('', Validators.required),
+      authorId: new FormControl('', Validators.required),
+      bookId: new FormControl('', Validators.required),
+      dishId: new FormControl('', Validators.required),
+      /*ingredients: new FormArray([
         new FormGroup({
           name: new FormControl('', Validators.required),
           unit: new FormControl('', Validators.required),
           quantity: new FormControl('', Validators.required),
         }),
-      ]),
+      ]),*/
     });
-    this.updateRecipeModel.ingredients = [new CreateIngredientModel()];
+    //   this.updateRecipeModel.ingredients = [new CreateIngredientModel()];
   }
 
   public ngAfterViewChecked(): void {
@@ -106,14 +119,14 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
     this.getAuthorList();
     this.getBookList();
 
-    this.myForm.patchValue({
+    /*  this.myForm.patchValue({
       ingredients: this.updateRecipeModel.ingredients,
     });
 
     this.myForm.setControl(
       'ingredients',
       this.setExistingBooks(this.updateRecipeModel.ingredients)
-    );
+    );*/
   }
 
   setExistingBooks(ingredients: ICreateIngredientModel[]): FormArray {
@@ -145,7 +158,7 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
       );
   }
 
-  public getFormsControls(): FormArray {
+  public getIngredientsFormsControls(): FormArray {
     return this.myForm.controls['ingredients'] as FormArray;
   }
 

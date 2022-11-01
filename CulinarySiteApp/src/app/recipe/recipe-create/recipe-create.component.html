@@ -1,5 +1,6 @@
 <div class="Pad">
   <h3>Добавление нового рецепта</h3>
+  <br />
   <form [formGroup]="myForm" class="example-form">
     <!--  <div class="form-group">
       <label>Название</label>
@@ -30,7 +31,7 @@
         placeholder="Название"
       />
       <mat-error *ngIf="myForm.controls['name'].hasError('required')">
-        Не указано название книги</mat-error
+        Не указано название рецепта</mat-error
       >
     </mat-form-field>
 
@@ -131,7 +132,12 @@
         [(ngModel)]="createRecipeModel.cookingTime"
         placeholder="Время готовки"
       />
-      <mat-error *ngIf="myForm.controls['cookingTime'].hasError('required')">
+      <mat-error
+        *ngIf="
+          myForm.controls['cookingTime'].hasError('required') ||
+          myForm.controls['cookingTime'].touched
+        "
+      >
         Не указано время готовки</mat-error
       >
     </mat-form-field>
@@ -158,7 +164,7 @@
       </div>
     </div>-->
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" style="width: 500px">
       <mat-label>Уровень сложности</mat-label>
       <br />
       <mat-select
@@ -236,7 +242,7 @@
       </div>
     </div>-->
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" style="width: 500px">
       <mat-label>Автор</mat-label>
       <br />
       <mat-select
@@ -251,7 +257,7 @@
       <mat-error
         *ngIf="myForm.controls['difficultyLevel'].hasError('required')"
       >
-        Не указан автор книги
+        Не указан автор рецепта
       </mat-error>
     </mat-form-field>
 
@@ -276,7 +282,7 @@
       </div>
     </div>-->
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" style="width: 500px">
       <mat-label>Название книги</mat-label>
       <br />
       <mat-select
@@ -314,7 +320,7 @@
       </div>
     </div>-->
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" style="width: 500px">
       <mat-label>Категория блюда</mat-label>
       <br />
       <mat-select
@@ -332,6 +338,7 @@
     </mat-form-field>
 
     <h3>Добавление ингредиентов</h3>
+    <br />
     <div
       formArrayName="ingredients"
       *ngFor="
@@ -381,7 +388,7 @@
         </div>
 -->
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" style="width: 500px">
           <mat-label>Единица измерения</mat-label>
           <br />
           <mat-select
@@ -436,6 +443,7 @@
     </div>
 
     <h3>Добавление органических материй</h3>
+    <br />
     <div
       formArrayName="organicMatters"
       *ngFor="
@@ -459,7 +467,7 @@
         </div>
 -->
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" style="width: 500px">
           <mat-label>Название</mat-label>
           <br />
           <mat-select
@@ -493,7 +501,7 @@
           </select>
         </div>-->
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" style="width: 500px">
           <mat-label>Единица измерения</mat-label>
           <br />
           <mat-select
@@ -560,4 +568,12 @@
       Создать
     </button>
   </div>
+  <br />
+  <p>
+    <a [routerLink]="['/recipe']">Назад к списку рецептов</a>
+  </p>
+
+  <p>
+    <a routerLink="/">На домашнюю страницу</a>
+  </p>
 </div>

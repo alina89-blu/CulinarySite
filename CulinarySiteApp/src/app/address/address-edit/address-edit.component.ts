@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AddressService } from 'src/app/services/address.service';
 import { UpdateAddressModel } from 'src/app/viewmodels/address/update-address-model.class';
 import { IAddressDetailModel } from 'src/app/interfaces/address/address-detail-model.interface';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-address-edit',
@@ -12,6 +13,7 @@ import { IAddressDetailModel } from 'src/app/interfaces/address/address-detail-m
 export class AddressEditComponent implements OnInit {
   private id: number;
   public updateAddressModel: UpdateAddressModel = new UpdateAddressModel();
+  name = new FormControl('', Validators.required);
 
   constructor(
     private addressService: AddressService,

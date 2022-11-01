@@ -1,41 +1,96 @@
 <div class="Pad">
   <h3>Изменение книги</h3>
-  <div>
-    <label>Название</label>
-    <input type="text" [(ngModel)]="updateBookModel.name" />
-  </div>
+  <br />
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Название</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="name"
+        [(ngModel)]="updateBookModel.name"
+        placeholder="Название"
+      />
+      <mat-error *ngIf="name.hasError('required')">
+        Не указано название книги</mat-error
+      >
+    </mat-form-field>
 
-  <div>
-    <label>Год создания</label>
-    <input
-      type="number"
-      min="1990"
-      [(ngModel)]="updateBookModel.creationYear"
-    />
-  </div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label> Год создания</mat-label>
+      <br />
+      <input
+        type="number"
+        matInput
+        [formControl]="creationYear"
+        [(ngModel)]="updateBookModel.creationYear"
+        placeholder="
+год создания"
+      />
+      <mat-error *ngIf="creationYear.hasError('required')">
+        Не указан год создания книги
+      </mat-error>
 
-  <div>
-    <label>Описание</label>
-    <input type="text" [(ngModel)]="updateBookModel.description" />
-  </div>
+      <mat-error *ngIf="creationYear.hasError('min')">
+        Год создания не может быть менише чем 1990 г.
+      </mat-error>
+    </mat-form-field>
 
-  <div>
-    <label>Автор</label>
-    <select [(ngModel)]="updateBookModel.authorId" class="form-control">
-      <option *ngFor="let author of authors" [ngValue]="author.authorId">
-        {{ author.name }}
-      </option>
-    </select>
-  </div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Описание</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="description"
+        [(ngModel)]="updateBookModel.description"
+        placeholder="Описание"
+      />
+      <mat-error *ngIf="description.hasError('required')">
+        Не указано описание
+      </mat-error>
+    </mat-form-field>
 
-  <div>
-    <label>Изображение</label>
-    <input type="text" [(ngModel)]="updateBookModel.imageUrl" />
-  </div>
+    <mat-form-field appearance="fill" style="width: 497px">
+      <mat-label>Автор</mat-label>
+      <br />
+      <mat-select
+        [formControl]="authorId"
+        [(ngModel)]="updateBookModel.authorId"
+        placeholder="Автор"
+      >
+        <mat-option *ngFor="let author of authors" [value]="author.authorId">
+          {{ author.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="authorId.hasError('required')">
+        Не указан автор книги
+      </mat-error>
+    </mat-form-field>
 
-  <div>
-    <button class="btn info" (click)="updateBook()">Обновить</button>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Картинка</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="imageUrl"
+        [(ngModel)]="updateBookModel.imageUrl"
+        placeholder="Имя"
+      />
+      <mat-error *ngIf="imageUrl.hasError('required')">
+        Не указан УРЛ картинки
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="updateBook()">
+      Обновить
+    </button>
   </div>
+  <br />
 
   <p>
     <a [routerLink]="['/book']">Назад к списку книг</a>

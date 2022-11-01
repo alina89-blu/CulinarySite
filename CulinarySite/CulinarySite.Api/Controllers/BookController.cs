@@ -5,6 +5,10 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.ViewModels.Book;
 using CulinarySite.Common.Dtos.Book;
 using System.Linq;
+using CulinarySite.Common.Pagination;
+using System.Threading.Tasks;
+using CulinarySite.Domain.Entities;
+using Newtonsoft.Json;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -21,7 +25,7 @@ namespace CulinarySite.Api.Controllers
         [HttpGet("{withRelated}")]
         public IEnumerable<BookDetailListModel> GetBookDetailList(bool withRelated)
         {
-            IEnumerable<BookDetailListDto> bookDetailListDtos = _bookService.GetBookDetailList(withRelated);          
+            IEnumerable<BookDetailListDto> bookDetailListDtos = _bookService.GetBookDetailList(withRelated);
             var bookDetailListModels = bookDetailListDtos.Select(x => _mapper.Map<BookDetailListModel>(x));
 
             return bookDetailListModels;
@@ -33,7 +37,7 @@ namespace CulinarySite.Api.Controllers
             IEnumerable<BookDto> bookDtos = _bookService.GetBookList();
             var bookModels = bookDtos.Select(x => _mapper.Map<BookModel>(x));
 
-            return bookModels;                      
+            return bookModels;
         }
 
         [HttpGet("{id}/{withRelated}")]
@@ -46,7 +50,7 @@ namespace CulinarySite.Api.Controllers
         }
 
         [HttpPost]
-      
+
         public void CreateBook(CreateBookModel createBookModel)
         {
             CreateBookDto createBookDto = _mapper.Map<CreateBookDto>(createBookModel);
@@ -71,7 +75,7 @@ namespace CulinarySite.Api.Controllers
         {
             IEnumerable<BookDetailListDto> bookDetailListDtos = _bookService.GetSortedBooksByName(withRelated);
             var bookDetailListModels = bookDetailListDtos.Select(x => _mapper.Map<BookDetailListModel>(x));
-            
+
             return bookDetailListModels;
         }
 
@@ -80,9 +84,20 @@ namespace CulinarySite.Api.Controllers
         {
             IEnumerable<BookDetailListDto> bookDetailListDtos = _bookService.GetSortedBooksByYear(withRelated);
             var bookDetailListModels = bookDetailListDtos.Select(x => _mapper.Map<BookDetailListModel>(x));
-           
+
             return bookDetailListModels;
         }
+
+        [HttpGet("paged")]
+        public IEnumerable<BookDetailListModel> GetPaginatedBooks([FromQuery] PagingParameters pagingParameters)
+        {
+            IEnumerable<BookDetailListDto> bookDetailListDtos = _bookService.GetPaginatedBooks(pagingParameters);
+            var bookDetailListModels = bookDetailListDtos.Select(x => _mapper.Map<BookDetailListModel>(x));
+
+            return bookDetailListModels;
+        }
+
+
     }
 }
 

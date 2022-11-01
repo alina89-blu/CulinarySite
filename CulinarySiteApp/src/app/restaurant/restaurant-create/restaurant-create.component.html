@@ -1,56 +1,55 @@
-<h3>Добавление новой ресторана</h3>
-<form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
-  <div class="form-group">
-    <label>Имя</label>
-    <input
-      class="form-control"
-      formControlName="restaurantName"
-      type="text"
-      [(ngModel)]="createRestaurantModel.name"
-    />
+<div class="Pad">
+  <h3>Добавление нового ресторана</h3>
+  <br />
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Название</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="name"
+        [(ngModel)]="createRestaurantModel.name"
+        placeholder="Название"
+      />
+      <mat-error *ngIf="name.hasError('required')">
+        Не указано название ресторана</mat-error
+      >
+    </mat-form-field>
 
-    <div
-      class="alert alert-danger"
-      *ngIf="
-        myForm.controls['restaurantName'].invalid &&
-        myForm.controls['restaurantName'].touched
-      "
-    >
-      Не указано название ресторана
-    </div>
+    <mat-form-field appearance="fill" style="width: 497px">
+      <mat-label>Адрес</mat-label>
+      <br />
+      <mat-select
+        [formControl]="addressId"
+        [(ngModel)]="createRestaurantModel.addressId"
+        placeholder="Адрес"
+      >
+        <mat-option
+          *ngFor="let address of addresses"
+          [value]="address.addressId"
+        >
+          {{ address.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="addressId.hasError('required')">
+        Не указан aдрес
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="createRestaurant()">
+      Добавить
+    </button>
   </div>
+  <br />
 
-  <div>
-    <label>Адрес</label>
-    <select
-      [(ngModel)]="createRestaurantModel.addressId"
-      class="form-control"
-      formControlName="addressName"
-    >
-      <option *ngFor="let address of addresses" [ngValue]="address.addressId">
-        {{ address.name }}
-      </option>
-    </select>
-    <div
-      class="alert alert-danger"
-      *ngIf="
-        myForm.controls['addressName'].invalid &&
-        myForm.controls['addressName'].touched
-      "
-    >
-      Не указан адрес
-    </div>
-  </div>
+  <p>
+    <a [routerLink]="['/restaurant']">Назад к списку ресторанов</a>
+  </p>
 
-  <div class="form-group">
-    <button class="btn info" [disabled]="myForm.invalid">Отправить</button>
-  </div>
-</form>
-
-<p>
-  <a [routerLink]="['/restaurant']">Назад к списку ресторанов</a>
-</p>
-
-<p>
-  <a routerLink="/">На домашнюю страницу</a>
-</p>
+  <p>
+    <a routerLink="/">На домашнюю страницу</a>
+  </p>
+</div>

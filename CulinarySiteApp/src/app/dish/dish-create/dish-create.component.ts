@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DishService } from 'src/app/services/dish.service';
 import { DishCategory } from 'src/app/enums/dish-category.enum';
 import { CreateDishModel } from 'src/app/viewmodels/dish/create-dish-model.class';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dish-create',
@@ -11,6 +12,9 @@ import { CreateDishModel } from 'src/app/viewmodels/dish/create-dish-model.class
 })
 export class DishCreateComponent {
   public createDishModel: CreateDishModel = new CreateDishModel();
+  category = new FormControl('', Validators.required);
+  imageUrl = new FormControl('', Validators.required);
+
   public dishCategories: DishCategory[] = [
     DishCategory.Блины,
     DishCategory.ВторыеБлюда,

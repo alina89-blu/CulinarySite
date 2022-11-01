@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DishCategory } from 'src/app/enums/dish-category.enum';
 import { UpdateDishModel } from 'src/app/viewmodels/dish/update-dish-model.class';
 import { IDishDetailModel } from 'src/app/interfaces/dish/dish-detail-model.interface';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dish-edit',
@@ -13,6 +14,9 @@ import { IDishDetailModel } from 'src/app/interfaces/dish/dish-detail-model.inte
 export class DishEditComponent implements OnInit {
   private id: number;
   public updateDishModel: UpdateDishModel = new UpdateDishModel();
+  category = new FormControl('', Validators.required);
+  imageUrl = new FormControl('', Validators.required);
+
   public dishCategories: DishCategory[] = [
     DishCategory.Блины,
     DishCategory.ВторыеБлюда,

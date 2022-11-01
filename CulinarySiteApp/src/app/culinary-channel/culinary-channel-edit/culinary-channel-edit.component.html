@@ -1,19 +1,50 @@
 <div class="Pad">
   <h3>Изменение кулинарного канала</h3>
-  <div>
-    <label>Название</label>
-    <input type="text" [(ngModel)]="updateCulinaryChannelModel.name" />
+
+  <br />
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Название</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="name"
+        [(ngModel)]="updateCulinaryChannelModel.name"
+        placeholder="Название"
+      />
+      <mat-error *ngIf="name.hasError('required')">
+        Не указано название
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Содержание</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="content"
+        [(ngModel)]="updateCulinaryChannelModel.content"
+        placeholder="Содержание"
+      />
+      <mat-error *ngIf="content.hasError('required')">
+        Не указано cодержание
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="updateCulinaryChannel()">
+      Обновить
+    </button>
   </div>
-  <div>
-    <label>Содержание</label>
-    <input type="text" [(ngModel)]="updateCulinaryChannelModel.content" />
-  </div>
-  <div>
-    <button class="btn info" (click)="updateCulinaryChannel()">Обновить</button>
-  </div>
+  <br />
+
   <p>
     <a [routerLink]="['/culinaryChannel']">Назад к списку кулинарных каналов</a>
   </p>
+
   <p>
     <a routerLink="/">На домашнюю страницу</a>
   </p>

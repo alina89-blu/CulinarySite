@@ -1,28 +1,55 @@
-<h3>Editing the dish</h3>
+<div class="Pad">
+  <h3>Изменение категории блюда</h3>
+  <br />
+  <form class="example-form">
+    <mat-form-field appearance="fill" style="width: 505px">
+      <mat-label>Категория</mat-label>
+      <br />
+      <mat-select
+        [formControl]="category"
+        [(ngModel)]="updateDishModel.category"
+        placeholder="Категория"
+      >
+        <mat-option
+          *ngFor="let dishCategory of dishCategories"
+          [value]="dishCategory"
+        >
+          {{ dishCategory }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="category.hasError('required')">
+        Не указана категория блюда
+      </mat-error>
+    </mat-form-field>
 
-<div>
-  <label>Category</label>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>УРЛ картинки</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="imageUrl"
+        [(ngModel)]="updateDishModel.imageUrl"
+        placeholder="УРЛ картинки"
+      />
+      <mat-error *ngIf="imageUrl.hasError('required')">
+        Не указан УРЛ картинки
+      </mat-error>
+    </mat-form-field>
+  </form>
 
-  <select [(ngModel)]="updateDishModel.category" class="form-control">
-    <option *ngFor="let dishCategory of dishCategories">
-      {{ dishCategory }}
-    </option>
-  </select>
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="updateDish()">
+      Обновить
+    </button>
+  </div>
+  <br />
+
+  <p>
+    <a [routerLink]="['/dish']">Назад к списку блюд</a>
+  </p>
+
+  <p>
+    <a routerLink="/">На домашнюю страницу</a>
+  </p>
 </div>
-
-<div>
-  <label>Изображение</label>
-  <input type="text" [(ngModel)]="updateDishModel.imageUrl" />
-</div>
-
-<div>
-  <button class="btn info" (click)="updateDish()">Update</button>
-</div>
-
-<p>
-  <a [routerLink]="['/dish']">Back to dishes's list</a>
-</p>
-
-<p>
-  <a routerLink="/">Home</a>
-</p>

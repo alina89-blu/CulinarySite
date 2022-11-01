@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICulinaryChannelListModel } from 'src/app/interfaces/culinary-channel/culinary-channel-list-model.interface';
 import { IEpisodeDetailModel } from 'src/app/interfaces/episode/episode-detail-model.interface';
@@ -15,6 +16,10 @@ import { UpdateEpisodeModel } from 'src/app/viewmodels/episode/update-episode-mo
 export class EpisodeEditComponent implements OnInit {
   private id: number;
   public updateEpisodeModel: UpdateEpisodeModel = new UpdateEpisodeModel();
+  name = new FormControl('', Validators.required);
+  imageUrl = new FormControl('', Validators.required);
+  videoUrl = new FormControl('', Validators.required);
+  culinaryChannelId = new FormControl('', Validators.required);
   culinaryChannels: CulinaryChannelListModel[] = [];
 
   constructor(

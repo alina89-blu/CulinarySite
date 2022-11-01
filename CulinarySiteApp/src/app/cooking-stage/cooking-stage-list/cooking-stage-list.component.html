@@ -1,4 +1,4 @@
-<div class="content">
+<div class="set-padding">
   <div class="example-button-row">
     <a mat-stroked-button color="primary" [routerLink]="['/createCookingStage']"
       >Добавить</a
@@ -8,12 +8,18 @@
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>No.</th>
-      <td mat-cell *matCellDef="let element">{{ element.cookingStageId }}</td>
+      <td mat-cell *matCellDef="let element; let idx = index">{{ idx + 1 }}</td>
     </ng-container>
 
     <ng-container matColumnDef="content">
-      <th mat-header-cell *matHeaderCellDef>Содержание</th>
-      <td mat-cell *matCellDef="let element">{{ element.content }}</td>
+      <th mat-header-cell *matHeaderCellDef style="width: 650px">Содержание</th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        style="padding: 10px; text-align: justify"
+      >
+        {{ element.content }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="recipeName">

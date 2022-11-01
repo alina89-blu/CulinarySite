@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IRestaurantModel } from 'src/app/interfaces/restaurant/restaurant-model.interface';
 import { ITelephoneDetailModel } from 'src/app/interfaces/telephone/telephone-detail-model.interface';
@@ -16,6 +17,8 @@ export class TelephoneEditComponent implements OnInit {
   private id: number;
   public updateTelephoneModel: UpdateTelephoneModel =
     new UpdateTelephoneModel();
+  number = new FormControl('', Validators.required);
+  restaurantId = new FormControl('', Validators.required);
   public restaurants: RestaurantModel[] = [];
 
   constructor(

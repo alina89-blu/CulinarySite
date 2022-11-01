@@ -1,4 +1,5 @@
 ﻿using CulinarySite.Common.Dtos.Book;
+using CulinarySite.Common.Pagination;
 using System.Collections.Generic;
 
 namespace CulinarySite.Bll.Interfaces
@@ -10,8 +11,10 @@ namespace CulinarySite.Bll.Interfaces
         void DeleteBook(int id);
         IEnumerable<BookDetailListDto> GetBookDetailList(bool withRelated);
         IEnumerable<BookDto> GetBookList();
-        BookDetailDto GetBook(int id, bool withRelated);        
+        BookDetailDto GetBook(int id, bool withRelated);
         IEnumerable<BookDetailListDto> GetSortedBooksByName(bool withRelated);
         IEnumerable<BookDetailListDto> GetSortedBooksByYear(bool withRelated);
+        IEnumerable<BookDetailListDto> GetPaginatedBooks(PagingParameters pagingParameters);
+
     }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { ITelephoneListModel } from 'src/app/interfaces/telephone/telephone-list-model.interface';
 import { TelephoneService } from 'src/app/services/telephone.service';
 import { TelephoneListModel } from 'src/app/viewmodels/telephone/telephone-list-model.class';
@@ -10,6 +11,8 @@ import { TelephoneListModel } from 'src/app/viewmodels/telephone/telephone-list-
 })
 export class TelephoneListComponent implements OnInit {
   telephones: TelephoneListModel[] = [];
+  displayedColumns: string[] = ['id', 'number', 'restaurantName', 'actions'];
+  dataSource: MatTableDataSource<ITelephoneListModel>;
 
   constructor(private telephoneService: TelephoneService) {}
 
@@ -20,10 +23,12 @@ export class TelephoneListComponent implements OnInit {
   public getTelephoneList(): void {
     this.telephoneService
       .getTelephoneList(true)
-      .subscribe(
-        (data: ITelephoneListModel[]) =>
-          (this.telephones = data.map((x) => new TelephoneListModel(x)))
-      );
+      .subscribe((data: ITelephoneListModel[]) => {
+        this.telephones = data.map((x) => new TelephoneListModel(x));
+        this.dataSource = new MatTableDataSource<ITelephoneListModel>(
+          this.telephones
+        );
+      });
   }
 
   public deleteTelephone(id: number): void {

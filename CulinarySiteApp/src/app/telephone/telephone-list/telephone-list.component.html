@@ -1,38 +1,57 @@
-<div>
-  <button class="btn info">
-    <a [routerLink]="['/createTelephone']">Добавить</a>
-  </button>
-</div>
-<table>
-  <thead>
-    <tr>
-      <th colspan="2">Телефоны</th>
-    </tr>
-    <tr>
-      <td>Нр.</td>
-      <td>Номер</td>
-      <td>Название ресторана</td>
-      <td>Действия</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let telephone of telephones; let idx = index">
-      <td>{{ idx + 1 }}</td>
-      <td>{{ telephone.number }}</td>
-      <td>{{ telephone.restaurantName }}</td>
-      <td>
+<div class="set-padding">
+  <div class="example-button-row">
+    <a mat-stroked-button color="primary" [routerLink]="['/createTelephone']"
+      >Добавить</a
+    >
+  </div>
+  <br />
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element">{{ element.telephoneId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="number">
+      <th mat-header-cell *matHeaderCellDef style="width: 650px">Номер</th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        style="padding: 10px; text-align: justify"
+      >
+        {{ element.number }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="restaurantName">
+      <th mat-header-cell *matHeaderCellDef>Название ресторана</th>
+      <td mat-cell *matCellDef="let element">{{ element.restaurantName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Действия</th>
+      <td class="example-button-row" mat-cell *matCellDef="let element">
         <a
-          class="btn info"
-          [routerLink]="['/editTelephone', telephone.telephoneId]"
+          mat-stroked-button
+          color="primary"
+          [routerLink]="['/editTelephone', element.telephoneId]"
           >Редактировать</a
         >
+
         <button
-          class="btn info"
-          (click)="deleteTelephone(telephone.telephoneId)"
+          mat-stroked-button
+          color="warn"
+          (click)="deleteTelephone(element.telephoneId)"
         >
           Удалить
         </button>
       </td>
-    </tr>
-  </tbody>
-</table>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+<p>
+  <a routerLink="/">Home</a>
+</p>

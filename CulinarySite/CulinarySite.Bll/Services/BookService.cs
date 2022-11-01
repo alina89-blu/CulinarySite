@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Book;
+using CulinarySite.Common.Pagination;
 using CulinarySite.Common.ViewModels.Book;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
@@ -111,5 +112,14 @@ namespace CulinarySite.Bll.Services
             return books;
         }
 
+        public IEnumerable<BookDetailListDto> GetPaginatedBooks(PagingParameters pagingParameters)
+        {
+            var books = _bookReadOnlyRepository.GetPagedItems(pagingParameters);
+            var bookDetailListDtos = books.Select(x => _mapper.Map<BookDetailListDto>(x));
+
+            return bookDetailListDtos;
+        }
+
     }
 }
+

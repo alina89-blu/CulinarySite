@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthorService } from 'src/app/services/author.service';
 import { UpdateAuthorModel } from 'src/app/viewmodels/author/update-author-model.class';
 import { IAuthorDetailModel } from 'src/app/interfaces/author/author-detail-model.interface';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-author-edit',
@@ -12,6 +13,7 @@ import { IAuthorDetailModel } from 'src/app/interfaces/author/author-detail-mode
 export class AuthorEditComponent implements OnInit {
   public id: number;
   public updateAuthorModel: UpdateAuthorModel = new UpdateAuthorModel();
+  name = new FormControl('', Validators.required);
 
   constructor(
     private authorService: AuthorService,

@@ -5,6 +5,7 @@ import { CulinaryChannelService } from 'src/app/services/culinary-channel.servic
 import { CulinaryChannelListModel } from 'src/app/viewmodels/culinary-channel/culinary-channel-list-model.class';
 import { ICulinaryChannelListModel } from 'src/app/interfaces/culinary-channel/culinary-channel-list-model.interface';
 import { CreateEpisodeModel } from 'src/app/viewmodels/episode/create-episode-model.class';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-episode-create',
@@ -13,6 +14,11 @@ import { CreateEpisodeModel } from 'src/app/viewmodels/episode/create-episode-mo
 })
 export class EpisodeCreateComponent implements OnInit {
   public createEpisodeModel: CreateEpisodeModel = new CreateEpisodeModel();
+  name = new FormControl('', Validators.required);
+  imageUrl = new FormControl('', Validators.required);
+  videoUrl = new FormControl('', Validators.required);
+  culinaryChannelId = new FormControl('', Validators.required);
+
   public culinaryChannels: CulinaryChannelListModel[] = [];
 
   constructor(

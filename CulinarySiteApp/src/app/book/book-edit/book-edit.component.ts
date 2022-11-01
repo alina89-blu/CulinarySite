@@ -6,6 +6,7 @@ import { AuthorListModel } from 'src/app/viewmodels/author/author-list-model.cla
 import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.interface';
 import { UpdateBookModel } from 'src/app/viewmodels/book/update-book-model.class';
 import { IBookDetailModel } from 'src/app/interfaces/book/book-detail-model.interface';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-book-edit',
@@ -16,6 +17,14 @@ export class BookEditComponent implements OnInit {
   private id: number;
   public updateBookModel: UpdateBookModel = new UpdateBookModel();
   public authors: AuthorListModel[] = [];
+  name = new FormControl('', Validators.required);
+  creationYear = new FormControl('', [
+    Validators.required,
+    Validators.min(1990),
+  ]);
+  description = new FormControl('', Validators.required);
+  imageUrl = new FormControl('', Validators.required);
+  authorId = new FormControl('', Validators.required);
 
   constructor(
     private bookService: BookService,

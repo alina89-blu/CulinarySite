@@ -1,29 +1,49 @@
 <div class="Pad">
   <h3>Изменение телефона</h3>
-
-  <div>
-    <label>Номер телефона</label>
-    <input type="text" [(ngModel)]="updateTelephoneModel.number" />
-  </div>
-
-  <div>
-    <label>Название ресторана</label>
-    <select
-      [(ngModel)]="updateTelephoneModel.restaurantId"
-      class="form-control"
-    >
-      <option
-        *ngFor="let restaurant of restaurants"
-        [ngValue]="restaurant.restaurantId"
+  <br />
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Номер телефона</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="number"
+        [(ngModel)]="updateTelephoneModel.number"
+        placeholder="Номер телефона"
+      />
+      <mat-error *ngIf="number.hasError('required')">
+        Не указан номер телефона</mat-error
       >
-        {{ restaurant.name }}
-      </option>
-    </select>
-  </div>
+    </mat-form-field>
 
-  <div>
-    <button class="btn info" (click)="updateTelephone()">Обновить</button>
+    <mat-form-field appearance="fill" style="width: 497px">
+      <mat-label>Название ресторана</mat-label>
+      <br />
+      <mat-select
+        [formControl]="restaurantId"
+        [(ngModel)]="updateTelephoneModel.restaurantId"
+        placeholder="Название ресторана"
+      >
+        <mat-option
+          *ngFor="let restaurant of restaurants"
+          [value]="restaurant.restaurantId"
+        >
+          {{ restaurant.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="restaurantId.hasError('required')">
+        Не указано название ресторана
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="updateTelephone()">
+      Добавить
+    </button>
   </div>
+  <br />
 
   <p>
     <a [routerLink]="['/telephone']">Назад к списку телефонов</a>

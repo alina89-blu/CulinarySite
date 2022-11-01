@@ -1,32 +1,25 @@
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
   width: 100%;
-  border: 1px solid #ddd;
-  margin: 20px;
+}
+th {
+  background-color: #ff4081;
+  font-weight: bold;
 }
 
-th,
-td {
-  text-align: left;
-  padding: 10px;
+.content {
+  display: block;
+  margin: 82px auto 32px;
+  padding: 0 16px;
+  /*max-width: 960px;*/
+  flex-direction: column;
+  align-items: center;
 }
 
-tr:nth-child(even) {
-  background-color: #afeeee;
-}
-
-.btn {
-  border: none;
-  color: white;
-  padding: 14px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.info {
-  background-color: #2196f3;
-}
-.info:hover {
-  background: #0b7dda;
+.Pad {
+  padding: 50px 100px 50px 250px;
 }

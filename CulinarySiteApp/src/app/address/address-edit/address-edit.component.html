@@ -1,16 +1,35 @@
-<h3>Изменение адреса</h3>
-<div>
-  <label>Название</label>
-  <input type="text" [(ngModel)]="updateAddressModel.name" />
-</div>
-<div>
-  <button class="btn info" (click)="updateAddress()">Обновить</button>
-</div>
+<div class="Pad">
+  <h3>Изменение адреса</h3>
+  <br />
 
-<p>
-  <a [routerLink]="['/address']">Назад к списку адресов</a>
-</p>
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Название</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="name"
+        [(ngModel)]="updateAddressModel.name"
+        placeholder="Название"
+      />
+      <mat-error *ngIf="name.hasError('required')">
+        Не указано название
+      </mat-error>
+    </mat-form-field>
+  </form>
 
-<p>
-  <a routerLink="/">На домашнюю страницу</a>
-</p>
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="updateAddress()">
+      Обновить
+    </button>
+  </div>
+  <br />
+  <p>
+    <a [routerLink]="['/address']">Назад к списку адресов</a>
+  </p>
+
+  <p>
+    <a routerLink="/">На домашнюю страницу</a>
+  </p>
+</div>

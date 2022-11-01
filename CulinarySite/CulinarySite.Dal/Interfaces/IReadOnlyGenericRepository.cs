@@ -1,8 +1,8 @@
-﻿using CulinarySite.Domain.Entities;
+﻿using CulinarySite.Common.Pagination;
+using CulinarySite.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-
 
 namespace CulinarySite.Dal.Interfaces
 {
@@ -13,6 +13,7 @@ namespace CulinarySite.Dal.Interfaces
         TEntity GetItem(int id);
         TEntity GetItemWithInclude(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
         int GetNumberOfItems();
+        IEnumerable<TEntity> GetPagedItems(PagingParameters pagingParameters);
 
     }
 }

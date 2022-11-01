@@ -1,34 +1,69 @@
 <div class="Pad">
-  <h3>Editing the cooking stage</h3>
-  <div>
-    <label>Content</label>
-    <input type="text" [(ngModel)]="updateCookingStageModel.content" />
+  <h3>Изменение этапа приготовления</h3>
+  <br />
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Содержание</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="content"
+        [(ngModel)]="updateCookingStageModel.content"
+        placeholder="Содержание"
+      />
+      <mat-error *ngIf="content.hasError('required')">
+        Не указано содержание</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Картинка</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="imageUrl"
+        [(ngModel)]="updateCookingStageModel.imageUrl"
+        placeholder="УРЛ картинки"
+      />
+      <mat-error *ngIf="imageUrl.hasError('required')">
+        Не указан УРЛ картинки
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 497px">
+      <mat-label>Рецепт</mat-label>
+      <br />
+      <mat-select
+        [formControl]="recipeId"
+        [(ngModel)]="updateCookingStageModel.recipeId"
+        placeholder="Рецепт"
+      >
+        <mat-option *ngFor="let recipe of recipes" [value]="recipe.recipeId">
+          {{ recipe.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="recipeId.hasError('required')">
+        Не указано название рецепта
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="updateCookingStage()">
+      Обновить
+    </button>
+    <br />
   </div>
-
-  <div>
-    <label>Image</label>
-    <input type="text" [(ngModel)]="updateCookingStageModel.imageUrl" />
-  </div>
-
-  <div>
-    <label>Recipe</label>
-
-    <select [(ngModel)]="updateCookingStageModel.recipeId" class="form-control">
-      <option *ngFor="let recipe of recipes" [ngValue]="recipe.recipeId">
-        {{ recipe.name }}
-      </option>
-    </select>
-  </div>
-
-  <div>
-    <button class="btn info" (click)="updateCookingStage()">Update</button>
-  </div>
-
+  <br />
   <p>
-    <a [routerLink]="['/cookingStage']">Back to cooking stage's list</a>
+    <a [routerLink]="['/cookingStage']"
+      >Назад на страницу с этапами приготовления</a
+    >
   </p>
 
   <p>
-    <a routerLink="/">Home</a>
+    <a routerLink="/">На домашнюю страницу</a>
   </p>
 </div>

@@ -1,36 +1,80 @@
-<h3>Добавление нового эпизода</h3>
-<div>
-  <label>Название</label>
-  <input type="text" [(ngModel)]="createEpisodeModel.name" />
-</div>
+<div class="Pad">
+  <h3>Добавление нового эпизода</h3>
+  <br />
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Название</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="name"
+        [(ngModel)]="createEpisodeModel.name"
+        placeholder="Название"
+      />
+      <mat-error *ngIf="name.hasError('required')">
+        Не указано название эпизода</mat-error
+      >
+    </mat-form-field>
 
-<div>
-  <label>image</label>
-  <input type="text" [(ngModel)]="createEpisodeModel.imageUrl" />
-</div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Картинка</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="imageUrl"
+        [(ngModel)]="createEpisodeModel.imageUrl"
+        placeholder="УРЛ картинки"
+      />
+      <mat-error *ngIf="imageUrl.hasError('required')">
+        Не указан УРЛ картинки
+      </mat-error>
+    </mat-form-field>
 
-<div>
-  <label>video</label>
-  <input type="text" [(ngModel)]="createEpisodeModel.videoUrl" />
-</div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Видео</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="videoUrl"
+        [(ngModel)]="createEpisodeModel.videoUrl"
+        placeholder="УРЛ видео"
+      />
+      <mat-error *ngIf="videoUrl.hasError('required')">
+        Не указан УРЛ видео
+      </mat-error>
+    </mat-form-field>
 
-<div>
-  <label>Название кулинарного канала</label>
-  <select
-    [(ngModel)]="createEpisodeModel.culinaryChannelId"
-    class="form-control"
-  >
-    <option
-      *ngFor="let culinaryChannel of culinaryChannels"
-      [ngValue]="culinaryChannel.culinaryChannelId"
-    >
-      {{ culinaryChannel.name }}
-    </option>
-  </select>
+    <mat-form-field appearance="fill" style="width: 497px">
+      <mat-label>Название кулинарного канала</mat-label>
+      <br />
+      <mat-select
+        [formControl]="culinaryChannelId"
+        [(ngModel)]="createEpisodeModel.culinaryChannelId"
+        placeholder="Кулинарный канал"
+      >
+        <mat-option
+          *ngFor="let culinaryChannel of culinaryChannels"
+          [value]="culinaryChannel.culinaryChannelId"
+        >
+          {{ culinaryChannel.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="culinaryChannelId.hasError('required')">
+        Не указано название кулинарного канала
+      </mat-error>
+    </mat-form-field>
+  </form>
 
-  <div>
-    <button class="btn info" (click)="createEpisode()">Создать</button>
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="createEpisode()">
+      Добавить
+    </button>
   </div>
+  <br />
+
   <p>
     <a [routerLink]="['/episode']">Назад к списку эпизодов</a>
   </p>

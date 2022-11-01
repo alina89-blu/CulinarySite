@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CulinaryChannelService } from 'src/app/services/culinary-channel.service';
 import { Router } from '@angular/router';
 import { CreateCulinaryChannelModel } from 'src/app/viewmodels/culinary-channel/create-culinary-channel-model.class';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-culinary-channel-create',
@@ -11,6 +12,8 @@ import { CreateCulinaryChannelModel } from 'src/app/viewmodels/culinary-channel/
 export class CulinaryChannelCreateComponent {
   public createCulinaryChannelModel: CreateCulinaryChannelModel =
     new CreateCulinaryChannelModel();
+  name = new FormControl('', Validators.required);
+  content = new FormControl('', Validators.required);
 
   constructor(
     private culinaryChannelService: CulinaryChannelService,

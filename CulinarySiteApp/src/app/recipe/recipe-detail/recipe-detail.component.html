@@ -1,59 +1,56 @@
-<div class="container">
-  <div class="row">
-    <div>
-      <br />
-      <em
-        ><h1 class="B color-green">{{ recipeDetailModel.name }}</h1>
-      </em>
-      <br />
-      <img
-        id="img"
-        src="{{ recipeDetailModel.imageUrl }}"
-        alt="not found"
-        style="float: left; margin: 15px 15px 0px 0px"
-      />
+<div class="Pad">
+  <br />
+  <em
+    ><h1 class="B color-green">{{ recipeDetailModel.name }}</h1>
+  </em>
+  <br />
+  <img
+    id="img"
+    src="{{ recipeDetailModel.imageUrl }}"
+    alt="not found"
+    style="float: left; margin: 15px 15px 0px 0px"
+  />
 
-      <hr />
-      <p>
-        <img
-          class="img-marg"
-          src="https://jaymi-oliver.ru/images/vilka.png"
-          width="50"
-          height="50"
-          alt=""
-        />
+  <p>
+    <img
+      class="img-marg"
+      src="https://jaymi-oliver.ru/images/vilka.png"
+      width="50"
+      height="50"
+      alt=""
+    />
 
-        <img
-          class="img-marg"
-          src="https://jaymi-oliver.ru/images/chasi.png"
-          alt=""
-          width="50"
-          height="50"
-        />
+    <img
+      class="img-marg"
+      src="https://jaymi-oliver.ru/images/chasi.png"
+      alt=""
+      width="50"
+      height="50"
+    />
 
-        <img
-          class="img-marg"
-          src="https://jaymi-oliver.ru/images/slogno.png"
-          alt=""
-          width="50"
-          height="50"
-        />
-      </p>
-      <p>
-        На {{ recipeDetailModel.servingsNumber }} порций
-        {{ recipeDetailModel.cookingTime | date: "HH:mm" }} минут
-        {{ recipeDetailModel.difficultyLevel }}
-      </p>
-      <div>
-        <p class="line-height">
-          <b> {{ recipeDetailModel.content }}</b>
-        </p>
-      </div>
-    </div>
+    <img
+      class="img-marg"
+      src="https://jaymi-oliver.ru/images/slogno.png"
+      alt=""
+      width="50"
+      height="50"
+    />
+  </p>
+  <p>
+    На {{ recipeDetailModel.servingsNumber }} порций
+    {{ recipeDetailModel.cookingTime | date: "HH:mm" }} минут
+    {{ recipeDetailModel.difficultyLevel }}
+  </p>
+  <div>
+    <p class="line-height">
+      <b> {{ recipeDetailModel.content }}</b>
+    </p>
   </div>
-</div>
-<br />
-<div class="container">
+  <br />
+  <br />
+  <br />
+  <br />
+
   <div>
     <h3 class="color-green"><em> Ингредиенты </em></h3>
     <br />
@@ -68,38 +65,38 @@
       </em>
     </div>
   </div>
-</div>
 
-<div class="container">
-  <div>
-    <div
-      *ngFor="
-        let cookingStage of recipeDetailModel.cookingStages;
-        let idx = index
-      "
-    >
-      <p>
-        <b class="color-green">
-          {{ idx + 1 }}
-        </b>
+  <hr />
+  <hr />
 
-        {{ cookingStage.content }}
-      </p>
-      <p>
-        <img
-          *ngIf="cookingStage.imageUrl"
-          src="{{ cookingStage.imageUrl }}"
-          width="755px"
-          height="391px"
-        />
-      </p>
-    </div>
+  <div
+    *ngFor="
+      let cookingStage of recipeDetailModel.cookingStages;
+      let idx = index
+    "
+  >
+    <p>
+      <b class="color-green">
+        {{ idx + 1 }}
+      </b>
 
-    <em>
-      <h2 class="color-green">Пищевая ценность</h2>
-    </em>
-    <br />
+      {{ cookingStage.content }}
+    </p>
+    <p>
+      <img
+        *ngIf="cookingStage.imageUrl"
+        src="{{ cookingStage.imageUrl }}"
+        width="755px"
+        height="391px"
+      />
+    </p>
   </div>
+  <hr />
+  <hr />
+  <em>
+    <h2 class="color-green">Пищевая ценность</h2>
+  </em>
+  <br />
 
   <div *ngFor="let organicMatter of recipeDetailModel.organicMatters">
     <p>

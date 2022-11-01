@@ -8,16 +8,8 @@ table {
 }
 
 th {
-  background-color: #5e6dc4;
+  background-color: #ff4081;
   font-weight: bold;
-}
-.content {
-  display: block;
-  margin: 82px auto 32px;
-  padding: 0 16px;
-  /* max-width: 960px;*/
-  flex-direction: column;
-  align-items: center;
 }
 
 .Pad {

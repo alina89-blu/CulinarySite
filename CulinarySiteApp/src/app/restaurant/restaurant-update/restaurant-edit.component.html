@@ -1,22 +1,49 @@
 <div class="Pad">
-  <h3>Добавление новой ресторана</h3>
-  <div>
-    <label>Название</label>
-    <input type="text" [(ngModel)]="updateRestaurantModel.name" />
-  </div>
+  <h3>Изменение ресторана</h3>
+  <br />
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Название</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        [formControl]="name"
+        [(ngModel)]="updateRestaurantModel.name"
+        placeholder="Название"
+      />
+      <mat-error *ngIf="name.hasError('required')">
+        Не указано название ресторана</mat-error
+      >
+    </mat-form-field>
 
-  <div>
-    <label>Адрес</label>
-    <select [(ngModel)]="updateRestaurantModel.addressId" class="form-control">
-      <option *ngFor="let address of addresses" [ngValue]="address.addressId">
-        {{ address.name }}
-      </option>
-    </select>
-  </div>
+    <mat-form-field appearance="fill" style="width: 497px">
+      <mat-label>Адрес</mat-label>
+      <br />
+      <mat-select
+        [formControl]="addressId"
+        [(ngModel)]="updateRestaurantModel.addressId"
+        placeholder="Адрес"
+      >
+        <mat-option
+          *ngFor="let address of addresses"
+          [value]="address.addressId"
+        >
+          {{ address.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="addressId.hasError('required')">
+        Не указан aдрес
+      </mat-error>
+    </mat-form-field>
+  </form>
 
-  <div>
-    <button class="btn info" (click)="updateRestaurant()">Создать</button>
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="updateRestaurant()">
+      Обновить
+    </button>
   </div>
+  <br />
 
   <p>
     <a [routerLink]="['/restaurant']">Назад к списку ресторанов</a>
