@@ -55,19 +55,19 @@
     <mat-grid-tile
       *ngFor="let dish of dishes; let idx = index"
       class="hover-image-scale"
-      ><img
-        src="{{ dish.imageUrl }}"
-        alt="not found"
-        class="hover-image-scale"
-      />
+    >
+      <a [routerLink]="['/dish', dish.dishId]"
+        ><img
+          src="{{ dish.imageUrl }}"
+          alt="not found"
+          class="hover-image-scale"
+      /></a>
       <!--   <a [routerLink]="['/dish', dish.dishId]">
         <h3>{{ dish.category }}</h3>
       </a>-->
 
       <mat-grid-tile-footer>
-        <a [routerLink]="['/dish', dish.dishId]">
-          <h3>{{ dish.category }}</h3>
-        </a>
+        <h3>{{ dish.category }}</h3>
       </mat-grid-tile-footer>
     </mat-grid-tile>
     <!--   <mat-grid-tile *ngFor="let dish of dishes; let idx = index"

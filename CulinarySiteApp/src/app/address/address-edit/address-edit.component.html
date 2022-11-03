@@ -2,28 +2,47 @@
   <h3>Изменение адреса</h3>
   <br />
 
-  <form class="example-form">
+  <form
+    class="example-form"
+    [formGroup]="addressForm"
+    (ngSubmit)="updateAddress()"
+  >
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Название</mat-label>
       <br />
       <input
         type="text"
         matInput
-        [formControl]="name"
+        formControlName="name"
         [(ngModel)]="updateAddressModel.name"
         placeholder="Название"
       />
-      <mat-error *ngIf="name.hasError('required')">
+      <mat-error
+        *ngIf="
+          addressForm.controls['name'].hasError('minlength') &&
+          !addressForm.controls['name'].hasError('required')
+        "
+      >
+        Название не может быть меньше 5 симболов
+      </mat-error>
+      <mat-error *ngIf="addressForm.controls['name'].hasError('required')">
         Не указано название
       </mat-error>
     </mat-form-field>
+    <br />
+    <br />
+    <div class="example-button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="addressForm.invalid"
+      >
+        Обновить
+      </button>
+    </div>
   </form>
 
-  <div class="example-button-row">
-    <button mat-raised-button color="primary" (click)="updateAddress()">
-      Обновить
-    </button>
-  </div>
   <br />
   <p>
     <a [routerLink]="['/address']">Назад к списку адресов</a>

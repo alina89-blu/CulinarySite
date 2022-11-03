@@ -1,26 +1,39 @@
 <div class="Pad">
   <h3>Изменение автора</h3>
   <br />
-  <form class="example-form">
+  <form
+    class="example-form"
+    [formGroup]="authorForm"
+    (ngSubmit)="updateAuthor()"
+  >
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Имя</mat-label>
       <br />
       <input
         type="text"
         matInput
-        [formControl]="name"
+        formControlName="name"
         [(ngModel)]="updateAuthorModel.name"
         placeholder="Имя"
       />
-      <mat-error *ngIf="name.hasError('required')"> Не указано имя </mat-error>
+      <mat-error *ngIf="authorForm.controls['name'].hasError('required')">
+        Не указано имя
+      </mat-error>
     </mat-form-field>
+    <br />
+    <br />
+    <div class="example-button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="authorForm.invalid"
+      >
+        Обновить
+      </button>
+    </div>
   </form>
 
-  <div class="example-button-row">
-    <button mat-raised-button color="primary" (click)="updateAuthor()">
-      Обновить
-    </button>
-  </div>
   <br />
 
   <p>

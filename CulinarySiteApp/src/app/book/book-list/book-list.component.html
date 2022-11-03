@@ -1,43 +1,81 @@
-<div>
-  <div>
-    <button class="btn info">
-      <a [routerLink]="['/createBook']">Добавить</a>
-    </button>
-  </div>
-  <table>
-    <thead>
-      <tr>
-        <td>Нр.</td>
+<div class="Pad" role="main">
+  <div class="mat-elevation-z8">
+    <mat-form-field>
+      <mat-label> Filter </mat-label>
+      <input matInput placeholder="Filter" (keyup)="FilterChange($event)" />
+    </mat-form-field>
+    >
 
-        <td (click)="sortBooksByName()">Название</td>
+    <table mat-table matSort [dataSource]="dataSource">
+      <ng-container matColumnDef="code">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element; let idx = index">
+          {{ idx + 1 }}
+        </td>
+      </ng-container>
 
-        <td (click)="sortBooksByYear()">Год создания</td>
-        <td>Автор</td>
-        <td>Описание</td>
-        <td>Действия</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let book of books; let idx = index">
-        <td>{{ idx + 1 }}</td>
-        <td>{{ book.name }}</td>
-        <td class="A">{{ book.creationYear }}</td>
-        <td>{{ book.authorName }}</td>
-        <td class="textalign">{{ book.description }}</td>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
 
-        <td>
-          <a class="btn info" [routerLink]="['/editBook', book.bookId]"
+      <ng-container matColumnDef="year">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Year</th>
+        <td mat-cell *matCellDef="let element">{{ element.creationYear }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef>Author</th>
+        <td mat-cell *matCellDef="let element">{{ element.authorName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td class="example-button-row" mat-cell *matCellDef="let element">
+          <a
+            mat-stroked-button
+            color="primary"
+            [routerLink]="['/editBook', element.bookId]"
             >Редактировать</a
           >
-          <button class="btn info" (click)="deleteBook(book.bookId)">
+
+          <button
+            mat-stroked-button
+            color="warn"
+            (click)="deleteBook(element.bookId)"
+          >
             Удалить
           </button>
         </td>
-      </tr>
-    </tbody>
-  </table>
+      </ng-container>
 
-  <p>
-    <a routerLink="/">На домашнюю страницу</a>
-  </p>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <!--  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+    </mat-paginator>-->
+
+    <mat-paginator
+      #paginator
+      [length]="totalRows"
+      [pageIndex]="currentPage"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="pageChanged($event)"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
+  <br />
+  <div class="example-button-row">
+    <a mat-stroked-button color="primary" [routerLink]="['/createBook']"
+      >Добавить</a
+    >
+  </div>
 </div>

@@ -1,18 +1,23 @@
 <div class="Pad">
   <h3>Изменение ресторана</h3>
   <br />
-  <form class="example-form">
+
+  <form
+    class="example-form"
+    [formGroup]="restaurantForm"
+    (ngSubmit)="updateRestaurant()"
+  >
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Название</mat-label>
       <br />
       <input
         type="text"
         matInput
-        [formControl]="name"
+        formControlName="name"
         [(ngModel)]="updateRestaurantModel.name"
         placeholder="Название"
       />
-      <mat-error *ngIf="name.hasError('required')">
+      <mat-error *ngIf="restaurantForm.controls['name'].hasError('required')">
         Не указано название ресторана</mat-error
       >
     </mat-form-field>
@@ -21,7 +26,7 @@
       <mat-label>Адрес</mat-label>
       <br />
       <mat-select
-        [formControl]="addressId"
+        formControlName="addressId"
         [(ngModel)]="updateRestaurantModel.addressId"
         placeholder="Адрес"
       >
@@ -32,17 +37,25 @@
           {{ address.name }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="addressId.hasError('required')">
+      <mat-error
+        *ngIf="restaurantForm.controls['addressId'].hasError('required')"
+      >
         Не указан aдрес
       </mat-error>
     </mat-form-field>
+    <br /><br />
+    <div class="example-button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="restaurantForm.invalid"
+      >
+        Обновить
+      </button>
+    </div>
   </form>
 
-  <div class="example-button-row">
-    <button mat-raised-button color="primary" (click)="updateRestaurant()">
-      Обновить
-    </button>
-  </div>
   <br />
 
   <p>

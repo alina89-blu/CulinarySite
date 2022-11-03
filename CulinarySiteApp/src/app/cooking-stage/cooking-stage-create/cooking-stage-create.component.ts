@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IRecipeModel } from 'src/app/interfaces/recipe/recipe-model.interface';
 import { CookingStageService } from 'src/app/services/cooking-stage.service';
@@ -16,16 +16,20 @@ export class CookingStageCreateComponent implements OnInit {
   public createCookingStageModel: CreateCookingStageModel =
     new CreateCookingStageModel();
   public recipes: RecipeModel[] = [];
-
-  content = new FormControl('', Validators.required);
-  imageUrl = new FormControl('', Validators.required);
-  recipeId = new FormControl('', Validators.required);
+  public cookingStageForm: FormGroup;
 
   constructor(
     private cookingStageService: CookingStageService,
     private recipeService: RecipeService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.cookingStageForm = this.fb.group({
+      content: ['', Validators.required],
+      imageUrl: [''],
+      recipeId: ['', Validators.required],
+    });
+  }
 
   public ngOnInit(): void {
     this.getRecipeList();

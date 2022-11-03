@@ -1,9 +1,9 @@
-form {
+/*form {
   border: 1px solid grey;
   padding: 10% 15%;
   margin-top: 20%;
   font-family: Bradley Hand, cursive;
-}
+}*/
 
 button {
   margin: 10px;
@@ -19,4 +19,24 @@ button {
 
 a {
   color: grey;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  border: 1px solid pink;
+  padding: 10px 40px 10px 40px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.Pad {
+  padding: 50px 100px 50px 250px;
+}
+input {
+  background-color: white;
+  height: 50px;
 }

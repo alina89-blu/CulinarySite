@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthorService } from 'src/app/services/author.service';
 import { UpdateAuthorModel } from 'src/app/viewmodels/author/update-author-model.class';
 import { IAuthorDetailModel } from 'src/app/interfaces/author/author-detail-model.interface';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-author-edit',
@@ -13,14 +13,18 @@ import { FormControl, Validators } from '@angular/forms';
 export class AuthorEditComponent implements OnInit {
   public id: number;
   public updateAuthorModel: UpdateAuthorModel = new UpdateAuthorModel();
-  name = new FormControl('', Validators.required);
+  public authorForm: FormGroup;
 
   constructor(
     private authorService: AuthorService,
     private router: Router,
-    activeRoute: ActivatedRoute
+    activeRoute: ActivatedRoute,
+    private fb: FormBuilder
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
+    this.authorForm = this.fb.group({
+      name: ['', Validators.required],
+    });
   }
 
   public ngOnInit(): void {

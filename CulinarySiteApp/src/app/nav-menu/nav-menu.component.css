@@ -2,13 +2,37 @@
   flex: 1 1 auto;
 }
 
-a:hover {
-  color: white;
-  text-decoration: none;
-}
-
 mat-icon {
   font-size: 40px;
   width: 40px;
   height: 40px;
+}
+
+#a {
+  text-decoration: none;
+  color: black;
+}
+
+#a:hover {
+  color: #50c878;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #50c878;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+#button:hover {
+  color: #50c878;
+  text-decoration: none;
+}
+
+mat-icon:hover {
+  color: #50c878;
 }

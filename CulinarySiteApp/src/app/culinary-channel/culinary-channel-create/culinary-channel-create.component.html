@@ -2,18 +2,25 @@
   <h3>Добавление нового кулинарного канала</h3>
 
   <br />
-  <form class="example-form">
+
+  <form
+    class="example-form"
+    [formGroup]="culinaryChannelForm"
+    (ngSubmit)="createCulinaryChannel()"
+  >
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Название</mat-label>
       <br />
       <input
         type="text"
         matInput
-        [formControl]="name"
+        formControlName="name"
         [(ngModel)]="createCulinaryChannelModel.name"
         placeholder="Название"
       />
-      <mat-error *ngIf="name.hasError('required')">
+      <mat-error
+        *ngIf="culinaryChannelForm.controls['name'].hasError('required')"
+      >
         Не указано название
       </mat-error>
     </mat-form-field>
@@ -24,21 +31,29 @@
       <input
         type="text"
         matInput
-        [formControl]="content"
+        formControlName="content"
         [(ngModel)]="createCulinaryChannelModel.content"
         placeholder="Содержание"
       />
-      <mat-error *ngIf="content.hasError('required')">
+      <mat-error
+        *ngIf="culinaryChannelForm.controls['content'].hasError('required')"
+      >
         Не указано cодержание
       </mat-error>
     </mat-form-field>
+    <br /><br />
+    <div class="example-button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="culinaryChannelForm.invalid"
+      >
+        Добавить
+      </button>
+    </div>
   </form>
 
-  <div class="example-button-row">
-    <button mat-raised-button color="primary" (click)="createCulinaryChannel()">
-      Создать
-    </button>
-  </div>
   <br />
 
   <p>

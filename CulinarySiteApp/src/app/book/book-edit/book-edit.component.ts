@@ -6,7 +6,12 @@ import { AuthorListModel } from 'src/app/viewmodels/author/author-list-model.cla
 import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.interface';
 import { UpdateBookModel } from 'src/app/viewmodels/book/update-book-model.class';
 import { IBookDetailModel } from 'src/app/interfaces/book/book-detail-model.interface';
-import { FormControl, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-book-edit',
@@ -17,22 +22,23 @@ export class BookEditComponent implements OnInit {
   private id: number;
   public updateBookModel: UpdateBookModel = new UpdateBookModel();
   public authors: AuthorListModel[] = [];
-  name = new FormControl('', Validators.required);
-  creationYear = new FormControl('', [
-    Validators.required,
-    Validators.min(1990),
-  ]);
-  description = new FormControl('', Validators.required);
-  imageUrl = new FormControl('', Validators.required);
-  authorId = new FormControl('', Validators.required);
+  public bookForm: FormGroup;
 
   constructor(
     private bookService: BookService,
     private authorService: AuthorService,
     private router: Router,
-    activeRoute: ActivatedRoute
+    activeRoute: ActivatedRoute,
+    private fb: FormBuilder
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
+    this.bookForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(5)]],
+      creationYear: ['', [Validators.required, Validators.min(1990)]],
+      description: ['', Validators.required],
+      imageUrl: ['', Validators.required],
+      authorId: ['', Validators.required],
+    });
   }
 
   public ngOnInit(): void {

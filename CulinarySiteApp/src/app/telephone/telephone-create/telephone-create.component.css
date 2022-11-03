@@ -19,8 +19,9 @@ input {
 
 mat-select {
   background-color: white;
-  height: 50px;
+  height: 30px;
   padding: 15px;
+  width: 440px;
 }
 
 button {

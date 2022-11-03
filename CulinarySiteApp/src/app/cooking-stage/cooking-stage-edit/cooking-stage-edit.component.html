@@ -1,18 +1,24 @@
 <div class="Pad">
   <h3>Изменение этапа приготовления</h3>
   <br />
-  <form class="example-form">
+  <form
+    class="example-form"
+    [formGroup]="cookingStageForm"
+    (ngSubmit)="updateCookingStage()"
+  >
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Содержание</mat-label>
       <br />
       <input
         type="text"
         matInput
-        [formControl]="content"
+        formControlName="content"
         [(ngModel)]="updateCookingStageModel.content"
         placeholder="Содержание"
       />
-      <mat-error *ngIf="content.hasError('required')">
+      <mat-error
+        *ngIf="cookingStageForm.controls['content'].hasError('required')"
+      >
         Не указано содержание</mat-error
       >
     </mat-form-field>
@@ -23,20 +29,17 @@
       <input
         type="text"
         matInput
-        [formControl]="imageUrl"
+        formControlName="imageUrl"
         [(ngModel)]="updateCookingStageModel.imageUrl"
-        placeholder="УРЛ картинки"
+        placeholder="Имя"
       />
-      <mat-error *ngIf="imageUrl.hasError('required')">
-        Не указан УРЛ картинки
-      </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" style="width: 497px">
+    <mat-form-field appearance="fill" style="width: 500px">
       <mat-label>Рецепт</mat-label>
       <br />
       <mat-select
-        [formControl]="recipeId"
+        formControlName="recipeId"
         [(ngModel)]="updateCookingStageModel.recipeId"
         placeholder="Рецепт"
       >
@@ -44,18 +47,26 @@
           {{ recipe.name }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="recipeId.hasError('required')">
+      <mat-error
+        *ngIf="cookingStageForm.controls['recipeId'].hasError('required')"
+      >
         Не указано название рецепта
       </mat-error>
     </mat-form-field>
+    <br />
+    <br />
+    <div class="example-button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="cookingStageForm.invalid"
+      >
+        Обновить
+      </button>
+    </div>
   </form>
 
-  <div class="example-button-row">
-    <button mat-raised-button color="primary" (click)="updateCookingStage()">
-      Обновить
-    </button>
-    <br />
-  </div>
   <br />
   <p>
     <a [routerLink]="['/cookingStage']"

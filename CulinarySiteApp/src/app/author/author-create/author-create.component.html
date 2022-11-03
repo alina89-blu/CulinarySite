@@ -1,26 +1,40 @@
 <div class="Pad">
   <h3>Добавление нового автора</h3>
   <br />
-  <form class="example-form">
+
+  <form
+    class="example-form"
+    [formGroup]="authorForm"
+    (ngSubmit)="createAuthor()"
+  >
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Имя</mat-label>
       <br />
       <input
         type="text"
         matInput
-        [formControl]="name"
+        formControlName="name"
         [(ngModel)]="createAuthorModel.name"
         placeholder="Имя"
       />
-      <mat-error *ngIf="name.hasError('required')"> Не указано имя </mat-error>
+      <mat-error *ngIf="authorForm.controls['name'].hasError('required')">
+        Не указано имя
+      </mat-error>
     </mat-form-field>
+    <br />
+    <br />
+    <div class="example-button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="authorForm.invalid"
+      >
+        Добавить
+      </button>
+    </div>
   </form>
 
-  <div class="example-button-row">
-    <button mat-raised-button color="primary" (click)="createAuthor()">
-      Добавить
-    </button>
-  </div>
   <br />
 
   <p>

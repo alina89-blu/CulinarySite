@@ -1,18 +1,23 @@
 <div class="Pad">
   <h3>Добавление нового эпизода</h3>
   <br />
-  <form class="example-form">
+
+  <form
+    class="example-form"
+    [formGroup]="episodeForm"
+    (ngSubmit)="createEpisode()"
+  >
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Название</mat-label>
       <br />
       <input
         type="text"
         matInput
-        [formControl]="name"
+        formControlName="name"
         [(ngModel)]="createEpisodeModel.name"
         placeholder="Название"
       />
-      <mat-error *ngIf="name.hasError('required')">
+      <mat-error *ngIf="episodeForm.controls['name'].hasError('required')">
         Не указано название эпизода</mat-error
       >
     </mat-form-field>
@@ -23,11 +28,11 @@
       <input
         type="text"
         matInput
-        [formControl]="imageUrl"
+        formControlName="imageUrl"
         [(ngModel)]="createEpisodeModel.imageUrl"
         placeholder="УРЛ картинки"
       />
-      <mat-error *ngIf="imageUrl.hasError('required')">
+      <mat-error *ngIf="episodeForm.controls['imageUrl'].hasError('required')">
         Не указан УРЛ картинки
       </mat-error>
     </mat-form-field>
@@ -38,11 +43,11 @@
       <input
         type="text"
         matInput
-        [formControl]="videoUrl"
+        formControlName="videoUrl"
         [(ngModel)]="createEpisodeModel.videoUrl"
         placeholder="УРЛ видео"
       />
-      <mat-error *ngIf="videoUrl.hasError('required')">
+      <mat-error *ngIf="episodeForm.controls['videoUrl'].hasError('required')">
         Не указан УРЛ видео
       </mat-error>
     </mat-form-field>
@@ -51,7 +56,7 @@
       <mat-label>Название кулинарного канала</mat-label>
       <br />
       <mat-select
-        [formControl]="culinaryChannelId"
+        formControlName="culinaryChannelId"
         [(ngModel)]="createEpisodeModel.culinaryChannelId"
         placeholder="Кулинарный канал"
       >
@@ -62,17 +67,25 @@
           {{ culinaryChannel.name }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="culinaryChannelId.hasError('required')">
+      <mat-error
+        *ngIf="episodeForm.controls['culinaryChannelId'].hasError('required')"
+      >
         Не указано название кулинарного канала
       </mat-error>
     </mat-form-field>
+    <br /><br />
+    <div class="example-button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="episodeForm.invalid"
+      >
+        Добавить
+      </button>
+    </div>
   </form>
 
-  <div class="example-button-row">
-    <button mat-raised-button color="primary" (click)="createEpisode()">
-      Добавить
-    </button>
-  </div>
   <br />
 
   <p>

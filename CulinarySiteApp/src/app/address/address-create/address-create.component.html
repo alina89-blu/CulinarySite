@@ -1,47 +1,47 @@
-<!--<div class="Pad">
-  <h3>Добавление нового адреса</h3>
-  <div>
-    <label>Название</label>
-    <input type="text" [(ngModel)]="createAddressModel.name" />
-  </div>
-  <div>
-    <button class="btn info" (click)="createAddress()">Создать</button>
-  </div>
-
-  <p>
-    <a [routerLink]="['/address']">Назад к списку адресов</a>
-  </p>
-
-  <p>
-    <a routerLink="/">На домашнюю страницу</a>
-  </p>
-</div>-->
-
 <div class="Pad">
   <h3>Добавление нового адреса</h3>
   <br />
-  <form class="example-form">
+  <form
+    class="example-form"
+    [formGroup]="addressForm"
+    (ngSubmit)="createAddress()"
+  >
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Название</mat-label>
       <br />
       <input
         type="text"
         matInput
-        [formControl]="name"
+        formControlName="name"
         [(ngModel)]="createAddressModel.name"
         placeholder="Название"
       />
-      <mat-error *ngIf="name.hasError('required')">
+      <mat-error *ngIf="addressForm.controls['name'].hasError('required')">
         Не указано название
       </mat-error>
+      <mat-error
+        *ngIf="
+          addressForm.controls['name'].hasError('minlength') &&
+          !addressForm.controls['name'].hasError('required')
+        "
+      >
+        Название не может быть меньше 5 симболов
+      </mat-error>
     </mat-form-field>
+    <br />
+    <br />
+    <div class="example-button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="addressForm.invalid"
+      >
+        Добавить
+      </button>
+    </div>
   </form>
 
-  <div class="example-button-row">
-    <button mat-raised-button color="primary" (click)="createAddress()">
-      Добавить
-    </button>
-  </div>
   <br />
   <p>
     <a [routerLink]="['/address']">Назад к списку адресов</a>

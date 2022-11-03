@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IAddressListModel } from 'src/app/interfaces/address/address-list-model.interface';
 import { AddressService } from 'src/app/services/address.service';
@@ -15,23 +15,21 @@ import { CreateRestaurantModel } from 'src/app/viewmodels/restaurant/create-rest
 export class RestaurantCreateComponent implements OnInit {
   public createRestaurantModel: CreateRestaurantModel =
     new CreateRestaurantModel();
-  name = new FormControl('', Validators.required);
-  addressId = new FormControl('', Validators.required);
-
   public addresses: AddressListModel[] = [];
-  myForm: FormGroup;
+  public restaurantForm: FormGroup;
 
   constructor(
     private restaurantService: RestaurantService,
     private router: Router,
-    private addressService: AddressService
-  ) {}
-
-  public createRestaurant(): void {
-    this.restaurantService
-      .createRestaurant(this.createRestaurantModel)
-      .subscribe(() => this.router.navigateByUrl('restaurant'));
+    private addressService: AddressService,
+    private fb: FormBuilder
+  ) {
+    this.restaurantForm = this.fb.group({
+      name: ['', Validators.required],
+      addressId: ['', Validators.required],
+    });
   }
+
   public ngOnInit(): void {
     this.getAddressList();
   }
@@ -43,5 +41,11 @@ export class RestaurantCreateComponent implements OnInit {
         (data: IAddressListModel[]) =>
           (this.addresses = data.map((x) => new AddressListModel(x)))
       );
+  }
+
+  public createRestaurant(): void {
+    this.restaurantService
+      .createRestaurant(this.createRestaurantModel)
+      .subscribe(() => this.router.navigateByUrl('restaurant'));
   }
 }

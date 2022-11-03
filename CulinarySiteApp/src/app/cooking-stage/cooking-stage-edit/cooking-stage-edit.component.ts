@@ -6,7 +6,7 @@ import { ICookingStageDetailModel } from 'src/app/interfaces/cooking-stage/cooki
 import { UpdateCookingStageModel } from 'src/app/viewmodels/cooking-stage/update-cooking-stage-model.class';
 import { IRecipeModel } from 'src/app/interfaces/recipe/recipe-model.interface';
 import { RecipeModel } from 'src/app/viewmodels/recipe/recipe-model.class';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cooking-stage-edit',
@@ -18,18 +18,21 @@ export class CookingStageEditComponent implements OnInit {
   public updateCookingStageModel: UpdateCookingStageModel =
     new UpdateCookingStageModel();
   recipes: RecipeModel[] = [];
-
-  content = new FormControl('', Validators.required);
-  imageUrl = new FormControl('', Validators.required);
-  recipeId = new FormControl('', Validators.required);
+  public cookingStageForm: FormGroup;
 
   constructor(
     private cookingStageService: CookingStageService,
     private recipeService: RecipeService,
     private router: Router,
-    activeRoute: ActivatedRoute
+    activeRoute: ActivatedRoute,
+    private fb: FormBuilder
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
+    this.cookingStageForm = this.fb.group({
+      content: ['', Validators.required],
+      imageUrl: [''],
+      recipeId: ['', Validators.required],
+    });
   }
 
   public ngOnInit(): void {
@@ -44,12 +47,6 @@ export class CookingStageEditComponent implements OnInit {
     this.getRecipeList();
   }
 
-  public updateCookingStage(): void {
-    this.cookingStageService
-      .updateCookingStage(this.updateCookingStageModel)
-      .subscribe(() => this.router.navigateByUrl('cookingStage'));
-  }
-
   public getRecipeList() {
     this.recipeService
       .getRecipeList()
@@ -57,5 +54,11 @@ export class CookingStageEditComponent implements OnInit {
         (data: IRecipeModel[]) =>
           (this.recipes = data.map((x) => new RecipeModel(x)))
       );
+  }
+
+  public updateCookingStage(): void {
+    this.cookingStageService
+      .updateCookingStage(this.updateCookingStageModel)
+      .subscribe(() => this.router.navigateByUrl('cookingStage'));
   }
 }

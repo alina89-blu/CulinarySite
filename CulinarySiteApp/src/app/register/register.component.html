@@ -1,60 +1,53 @@
-<div class="textColor">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-4"></div>
-      <div class="col-lg-4">
-        <form [formGroup]="registerForm" (ngSubmit)="register()">
-          <h4 class="textAlignCenter">Регистрация</h4>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Имя пользователя</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="username"
-            />
-          </div>
+<div class="Pad">
+  <form class="example-form" [formGroup]="registerForm" (ngSubmit)="register()">
+    <h4 class="textAlignCenter">Регистрация</h4>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Имя пользователя</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        formControlName="username"
+        placeholder="Имя пользователя"
+      />
+      <mat-error *ngIf="username?.hasError('required') && username?.touched">
+        Это поле обязательно к заполнению!
+      </mat-error>
+    </mat-form-field>
 
-          <div
-            *ngIf="username?.touched && username?.errors?.['required']"
-            class="alert alert-danger"
-          >
-            Это поле обязательно к заполнению!
-          </div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Эл. адрес</mat-label>
+      <br />
+      <input
+        type="email"
+        matInput
+        formControlName="email"
+        placeholder="Эл. адрес"
+      />
+      <mat-error *ngIf="email?.hasError('required') && email?.touched">
+        Это поле обязательно к заполнению!
+      </mat-error>
+    </mat-form-field>
 
-          <div class="form-group">
-            <label for="exampleInputEmail1"> Эл. адрес</label>
-            <input type="email" class="form-control" formControlName="email" />
-          </div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Пароль</mat-label>
+      <br />
+      <input
+        type="password"
+        matInput
+        formControlName="password"
+        placeholder="Пароль"
+      />
 
-          <div
-            *ngIf="email?.touched && email?.errors?.['required']"
-            class="alert alert-danger"
-          >
-            Это поле обязательно к заполнению!
-          </div>
+      <mat-error *ngIf="password?.hasError('required')">
+        Это поле обязательно к заполнению!
+      </mat-error>
+    </mat-form-field>
 
-          <div class="form-group">
-            <label for="exampleInputPassword1">Пароль</label>
-            <input
-              type="password"
-              class="form-control"
-              formControlName="password"
-            />
-          </div>
-
-          <div
-            *ngIf="password?.touched && password?.errors?.['required']"
-            class="alert alert-danger"
-          >
-            Это поле обязательно к заполнению!
-          </div>
-
-          <button type="submit" class="btn btn-secondary">
-            Зарегистрироваться
-          </button>
-        </form>
-      </div>
-      <div class="col-lg-4"></div>
+    <div class="example-button-row">
+      <button mat-raised-button color="accent" type="submit">
+        Зарегистрироваться
+      </button>
     </div>
-  </div>
+  </form>
 </div>

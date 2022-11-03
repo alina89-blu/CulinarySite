@@ -3,6 +3,8 @@
 
   background-color: #c3fdb8;
   border-radius: 15px;
+  max-height: max-content;
+  min-height: 1500px;
 }
 
 * {

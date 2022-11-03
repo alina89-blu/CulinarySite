@@ -1,12 +1,13 @@
 <div class="Pad">
   <h3>Добавление новой категории блюда</h3>
   <br />
-  <form class="example-form">
+
+  <form class="example-form" [formGroup]="dishForm" (ngSubmit)="createDish()">
     <mat-form-field appearance="fill" style="width: 505px">
       <mat-label>Категория</mat-label>
       <br />
       <mat-select
-        [formControl]="category"
+        formControlName="category"
         [(ngModel)]="createDishModel.category"
         placeholder="Категория"
       >
@@ -17,7 +18,7 @@
           {{ dishCategory }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="category.hasError('required')">
+      <mat-error *ngIf="dishForm.controls['category'].hasError('required')">
         Не указана категория блюда
       </mat-error>
     </mat-form-field>
@@ -28,21 +29,27 @@
       <input
         type="text"
         matInput
-        [formControl]="imageUrl"
+        formControlName="imageUrl"
         [(ngModel)]="createDishModel.imageUrl"
         placeholder="Имя"
       />
-      <mat-error *ngIf="imageUrl.hasError('required')">
+      <mat-error *ngIf="dishForm.controls['imageUrl'].hasError('required')">
         Не указан УРЛ картинки
       </mat-error>
     </mat-form-field>
+    <br /><br />
+    <div class="example-button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="dishForm.invalid"
+      >
+        Добавить
+      </button>
+    </div>
   </form>
 
-  <div class="example-button-row">
-    <button mat-raised-button color="primary" (click)="createDish()">
-      Добавить
-    </button>
-  </div>
   <br />
 
   <p>

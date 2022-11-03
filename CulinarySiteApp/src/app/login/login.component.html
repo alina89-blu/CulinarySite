@@ -1,48 +1,40 @@
-<div class="textColor">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-4"></div>
-      <div class="col-lg-4">
-        <form [formGroup]="loginForm" (ngSubmit)="login()">
-          <h4 class="textAlignCenter">Авторизация</h4>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Логин</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="username"
-            />
-          </div>
+<div class="Pad">
+  <form class="example-form" [formGroup]="loginForm" (ngSubmit)="login()">
+    <h4 class="textAlignCenter">Авторизация</h4>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Логин</mat-label>
+      <br />
+      <input
+        type="text"
+        matInput
+        formControlName="username"
+        placeholder="Логин"
+      />
+      <mat-error *ngIf="username?.hasError('required') && username?.touched">
+        Это поле обязательно к заполнению!
+      </mat-error>
+    </mat-form-field>
 
-          <div
-            *ngIf="username?.touched && username?.errors?.['required']"
-            class="alert alert-danger"
-          >
-            Это поле обязательно к заполнению!
-          </div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Пароль</mat-label>
+      <br />
+      <input
+        type="password"
+        matInput
+        formControlName="password"
+        placeholder="Пароль"
+      />
 
-          <div class="form-group">
-            <label for="exampleInputPassword1">Пароль</label>
-            <input
-              type="password"
-              class="form-control"
-              formControlName="password"
-            />
-          </div>
+      <mat-error *ngIf="password?.hasError('required')">
+        Это поле обязательно к заполнению!
+      </mat-error>
+    </mat-form-field>
 
-          <div
-            *ngIf="password?.touched && password?.errors?.['required']"
-            class="alert alert-danger"
-          >
-            Это поле обязательно к заполнению!
-          </div>
-
-          <button type="submit" class="btn btn-secondary">Войти</button>
-
-          <a [routerLink]="['/register']">Зарегистрироваться</a>
-        </form>
-      </div>
-      <div class="col-lg-4"></div>
+    <div class="example-button-row">
+      <button mat-raised-button color="accent" type="submit">Войти</button>
+      <a mat-stroked-button color="accent" [routerLink]="['/register']"
+        >Зарегистрироваться</a
+      >
     </div>
-  </div>
+  </form>
 </div>

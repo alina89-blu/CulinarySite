@@ -5,7 +5,7 @@ import { AuthorService } from 'src/app/services/author.service';
 import { AuthorListModel } from 'src/app/viewmodels/author/author-list-model.class';
 import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.interface';
 import { CreateBookModel } from 'src/app/viewmodels/book/create-book-model.class';
-import { FormControl, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-book-create',
@@ -15,26 +15,23 @@ import { FormControl, NgForm, Validators } from '@angular/forms';
 export class BookCreateComponent implements OnInit {
   public createBookModel: CreateBookModel = new CreateBookModel();
   public authors: AuthorListModel[] = [];
-  name = new FormControl('', Validators.required);
-  creationYear = new FormControl('', [
-    Validators.required,
-    Validators.min(1990),
-  ]);
-  description = new FormControl('', Validators.required);
-  imageUrl = new FormControl('', Validators.required);
-  authorId = new FormControl('', Validators.required);
+  public bookForm: FormGroup;
 
   constructor(
     private bookService: BookService,
     private router: Router,
-    private authorService: AuthorService
-  ) {}
-
-  public createBook(): void {
-    this.bookService
-      .createBook(this.createBookModel)
-      .subscribe(() => this.router.navigateByUrl('book'));
+    private authorService: AuthorService,
+    private fb: FormBuilder
+  ) {
+    this.bookForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(5)]],
+      creationYear: ['', [Validators.required, Validators.min(1990)]],
+      description: ['', Validators.required],
+      imageUrl: ['', Validators.required],
+      authorId: ['', Validators.required],
+    });
   }
+
   public ngOnInit(): void {
     this.getAuthorList();
   }
@@ -46,5 +43,11 @@ export class BookCreateComponent implements OnInit {
         (data: IAuthorListModel[]) =>
           (this.authors = data.map((x) => new AuthorListModel(x)))
       );
+  }
+
+  public createBook(): void {
+    this.bookService
+      .createBook(this.createBookModel)
+      .subscribe(() => this.router.navigateByUrl('book'));
   }
 }

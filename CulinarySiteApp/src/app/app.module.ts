@@ -69,6 +69,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { EpisodeDetailComponent } from './episode/episode-detail/episode-detail.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -176,6 +177,7 @@ const appRoutes: Routes = [
     //ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     ReactiveFormsModule,
     MaterialModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     AddressService,

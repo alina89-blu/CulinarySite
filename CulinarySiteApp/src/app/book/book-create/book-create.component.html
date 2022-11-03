@@ -1,20 +1,29 @@
 <div class="Pad">
   <h3>Добавление новой книги</h3>
   <br />
-  <form class="example-form">
+
+  <form class="example-form" [formGroup]="bookForm" (ngSubmit)="createBook()">
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Название</mat-label>
       <br />
       <input
         type="text"
         matInput
-        [formControl]="name"
+        formControlName="name"
         [(ngModel)]="createBookModel.name"
         placeholder="Название"
       />
-      <mat-error *ngIf="name.hasError('required')">
+      <mat-error *ngIf="bookForm.controls['name'].hasError('required')">
         Не указано название книги</mat-error
       >
+      <mat-error
+        *ngIf="
+          bookForm.controls['name'].hasError('minlength') &&
+          !bookForm.controls['name'].hasError('required')
+        "
+      >
+        Название книги не может быть меньше 5 симболов
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width" appearance="fill">
@@ -23,17 +32,22 @@
       <input
         type="number"
         matInput
-        [formControl]="creationYear"
+        formControlName="creationYear"
         [(ngModel)]="createBookModel.creationYear"
         placeholder="
 год создания"
       />
-      <mat-error *ngIf="creationYear.hasError('required')">
-        Не указан год создания книги
-      </mat-error>
 
-      <mat-error *ngIf="creationYear.hasError('min')">
+      <mat-error
+        *ngIf="
+          bookForm.controls['creationYear'].hasError('min') &&
+          !bookForm.controls['creationYear'].hasError('required')
+        "
+      >
         Год создания не может быть менише чем 1990 г.
+      </mat-error>
+      <mat-error *ngIf="bookForm.controls['creationYear'].hasError('required')">
+        Не указан год создания книги
       </mat-error>
     </mat-form-field>
 
@@ -43,11 +57,11 @@
       <input
         type="text"
         matInput
-        [formControl]="description"
+        formControlName="description"
         [(ngModel)]="createBookModel.description"
         placeholder="Описание"
       />
-      <mat-error *ngIf="description.hasError('required')">
+      <mat-error *ngIf="bookForm.controls['description'].hasError('required')">
         Не указано описание
       </mat-error>
     </mat-form-field>
@@ -56,7 +70,7 @@
       <mat-label>Автор</mat-label>
       <br />
       <mat-select
-        [formControl]="authorId"
+        formControlName="authorId"
         [(ngModel)]="createBookModel.authorId"
         placeholder="Автор"
       >
@@ -64,7 +78,7 @@
           {{ author.name }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="authorId.hasError('required')">
+      <mat-error *ngIf="bookForm.controls['authorId'].hasError('required')">
         Не указан автор книги
       </mat-error>
     </mat-form-field>
@@ -75,21 +89,27 @@
       <input
         type="text"
         matInput
-        [formControl]="imageUrl"
+        formControlName="imageUrl"
         [(ngModel)]="createBookModel.imageUrl"
         placeholder="Имя"
       />
-      <mat-error *ngIf="imageUrl.hasError('required')">
+      <mat-error *ngIf="bookForm.controls['imageUrl'].hasError('required')">
         Не указан УРЛ картинки
       </mat-error>
     </mat-form-field>
+    <br /><br />
+    <div class="example-button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="bookForm.invalid"
+      >
+        Добавить
+      </button>
+    </div>
   </form>
 
-  <div class="example-button-row">
-    <button mat-raised-button color="primary" (click)="createBook()">
-      Добавить
-    </button>
-  </div>
   <br />
 
   <p>

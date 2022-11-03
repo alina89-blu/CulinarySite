@@ -1,9 +1,12 @@
 <div class="Pad">
+  <h2 class="B">{{ recipeDetailModel.name }}</h2>
+
   <br />
-  <em
-    ><h1 class="B color-green">{{ recipeDetailModel.name }}</h1>
-  </em>
-  <br />
+
+  <mat-icon>restaurant</mat-icon>
+  <mat-icon>watch_later</mat-icon>
+  <mat-icon>equalizer</mat-icon>
+
   <img
     id="img"
     src="{{ recipeDetailModel.imageUrl }}"
@@ -11,7 +14,7 @@
     style="float: left; margin: 15px 15px 0px 0px"
   />
 
-  <p>
+  <!-- <p>
     <img
       class="img-marg"
       src="https://jaymi-oliver.ru/images/vilka.png"
@@ -35,10 +38,10 @@
       width="50"
       height="50"
     />
-  </p>
+  </p>-->
   <p>
-    На {{ recipeDetailModel.servingsNumber }} порций
-    {{ recipeDetailModel.cookingTime | date: "HH:mm" }} минут
+    На {{ recipeDetailModel.servingsNumber }} порций/
+    {{ recipeDetailModel.cookingTime | date: "HH:mm" }} минут/
     {{ recipeDetailModel.difficultyLevel }}
   </p>
   <div>
@@ -52,8 +55,8 @@
   <br />
 
   <div>
-    <h3 class="color-green"><em> Ингредиенты </em></h3>
-    <br />
+    <h2 class="color-green"><em> Ингредиенты </em></h2>
+
     <div
       *ngFor="let ingredient of recipeDetailModel.ingredients; let idx = index"
     >
@@ -65,9 +68,8 @@
       </em>
     </div>
   </div>
-
-  <hr />
-  <hr />
+  <br />
+  <hr class="new4" />
 
   <div
     *ngFor="
@@ -91,12 +93,11 @@
       />
     </p>
   </div>
-  <hr />
-  <hr />
+  <hr class="new4" />
+
   <em>
     <h2 class="color-green">Пищевая ценность</h2>
   </em>
-  <br />
 
   <div *ngFor="let organicMatter of recipeDetailModel.organicMatters">
     <p>

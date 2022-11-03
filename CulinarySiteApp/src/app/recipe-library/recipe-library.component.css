@@ -41,7 +41,8 @@ img {
   text-align: center;
 }
 
-a:hover {
-  color: white;
+h3:hover {
+  color: green;
   text-decoration: none;
+  font-size: larger;
 }

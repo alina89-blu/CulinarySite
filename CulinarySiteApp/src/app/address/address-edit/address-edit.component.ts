@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AddressService } from 'src/app/services/address.service';
 import { UpdateAddressModel } from 'src/app/viewmodels/address/update-address-model.class';
 import { IAddressDetailModel } from 'src/app/interfaces/address/address-detail-model.interface';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-address-edit',
@@ -13,14 +13,18 @@ import { FormControl, Validators } from '@angular/forms';
 export class AddressEditComponent implements OnInit {
   private id: number;
   public updateAddressModel: UpdateAddressModel = new UpdateAddressModel();
-  name = new FormControl('', Validators.required);
+  public addressForm: FormGroup;
 
   constructor(
     private addressService: AddressService,
     private router: Router,
+    private fb: FormBuilder,
     activeRoute: ActivatedRoute
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
+    this.addressForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(5)]],
+    });
   }
 
   public ngOnInit(): void {

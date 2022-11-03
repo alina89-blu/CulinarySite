@@ -3,7 +3,7 @@ import { CulinaryChannelService } from 'src/app/services/culinary-channel.servic
 import { ActivatedRoute, Router } from '@angular/router';
 import { UpdateCulinaryChannelModel } from 'src/app/viewmodels/culinary-channel/update-culinary-channel-model.class';
 import { ICulinaryChannelDetail } from 'src/app/interfaces/culinary-channel/culinary-channel-detail.interface';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-culinary-channel-edit',
@@ -14,15 +14,19 @@ export class CulinaryChannelEditComponent implements OnInit {
   private id: number;
   public updateCulinaryChannelModel: UpdateCulinaryChannelModel =
     new UpdateCulinaryChannelModel();
-  name = new FormControl('', Validators.required);
-  content = new FormControl('', Validators.required);
+  public culinaryChannelForm: FormGroup;
 
   constructor(
     private culinaryChannelService: CulinaryChannelService,
     private router: Router,
-    activeRoute: ActivatedRoute
+    activeRoute: ActivatedRoute,
+    private fb: FormBuilder
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
+    this.culinaryChannelForm = this.fb.group({
+      name: ['', Validators.required],
+      content: ['', Validators.required],
+    });
   }
 
   public ngOnInit(): void {

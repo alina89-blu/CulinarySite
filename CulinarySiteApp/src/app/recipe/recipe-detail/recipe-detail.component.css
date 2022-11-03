@@ -25,3 +25,16 @@
 .Pad {
   padding: 50px 100px 50px 250px;
 }
+mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  padding: 25px;
+  color: green;
+
+  margin: 9px;
+}
+
+hr.new4 {
+  border: 2px dotted green;
+}

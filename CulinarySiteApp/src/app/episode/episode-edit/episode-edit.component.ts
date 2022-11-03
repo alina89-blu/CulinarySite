@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICulinaryChannelListModel } from 'src/app/interfaces/culinary-channel/culinary-channel-list-model.interface';
 import { IEpisodeDetailModel } from 'src/app/interfaces/episode/episode-detail-model.interface';
@@ -16,19 +16,24 @@ import { UpdateEpisodeModel } from 'src/app/viewmodels/episode/update-episode-mo
 export class EpisodeEditComponent implements OnInit {
   private id: number;
   public updateEpisodeModel: UpdateEpisodeModel = new UpdateEpisodeModel();
-  name = new FormControl('', Validators.required);
-  imageUrl = new FormControl('', Validators.required);
-  videoUrl = new FormControl('', Validators.required);
-  culinaryChannelId = new FormControl('', Validators.required);
-  culinaryChannels: CulinaryChannelListModel[] = [];
+  public culinaryChannels: CulinaryChannelListModel[] = [];
+  public episodeForm: FormGroup;
 
   constructor(
     private activeRoute: ActivatedRoute,
     private episodeService: EpisodeService,
     private culinaryChannelService: CulinaryChannelService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) {
     this.id = Number.parseInt(this.activeRoute.snapshot.params['id']);
+
+    this.episodeForm = this.fb.group({
+      name: ['', Validators.required],
+      imageUrl: ['', Validators.required],
+      videoUrl: ['', Validators.required],
+      culinaryChannelId: ['', Validators.required],
+    });
   }
 
   public ngOnInit(): void {
@@ -43,12 +48,6 @@ export class EpisodeEditComponent implements OnInit {
     this.getCulinaryChannelList();
   }
 
-  public updateEpisode(): void {
-    this.episodeService
-      .updateEpisode(this.updateEpisodeModel)
-      .subscribe(() => this.router.navigateByUrl('episode'));
-  }
-
   public getCulinaryChannelList(): void {
     this.culinaryChannelService
       .getCulinaryChannelList(false)
@@ -58,5 +57,11 @@ export class EpisodeEditComponent implements OnInit {
             (x) => new CulinaryChannelListModel(x)
           ))
       );
+  }
+
+  public updateEpisode(): void {
+    this.episodeService
+      .updateEpisode(this.updateEpisodeModel)
+      .subscribe(() => this.router.navigateByUrl('episode'));
   }
 }

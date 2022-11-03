@@ -5,7 +5,7 @@ import { CulinaryChannelService } from 'src/app/services/culinary-channel.servic
 import { CulinaryChannelListModel } from 'src/app/viewmodels/culinary-channel/culinary-channel-list-model.class';
 import { ICulinaryChannelListModel } from 'src/app/interfaces/culinary-channel/culinary-channel-list-model.interface';
 import { CreateEpisodeModel } from 'src/app/viewmodels/episode/create-episode-model.class';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-episode-create',
@@ -14,27 +14,25 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class EpisodeCreateComponent implements OnInit {
   public createEpisodeModel: CreateEpisodeModel = new CreateEpisodeModel();
-  name = new FormControl('', Validators.required);
-  imageUrl = new FormControl('', Validators.required);
-  videoUrl = new FormControl('', Validators.required);
-  culinaryChannelId = new FormControl('', Validators.required);
-
   public culinaryChannels: CulinaryChannelListModel[] = [];
+  public episodeForm: FormGroup;
 
   constructor(
     private episodeService: EpisodeService,
     private router: Router,
-    private culinaryChannelService: CulinaryChannelService
-  ) {}
+    private culinaryChannelService: CulinaryChannelService,
+    private fb: FormBuilder
+  ) {
+    this.episodeForm = this.fb.group({
+      name: ['', Validators.required],
+      imageUrl: ['', Validators.required],
+      videoUrl: ['', Validators.required],
+      culinaryChannelId: ['', Validators.required],
+    });
+  }
 
   public ngOnInit(): void {
     this.getCulinaryChannelList();
-  }
-
-  public createEpisode(): void {
-    this.episodeService
-      .createEpisode(this.createEpisodeModel)
-      .subscribe(() => this.router.navigateByUrl('episode'));
   }
 
   public getCulinaryChannelList(): void {
@@ -46,5 +44,11 @@ export class EpisodeCreateComponent implements OnInit {
             (x) => new CulinaryChannelListModel(x)
           ))
       );
+  }
+
+  public createEpisode(): void {
+    this.episodeService
+      .createEpisode(this.createEpisodeModel)
+      .subscribe(() => this.router.navigateByUrl('episode'));
   }
 }

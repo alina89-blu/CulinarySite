@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DishCategory } from 'src/app/enums/dish-category.enum';
 import { UpdateDishModel } from 'src/app/viewmodels/dish/update-dish-model.class';
 import { IDishDetailModel } from 'src/app/interfaces/dish/dish-detail-model.interface';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dish-edit',
@@ -14,8 +14,7 @@ import { FormControl, Validators } from '@angular/forms';
 export class DishEditComponent implements OnInit {
   private id: number;
   public updateDishModel: UpdateDishModel = new UpdateDishModel();
-  category = new FormControl('', Validators.required);
-  imageUrl = new FormControl('', Validators.required);
+  public dishForm: FormGroup;
 
   public dishCategories: DishCategory[] = [
     DishCategory.Блины,
@@ -34,9 +33,14 @@ export class DishEditComponent implements OnInit {
   constructor(
     private dishService: DishService,
     private router: Router,
-    activeRoute: ActivatedRoute
+    activeRoute: ActivatedRoute,
+    private fb: FormBuilder
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
+    this.dishForm = this.fb.group({
+      category: ['', Validators.required],
+      imageUrl: ['', Validators.required],
+    });
   }
 
   public ngOnInit(): void {

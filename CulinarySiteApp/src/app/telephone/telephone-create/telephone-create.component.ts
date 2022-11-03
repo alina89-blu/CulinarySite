@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IRestaurantModel } from 'src/app/interfaces/restaurant/restaurant-model.interface';
 import { RestaurantService } from 'src/app/services/restaurant.service';
@@ -15,24 +15,23 @@ import { CreateTelephoneModel } from 'src/app/viewmodels/telephone/create-teleph
 export class TelephoneCreateComponent implements OnInit {
   public createTelephoneModel: CreateTelephoneModel =
     new CreateTelephoneModel();
-  number = new FormControl('', Validators.required);
-  restaurantId = new FormControl('', Validators.required);
-
+  public telephoneForm: FormGroup;
   public restaurants: RestaurantModel[] = [];
 
   constructor(
     private telephoneService: TelephoneService,
     private restaurantService: RestaurantService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.telephoneForm = this.fb.group({
+      number: ['', Validators.required],
+      restaurantId: ['', Validators.required],
+    });
+  }
 
   public ngOnInit(): void {
     this.getRestaurantList();
-  }
-  public createTelephone(): void {
-    this.telephoneService
-      .createTelephone(this.createTelephoneModel)
-      .subscribe(() => this.router.navigateByUrl('telephone'));
   }
 
   public getRestaurantList(): void {
@@ -42,5 +41,11 @@ export class TelephoneCreateComponent implements OnInit {
         (data: IRestaurantModel[]) =>
           (this.restaurants = data.map((x) => new RestaurantModel(x)))
       );
+  }
+
+  public createTelephone(): void {
+    this.telephoneService
+      .createTelephone(this.createTelephoneModel)
+      .subscribe(() => this.router.navigateByUrl('telephone'));
   }
 }

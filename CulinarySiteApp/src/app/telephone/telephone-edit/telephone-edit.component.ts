@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IRestaurantModel } from 'src/app/interfaces/restaurant/restaurant-model.interface';
 import { ITelephoneDetailModel } from 'src/app/interfaces/telephone/telephone-detail-model.interface';
@@ -17,17 +17,22 @@ export class TelephoneEditComponent implements OnInit {
   private id: number;
   public updateTelephoneModel: UpdateTelephoneModel =
     new UpdateTelephoneModel();
-  number = new FormControl('', Validators.required);
-  restaurantId = new FormControl('', Validators.required);
   public restaurants: RestaurantModel[] = [];
+  public telephoneForm: FormGroup;
 
   constructor(
     private telephoneService: TelephoneService,
     private restaurantService: RestaurantService,
     private router: Router,
-    activeRoute: ActivatedRoute
+    activeRoute: ActivatedRoute,
+    private fb: FormBuilder
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
+
+    this.telephoneForm = this.fb.group({
+      number: ['', Validators.required],
+      restaurantId: ['', Validators.required],
+    });
   }
 
   public ngOnInit(): void {
@@ -42,12 +47,6 @@ export class TelephoneEditComponent implements OnInit {
     this.getRestaurantList();
   }
 
-  public updateTelephone(): void {
-    this.telephoneService
-      .updateTelephone(this.updateTelephoneModel)
-      .subscribe(() => this.router.navigateByUrl('telephone'));
-  }
-
   public getRestaurantList(): void {
     this.restaurantService
       .getRestaurantList()
@@ -55,5 +54,11 @@ export class TelephoneEditComponent implements OnInit {
         (data: IRestaurantModel[]) =>
           (this.restaurants = data.map((x) => new RestaurantModel(x)))
       );
+  }
+
+  public updateTelephone(): void {
+    this.telephoneService
+      .updateTelephone(this.updateTelephoneModel)
+      .subscribe(() => this.router.navigateByUrl('telephone'));
   }
 }

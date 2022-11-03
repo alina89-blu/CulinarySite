@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IAddressListModel } from 'src/app/interfaces/address/address-list-model.interface';
 import { IRestaurantDetailModel } from 'src/app/interfaces/restaurant/restaurant-detail-model.interface';
@@ -17,17 +17,22 @@ export class RestaurantEditComponent implements OnInit {
   private id: number;
   public updateRestaurantModel: UpdateRestaurantModel =
     new UpdateRestaurantModel();
-  name = new FormControl('', Validators.required);
-  addressId = new FormControl('', Validators.required);
   public addresses: AddressListModel[] = [];
+  public restaurantForm: FormGroup;
 
   constructor(
     private restaurantService: RestaurantService,
     private addressService: AddressService,
     private router: Router,
-    activeRoute: ActivatedRoute
+    activeRoute: ActivatedRoute,
+    private fb: FormBuilder
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
+
+    this.restaurantForm = this.fb.group({
+      name: ['', Validators.required],
+      addressId: ['', Validators.required],
+    });
   }
 
   public ngOnInit(): void {
@@ -42,12 +47,6 @@ export class RestaurantEditComponent implements OnInit {
     this.getAddressList();
   }
 
-  public updateRestaurant(): void {
-    this.restaurantService
-      .updateRestaurant(this.updateRestaurantModel)
-      .subscribe(() => this.router.navigateByUrl('restaurant'));
-  }
-
   public getAddressList(): void {
     this.addressService
       .getAddressList()
@@ -55,5 +54,11 @@ export class RestaurantEditComponent implements OnInit {
         (data: IAddressListModel[]) =>
           (this.addresses = data.map((x) => new AddressListModel(x)))
       );
+  }
+
+  public updateRestaurant(): void {
+    this.restaurantService
+      .updateRestaurant(this.updateRestaurantModel)
+      .subscribe(() => this.router.navigateByUrl('restaurant'));
   }
 }

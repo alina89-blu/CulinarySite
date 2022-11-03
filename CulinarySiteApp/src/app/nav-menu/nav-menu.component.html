@@ -6,32 +6,36 @@
 
   <span><a mat-button [routerLink]="['/recipeLibrary']">РЕЦЕПТЫ</a></span>
 
-  <button mat-button [matMenuTriggerFor]="menu">АДМИН МЕНЮ</button>
+  <button id="button" mat-button [matMenuTriggerFor]="menu">АДМИН МЕНЮ</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item><a [routerLink]="['/address']">Адреса</a></button>
-    <button mat-menu-item><a [routerLink]="['/author']">Авторы</a></button>
     <button mat-menu-item>
-      <a [routerLink]="['/recipe']">Рецепты</a>
-    </button>
-    <button mat-menu-item><a [routerLink]="['/book']">Книги</a></button>
-    <button mat-menu-item>
-      <a [routerLink]="['/cookingStage']">Этапы приготовления</a>
+      <a id="a" [routerLink]="['/address']">Адреса</a>
     </button>
     <button mat-menu-item>
-      <a [routerLink]="['/culinaryChannel']">Кулинарные каналы</a>
+      <a id="a" [routerLink]="['/author']">Авторы</a>
     </button>
     <button mat-menu-item>
-      <a [routerLink]="['/dish']">Блюда</a>
+      <a id="a" [routerLink]="['/recipe']">Рецепты</a>
+    </button>
+    <button mat-menu-item><a id="a" [routerLink]="['/book']">Книги</a></button>
+    <button mat-menu-item>
+      <a id="a" [routerLink]="['/cookingStage']">Этапы приготовления</a>
     </button>
     <button mat-menu-item>
-      <a [routerLink]="['/episode']">Эпизоды</a>
+      <a id="a" [routerLink]="['/culinaryChannel']">Кулинарные каналы</a>
+    </button>
+    <button mat-menu-item>
+      <a id="a" [routerLink]="['/dish']">Блюда</a>
+    </button>
+    <button mat-menu-item>
+      <a id="a" [routerLink]="['/episode']">Эпизоды</a>
     </button>
 
     <button mat-menu-item>
-      <a [routerLink]="['/telephone']">Телефоны</a>
+      <a id="a" [routerLink]="['/telephone']">Телефоны</a>
     </button>
     <button mat-menu-item>
-      <a [routerLink]="['/restaurant']">Рестораны</a>
+      <a id="a" [routerLink]="['/restaurant']">Рестораны</a>
     </button>
   </mat-menu>
 
@@ -40,10 +44,12 @@
   <span><a mat-button [routerLink]="['/restaurantLibrary']">РЕСТОРАНЫ</a></span>
 
   <span *ngIf="!isAuthenticated()">
-    <a mat-flat-button [routerLink]="['/login']">Вход</a>
+    <a id="a" mat-flat-button [routerLink]="['/login']">Вход</a>
   </span>
 
   <span *ngIf="isAuthenticated()">
-    <a mat-flat-button (click)="logout()" [routerLink]="['/login']"> Выход </a>
+    <a id="a" mat-flat-button (click)="logout()" [routerLink]="['/login']">
+      Выход
+    </a>
   </span>
 </mat-toolbar>
