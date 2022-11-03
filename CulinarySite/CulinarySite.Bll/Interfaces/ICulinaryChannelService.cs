@@ -8,7 +8,8 @@ namespace CulinarySite.Bll.Interfaces
         void CreateCulinaryChannel(CreateCulinaryChannelDto createCulinaryChannelDto);
         void UpdateCulinaryChannel(UpdateCulinaryChannelDto updateCulinaryChannelDto);
         void DeleteCulinaryChannel(int id);
-        IEnumerable<CulinaryChannelListDto> GetCulinaryChannelList(bool withRelated);
+        IEnumerable<CulinaryChannelListDto> GetCulinaryChannelDetailList(bool withRelated);
+        IEnumerable<CulinaryChannelDto> GetCulinaryChannelList();
         CulinaryChannelDetailDto GetCulinaryChannel(int id, bool withRelated);
     }
 }

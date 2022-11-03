@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ICulinaryChannelListModel } from 'src/app/interfaces/culinary-channel/culinary-channel-list-model.interface';
+import { ICulinaryChannelModel } from 'src/app/interfaces/culinary-channel/culinary-channel.interface';
 import { IEpisodeDetailModel } from 'src/app/interfaces/episode/episode-detail-model.interface';
 import { CulinaryChannelService } from 'src/app/services/culinary-channel.service';
 import { EpisodeService } from 'src/app/services/episode.service';
-import { CulinaryChannelListModel } from 'src/app/viewmodels/culinary-channel/culinary-channel-list-model.class';
+import { CulinaryChannelModel } from 'src/app/viewmodels/culinary-channel/culinary-channel-model.class';
 import { UpdateEpisodeModel } from 'src/app/viewmodels/episode/update-episode-model.class';
 
 @Component({
@@ -16,7 +16,7 @@ import { UpdateEpisodeModel } from 'src/app/viewmodels/episode/update-episode-mo
 export class EpisodeEditComponent implements OnInit {
   private id: number;
   public updateEpisodeModel: UpdateEpisodeModel = new UpdateEpisodeModel();
-  public culinaryChannels: CulinaryChannelListModel[] = [];
+  public culinaryChannels: CulinaryChannelModel[] = [];
   public episodeForm: FormGroup;
 
   constructor(
@@ -50,12 +50,10 @@ export class EpisodeEditComponent implements OnInit {
 
   public getCulinaryChannelList(): void {
     this.culinaryChannelService
-      .getCulinaryChannelList(false)
+      .getCulinaryChannelList()
       .subscribe(
-        (data: ICulinaryChannelListModel[]) =>
-          (this.culinaryChannels = data.map(
-            (x) => new CulinaryChannelListModel(x)
-          ))
+        (data: ICulinaryChannelModel[]) =>
+          (this.culinaryChannels = data.map((x) => new CulinaryChannelModel(x)))
       );
   }
 

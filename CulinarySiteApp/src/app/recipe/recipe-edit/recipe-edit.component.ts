@@ -115,7 +115,7 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
     }
     this.getDishList();
 
-    this.getIngredientList();
+    //this.getIngredientList();
     this.getAuthorList();
     this.getBookList();
 
@@ -179,14 +179,14 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
     return group;
   }
 
-  public getIngredientList(): void {
+  /*public getIngredientList(): void {
     this.ingredientService
       .getIngredientList()
       .subscribe(
         (data: IIngredientListModel[]) =>
           (this.ingredients = data.map((x) => new IngredientListModel(x)))
       );
-  }
+  }*/
 
   public getBookList(): void {
     this.bookService

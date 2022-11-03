@@ -5,6 +5,7 @@ import { ICulinaryChannelListModel } from '../interfaces/culinary-channel/culina
 import { ICulinaryChannelDetail } from '../interfaces/culinary-channel/culinary-channel-detail.interface';
 import { CreateCulinaryChannelModel } from '../viewmodels/culinary-channel/create-culinary-channel-model.class';
 import { UpdateCulinaryChannelModel } from '../viewmodels/culinary-channel/update-culinary-channel-model.class';
+import { ICulinaryChannelModel } from '../interfaces/culinary-channel/culinary-channel.interface';
 
 @Injectable()
 export class CulinaryChannelService {
@@ -12,12 +13,16 @@ export class CulinaryChannelService {
 
   constructor(private http: HttpClient) {}
 
-  public getCulinaryChannelList(
+  public getCulinaryChannelDetailList(
     withRelated: boolean
   ): Observable<ICulinaryChannelListModel[]> {
     return this.http.get<ICulinaryChannelListModel[]>(
       this.url + '/' + withRelated
     );
+  }
+
+  public getCulinaryChannelList(): Observable<ICulinaryChannelModel[]> {
+    return this.http.get<ICulinaryChannelModel[]>(this.url);
   }
 
   public getCulinaryChannel(

@@ -6,6 +6,8 @@ import { CulinaryChannelListModel } from 'src/app/viewmodels/culinary-channel/cu
 import { ICulinaryChannelListModel } from 'src/app/interfaces/culinary-channel/culinary-channel-list-model.interface';
 import { CreateEpisodeModel } from 'src/app/viewmodels/episode/create-episode-model.class';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CulinaryChannelModel } from 'src/app/viewmodels/culinary-channel/culinary-channel-model.class';
+import { ICulinaryChannelModel } from 'src/app/interfaces/culinary-channel/culinary-channel.interface';
 
 @Component({
   selector: 'app-episode-create',
@@ -14,7 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class EpisodeCreateComponent implements OnInit {
   public createEpisodeModel: CreateEpisodeModel = new CreateEpisodeModel();
-  public culinaryChannels: CulinaryChannelListModel[] = [];
+  public culinaryChannels: CulinaryChannelModel[] = [];
   public episodeForm: FormGroup;
 
   constructor(
@@ -37,12 +39,10 @@ export class EpisodeCreateComponent implements OnInit {
 
   public getCulinaryChannelList(): void {
     this.culinaryChannelService
-      .getCulinaryChannelList(false)
+      .getCulinaryChannelList()
       .subscribe(
-        (data: ICulinaryChannelListModel[]) =>
-          (this.culinaryChannels = data.map(
-            (x) => new CulinaryChannelListModel(x)
-          ))
+        (data: ICulinaryChannelModel[]) =>
+          (this.culinaryChannels = data.map((x) => new CulinaryChannelModel(x)))
       );
   }
 

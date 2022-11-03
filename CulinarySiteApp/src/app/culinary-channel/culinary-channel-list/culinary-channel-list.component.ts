@@ -22,7 +22,7 @@ export class CulinaryChannelListComponent implements OnInit {
 
   public getCulinaryChannelList(): void {
     this.culinaryChannelService
-      .getCulinaryChannelList(false)
+      .getCulinaryChannelDetailList(false)
       .subscribe((data: ICulinaryChannelListModel[]) => {
         this.culinaryChannels = data.map(
           (x) => new CulinaryChannelListModel(x)

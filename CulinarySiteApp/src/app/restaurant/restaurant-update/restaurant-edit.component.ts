@@ -38,7 +38,7 @@ export class RestaurantEditComponent implements OnInit {
   public ngOnInit(): void {
     if (this.id) {
       this.restaurantService
-        .getRestaurant(this.id, true)
+        .getRestaurant(this.id, false)
         .subscribe(
           (data: IRestaurantDetailModel) =>
             (this.updateRestaurantModel = new UpdateRestaurantModel(data))

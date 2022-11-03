@@ -1,22 +1,38 @@
 <div class="Pad">
-  <h1>Рецепты от Джейми Оливера</h1>
+  <h2>
+    Рецепты от Джейми Оливера /
+    <span style="color: green">{{ dishDetailModel.category }}</span>
+  </h2>
   <br />
+
   <div
     *ngFor="let recipe of dishDetailModel.recipes; let idx = index"
-    class="block"
+    style="height: 200px; width: 900px"
   >
-    <h4>
-      <a [routerLink]="['/recipe', recipe.recipeId]">{{ recipe.name }}</a>
+    <h4 style="text-align: right; color: green">
+      {{ recipe.name }}
     </h4>
+    <hr />
 
-    <img
-      src="{{ recipe.imageUrl }}"
-      alt=""
-      style="float: left; margin: 0px 15px 0px 0px"
-      width="150px"
-      height="170px"
-    />
-
-    <p>{{ recipe.content }}</p>
+    <div>
+      <img
+        src="{{ recipe.imageUrl }}"
+        alt=""
+        style="float: left; margin: 0px 15px 0px 0px"
+        width="150px"
+        height="170px"
+      />{{ recipe.content }}
+    </div>
+    <a [routerLink]="['/recipe', recipe.recipeId]"
+      ><button mat-raised-button color="accent">Подробнее...</button></a
+    >
   </div>
 </div>
+
+<!-- <a
+          mat-stroked-button
+          color="primary"
+          [routerLink]="['/editAddress', element.addressId]"
+          >Редактировать</a
+        >
+-->

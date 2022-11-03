@@ -14,7 +14,6 @@ using CulinarySite.Common.Dtos.Restaurant;
 using CulinarySite.Common.Dtos.Subscriber;
 using CulinarySite.Common.Dtos.Tag;
 using CulinarySite.Common.Dtos.Telephone;
-using CulinarySite.Common.Pagination;
 using CulinarySite.Common.ViewModels.Address;
 using CulinarySite.Common.ViewModels.Author;
 using CulinarySite.Common.ViewModels.Book;
@@ -30,8 +29,7 @@ using CulinarySite.Common.ViewModels.Restaurant;
 using CulinarySite.Common.ViewModels.Subscriber;
 using CulinarySite.Common.ViewModels.Tag;
 using CulinarySite.Common.ViewModels.Telephone;
-using CulinarySite.Domain.Entities;
-using System.Threading.Tasks;
+
 
 namespace CulinarySite.Api.AutoMapperProfiles
 {
@@ -65,6 +63,7 @@ namespace CulinarySite.Api.AutoMapperProfiles
             CreateMap<UpdateCulinaryChannelModel, UpdateCulinaryChannelDto>().ReverseMap();
             CreateMap<CulinaryChannelDetailModel, CulinaryChannelDetailDto>().ReverseMap();
             CreateMap<CulinaryChannelListModel, CulinaryChannelListDto>().ReverseMap();
+            CreateMap<CulinaryChannelModel, CulinaryChannelDto>().ReverseMap();
 
             CreateMap<CreateDishModel, CreateDishDto>().ReverseMap();
             CreateMap<UpdateDishModel, UpdateDishDto>().ReverseMap();
@@ -101,6 +100,8 @@ namespace CulinarySite.Api.AutoMapperProfiles
             CreateMap<RecipeDetailModel, RecipeDetailDto>().ReverseMap();
             CreateMap<RecipeListModel, RecipeListDto>().ReverseMap();
             CreateMap<RecipeModel, RecipeDto>().ReverseMap();
+            CreateMap<DishRecipeModel, DishRecipeDto>().ReverseMap();
+
 
             CreateMap<CreateRestaurantModel, CreateRestaurantDto>().ReverseMap();
             CreateMap<UpdateRestaurantModel, UpdateRestaurantDto>().ReverseMap();
@@ -124,22 +125,10 @@ namespace CulinarySite.Api.AutoMapperProfiles
             CreateMap<CommentListModel, CommentListDto>().ReverseMap();
             CreateMap<CommentDetailModel, CommentDetailDto>().ReverseMap();
 
-        
-            
-
-            // CreateMap<List<AddressListModel>, List<AddressListDto>>().ReverseMap();
-
-            //.ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name + " test "));
 
 
-            /*  CreateMap<User, UserViewModel>()
-          .ForMember(dest =>
-              dest.FName,
-              opt => opt.MapFrom(src => src.FirstName))
-          .ForMember(dest =>
-              dest.LName,
-              opt => opt.MapFrom(src => src.LastName))
-          .ReverseMap();*/
+
+
         }
     }
 }

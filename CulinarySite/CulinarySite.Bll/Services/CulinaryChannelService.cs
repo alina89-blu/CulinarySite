@@ -43,7 +43,7 @@ namespace CulinarySite.Bll.Services
             _culinaryChannelWriteRepository.Save();
         }
 
-        public IEnumerable<CulinaryChannelListDto> GetCulinaryChannelList(bool withRelated)
+        public IEnumerable<CulinaryChannelListDto> GetCulinaryChannelDetailList(bool withRelated)
         {
             IEnumerable<CulinaryChannel> culinaryChannels;
             IEnumerable<CulinaryChannelListDto> culinaryChannelListDtos;
@@ -61,6 +61,14 @@ namespace CulinarySite.Bll.Services
             culinaryChannelListDtos = culinaryChannels.Select(x => _mapper.Map<CulinaryChannelListDto>(x));
 
             return culinaryChannelListDtos;
+        }
+
+        public IEnumerable<CulinaryChannelDto> GetCulinaryChannelList()
+        {
+            IEnumerable<CulinaryChannel> culinaryChannels=_culinaryChannelReadOnlyRepository.GetItemList();
+            IEnumerable<CulinaryChannelDto> culinaryChannelDtos = culinaryChannels.Select(x => _mapper.Map<CulinaryChannelDto>(x));          
+
+            return culinaryChannelDtos;
         }
 
         public CulinaryChannelDetailDto GetCulinaryChannel(int id, bool withRelated)

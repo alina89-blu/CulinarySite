@@ -11,11 +11,11 @@
 .example-card {
   width: 400px;
   margin-bottom: 8px;
-  margin: 15px;
+  margin: 20px;
 }
 
 .text-display {
-  height: 80px;
+  height: 85px;
   overflow-y: hidden;
   text-overflow: ellipsis; /* Добавляем многоточие */
 }

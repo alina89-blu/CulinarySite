@@ -12,12 +12,18 @@
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Название</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <th mat-header-cell *matHeaderCellDef style="width: 200px">Название</th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        style="padding: 10px; text-align: left"
+      >
+        {{ element.name }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="servingsNumber">
-      <th mat-header-cell *matHeaderCellDef>Количество порций</th>
+      <th mat-header-cell *matHeaderCellDef style="width: 50px">Кол. порций</th>
       <td mat-cell *matCellDef="let element">{{ element.servingsNumber }}</td>
     </ng-container>
 
@@ -38,7 +44,13 @@
 
     <ng-container matColumnDef="dishCategory">
       <th mat-header-cell *matHeaderCellDef>Категория блюда</th>
-      <td mat-cell *matCellDef="let element">{{ element.dishCategory }}</td>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        style="padding: 10px; text-align: left"
+      >
+        {{ element.dishCategory }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="authorName">
@@ -47,8 +59,16 @@
     </ng-container>
 
     <ng-container matColumnDef="bookName">
-      <th mat-header-cell *matHeaderCellDef>Название книги</th>
-      <td mat-cell *matCellDef="let element">{{ element.bookName }}</td>
+      <th mat-header-cell *matHeaderCellDef style="width: 200px">
+        Название книги
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        style="padding: 10px; text-align: left"
+      >
+        {{ element.bookName }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">

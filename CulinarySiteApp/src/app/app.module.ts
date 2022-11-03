@@ -14,7 +14,6 @@ import { CookingStageService } from './services/cooking-stage.service';
 import { CulinaryChannelService } from './services/culinary-channel.service';
 import { DishService } from './services/dish.service';
 import { EpisodeService } from './services/episode.service';
-import { ImageService } from './services/image.service';
 import { IngredientService } from './services/ingredient.service';
 import { OrganicMatterService } from './services/organic-matter.service';
 import { RecipeService } from './services/recipe.service';
@@ -188,7 +187,6 @@ const appRoutes: Routes = [
     CulinaryChannelService,
     DishService,
     EpisodeService,
-    ImageService,
     IngredientService,
     OrganicMatterService,
     RecipeService,

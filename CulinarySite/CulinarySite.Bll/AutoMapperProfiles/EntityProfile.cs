@@ -86,6 +86,8 @@ namespace CulinarySite.Bll.AutoMapperProfiles
             CreateMap<CulinaryChannelListDto, CulinaryChannel>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CulinaryChannelId)).ReverseMap();
 
+            CreateMap<CulinaryChannelDto, CulinaryChannel>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CulinaryChannelId)).ReverseMap();
 
 
             CreateMap<CreateDishDto, Dish>().ReverseMap();
@@ -175,6 +177,10 @@ namespace CulinarySite.Bll.AutoMapperProfiles
             CreateMap<RecipeDto, Recipe>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeId)).ReverseMap();
 
+            CreateMap<DishRecipeDto, Recipe>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeId))
+                .ReverseMap();
+
 
 
             CreateMap<CreateRestaurantDto, Restaurant>().ReverseMap();
@@ -207,7 +213,6 @@ namespace CulinarySite.Bll.AutoMapperProfiles
 
             CreateMap<TelephoneDto, Telephone>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TelephoneId)).ReverseMap();
-
 
 
             CreateMap<CreateSubscriberDto, Subscriber>().ReverseMap();

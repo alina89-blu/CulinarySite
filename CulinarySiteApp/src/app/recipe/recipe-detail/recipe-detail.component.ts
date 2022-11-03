@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IRecipeDetailModel } from 'src/app/interfaces/recipe/recipe-detail-model.interface';
-import { ImageService } from 'src/app/services/image.service';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { RecipeDetailModel } from 'src/app/viewmodels/recipe/recipe-detail-model.class';
 
@@ -15,10 +14,8 @@ export class RecipeDetailComponent implements OnInit {
   id: number;
   recipeDetailModel: RecipeDetailModel = new RecipeDetailModel();
 
-  //  loaded: boolean = false;
   constructor(
     private recipeService: RecipeService,
-    private imageService: ImageService,
     activeRoute: ActivatedRoute,
     private http: HttpClient
   ) {
@@ -34,15 +31,5 @@ export class RecipeDetailComponent implements OnInit {
             (this.recipeDetailModel = new RecipeDetailModel(data))
         );
     }
-    //this.getRecipeImageList();
   }
-
-  /*public getRecipeImageList(): void {
-    this.imageService
-      .getRecipeImageList(true)
-      .subscribe(
-        (data: IRecipeImageListModel[]) =>
-          (this.images = data.map((x) => new RecipeImageListModel(x)))
-      );
-  }*/
 }

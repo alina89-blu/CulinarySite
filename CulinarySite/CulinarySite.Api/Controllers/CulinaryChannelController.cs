@@ -19,12 +19,21 @@ namespace CulinarySite.Api.Controllers
         }
 
         [HttpGet("{withRelated}")]
-        public IEnumerable<CulinaryChannelListModel> GetCulinaryChannelList(bool withRelated)
+        public IEnumerable<CulinaryChannelListModel> GetCulinaryChannelDetailList(bool withRelated)
         {
-            IEnumerable<CulinaryChannelListDto> culinaryChannelListDtos = _culinaryChannelService.GetCulinaryChannelList(withRelated);
+            IEnumerable<CulinaryChannelListDto> culinaryChannelListDtos = _culinaryChannelService.GetCulinaryChannelDetailList(withRelated);
             var culinaryChannelListModels = culinaryChannelListDtos.Select(x => _mapper.Map<CulinaryChannelListModel>(x));
            
             return culinaryChannelListModels;
+        }
+
+        [HttpGet]
+        public IEnumerable<CulinaryChannelModel> GetCulinaryChannelList()
+        {
+            IEnumerable<CulinaryChannelDto> culinaryChannelDtos = _culinaryChannelService.GetCulinaryChannelList();
+            var culinaryChannelModels = culinaryChannelDtos.Select(x => _mapper.Map<CulinaryChannelModel>(x));
+
+            return culinaryChannelModels;
         }
 
         [HttpGet("{id}/{withRelated}")]
