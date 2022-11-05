@@ -1,40 +1,7 @@
-<div class="A">
-  <h1>Рецепты от Джейми Оливера</h1>
-
-  <!--<div *ngFor="let recipe of dishDetailModel.recipes; let idx = index">
-    <a [routerLink]="['/recipe', recipe.recipeId]">
-      <h2>{{ recipe.name }}</h2>
-    </a>
-    <div>
-      <img
-        src="{{ recipe.imageUrl }}"
-        alt=""
-        style="float: left; margin: 0px 15px 0px 0px"
-        width="150px"
-        height="170px"
-      />
-    </div>
-    <div>
-      <p>{{ recipe.content }}</p>
-    </div>
-    <hr />
-  </div>-->
-
-  <!--<img src="{{ episodeDetailModel.imageUrl }}" alt="" /> -->
-
-  <!--  <video controls src="{{ episodeDetailModel.videoUrl }}"></video>
-</div> -->
-
-  <!--<iframe
-  width="1280"
-  height="720"
-  src="https://www.youtube.com/embed/iGAn-KcGhLU"
-  title="ЛЕГКИЕ И БЫСТРЫЕ РЕЦЕПТЫ С ДЖЕЙМИ ОЛИВЕРОМ"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen
-></iframe>
--->
-  <iframe width="560" height="315" src="{{ episodeDetailModel.videoUrl }}">
-  </iframe>
+<div class="set-padding">
+  <h3>Кулинарный канал Джейми. {{ episodeDetailModel.name }}</h3>
+  <p>
+    <img src="{{ episodeDetailModel.imageUrl }}" alt="" />
+  </p>
+  <h3>Видео: Кулинарный канал Джейми Оливера. {{ episodeDetailModel.name }}</h3>
 </div>

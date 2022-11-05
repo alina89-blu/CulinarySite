@@ -26,3 +26,7 @@ img {
 button {
   margin: 10px;
 }
+
+button:hover {
+  color: green;
+}

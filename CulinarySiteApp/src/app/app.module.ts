@@ -69,6 +69,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { EpisodeDetailComponent } from './episode/episode-detail/episode-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EpisodesLibraryComponent } from './episodes-library/episodes-library.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -106,6 +107,7 @@ const appRoutes: Routes = [
   { path: 'recipeLibrary', component: RecipeLibraryComponent },
   { path: 'bookLibrary', component: BookLibraryComponent },
   { path: 'restaurantLibrary', component: RestaurantLibraryComponent },
+  // { path: 'episodesLibrary', component: EpisodesLibraryComponent },
   { path: 'book/:id', component: BookDetailComponent },
   { path: 'dish/:id', component: DishDetailComponent },
   { path: 'telephone', component: TelephoneListComponent },
@@ -167,6 +169,7 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     EpisodeDetailComponent,
+    EpisodesLibraryComponent,
   ],
   imports: [
     BrowserModule,

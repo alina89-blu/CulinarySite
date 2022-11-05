@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Book;
+using CulinarySite.Common.Exceptions;
 using CulinarySite.Common.Pagination;
 using CulinarySite.Common.ViewModels.Book;
 using CulinarySite.Dal.Interfaces;
@@ -27,6 +28,13 @@ namespace CulinarySite.Bll.Services
 
         public void CreateBook(CreateBookDto createBookDto)
         {
+            var bookNames = _bookReadOnlyRepository.GetItemList().Select(x => x.Name);
+
+            if (bookNames.Contains(createBookDto.Name))
+            {
+                throw new ValidationException($"The book with name:{createBookDto.Name} already exists.");
+            }
+
             Book book = _mapper.Map<Book>(createBookDto);
 
             _bookWriteRepository.Create(book);

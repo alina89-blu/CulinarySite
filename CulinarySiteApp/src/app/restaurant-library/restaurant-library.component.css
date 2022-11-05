@@ -4,7 +4,8 @@
 .example-card {
   width: 400px;
   margin-bottom: 8px;
-  margin: 15px;
+  margin: 15px 15px 15px 75px;
+  background-color: #98ff98;
 }
 
 .text-align-center {

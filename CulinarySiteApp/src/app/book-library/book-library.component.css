@@ -22,6 +22,7 @@
 
 mat-card {
   background-color: white;
+  border: dotted 2px greenyellow;
 }
 
 a {
@@ -30,5 +31,9 @@ a {
 }
 
 img {
-  border-radius: 5px;
+  border-radius: 3px;
+}
+
+a:hover {
+  color: green;
 }

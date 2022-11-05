@@ -21,16 +21,19 @@
     <button mat-menu-item>
       <a id="a" [routerLink]="['/cookingStage']">Этапы приготовления</a>
     </button>
-    <button mat-menu-item>
+
+    <!--   <button mat-menu-item>
       <a id="a" [routerLink]="['/culinaryChannel']">Кулинарные каналы</a>
     </button>
+-->
     <button mat-menu-item>
       <a id="a" [routerLink]="['/dish']">Блюда</a>
     </button>
-    <button mat-menu-item>
+
+    <!--    <button mat-menu-item>
       <a id="a" [routerLink]="['/episode']">Эпизоды</a>
     </button>
-
+-->
     <button mat-menu-item>
       <a id="a" [routerLink]="['/telephone']">Телефоны</a>
     </button>
@@ -42,6 +45,12 @@
   <span><a mat-button [routerLink]="['/bookLibrary']">КНИГИ</a></span>
 
   <span><a mat-button [routerLink]="['/restaurantLibrary']">РЕСТОРАНЫ</a></span>
+
+  <!--  <span
+    ><a mat-button [routerLink]="['/episodesLibrary']"
+      >КУЛИНАРНЫЙ КАНАЛ</a
+    ></span
+  >-->
 
   <span *ngIf="!isAuthenticated()">
     <a id="a" mat-flat-button [routerLink]="['/login']">Вход</a>

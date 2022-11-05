@@ -23,3 +23,15 @@ th {
 .Pad {
   padding: 50px 100px 50px 250px;
 }
+
+a:hover {
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #addfff;
+}
+
+button:hover {
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #ffdfdd;
+}
