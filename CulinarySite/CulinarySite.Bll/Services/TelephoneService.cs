@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Telephone;
+using CulinarySite.Common.Exceptions;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
 using System.Collections.Generic;
@@ -25,6 +26,13 @@ namespace CulinarySite.Bll.Services
 
         public void CreateTelephone(CreateTelephoneDto createTelephoneDto)
         {
+            var telephoneNames = _telephoneReadOnlyRepository.GetItemList().Select(x => x.Number);
+
+            if (telephoneNames.Contains(createTelephoneDto.Number))
+            {
+                throw new ValidationException($"The telephone number:{createTelephoneDto.Number} already exists.");
+            }
+
             Telephone telephone = _mapper.Map<Telephone>(createTelephoneDto);
 
             _telephoneWriteRepository.Create(telephone);

@@ -5,6 +5,7 @@ using CulinarySite.Common.Dtos.Author;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
 using System.Linq;
+using CulinarySite.Common.Exceptions;
 
 namespace CulinarySite.Bll.Services
 {
@@ -25,6 +26,13 @@ namespace CulinarySite.Bll.Services
 
         public void CreateAuthor(CreateAuthorDto createAuthorDto)
         {
+            var authorNames = _authorReadOnlyRepository.GetItemList().Select(x => x.Name);
+
+            if (authorNames.Contains(createAuthorDto.Name))
+            {
+                throw new ValidationException($"The author with name:{createAuthorDto.Name} already exists.");
+            }
+
             Author author = _mapper.Map<Author>(createAuthorDto);
 
             _authorWriteRepository.Create(author);

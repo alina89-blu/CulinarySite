@@ -5,6 +5,7 @@ using CulinarySite.Common.Dtos.OrganicMatter;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
 using System.Linq;
+using CulinarySite.Common.Exceptions;
 
 namespace CulinarySite.Bll.Services
 {
@@ -25,6 +26,13 @@ namespace CulinarySite.Bll.Services
 
         public void CreateOrganicMatter(CreateOrganicMatterDto createOrganicMatterDto)
         {
+            var organicMatterNames = _organicMatterReadOnlyRepository.GetItemList().Select(x => x.Name);
+
+            if (organicMatterNames.Contains(createOrganicMatterDto.Name))
+            {
+                throw new ValidationException($"The organic matter with name:{createOrganicMatterDto.Name} already exists.");
+            }
+
             OrganicMatter organicMatter = _mapper.Map<OrganicMatter>(createOrganicMatterDto);
 
             _organicMatterWriteRepository.Create(organicMatter);

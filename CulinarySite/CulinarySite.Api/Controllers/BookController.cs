@@ -6,9 +6,7 @@ using CulinarySite.Common.ViewModels.Book;
 using CulinarySite.Common.Dtos.Book;
 using System.Linq;
 using CulinarySite.Common.Pagination;
-using System.Threading.Tasks;
-using CulinarySite.Domain.Entities;
-using Newtonsoft.Json;
+
 
 namespace CulinarySite.Api.Controllers
 {

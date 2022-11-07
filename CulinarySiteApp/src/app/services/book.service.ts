@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { IBookDetailListModel } from '../interfaces/book/book-detail-list-model.interface';
 import { IBookDetailModel } from '../interfaces/book/book-detail-model.interface';
 import { CreateBookModel } from '../viewmodels/book/create-book-model.class';
@@ -68,4 +68,17 @@ export class BookService {
 
     return this.http.get<IBookDetailModel>(this.url, { params });
   }*/
+
+  public getPagedBooks(
+    pageNumber = 0,
+    pageSize = 3
+  ): Observable<IBookDetailListModel[]> {
+    let params = new HttpParams();
+    params = params.set('pageNumber', pageNumber.toString());
+    params = params.set('pageSize', pageSize.toString());
+
+    return this.http.get<IBookDetailListModel[]>(this.url + '/' + 'paged', {
+      params,
+    });
+  }
 }

@@ -1,9 +1,12 @@
 ﻿
 
+using System.ComponentModel.DataAnnotations;
+
 namespace CulinarySite.Common.ViewModels.Author
 {
     public class CreateUpdateAuthorBaseModel
     {
-        public string Name { get; set; }       
+        [Required]
+        public string Name { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using CulinarySite.Common.Dtos.CulinaryChannel;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
 using System.Linq;
+using CulinarySite.Common.Exceptions;
 
 namespace CulinarySite.Bll.Services
 {
@@ -25,7 +26,15 @@ namespace CulinarySite.Bll.Services
 
         public void CreateCulinaryChannel(CreateCulinaryChannelDto createCulinaryChannelDto)
         {
+            var culinaryChannelNames = _culinaryChannelReadOnlyRepository.GetItemList().Select(x => x.Name);
+
+            if (culinaryChannelNames.Contains(createCulinaryChannelDto.Name))
+            {
+                throw new ValidationException($"The culinary channel with name:{createCulinaryChannelDto.Name} already exists.");
+            }
+
             CulinaryChannel culinaryChannel = _mapper.Map<CulinaryChannel>(createCulinaryChannelDto);
+
             _culinaryChannelWriteRepository.Create(culinaryChannel);
             _culinaryChannelWriteRepository.Save();
         }

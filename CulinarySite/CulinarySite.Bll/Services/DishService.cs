@@ -5,6 +5,7 @@ using CulinarySite.Common.Dtos.Dish;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
 using System.Linq;
+using CulinarySite.Common.Exceptions;
 
 namespace CulinarySite.Bll.Services
 {
@@ -25,6 +26,13 @@ namespace CulinarySite.Bll.Services
 
         public void CreateDish(CreateDishDto createDishDto)
         {
+            var dishCategories = _dishReadOnlyRepository.GetItemList().Select(x => x.Category);
+
+            if (dishCategories.Contains(createDishDto.Category))
+            {
+                throw new ValidationException($"The dish category:{createDishDto.Category} already exists.");
+            }
+
             Dish dish = _mapper.Map<Dish>(createDishDto);
 
             _dishWriteRepository.Create(dish);

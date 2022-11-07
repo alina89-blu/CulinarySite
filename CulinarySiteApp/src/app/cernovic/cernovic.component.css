@@ -10,3 +10,7 @@ table {
   flex-direction: column;
   align-items: center;
 }
+
+.C {
+  padding: 50px 100px 50px 250px;
+}

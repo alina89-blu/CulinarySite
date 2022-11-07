@@ -2,7 +2,7 @@
   color: green;
 }
 
-img {
+#img {
   border: 3px solid green; /* Ширина, вид и цвет рамки */
 }
 
@@ -12,4 +12,26 @@ img {
 
 .Pad {
   padding: 50px 100px 50px 250px;
+}
+
+.block {
+  background-color: white;
+  height: 200px;
+  border: 2px dotted green;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+a:hover {
+  color: green;
+}
+
+img {
+  border-radius: 2px;
 }

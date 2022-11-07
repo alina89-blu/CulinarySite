@@ -70,7 +70,7 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
 
       servingsNumber: new FormControl('', [
         Validators.required,
-        Validators.min(3),
+        Validators.min(1),
       ]),
       imageUrl: new FormControl('', Validators.required),
       cookingTime: new FormControl('', Validators.required),

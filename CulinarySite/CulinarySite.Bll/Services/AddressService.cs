@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Address;
+using CulinarySite.Common.Exceptions;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
 using System.Collections.Generic;
@@ -25,6 +26,13 @@ namespace CulinarySite.Bll.Services
 
         public void CreateAddress(CreateAddressDto createAddressDto)
         {
+            var addressNames = _addressReadOnlyRepository.GetItemList().Select(x => x.Name);
+
+            if (addressNames.Contains(createAddressDto.Name))
+            {
+                throw new ValidationException($"The address with name:{createAddressDto.Name} already exists.");
+            }
+
             Address address = _mapper.Map<Address>(createAddressDto);
 
             _addressWriteRepository.Create(address);

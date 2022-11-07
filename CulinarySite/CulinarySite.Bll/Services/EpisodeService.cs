@@ -5,6 +5,7 @@ using CulinarySite.Common.Dtos.Episode;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
 using System.Linq;
+using CulinarySite.Common.Exceptions;
 
 namespace CulinarySite.Bll.Services
 {
@@ -25,6 +26,13 @@ namespace CulinarySite.Bll.Services
 
         public void CreateEpisode(CreateEpisodeDto createEpisodeDto)
         {
+            var episodeNames = _episodeReadOnlyRepository.GetItemList().Select(x => x.Name);
+
+            if (episodeNames.Contains(createEpisodeDto.Name))
+            {
+                throw new ValidationException($"The episode with name:{createEpisodeDto.Name} already exists.");
+            }
+
             Episode episode = _mapper.Map<Episode>(createEpisodeDto);
 
             _episodeWriteRepository.Create(episode);

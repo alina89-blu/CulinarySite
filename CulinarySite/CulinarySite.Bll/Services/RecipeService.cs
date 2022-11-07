@@ -5,6 +5,7 @@ using CulinarySite.Common.Dtos.Recipe;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
 using System.Linq;
+using CulinarySite.Common.Exceptions;
 
 namespace CulinarySite.Bll.Services
 {
@@ -25,6 +26,13 @@ namespace CulinarySite.Bll.Services
 
         public void CreateRecipe(CreateRecipeDto createRecipeDto)
         {
+            var recipeNames = _recipeReadOnlyRepository.GetItemList().Select(x => x.Name);
+
+            if (recipeNames.Contains(createRecipeDto.Name))
+            {
+                throw new ValidationException($"The recipe with name:{createRecipeDto.Name} already exists.");
+            }
+
             Recipe recipe = _mapper.Map<Recipe>(createRecipeDto);
 
             _recipeWriteRepository.Create(recipe);
