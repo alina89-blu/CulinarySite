@@ -37,3 +37,12 @@ img {
 a:hover {
   color: green;
 }
+
+#a {
+  text-decoration: none;
+  color: green;
+}
+
+#a:hover {
+  color: #ff4081;
+}

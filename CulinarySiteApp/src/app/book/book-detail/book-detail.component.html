@@ -1,5 +1,16 @@
 <div class="Pad" style="width: 900px">
-  <h2>{{ bookDetailModel.name }}</h2>
+  <div style="font-size: 14px">
+    <span><a id="a" [routerLink]="['']">Главная >> </a> </span>
+    <span>
+      <a id="a" [routerLink]="['/bookLibrary']">Книги >> </a>
+    </span>
+    <span>
+      {{ bookDetailModel.name }}
+    </span>
+  </div>
+
+  <br />
+  <h2 style="text-align: right">{{ bookDetailModel.name }}</h2>
   <br />
   <img
     id="img"

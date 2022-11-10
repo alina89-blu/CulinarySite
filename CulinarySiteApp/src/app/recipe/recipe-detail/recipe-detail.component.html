@@ -1,59 +1,50 @@
 <div class="Pad">
+  <div style="font-size: 14px">
+    <span><a [routerLink]="['']">Главная >> </a> </span>
+    <span *ngFor="let dish of dishes">
+      <span *ngIf="dish.dishId == recipeDetailModel.dishId">
+        <a [routerLink]="['/dish', dish.dishId]">{{ dish.category }} >> </a>
+      </span>
+    </span>
+    <span>
+      {{ recipeDetailModel.name }}
+    </span>
+  </div>
+
+  <br />
+
   <h2 class="B">{{ recipeDetailModel.name }}</h2>
 
   <br />
-
-  <mat-icon>restaurant</mat-icon>
-  <mat-icon>watch_later</mat-icon>
-  <mat-icon>equalizer</mat-icon>
-
-  <img
-    id="img"
-    src="{{ recipeDetailModel.imageUrl }}"
-    alt="not found"
-    style="float: left; margin: 15px 15px 0px 0px"
-  />
-
-  <!-- <p>
-    <img
-      class="img-marg"
-      src="https://jaymi-oliver.ru/images/vilka.png"
-      width="50"
-      height="50"
-      alt=""
-    />
+  <div style="height: 430px">
+    <mat-icon>restaurant</mat-icon>
+    <mat-icon>watch_later</mat-icon>
+    <mat-icon>equalizer</mat-icon>
 
     <img
-      class="img-marg"
-      src="https://jaymi-oliver.ru/images/chasi.png"
-      alt=""
-      width="50"
-      height="50"
+      id="img"
+      src="{{ recipeDetailModel.imageUrl }}"
+      alt="not found"
+      style="
+        float: left;
+        margin: 15px 15px 0px 0px;
+        width: 308px;
+        height: 412px;
+      "
     />
 
-    <img
-      class="img-marg"
-      src="https://jaymi-oliver.ru/images/slogno.png"
-      alt=""
-      width="50"
-      height="50"
-    />
-  </p>-->
-  <p>
-    На {{ recipeDetailModel.servingsNumber }} порций/
-    {{ recipeDetailModel.cookingTime | date: "HH:mm" }} минут/
-    {{ recipeDetailModel.difficultyLevel }}
-  </p>
-  <div>
-    <p class="line-height">
-      <b> {{ recipeDetailModel.content }}</b>
+    <p>
+      На {{ recipeDetailModel.servingsNumber }} порций/
+      {{ recipeDetailModel.cookingTime | date: "HH:mm" }} минут/
+      {{ recipeDetailModel.difficultyLevel }}
     </p>
+    <div>
+      <p class="line-height">
+        <b> {{ recipeDetailModel.content }}</b>
+      </p>
+    </div>
   </div>
   <br />
-  <br />
-  <br />
-  <br />
-
   <div>
     <h2 class="color-green"><em> Ингредиенты </em></h2>
 

@@ -38,3 +38,12 @@ mat-icon {
 hr.new4 {
   border: 2px dotted green;
 }
+
+a {
+  text-decoration: none;
+  color: green;
+}
+
+a:hover {
+  color: #ff4081;
+}

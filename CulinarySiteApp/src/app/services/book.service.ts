@@ -60,18 +60,9 @@ export class BookService {
     );
   }
 
-  /* public getBook1(id: number): Observable<IBookDetailModel> {
-    let params = new HttpParams();
-    if (id) {
-      params = params.set('getBook', id);
-    }
-
-    return this.http.get<IBookDetailModel>(this.url, { params });
-  }*/
-
   public getPagedBooks(
-    pageNumber = 0,
-    pageSize = 3
+    pageNumber: number = 0,
+    pageSize: number = 3
   ): Observable<IBookDetailListModel[]> {
     let params = new HttpParams();
     params = params.set('pageNumber', pageNumber.toString());

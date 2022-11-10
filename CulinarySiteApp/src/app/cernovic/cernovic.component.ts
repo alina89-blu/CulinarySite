@@ -1,14 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
 import { tap } from 'rxjs';
-import { IBookDetailListModel } from '../interfaces/book/book-detail-list-model.interface';
 import { BookService } from '../services/book.service';
-import { CoursesService } from '../services/courses.service';
-import { LessonsDataSource } from '../services/lessonsDataSource .class';
-import { BookDetailListModel } from '../viewmodels/book/book-detail-list-model.class';
+import { BooksDataSource } from '../services/booksDataSource.class';
 
 @Component({
   selector: 'app-cernovic',
@@ -16,107 +10,35 @@ import { BookDetailListModel } from '../viewmodels/book/book-detail-list-model.c
   styleUrls: ['./cernovic.component.css'],
 })
 export class CernovicComponent implements AfterViewInit, OnInit {
-  /* constructor(private bookService: BookService) {}
-
-  displayedColumns: string[] = [
-    'code',
-    'name',
-    'year',
-    'author',
-    'action',
-    
-  ];
-  dataSource: MatTableDataSource<IBookDetailListModel>;
-  public books: BookDetailListModel[];
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  public ngOnInit(): void {
-    this.getBookDetailList();
-  }
-
-  public deleteBook(id: number) {
-    this.bookService.deleteBook(id).subscribe(() => this.getBookDetailList());
-  }
-
-  public getBookDetailList(): void {
-    this.bookService
-      .getBookDetailList(true)
-      .subscribe((data: IBookDetailListModel[]) => {
-        this.books = data.map((x) => new BookDetailListModel(x));
-        this.dataSource = new MatTableDataSource<IBookDetailListModel>(
-          this.books
-        );
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      });
-  }
-
-  FilterChange(event: Event) {
-    const filvalue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filvalue;
-  }
-  // Misha
-  public totalRows = 0;
-  public pageSize = 5;
-  public currentPage = 0;
-  public pageSizeOptions: number[] = [5, 10, 25, 100];
-
-  public pageChanged(event: PageEvent) {
-    console.log({ event });
-    this.pageSize = event.pageSize;
-    this.currentPage = event.pageIndex;
-    
-  }*/
-
-  /* dataSource: LessonsDataSource;
-  displayedColumns = ['code', 'name', 'year', 'author', 'action'];
-
-  constructor(private coursesService: CoursesService) {}
-
-  ngOnInit() {
-    this.dataSource = new LessonsDataSource(this.coursesService);
-    this.dataSource.loadLessons(1);
-  }
-
-  public totalRows = 0;
-  public pageSize = 5;
-  public currentPage = 0;
-  public pageSizeOptions: number[] = [3, 5, 10, 25];*/
-  public totalRows = 0;
-  public pageSize = 5;
-  public currentPage = 0;
+  public totalRows: number = 0;
+  public pageSize: number = 5;
+  public currentPage: number = 0;
   public pageSizeOptions: number[] = [3, 5, 10, 25];
 
-  //course: BookDetailListModel = new BookDetailListModel();
-  dataSource: LessonsDataSource;
-  displayedColumns = ['code', 'name', 'year', 'author'];
+  dataSource: BooksDataSource;
+  displayedColumns: string[] = ['number', 'name', 'year', 'author', 'action'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(
-    private coursesService: CoursesService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private bookService: BookService) {}
 
-  ngOnInit() {
-    // this.course = this.route.snapshot.data['course'];
-    this.dataSource = new LessonsDataSource(this.coursesService);
-    //this.dataSource.loadLessons(this.course.bookId, '', 'asc', 0, 3);
-    this.dataSource.loadLessons('', 'asc', 0, 3);
+  public ngOnInit(): void {
+    this.dataSource = new BooksDataSource(this.bookService);
+    this.dataSource.loadBooks(0, 3);
   }
 
-  ngAfterViewInit() {
-    this.paginator.page.pipe(tap(() => this.loadLessonsPage())).subscribe();
+  public ngAfterViewInit(): void {
+    this.paginator.page.pipe(tap(() => this.loadBooksPage())).subscribe();
   }
 
-  loadLessonsPage() {
-    this.dataSource.loadLessons(
-      '',
-      'asc',
+  public loadBooksPage(): void {
+    this.dataSource.loadBooks(
       this.paginator.pageIndex,
       this.paginator.pageSize
     );
+  }
+
+  public deleteBook(id: number) {
+    this.bookService.deleteBook(id).subscribe(() => this.loadBooksPage());
   }
 }

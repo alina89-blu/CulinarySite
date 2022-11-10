@@ -67,7 +67,6 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
   ) {
     this.myForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-
       servingsNumber: new FormControl('', [
         Validators.required,
         Validators.min(1),
@@ -82,16 +81,16 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
 
       ingredients: new FormArray([
         new FormGroup({
-          name: new FormControl('', Validators.required),
-          unit: new FormControl('', Validators.required),
-          quantity: new FormControl('', Validators.required),
+          ingredientName: new FormControl('', Validators.required),
+          ingredientUnit: new FormControl('', Validators.required),
+          ingredientQuantity: new FormControl('', Validators.required),
         }),
       ]),
       organicMatters: new FormArray([
         new FormGroup({
-          name: new FormControl('', Validators.required),
-          unit: new FormControl('', Validators.required),
-          quantity: new FormControl('', Validators.required),
+          organicMatterName: new FormControl('', Validators.required),
+          organicMatterUnit: new FormControl('', Validators.required),
+          organicMatterQuantity: new FormControl('', Validators.required),
         }),
       ]),
     });
@@ -125,18 +124,18 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
 
   public createNewIngredient(): FormGroup {
     const group = new FormGroup({
-      name: new FormControl('', Validators.required),
-      unit: new FormControl('', Validators.required),
-      quantity: new FormControl('', Validators.required),
+      ingredientName: new FormControl('', Validators.required),
+      ingredientUnit: new FormControl('', Validators.required),
+      ingredientQuantity: new FormControl('', Validators.required),
     });
     return group;
   }
 
   public createNewOrganicMatter(): FormGroup {
     const group = new FormGroup({
-      name: new FormControl('', Validators.required),
-      unit: new FormControl('', Validators.required),
-      quantity: new FormControl('', Validators.required),
+      organicMatterName: new FormControl('', Validators.required),
+      organicMatterUnit: new FormControl('', Validators.required),
+      organicMatterQuantity: new FormControl('', Validators.required),
     });
     return group;
   }
@@ -186,6 +185,10 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
   public deleteIngredient(index: number) {
     this.getIngredientsFormsControls().removeAt(index);
   }
+
+  /*getIngredientsFormsControls()
+                .controls[i].get('ingredientName')
+                ?.hasError('required')*/
 
   public deleteOrganicMatter(index: number) {
     this.getOrganicMattersFormsControls().removeAt(index);

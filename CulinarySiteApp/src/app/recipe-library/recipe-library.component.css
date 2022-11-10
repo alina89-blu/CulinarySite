@@ -46,3 +46,11 @@ h3:hover {
   text-decoration: none;
   font-size: larger;
 }
+a {
+  text-decoration: none;
+  color: green;
+}
+
+a:hover {
+  color: #ff4081;
+}

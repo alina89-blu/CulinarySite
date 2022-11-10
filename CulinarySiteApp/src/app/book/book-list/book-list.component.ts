@@ -15,20 +15,13 @@ import { BookDetailListModel } from 'src/app/viewmodels/book/book-detail-list-mo
 export class BookListComponent implements AfterViewInit, OnInit {
   constructor(private bookService: BookService) {}
 
-  displayedColumns: string[] = [
-    'code',
-    'name',
-    'year',
-    'author',
-    'action',
-    /* 'description',*/
-  ];
+  displayedColumns: string[] = ['code', 'name', 'year', 'author', 'action']; //
   dataSource: MatTableDataSource<IBookDetailListModel>;
-  //public books: BookDetailListModel[];
+
   public books: BookDetailListModel[] = [];
 
   //@ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator; //
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -63,16 +56,15 @@ export class BookListComponent implements AfterViewInit, OnInit {
   }
   // Misha
   // public totalRows = 0;
-  public totalRows = this.books.length;
-  public pageSize = 5;
-  public currentPage = 0;
+  public totalRows: number = 0;
+  public pageSize: number = 5;
+  public currentPage: number = 0;
   public pageSizeOptions: number[] = [3, 5, 10, 25];
 
   public pageChanged(event: PageEvent) {
     console.log({ event });
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
-    //this.loadData();
   }
   //
 
@@ -88,10 +80,10 @@ export class BookListComponent implements AfterViewInit, OnInit {
   }
 
   public ngAfterViewInit() {
-    this.paginator.page.pipe(tap(() => this.loadBooksPage())).subscribe();
+    this.paginator.page.pipe(tap(() => this.loadPagedBooks())).subscribe();
   }
 
-  public loadBooksPage(): void {
+  public loadPagedBooks(): void {
     this.getPagedBooks(this.currentPage, this.pageSize);
   }
 }

@@ -1,4 +1,11 @@
 <div class="A">
+  <div style="font-size: 14px">
+    <span><a id="a" [routerLink]="['']">Главная >> </a> </span>
+
+    <span> Рестораны </span>
+  </div>
+
+  <br />
   <h2>Рестораны Джейми Оливера в России</h2>
   <br />
   <div>
@@ -19,60 +26,6 @@
     необходимый из предложенных ниже.
   </div>
   <br />
-  <!--  <div>
-    <img
-      src="https://tokyostreet.ru/wp-content/uploads/vse-lyubyat-dzhejmi-olivera-sekret-populyarnosti-znamenitogo-shefa-foto-4.jpg"
-      alt="not found"
-      style="float: left; margin: 20px 15px 0px 0px"
-    />
-  </div>-->
-
-  <!--<img
-    src="https://hollywoodlifenews.com/wp-content/uploads/2019/05/718A2F1A-B202-4630-89E8-BA94045B8662.jpeg"
-    alt="not found"
-    style="float: left; margin: 0px 15px 0px 0px"
-  />-->
-
-  <!--  <div *ngFor="let restaurant of restaurants">
-    <h2>{{ restaurant.name }}</h2>
-    <hr />
-    <p><b>АДРЕС:</b> {{ restaurant.addressName }}</p>
-    <p></p>
-    <b><p>ТЕЛЕФОНЫ</p></b>
-    <div *ngFor="let telephone of restaurant.telephones">
-      <p>{{ telephone.number }}</p>
-    </div>
-  </div>-->
-
-  <!--   <div style="display: flex; flex-wrap: wrap; flex-basis: 33.333333%">
-    <mat-card
-      class="example-card"
-      *ngFor="let restaurant of restaurants; let idx = index"
-    >
-      <mat-card-title-group>
-        <mat-card-title class="text-align-size">
-          {{ restaurant.name }}
-        </mat-card-title>
-        <mat-card-subtitle> {{ restaurant.addressName }}</mat-card-subtitle>
-        <div *ngIf="idx == 0">
-          <img
-            mat-card-image
-            src="https://hollywoodlifenews.com/wp-content/uploads/2019/05/718A2F1A-B202-4630-89E8-BA94045B8662.jpeg"
-          />
-        </div>
-        <div *ngIf="idx == 1">
-          <img
-            mat-card-image
-            src="https://tokyostreet.ru/wp-content/uploads/vse-lyubyat-dzhejmi-olivera-sekret-populyarnosti-znamenitogo-shefa-foto-4.jpg"
-          />
-        </div>
-      </mat-card-title-group>
-      <p>ТЕЛЕФОНЫ</p>
-      <mat-card-content *ngFor="let telephone of restaurant.telephones">
-        <p class="text-display">{{ telephone.number }}</p>
-      </mat-card-content>
-    </mat-card>
-  </div>-->
 
   <div style="display: flex; flex-wrap: wrap; flex-basis: 33.333333%">
     <mat-card
@@ -115,10 +68,14 @@
   <br />
   <p>
     Перейти на официальный сайт
-    <a href="https://jaymi-oliver.ru/spb/">Джеймис Италиан Петербург</a>
+    <a target="blank" href="https://jaymi-oliver.ru/spb/"
+      >Джеймис Италиан Петербург</a
+    >
   </p>
   <p>
     Перейти на официальный сайт
-    <a href="https://jaymi-oliver.ru/msk/">Джеймис Италиан Москва</a>
+    <a target="blank" href="https://jaymi-oliver.ru/msk/"
+      >Джеймис Италиан Москва</a
+    >
   </p>
 </div>

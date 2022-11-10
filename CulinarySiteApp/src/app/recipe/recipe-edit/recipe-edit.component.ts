@@ -31,6 +31,7 @@ import { AuthorListModel } from 'src/app/viewmodels/author/author-list-model.cla
 import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.interface';
 import { DishModel } from 'src/app/viewmodels/dish/dish-model.class';
 import { IDishModel } from 'src/app/interfaces/dish/dish-model.interface';
+import { IUpdateIngredientModel } from 'src/app/interfaces/ingredient/update-ingredient-model.interface';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -90,13 +91,13 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
       authorId: new FormControl('', Validators.required),
       bookId: new FormControl('', Validators.required),
       dishId: new FormControl('', Validators.required),
-      /*ingredients: new FormArray([
+      ingredients: new FormArray([
         new FormGroup({
           name: new FormControl('', Validators.required),
           unit: new FormControl('', Validators.required),
           quantity: new FormControl('', Validators.required),
         }),
-      ]),*/
+      ]),
     });
     //   this.updateRecipeModel.ingredients = [new CreateIngredientModel()];
   }
@@ -108,10 +109,12 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
     if (this.id) {
       this.recipeService
         .getRecipe(this.id, true)
-        .subscribe(
-          (data: IRecipeDetailModel) =>
-            (this.updateRecipeModel = new UpdateRecipeModel(data))
-        );
+        .subscribe((data: IRecipeDetailModel) => {
+          this.updateRecipeModel = new UpdateRecipeModel(data);
+          this.myForm.setValue({
+            ingredients: this.updateRecipeModel.ingredients,
+          });
+        });
     }
     this.getDishList();
 
@@ -121,15 +124,15 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
 
     /*  this.myForm.patchValue({
       ingredients: this.updateRecipeModel.ingredients,
-    });
+    });*/
 
-    this.myForm.setControl(
+    /* this.myForm.setControl(
       'ingredients',
       this.setExistingBooks(this.updateRecipeModel.ingredients)
     );*/
   }
 
-  setExistingBooks(ingredients: ICreateIngredientModel[]): FormArray {
+  setExistingBooks(ingredients: IUpdateIngredientModel[]): FormArray {
     const formArray = new FormArray([]);
     ingredients.forEach((s) => {
       formArray.push(
