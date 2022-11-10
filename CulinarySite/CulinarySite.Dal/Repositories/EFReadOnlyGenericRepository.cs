@@ -30,6 +30,11 @@ namespace CulinarySite.Dal.Repositories
             return Include(includeProperties).ToList();
         }
 
+        public IQueryable<TEntity> GetItemListQueryableWithInclude(params Expression<Func<TEntity, object>>[] includeProperties)
+        {
+            return Include(includeProperties);
+        }
+
         public TEntity GetItem(int id)
         {
             TEntity item = _dbSet.AsNoTracking().FirstOrDefault(x => x.Id == id);
@@ -59,19 +64,22 @@ namespace CulinarySite.Dal.Repositories
             IQueryable<TEntity> query = _dbSet.AsNoTracking();
             return includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }
-
-        public int GetNumberOfItems()
+     
+        public PagedList<TEntity> GetPagedItems(IQueryable<TEntity> query, PagingParameters pagingParameters, Dictionary<string, Expression<Func<TEntity, object>>> orderMappings)
         {
-            return _dbSet.Count();
-        }
+            if (pagingParameters.ActiveColumn != null && orderMappings.ContainsKey(pagingParameters.ActiveColumn))
+            {
+                if (pagingParameters.IsAscending)
+                {
+                    query = query.OrderBy(orderMappings[pagingParameters.ActiveColumn]);
+                }
+                else
+                {
+                    query = query.OrderByDescending(orderMappings[pagingParameters.ActiveColumn]);
+                }
+            }
 
-        public IEnumerable<TEntity> GetPagedItems(PagingParameters pagingParameters)
-        {
-            return GetItemListWithInclude()
-                .OrderBy(on => on.Id)
-                .Skip((pagingParameters.PageNumber - 1) * pagingParameters.PageSize)
-                .Take(pagingParameters.PageSize)
-                .ToList();
+            return new PagedList<TEntity>(query, pagingParameters);
         }
 
     }

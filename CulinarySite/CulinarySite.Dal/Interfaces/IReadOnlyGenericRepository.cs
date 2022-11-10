@@ -2,6 +2,7 @@
 using CulinarySite.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace CulinarySite.Dal.Interfaces
@@ -10,10 +11,9 @@ namespace CulinarySite.Dal.Interfaces
     {
         IEnumerable<TEntity> GetItemList();
         IEnumerable<TEntity> GetItemListWithInclude(params Expression<Func<TEntity, object>>[] includeProperties);
+        IQueryable<TEntity> GetItemListQueryableWithInclude(params Expression<Func<TEntity, object>>[] includeProperties);
         TEntity GetItem(int id);
         TEntity GetItemWithInclude(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
-        int GetNumberOfItems();
-        IEnumerable<TEntity> GetPagedItems(PagingParameters pagingParameters);
-
+        PagedList<TEntity> GetPagedItems(IQueryable<TEntity> query, PagingParameters pagingParameters, Dictionary<string, Expression<Func<TEntity, object>>> orderMappings);
     }
 }

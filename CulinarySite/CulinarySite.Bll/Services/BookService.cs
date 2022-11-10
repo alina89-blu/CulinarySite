@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using AutoMapper;
 using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Book;
@@ -16,10 +18,19 @@ namespace CulinarySite.Bll.Services
         private readonly IReadOnlyGenericRepository<Book> _bookReadOnlyRepository;
         private readonly IWriteGenericRepository<Book> _bookWriteRepository;
         private readonly IMapper _mapper;
+
+        private readonly Dictionary<string, Expression<Func<Book, object>>> _orderMappings = new()
+        {
+            ["name"] = b => b.Name,
+            ["year"] = b => b.CreationYear,
+        };
+
+
+
         public BookService(
-            IReadOnlyGenericRepository<Book> bookReadOnlyRepository,
-            IWriteGenericRepository<Book> bookWriteRepository,
-            IMapper mapper)
+                IReadOnlyGenericRepository<Book> bookReadOnlyRepository,
+                IWriteGenericRepository<Book> bookWriteRepository,
+                IMapper mapper)
         {
             _bookReadOnlyRepository = bookReadOnlyRepository;
             _bookWriteRepository = bookWriteRepository;
@@ -120,12 +131,12 @@ namespace CulinarySite.Bll.Services
             return books;
         }
 
-        public IEnumerable<BookDetailListDto> GetPaginatedBooks(PagingParameters pagingParameters)
+        public PagedList<BookDetailListDto> GetPaginatedBooks(PagingParameters pagingParameters)
         {
-            var books = _bookReadOnlyRepository.GetPagedItems(pagingParameters);
-            var bookDetailListDtos = books.Select(x => _mapper.Map<BookDetailListDto>(x));
+            var query = _bookReadOnlyRepository.GetItemListQueryableWithInclude(x => x.Author);
+            var result = this._bookReadOnlyRepository.GetPagedItems(query, pagingParameters, this._orderMappings);
 
-            return bookDetailListDtos;
+            return new PagedList<BookDetailListDto>(result.Items.Select(x => _mapper.Map<BookDetailListDto>(x)), result.TotalCount);
         }
 
     }

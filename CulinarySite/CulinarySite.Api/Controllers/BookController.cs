@@ -87,15 +87,14 @@ namespace CulinarySite.Api.Controllers
         }
 
         [HttpGet("paged")]
-        public IEnumerable<BookDetailListModel> GetPaginatedBooks([FromQuery] PagingParameters pagingParameters)
+        public PagedList<BookDetailListModel> GetPaginatedBooks([FromQuery] PagingParameters pagingParameters)
         {
-            IEnumerable<BookDetailListDto> bookDetailListDtos = _bookService.GetPaginatedBooks(pagingParameters);
-            var bookDetailListModels = bookDetailListDtos.Select(x => _mapper.Map<BookDetailListModel>(x));
+            PagedList<BookDetailListDto> result = _bookService.GetPaginatedBooks(pagingParameters);
 
-            return bookDetailListModels;
+            var bookDetailListModels = result.Items.Select(x => _mapper.Map<BookDetailListModel>(x));
+
+            return new PagedList<BookDetailListModel>(bookDetailListModels, result.TotalCount);
         }
-
-
     }
 }
 

@@ -6,6 +6,7 @@ import { IBookDetailModel } from '../interfaces/book/book-detail-model.interface
 import { CreateBookModel } from '../viewmodels/book/create-book-model.class';
 import { UpdateBookModel } from '../viewmodels/book/update-book-model.class';
 import { IBookModel } from '../interfaces/book/book-model.interface';
+import { IPagedList } from '../interfaces/common/paged-list';
 
 @Injectable()
 export class BookService {
@@ -61,15 +62,25 @@ export class BookService {
   }
 
   public getPagedBooks(
-    pageNumber: number = 0,
-    pageSize: number = 3
-  ): Observable<IBookDetailListModel[]> {
+    pageNumber: number,
+    pageSize: number,
+    isAscending: boolean,
+    activeColumn: string
+  ): Observable<IPagedList<IBookDetailListModel>> {
     let params = new HttpParams();
     params = params.set('pageNumber', pageNumber.toString());
     params = params.set('pageSize', pageSize.toString());
 
-    return this.http.get<IBookDetailListModel[]>(this.url + '/' + 'paged', {
-      params,
-    });
+    if (activeColumn) {
+      params = params.set('isAscending', isAscending);
+      params = params.set('activeColumn', activeColumn);
+    }
+
+    return this.http.get<IPagedList<IBookDetailListModel>>(
+      this.url + '/' + 'paged',
+      {
+        params,
+      }
+    );
   }
 }

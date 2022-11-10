@@ -1,5 +1,4 @@
 ﻿using CulinarySite.Domain.Entities;
-using System.Collections.Generic;
 
 namespace CulinarySite.Dal.Interfaces
 {
@@ -9,7 +8,6 @@ namespace CulinarySite.Dal.Interfaces
         void Update(TEntity item);
         void Delete(int id);
         void Save();
-        TEntity GetItem(int id);
-        IEnumerable<TEntity> GetItemList();
+
     }
 }

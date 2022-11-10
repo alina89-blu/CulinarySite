@@ -58,9 +58,16 @@
 
     <mat-paginator
       [length]="totalRows"
-      [pageSize]="3"
-      [pageSizeOptions]="[3, 5, 10]"
+      [pageSize]="pageSize"
+      [pageIndex]="currentPage - 1"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="pageChanged($event)"
     ></mat-paginator>
+  </div>
+  <div class="example-button-row">
+    <a mat-stroked-button color="primary" [routerLink]="['/createBook']"
+      >Добавить</a
+    >
   </div>
   <br />
 </div>
