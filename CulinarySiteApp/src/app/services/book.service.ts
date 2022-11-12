@@ -65,11 +65,16 @@ export class BookService {
     pageNumber: number,
     pageSize: number,
     isAscending: boolean,
-    activeColumn: string
+    activeColumn: string,
+    filterValue: string
   ): Observable<IPagedList<IBookDetailListModel>> {
     let params = new HttpParams();
     params = params.set('pageNumber', pageNumber.toString());
     params = params.set('pageSize', pageSize.toString());
+
+    if (filterValue) {
+      params = params.set('filterValue', filterValue);
+    }
 
     if (activeColumn) {
       params = params.set('isAscending', isAscending);

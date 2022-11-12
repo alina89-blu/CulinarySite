@@ -71,10 +71,35 @@ import { EpisodeDetailComponent } from './episode/episode-detail/episode-detail.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EpisodesLibraryComponent } from './episodes-library/episodes-library.component';
 
+//import { AddressListModule } from './address/address-list/address-list.module';
+
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'address', component: AddressListComponent },
   { path: 'editAddress/:id', component: AddressEditComponent },
+  /* {
+    path: 'address',
+    loadChildren: () =>
+      import('src/app/address/address-list/address-list.module').then(
+        (m) => m.AddressListModule
+      ),
+  },*/
+
+  /*{
+    path: 'editAddress/:id',
+    loadChildren: () =>
+      import('src/app/address/address-edit/address-edit.module').then(
+        (m) => m.AddressEditModule
+      ),
+  },*/
+  /*{
+    path: 'createAddress',
+    loadChildren: () =>
+      import('src/app/address/address-create/address-create.module').then(
+        (m) => m.AddressCreateModule
+      ),
+  },*/
+
   { path: 'createAddress', component: AddressCreateComponent },
   { path: 'author', component: AuthorListComponent },
   { path: 'createAuthor', component: AuthorCreateComponent },

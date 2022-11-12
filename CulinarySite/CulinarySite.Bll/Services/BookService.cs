@@ -25,6 +25,14 @@ namespace CulinarySite.Bll.Services
             ["year"] = b => b.CreationYear,
         };
 
+        private readonly List<Func<string, Expression<Func<Book, bool>>>> _filterMappings = new()
+        {
+            filter => b => b.Name.Contains(filter),
+            filter => b => b.CreationYear.ToString().Contains(filter),
+            filter => b => b.Author.Name.Contains(filter),
+            //   ["year"] = b => b.CreationYear,
+        };
+
 
 
         public BookService(
@@ -134,7 +142,7 @@ namespace CulinarySite.Bll.Services
         public PagedList<BookDetailListDto> GetPaginatedBooks(PagingParameters pagingParameters)
         {
             var query = _bookReadOnlyRepository.GetItemListQueryableWithInclude(x => x.Author);
-            var result = this._bookReadOnlyRepository.GetPagedItems(query, pagingParameters, this._orderMappings);
+            var result = this._bookReadOnlyRepository.GetPagedItems(query, pagingParameters, this._orderMappings, this._filterMappings);
 
             return new PagedList<BookDetailListDto>(result.Items.Select(x => _mapper.Map<BookDetailListDto>(x)), result.TotalCount);
         }

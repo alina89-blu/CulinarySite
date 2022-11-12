@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using CulinarySite.Common.Exceptions;
 using CulinarySite.Common.Pagination;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
+using LinqKit;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -64,8 +66,20 @@ namespace CulinarySite.Dal.Repositories
             IQueryable<TEntity> query = _dbSet.AsNoTracking();
             return includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }
-     
-        public PagedList<TEntity> GetPagedItems(IQueryable<TEntity> query, PagingParameters pagingParameters, Dictionary<string, Expression<Func<TEntity, object>>> orderMappings)
+
+        public PagedList<TEntity> GetPagedItems(IQueryable<TEntity> query, PagingParameters pagingParameters, Dictionary<string, Expression<Func<TEntity, object>>> orderMappings, List<Func<string, Expression<Func<TEntity, bool>>>> filterMappings)
+        {
+            query = ApplyOrdering(query, pagingParameters, orderMappings);
+
+            if (pagingParameters.FilterValue != null)
+            {
+                query = this.ApplyFilters(query, filterMappings, pagingParameters.FilterValue);
+            }
+
+            return new PagedList<TEntity>(query, pagingParameters);
+        }
+
+        private  IQueryable<TEntity> ApplyOrdering(IQueryable<TEntity> query, PagingParameters pagingParameters, Dictionary<string, Expression<Func<TEntity, object>>> orderMappings)
         {
             if (pagingParameters.ActiveColumn != null && orderMappings.ContainsKey(pagingParameters.ActiveColumn))
             {
@@ -79,8 +93,20 @@ namespace CulinarySite.Dal.Repositories
                 }
             }
 
-            return new PagedList<TEntity>(query, pagingParameters);
+            return query;
         }
 
+        private IQueryable<TEntity> ApplyFilters(IQueryable<TEntity> query, List<Func<string, Expression<Func<TEntity, bool>>>> filterMappings, string filterValue)
+        {
+
+            var predicate = PredicateBuilder.New<TEntity>(true);
+
+            foreach (var mapping in filterMappings)
+            {
+                predicate = predicate.Or(mapping(filterValue));
+            }
+
+            return query.Where(predicate);
+        }
     }
 }

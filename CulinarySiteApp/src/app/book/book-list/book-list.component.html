@@ -4,7 +4,15 @@
       <mat-label> Filter </mat-label>
       <input matInput placeholder="Filter" (keyup)="FilterChange($event)" />
     </mat-form-field>-->
-
+    <mat-form-field appearance="fill">
+      <mat-label>Filter</mat-label>
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="filterValue"
+        (ngModelChange)="filterData()"
+      />
+    </mat-form-field>
     <table
       mat-table
       [dataSource]="dataSource"

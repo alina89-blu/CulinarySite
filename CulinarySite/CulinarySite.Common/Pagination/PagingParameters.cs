@@ -8,6 +8,7 @@ namespace CulinarySite.Common.Pagination
         private int _pageSize = 10;
         public bool IsAscending { get; set; }
         public string ActiveColumn { get; set; }
+        public string FilterValue { get; set; }
         public int PageSize
         {
             get

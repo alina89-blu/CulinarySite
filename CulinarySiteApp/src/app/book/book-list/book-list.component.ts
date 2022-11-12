@@ -17,6 +17,7 @@ export class BookListComponent implements OnInit {
   public totalRows: number = 0;
   public pageSize: number = 5;
   public activeColumn: string;
+  public filterValue: string;
   public isAscending: boolean = true;
   public currentPage: number = 1;
   public pageSizeOptions: number[] = [3, 5, 10, 25];
@@ -36,7 +37,8 @@ export class BookListComponent implements OnInit {
         this.currentPage,
         this.pageSize,
         this.isAscending,
-        this.activeColumn
+        this.activeColumn,
+        this.filterValue
       )
       .subscribe((result) => {
         this.dataSource = result.items;
@@ -57,6 +59,12 @@ export class BookListComponent implements OnInit {
 
       this.loadBooks();
     });
+  }
+
+  public filterData(): void {
+    this.currentPage = 1;
+
+    this.loadBooks();
   }
 
   public sortData(sort: Sort) {
