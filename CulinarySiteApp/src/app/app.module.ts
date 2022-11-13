@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
@@ -70,6 +70,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { EpisodeDetailComponent } from './episode/episode-detail/episode-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EpisodesLibraryComponent } from './episodes-library/episodes-library.component';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 //import { AddressListModule } from './address/address-list/address-list.module';
 
@@ -225,6 +226,11 @@ const appRoutes: Routes = [
     RecipeOrganicMatterService,
     AuthService,
     AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

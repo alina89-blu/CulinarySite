@@ -5,6 +5,7 @@ import { CreateAddressModel } from '../viewmodels/address/create-address-model.c
 import { UpdateAddressModel } from '../viewmodels/address/update-address-model.class';
 import { IAddressListModel } from '../interfaces/address/address-list-model.interface';
 import { IAddressDetailModel } from '../interfaces/address/address-detail-model.interface';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AddressService {

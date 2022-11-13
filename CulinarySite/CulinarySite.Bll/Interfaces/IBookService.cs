@@ -12,8 +12,6 @@ namespace CulinarySite.Bll.Interfaces
         IEnumerable<BookDetailListDto> GetBookDetailList(bool withRelated);
         IEnumerable<BookDto> GetBookList();
         BookDetailDto GetBook(int id, bool withRelated);
-        IEnumerable<BookDetailListDto> GetSortedBooksByName(bool withRelated);
-        IEnumerable<BookDetailListDto> GetSortedBooksByYear(bool withRelated);
         PagedList<BookDetailListDto> GetPaginatedBooks(PagingParameters pagingParameters);
 
     }

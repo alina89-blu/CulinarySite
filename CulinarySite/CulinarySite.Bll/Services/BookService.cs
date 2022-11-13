@@ -7,7 +7,6 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.Dtos.Book;
 using CulinarySite.Common.Exceptions;
 using CulinarySite.Common.Pagination;
-using CulinarySite.Common.ViewModels.Book;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
 
@@ -89,6 +88,7 @@ namespace CulinarySite.Bll.Services
 
                 return bookDetailDto;
             }
+
             book = _bookReadOnlyRepository.GetItem(id);
 
             bookDetailDto = _mapper.Map<BookDetailDto>(book);
@@ -125,24 +125,10 @@ namespace CulinarySite.Bll.Services
             return bookDtos;
         }
 
-        public IEnumerable<BookDetailListDto> GetSortedBooksByName(bool withRelated)
-        {
-            List<BookDetailListDto> books = GetBookDetailList(withRelated).ToList();
-            books.Sort(new BookNameComparer());
-            return books;
-        }
-
-        public IEnumerable<BookDetailListDto> GetSortedBooksByYear(bool withRelated)
-        {
-            List<BookDetailListDto> books = GetBookDetailList(withRelated).ToList();
-            books.Sort(new BookYearComparer());
-            return books;
-        }
-
         public PagedList<BookDetailListDto> GetPaginatedBooks(PagingParameters pagingParameters)
         {
             var query = _bookReadOnlyRepository.GetItemListQueryableWithInclude(x => x.Author);
-            var result = this._bookReadOnlyRepository.GetPagedItems(query, pagingParameters, this._orderMappings, this._filterMappings);
+            var result = this._bookReadOnlyRepository.GetPagedItems(query, pagingParameters, _orderMappings, _filterMappings);
 
             return new PagedList<BookDetailListDto>(result.Items.Select(x => _mapper.Map<BookDetailListDto>(x)), result.TotalCount);
         }

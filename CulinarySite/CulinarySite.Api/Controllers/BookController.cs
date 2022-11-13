@@ -6,7 +6,7 @@ using CulinarySite.Common.ViewModels.Book;
 using CulinarySite.Common.Dtos.Book;
 using System.Linq;
 using CulinarySite.Common.Pagination;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -48,7 +48,6 @@ namespace CulinarySite.Api.Controllers
         }
 
         [HttpPost]
-
         public void CreateBook(CreateBookModel createBookModel)
         {
             CreateBookDto createBookDto = _mapper.Map<CreateBookDto>(createBookModel);
@@ -62,28 +61,11 @@ namespace CulinarySite.Api.Controllers
             _bookService.UpdateBook(updateBookDto);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public void DeleteBook(int id)
         {
             _bookService.DeleteBook(id);
-        }
-
-        [HttpGet("{withRelated}/sortedByName")]
-        public IEnumerable<BookDetailListModel> GetSortedBooksByName(bool withRelated)
-        {
-            IEnumerable<BookDetailListDto> bookDetailListDtos = _bookService.GetSortedBooksByName(withRelated);
-            var bookDetailListModels = bookDetailListDtos.Select(x => _mapper.Map<BookDetailListModel>(x));
-
-            return bookDetailListModels;
-        }
-
-        [HttpGet("{withRelated}/sortedByYear")]
-        public IEnumerable<BookDetailListModel> GetSortedBooksByYear(bool withRelated)
-        {
-            IEnumerable<BookDetailListDto> bookDetailListDtos = _bookService.GetSortedBooksByYear(withRelated);
-            var bookDetailListModels = bookDetailListDtos.Select(x => _mapper.Map<BookDetailListModel>(x));
-
-            return bookDetailListModels;
         }
 
         [HttpGet("paged")]

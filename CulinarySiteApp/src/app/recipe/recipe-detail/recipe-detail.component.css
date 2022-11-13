@@ -47,3 +47,9 @@ a {
 a:hover {
   color: #ff4081;
 }
+
+#mat-icon {
+  color: green;
+
+  margin: 0px;
+}

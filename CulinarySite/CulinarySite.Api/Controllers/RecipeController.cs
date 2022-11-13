@@ -5,6 +5,7 @@ using CulinarySite.Common.ViewModels.Recipe;
 using CulinarySite.Common.Dtos.Recipe;
 using CulinarySite.Bll.Interfaces;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -37,6 +38,7 @@ namespace CulinarySite.Api.Controllers
             return recipeModels;
         }
 
+        [Authorize]
         [HttpGet("{id}/{withRelated}")]
         public RecipeDetailModel GetRecipe(int id, bool withRelated)
         {

@@ -22,17 +22,13 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm);
   }
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
 
-  login() {
-    this.authService.login(this.loginForm.value).subscribe(
-      (data) => {
-        this.authService.saveToken(data.token);
-        this.router.navigateByUrl('');
-        //this.router.navigateByUrl('book');
-      }
-      // () => this.router.navigateByUrl('')
-    );
+  public login(): void {
+    this.authService.login(this.loginForm.value).subscribe((data) => {
+      this.authService.saveToken(data.token);
+      this.router.navigateByUrl('');
+    });
   }
 
   public get username() {

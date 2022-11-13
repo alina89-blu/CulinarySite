@@ -1,7 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,18 +18,18 @@ export class AuthService {
     return this.http.post(this.url + '/' + 'register', data);
   }
 
-  saveToken(token: string) {
+  public saveToken(token: string): void {
     localStorage.setItem('token', token);
   }
-  getToken() {
+  public getToken(): string | null {
     return localStorage.getItem('token');
   }
 
-  isAuthenticated(): boolean {
+  public isAuthenticated(): boolean {
     return !!this.getToken();
   }
 
-  logout() {
+  public logout(): void {
     return localStorage.removeItem('token');
   }
 }

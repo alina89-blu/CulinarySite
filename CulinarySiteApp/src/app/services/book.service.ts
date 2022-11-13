@@ -45,22 +45,6 @@ export class BookService {
     return this.http.delete<void>(this.url + '/' + id);
   }
 
-  public getSortedBooksByName(
-    withRelated: boolean
-  ): Observable<IBookDetailListModel[]> {
-    return this.http.get<IBookDetailListModel[]>(
-      this.url + '/' + withRelated + '/' + 'sortedByName'
-    );
-  }
-
-  public getSortedBooksByYear(
-    withRelated: boolean
-  ): Observable<IBookDetailListModel[]> {
-    return this.http.get<IBookDetailListModel[]>(
-      this.url + '/' + withRelated + '/' + 'sortedByYear'
-    );
-  }
-
   public getPagedBooks(
     pageNumber: number,
     pageSize: number,

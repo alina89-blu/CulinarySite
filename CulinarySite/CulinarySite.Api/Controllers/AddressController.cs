@@ -5,6 +5,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.ViewModels.Address;
 using CulinarySite.Common.Dtos.Address;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -18,6 +19,7 @@ namespace CulinarySite.Api.Controllers
             _addressService = addressService;
         }
 
+        [Authorize]
         [HttpGet]
         public IEnumerable<AddressListModel> GetAddressList()
         {
@@ -36,6 +38,7 @@ namespace CulinarySite.Api.Controllers
             return addressDetailModel;
         }
 
+        [Authorize]
         [HttpPost]
         public void CreateAddress(CreateAddressModel createAddressModel)
         {
@@ -43,6 +46,7 @@ namespace CulinarySite.Api.Controllers
             _addressService.CreateAddress(сreateAddressDto);
         }
 
+        [Authorize]
         [HttpPut]
         public void UpdateAddress(UpdateAddressModel updateAddressModel)
         {
@@ -50,6 +54,7 @@ namespace CulinarySite.Api.Controllers
             _addressService.UpdateAddress(updateAddressDto);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public void DeleteAddress(int id)
         {

@@ -4,9 +4,14 @@
   <span> <a mat-button [routerLink]="['/']"> ГЛАВНАЯ</a></span>
   <div class="spacer"></div>
 
-  <span><a mat-button [routerLink]="['/recipeLibrary']">РЕЦЕПТЫ</a></span>
-
-  <button id="button" mat-button [matMenuTriggerFor]="menu">АДМИН МЕНЮ</button>
+  <button
+    id="button"
+    mat-button
+    [matMenuTriggerFor]="menu"
+    *ngIf="isAuthenticated()"
+  >
+    АДМИН МЕНЮ
+  </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item>
       <a id="a" [routerLink]="['/address']">Адреса</a>
@@ -44,6 +49,8 @@
       <a id="a" [routerLink]="['/cernovic']">cernovic</a>
     </button>
   </mat-menu>
+
+  <span><a mat-button [routerLink]="['/recipeLibrary']">РЕЦЕПТЫ</a></span>
 
   <span><a mat-button [routerLink]="['/bookLibrary']">КНИГИ</a></span>
 
