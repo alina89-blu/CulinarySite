@@ -5,6 +5,7 @@ using CulinarySite.Common.Dtos.CookingStage;
 using CulinarySite.Common.ViewModels.CookingStage;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using CulinarySite.Common.Pagination;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -54,6 +55,16 @@ namespace CulinarySite.Api.Controllers
         public void DeleteCookingStage(int id)
         {
             _cookingStageService.DeleteCookingStage(id);
+        }
+
+        [HttpGet("paged")]
+        public PagedList<CookingStageListModel> GetPaginatedCookingStages([FromQuery] PagingParameters pagingParameters)
+        {
+            PagedList<CookingStageListDto> result = _cookingStageService.GetPaginatedCookingStages(pagingParameters);
+
+            var cookingStageListModels = result.Items.Select(x => _mapper.Map<CookingStageListModel>(x));
+
+            return new PagedList<CookingStageListModel>(cookingStageListModels, result.TotalCount);
         }
     }
 }

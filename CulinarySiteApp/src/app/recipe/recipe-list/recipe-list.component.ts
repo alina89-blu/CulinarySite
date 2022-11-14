@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { PageEvent } from '@angular/material/paginator';
+import { Sort } from '@angular/material/sort';
 import { IRecipeListModel } from 'src/app/interfaces/recipe/recipe-list-model.interface';
 import { RecipeService } from 'src/app/services/recipe.service';
-import { RecipeListModel } from 'src/app/viewmodels/recipe/recipe-list-model.class';
 
 @Component({
   selector: 'app-recipe-list',
@@ -10,7 +10,15 @@ import { RecipeListModel } from 'src/app/viewmodels/recipe/recipe-list-model.cla
   styleUrls: ['./recipe-list.component.css'],
 })
 export class RecipeListComponent implements OnInit {
-  public recipes: RecipeListModel[] = [];
+  public totalRows: number = 0;
+  public pageSize: number = 5;
+  public activeColumn: string;
+  public filterValue: string;
+  public isAscending: boolean = true;
+  public currentPage: number = 1;
+  public pageSizeOptions: number[] = [3, 5, 10, 25];
+
+  dataSource: IRecipeListModel[];
   displayedColumns: string[] = [
     'id',
     'name',
@@ -23,35 +31,52 @@ export class RecipeListComponent implements OnInit {
     'actions',
   ];
 
-  dataSource: MatTableDataSource<IRecipeListModel>;
-
   constructor(private recipeService: RecipeService) {}
 
   public ngOnInit(): void {
-    this.getRecipeList();
+    this.loadRecipes();
   }
 
-  /*  public getRecipeList(): void {
+  public loadRecipes() {
     this.recipeService
-      .getRecipeList(true)
-      .subscribe(
-        (data: IRecipeListModel[]) =>
-          (this.recipes = data.map((x) => new RecipeListModel(x)))
-      );
-  }*/
-
-  public getRecipeList(): void {
-    this.recipeService
-      .getRecipeDetailList(true)
-      .subscribe((data: IRecipeListModel[]) => {
-        this.recipes = data.map((x) => new RecipeListModel(x));
-        this.dataSource = new MatTableDataSource<IRecipeListModel>(
-          this.recipes
-        );
+      .getPagedRecipes(
+        this.currentPage,
+        this.pageSize,
+        this.isAscending,
+        this.activeColumn,
+        this.filterValue
+      )
+      .subscribe((result) => {
+        this.dataSource = result.items;
+        this.totalRows = result.totalCount;
       });
   }
 
-  public deleteRecipe(id: number): void {
-    this.recipeService.deleteRecipe(id).subscribe(() => this.getRecipeList());
+  public pageChanged(event: PageEvent) {
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex + 1;
+
+    this.loadRecipes();
+  }
+
+  public deleteRecipe(id: number) {
+    this.recipeService.deleteRecipe(id).subscribe(() => {
+      this.currentPage = 1;
+
+      this.loadRecipes();
+    });
+  }
+
+  public filterData(): void {
+    this.currentPage = 1;
+
+    this.loadRecipes();
+  }
+
+  public sortData(sort: Sort) {
+    this.isAscending = sort.direction === 'asc';
+    this.activeColumn = sort.active;
+
+    this.loadRecipes();
   }
 }

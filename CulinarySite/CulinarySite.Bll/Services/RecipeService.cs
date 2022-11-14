@@ -6,6 +6,9 @@ using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
 using System.Linq;
 using CulinarySite.Common.Exceptions;
+using CulinarySite.Common.Pagination;
+using System.Linq.Expressions;
+using System;
 
 namespace CulinarySite.Bll.Services
 {
@@ -14,6 +17,29 @@ namespace CulinarySite.Bll.Services
         private readonly IReadOnlyGenericRepository<Recipe> _recipeReadOnlyRepository;
         private readonly IWriteGenericRepository<Recipe> _recipeWriteRepository;
         private readonly IMapper _mapper;
+
+        private readonly Dictionary<string, Expression<Func<Recipe, object>>> _orderMappings = new()
+        {
+            ["name"] = r => r.Name,
+            ["servingsNumber"] = r => r.ServingsNumber,
+            ["cookingTime"] = r => r.CookingTime,
+            ["difficultyLevel"] = r => r.DifficultyLevel,
+            ["dishCategory"] = r => r.Dish.Category,
+            ["authorName"] = r => r.Author.Name,
+            ["bookName"] = r => r.Book.Name,
+        };
+
+        private readonly List<Func<string, Expression<Func<Recipe, bool>>>> _filterMappings = new()
+        {
+            filter => r => r.Name.Contains(filter),
+            filter => r => r.ServingsNumber.ToString().Contains(filter),
+            filter => r => r.CookingTime.ToString().Contains(filter),
+            filter => r => r.DifficultyLevel.Contains(filter),
+            filter => r => r.Dish.Category.Contains(filter),
+            filter => r => r.Author.Name.Contains(filter),
+            filter => r => r.Book.Name.Contains(filter),
+
+        };
         public RecipeService(
             IReadOnlyGenericRepository<Recipe> recipeReadOnlyRepository,
             IWriteGenericRepository<Recipe> recipeWriteRepository,
@@ -87,7 +113,7 @@ namespace CulinarySite.Bll.Services
 
             return recipeDtos;
         }
-     
+
         public RecipeDetailDto GetRecipe(int id, bool withRelated)
         {
             var recipe = new Recipe();
@@ -116,6 +142,18 @@ namespace CulinarySite.Bll.Services
             recipeDetailDto = _mapper.Map<RecipeDetailDto>(recipe);
 
             return recipeDetailDto;
+        }
+
+        public PagedList<RecipeListDto> GetPaginatedRecipes(PagingParameters pagingParameters)
+        {
+            var query = _recipeReadOnlyRepository.GetItemListQueryableWithInclude(
+                x => x.Dish,
+                x => x.Author,
+                x => x.Book
+                );
+            var result = _recipeReadOnlyRepository.GetPagedItems(query, pagingParameters, _orderMappings, _filterMappings);
+
+            return new PagedList<RecipeListDto>(result.Items.Select(x => _mapper.Map<RecipeListDto>(x)), result.TotalCount);
         }
     }
 }

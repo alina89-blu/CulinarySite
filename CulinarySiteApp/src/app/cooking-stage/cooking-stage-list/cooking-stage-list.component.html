@@ -1,18 +1,36 @@
 <div class="set-padding">
-  <div class="example-button-row">
-    <a mat-stroked-button color="primary" [routerLink]="['/createCookingStage']"
-      >Добавить</a
-    >
-  </div>
   <br />
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Найти</mat-label>
+    <br />
+    <input
+      type="text"
+      matInput
+      [(ngModel)]="filterValue"
+      (ngModelChange)="filterData()"
+      placeholder="Поиск"
+    />
+  </mat-form-field>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="sortData($event)"
+  >
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>No.</th>
       <td mat-cell *matCellDef="let element; let idx = index">{{ idx + 1 }}</td>
     </ng-container>
 
     <ng-container matColumnDef="content">
-      <th mat-header-cell *matHeaderCellDef style="width: 650px">Содержание</th>
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        style="width: 650px"
+        mat-sort-header
+      >
+        Содержание
+      </th>
       <td
         mat-cell
         *matCellDef="let element"
@@ -23,7 +41,9 @@
     </ng-container>
 
     <ng-container matColumnDef="recipeName">
-      <th mat-header-cell *matHeaderCellDef>Название рецепта</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Название рецепта
+      </th>
       <td mat-cell *matCellDef="let element">{{ element.recipeName }}</td>
     </ng-container>
 
@@ -50,8 +70,20 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+  <mat-paginator
+    #paginator
+    [length]="totalRows"
+    [pageIndex]="currentPage - 1"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="pageChanged($event)"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+  <br />
+  <div class="example-button-row">
+    <a mat-stroked-button color="primary" [routerLink]="['/createCookingStage']"
+      >Добавить</a
+    >
+  </div>
 </div>
-
-<p>
-  <a routerLink="/">Home</a>
-</p>

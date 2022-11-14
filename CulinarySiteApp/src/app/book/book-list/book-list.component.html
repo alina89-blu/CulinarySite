@@ -1,9 +1,5 @@
 <div class="Pad" role="main">
   <div class="mat-elevation-z8">
-    <!--   <mat-form-field>
-      <mat-label> Filter </mat-label>
-      <input matInput placeholder="Filter" (keyup)="FilterChange($event)" />
-    </mat-form-field>-->
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Filter</mat-label>
       <br />
@@ -71,9 +67,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-
-    <!--  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
-    </mat-paginator>-->
 
     <mat-paginator
       #paginator

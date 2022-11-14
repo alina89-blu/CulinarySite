@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IPagedList } from '../interfaces/common/paged-list';
 import { IRecipeDetailModel } from '../interfaces/recipe/recipe-detail-model.interface';
 import { IRecipeListModel } from '../interfaces/recipe/recipe-list-model.interface';
 import { IRecipeModel } from '../interfaces/recipe/recipe-model.interface';
@@ -42,5 +43,33 @@ export class RecipeService {
 
   public deleteRecipe(id: number): Observable<void> {
     return this.http.delete<void>(this.url + '/' + id);
+  }
+
+  public getPagedRecipes(
+    pageNumber: number,
+    pageSize: number,
+    isAscending: boolean,
+    activeColumn: string,
+    filterValue: string
+  ): Observable<IPagedList<IRecipeListModel>> {
+    let params = new HttpParams();
+    params = params.set('pageNumber', pageNumber.toString());
+    params = params.set('pageSize', pageSize.toString());
+
+    if (filterValue) {
+      params = params.set('filterValue', filterValue);
+    }
+
+    if (activeColumn) {
+      params = params.set('isAscending', isAscending);
+      params = params.set('activeColumn', activeColumn);
+    }
+
+    return this.http.get<IPagedList<IRecipeListModel>>(
+      this.url + '/' + 'paged',
+      {
+        params,
+      }
+    );
   }
 }

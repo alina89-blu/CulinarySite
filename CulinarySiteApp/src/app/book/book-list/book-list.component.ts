@@ -1,12 +1,8 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { tap } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
+import { Sort } from '@angular/material/sort';
 import { IBookDetailListModel } from 'src/app/interfaces/book/book-detail-list-model.interface';
-import { IPagedList } from 'src/app/interfaces/common/paged-list';
 import { BookService } from 'src/app/services/book.service';
-import { BookDetailListModel } from 'src/app/viewmodels/book/book-detail-list-model.class';
 
 @Component({
   selector: 'app-book-list',

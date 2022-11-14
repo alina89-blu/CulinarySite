@@ -5,6 +5,9 @@ using CulinarySite.Common.Dtos.CookingStage;
 using CulinarySite.Dal.Interfaces;
 using CulinarySite.Domain.Entities;
 using System.Linq;
+using System.Linq.Expressions;
+using System;
+using CulinarySite.Common.Pagination;
 
 namespace CulinarySite.Bll.Services
 {
@@ -13,6 +16,18 @@ namespace CulinarySite.Bll.Services
         private readonly IReadOnlyGenericRepository<CookingStage> _cookingStageReadOnlyRepository;
         private readonly IWriteGenericRepository<CookingStage> _cookingStageWriteRepository;
         private readonly IMapper _mapper;
+
+        private readonly Dictionary<string, Expression<Func<CookingStage, object>>> _orderMappings = new()
+        {
+            ["content"] = c => c.Content,
+            ["recipeName"] = c => c.Recipe.Name,
+        };
+
+        private readonly List<Func<string, Expression<Func<CookingStage, bool>>>> _filterMappings = new()
+        {
+            filter => c => c.Content.Contains(filter),            
+            filter => c => c.Recipe.Name.Contains(filter),           
+        };
         public CookingStageService(
             IReadOnlyGenericRepository<CookingStage> cookingStageReadOnlyRepository,
             IWriteGenericRepository<CookingStage> cookingStageWriteRepository,
@@ -87,6 +102,14 @@ namespace CulinarySite.Bll.Services
             cookingStageDetailDto = _mapper.Map<CookingStageDetailDto>(cookingStage);
 
             return cookingStageDetailDto;
+        }
+
+        public PagedList<CookingStageListDto> GetPaginatedCookingStages(PagingParameters pagingParameters)
+        {
+            var query = _cookingStageReadOnlyRepository.GetItemListQueryableWithInclude(x => x.Recipe);
+            var result = _cookingStageReadOnlyRepository.GetPagedItems(query, pagingParameters, _orderMappings, _filterMappings);
+
+            return new PagedList<CookingStageListDto>(result.Items.Select(x => _mapper.Map<CookingStageListDto>(x)), result.TotalCount);
         }
     }
 }

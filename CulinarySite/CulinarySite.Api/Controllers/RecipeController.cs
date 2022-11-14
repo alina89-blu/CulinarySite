@@ -6,6 +6,7 @@ using CulinarySite.Common.Dtos.Recipe;
 using CulinarySite.Bll.Interfaces;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using CulinarySite.Common.Pagination;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -66,6 +67,16 @@ namespace CulinarySite.Api.Controllers
         public void DeleteRecipe(int id)
         {
             _recipeService.DeleteRecipe(id);
+        }
+
+        [HttpGet("paged")]
+        public PagedList<RecipeListModel> GetPaginatedRecipes([FromQuery] PagingParameters pagingParameters)
+        {
+            PagedList<RecipeListDto> result = _recipeService.GetPaginatedRecipes(pagingParameters);
+
+            var recipeListModels = result.Items.Select(x => _mapper.Map<RecipeListModel>(x));
+
+            return new PagedList<RecipeListModel>(recipeListModels, result.TotalCount);
         }
     }
 }

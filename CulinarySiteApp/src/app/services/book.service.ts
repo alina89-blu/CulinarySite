@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IBookDetailListModel } from '../interfaces/book/book-detail-list-model.interface';
 import { IBookDetailModel } from '../interfaces/book/book-detail-model.interface';
 import { CreateBookModel } from '../viewmodels/book/create-book-model.class';

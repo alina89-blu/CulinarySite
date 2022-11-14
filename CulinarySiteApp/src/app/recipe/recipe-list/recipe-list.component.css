@@ -26,3 +26,13 @@ button:hover {
   text-decoration: none;
   background-color: #ffdfdd;
 }
+
+input {
+  background-color: white;
+  height: 50px;
+  width: 473px;
+}
+
+.example-full-width {
+  width: 100%;
+}
