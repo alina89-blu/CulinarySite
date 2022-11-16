@@ -31,18 +31,10 @@
           alt="not found"
           class="hover-image-scale"
       /></a>
-      <!--   <a [routerLink]="['/dish', dish.dishId]">
-        <h3>{{ dish.category }}</h3>
-      </a>-->
 
       <mat-grid-tile-footer>
-        <h3>{{ dish.category }}</h3>
+        {{ dish.category }}
       </mat-grid-tile-footer>
     </mat-grid-tile>
-    <!--   <mat-grid-tile *ngFor="let dish of dishes; let idx = index"
-      ><a [routerLink]="['/dish', dish.dishId]">
-        <h3>{{ dish.category }}</h3>
-      </a></mat-grid-tile
-    >-->
   </mat-grid-list>
 </div>

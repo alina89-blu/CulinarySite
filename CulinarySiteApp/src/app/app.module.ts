@@ -27,7 +27,7 @@ import { AuthService } from './services/auth.service';
 import { AppComponent } from './app.component';
 import { AddressListComponent } from './address/address-list/address-list.component';
 import { AddressEditComponent } from './address/address-edit/address-edit.component';
-import { AddressCreateComponent } from './address/address-create/address-create.component';
+//import { AddressCreateComponent } from './address/address-create/address-create.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { AuthorListComponent } from './author/author-list/author-list.component';
@@ -71,37 +71,24 @@ import { EpisodeDetailComponent } from './episode/episode-detail/episode-detail.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EpisodesLibraryComponent } from './episodes-library/episodes-library.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { CommonModule } from '@angular/common';
 
-//import { AddressListModule } from './address/address-list/address-list.module';
+//import { AppRoutingModule } from './app-routing.module';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'address', component: AddressListComponent },
   { path: 'editAddress/:id', component: AddressEditComponent },
-  /* {
-    path: 'address',
-    loadChildren: () =>
-      import('src/app/address/address-list/address-list.module').then(
-        (m) => m.AddressListModule
-      ),
-  },*/
 
-  /*{
-    path: 'editAddress/:id',
-    loadChildren: () =>
-      import('src/app/address/address-edit/address-edit.module').then(
-        (m) => m.AddressEditModule
-      ),
-  },*/
-  /*{
+  {
     path: 'createAddress',
     loadChildren: () =>
-      import('src/app/address/address-create/address-create.module').then(
+      import('./address/address-create/address-create.module').then(
         (m) => m.AddressCreateModule
       ),
-  },*/
+  },
 
-  { path: 'createAddress', component: AddressCreateComponent },
+  // { path: 'createAddress', component: AddressCreateComponent },
   { path: 'author', component: AuthorListComponent },
   { path: 'createAuthor', component: AuthorCreateComponent },
   { path: 'editAuthor/:id', component: AuthorEditComponent },
@@ -155,7 +142,7 @@ const appRoutes: Routes = [
     AppComponent,
     AddressListComponent,
     AddressEditComponent,
-    AddressCreateComponent,
+    //AddressCreateComponent,
     NavMenuComponent,
     HomeComponent,
     AuthorListComponent,
@@ -206,6 +193,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MaterialModule,
     BrowserAnimationsModule,
+    // AppRoutingModule,
   ],
   providers: [
     AddressService,

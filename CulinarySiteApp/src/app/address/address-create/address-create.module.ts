@@ -1,18 +1,23 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { AddressCreateRoutingModule } from './address-create-routing.module';
 import { AddressCreateComponent } from './address-create.component';
-import { RouterModule, Routes } from '@angular/router';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: AddressCreateComponent,
-  },
-];
 
 @NgModule({
   declarations: [AddressCreateComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
-  exports: [RouterModule, AddressCreateComponent],
+  imports: [
+    AddressCreateRoutingModule,
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+  ],
+  exports: [AddressCreateComponent],
 })
 export class AddressCreateModule {}

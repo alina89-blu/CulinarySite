@@ -19,7 +19,6 @@ namespace CulinarySite.Api.Controllers
             _addressService = addressService;
         }
 
-        [Authorize]
         [HttpGet]
         public IEnumerable<AddressListModel> GetAddressList()
         {
@@ -46,7 +45,7 @@ namespace CulinarySite.Api.Controllers
             _addressService.CreateAddress(сreateAddressDto);
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpPut]
         public void UpdateAddress(UpdateAddressModel updateAddressModel)
         {

@@ -39,7 +39,7 @@ namespace CulinarySite.Api.Controllers
             return recipeModels;
         }
 
-        [Authorize]
+        
         [HttpGet("{id}/{withRelated}")]
         public RecipeDetailModel GetRecipe(int id, bool withRelated)
         {

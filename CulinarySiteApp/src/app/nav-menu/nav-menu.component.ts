@@ -14,6 +14,10 @@ export class NavMenuComponent {
     return this.authService.isAuthenticated();
   }
 
+  public isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
   public logout(): void {
     this.authService.logout();
   }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import jwtDecode from 'jwt-decode';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -21,6 +22,7 @@ export class AuthService {
   public saveToken(token: string): void {
     localStorage.setItem('token', token);
   }
+
   public getToken(): string | null {
     return localStorage.getItem('token');
   }
@@ -31,5 +33,17 @@ export class AuthService {
 
   public logout(): void {
     return localStorage.removeItem('token');
+  }
+
+  public isAdmin(): boolean {
+    const token = this.getToken();
+
+    if (!token) {
+      return false;
+    }
+
+    const decodedUser = jwtDecode<{ role: string }>(token);
+
+    return decodedUser.role.includes('admin');
   }
 }
