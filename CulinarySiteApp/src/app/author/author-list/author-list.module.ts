@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddressListComponent } from './address-list.component';
-import { AddressListRoutingModule } from './address-list-routing.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { AuthorListComponent } from './author-list.component';
+import { AuthorListRoutingModule } from './author-list-routing.module';
 
 @NgModule({
-  declarations: [AddressListComponent],
+  declarations: [AuthorListComponent],
   imports: [
-    AddressListRoutingModule,
+    AuthorListRoutingModule,
     CommonModule,
     MatButtonModule,
     MatTableModule,
   ],
-  exports: [AddressListComponent],
+  exports: [AuthorListComponent],
 })
-export class AddressListModule {}
+export class AuthorListModule {}

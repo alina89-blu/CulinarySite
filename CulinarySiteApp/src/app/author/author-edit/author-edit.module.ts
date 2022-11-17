@@ -1,16 +1,16 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddressEditComponent } from './address-edit.component';
-import { AddressEditRoutingModule } from './address-edit-routing.module';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AuthorEditRoutingModule } from './author-edit-routing.module';
+import { AuthorEditComponent } from './author-edit.component';
 
 @NgModule({
-  declarations: [AddressEditComponent],
+  declarations: [AuthorEditComponent],
   imports: [
-    AddressEditRoutingModule,
+    AuthorEditRoutingModule,
     CommonModule,
     FormsModule,
     MatButtonModule,
@@ -18,6 +18,6 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     ReactiveFormsModule,
   ],
-  exports: [AddressEditComponent],
+  exports: [AuthorEditComponent],
 })
-export class AddressEditModule {}
+export class AuthorEditModule {}

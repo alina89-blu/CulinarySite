@@ -16,15 +16,12 @@ export class AuthorEditComponent implements OnInit {
   public authorForm: FormGroup;
 
   constructor(
-    private authorService: AuthorService,
-    private router: Router,
-    activeRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private readonly authorService: AuthorService,
+    private readonly router: Router,
+    private readonly fb: FormBuilder,
+    activeRoute: ActivatedRoute
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
-    this.authorForm = this.fb.group({
-      name: ['', Validators.required],
-    });
   }
 
   public ngOnInit(): void {
@@ -36,6 +33,10 @@ export class AuthorEditComponent implements OnInit {
             (this.updateAuthorModel = new UpdateAuthorModel(data))
         );
     }
+
+    this.authorForm = this.fb.group({
+      name: ['', Validators.required],
+    });
   }
 
   public updateAuthor(): void {

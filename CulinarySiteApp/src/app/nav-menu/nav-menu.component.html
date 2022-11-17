@@ -8,40 +8,15 @@
     АДМИН МЕНЮ
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <a id="a" [routerLink]="['/address']">Адреса</a>
-    </button>
-    <button mat-menu-item>
-      <a id="a" [routerLink]="['/author']">Авторы</a>
-    </button>
-    <button mat-menu-item>
-      <a id="a" [routerLink]="['/recipe']">Рецепты</a>
-    </button>
-    <button mat-menu-item><a id="a" [routerLink]="['/book']">Книги</a></button>
-    <button mat-menu-item>
-      <a id="a" [routerLink]="['/cookingStage']">Этапы приготовления</a>
-    </button>
-
-    <!--   <button mat-menu-item>
-      <a id="a" [routerLink]="['/culinaryChannel']">Кулинарные каналы</a>
-    </button>
--->
-    <button mat-menu-item>
-      <a id="a" [routerLink]="['/dish']">Блюда</a>
-    </button>
-
-    <!--    <button mat-menu-item>
-      <a id="a" [routerLink]="['/episode']">Эпизоды</a>
-    </button>
--->
-    <button mat-menu-item>
-      <a id="a" [routerLink]="['/telephone']">Телефоны</a>
-    </button>
-    <button mat-menu-item>
-      <a id="a" [routerLink]="['/restaurant']">Рестораны</a>
-    </button>
-    <button mat-menu-item>
-      <a id="a" [routerLink]="['/cernovic']">cernovic</a>
+    <button mat-menu-item [routerLink]="['/author']">Авторы</button>
+    <button mat-menu-item [routerLink]="['/address']">Адреса</button>
+    <button mat-menu-item [routerLink]="['/dish']">Блюда</button>
+    <button mat-menu-item [routerLink]="['/book']">Книги</button>
+    <button mat-menu-item [routerLink]="['/recipe']">Рецепты</button>
+    <button mat-menu-item [routerLink]="['/restaurant']">Рестораны</button>
+    <button mat-menu-item [routerLink]="['/telephone']">Телефоны</button>
+    <button mat-menu-item [routerLink]="['/cookingStage']">
+      Этапы приготовления
     </button>
   </mat-menu>
 
@@ -50,12 +25,6 @@
   <span><a mat-button [routerLink]="['/bookLibrary']">КНИГИ</a></span>
 
   <span><a mat-button [routerLink]="['/restaurantLibrary']">РЕСТОРАНЫ</a></span>
-
-  <!--  <span
-    ><a mat-button [routerLink]="['/episodesLibrary']"
-      >КУЛИНАРНЫЙ КАНАЛ</a
-    ></span
-  >-->
 
   <span *ngIf="!isAuthenticated()">
     <a id="a" mat-flat-button [routerLink]="['/login']">Вход</a>

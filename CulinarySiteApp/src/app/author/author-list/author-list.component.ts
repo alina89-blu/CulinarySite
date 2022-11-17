@@ -14,7 +14,7 @@ export class AuthorListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'action'];
   dataSource: MatTableDataSource<IAuthorListModel>;
 
-  constructor(private authorService: AuthorService) {}
+  constructor(private readonly authorService: AuthorService) {}
 
   public ngOnInit(): void {
     this.getAuthorList();

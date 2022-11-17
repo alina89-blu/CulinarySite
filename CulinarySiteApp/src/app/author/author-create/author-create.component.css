@@ -1,9 +1,3 @@
-:host {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
 .Pad {
   padding: 50px 100px 50px 250px;
 }

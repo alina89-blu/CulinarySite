@@ -16,15 +16,12 @@ export class AddressEditComponent implements OnInit {
   public addressForm: FormGroup;
 
   constructor(
-    private addressService: AddressService,
-    private router: Router,
-    private fb: FormBuilder,
+    private readonly addressService: AddressService,
+    private readonly router: Router,
+    private readonly fb: FormBuilder,
     activeRoute: ActivatedRoute
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
-    this.addressForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(5)]],
-    });
   }
 
   public ngOnInit(): void {
@@ -36,6 +33,10 @@ export class AddressEditComponent implements OnInit {
             (this.updateAddressModel = new UpdateAddressModel(data))
         );
     }
+
+    this.addressForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(5)]],
+    });
   }
 
   public updateAddress(): void {

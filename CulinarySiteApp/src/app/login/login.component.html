@@ -1,4 +1,4 @@
-<div class="Pad">
+<div class="Pad d-center">
   <form class="example-form" [formGroup]="loginForm" (ngSubmit)="login()">
     <h4 class="textAlignCenter">Авторизация</h4>
     <mat-form-field class="example-full-width" appearance="fill">
@@ -30,11 +30,11 @@
       </mat-error>
     </mat-form-field>
 
-    <div class="example-button-row">
+    <div class="example-button-row d-center">
       <button mat-raised-button color="accent" type="submit">Войти</button>
-      <a mat-stroked-button color="accent" [routerLink]="['/register']"
-        >Зарегистрироваться</a
-      >
+      <button mat-raised-button type="button" [routerLink]="['/register']">
+        Зарегистрироваться
+      </button>
     </div>
   </form>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthorService } from 'src/app/services/author.service';
 import { Router } from '@angular/router';
 import { CreateAuthorModel } from 'src/app/viewmodels/author/create-author-model.class';
@@ -9,15 +9,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './author-create.component.html',
   styleUrls: ['./author-create.component.css'],
 })
-export class AuthorCreateComponent {
+export class AuthorCreateComponent implements OnInit {
   public createAuthorModel: CreateAuthorModel = new CreateAuthorModel();
   public authorForm: FormGroup;
 
   constructor(
-    private authorService: AuthorService,
-    private router: Router,
-    private fb: FormBuilder
-  ) {
+    private readonly authorService: AuthorService,
+    private readonly router: Router,
+    private readonly fb: FormBuilder
+  ) {}
+
+  public ngOnInit(): void {
     this.authorForm = this.fb.group({
       name: ['', Validators.required],
     });

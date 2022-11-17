@@ -15,7 +15,7 @@ export class AddressListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'action'];
   dataSource: MatTableDataSource<IAddressListModel>;
 
-  constructor(private addressService: AddressService) {}
+  constructor(private readonly addressService: AddressService) {}
 
   public ngOnInit(): void {
     this.getAddressList();

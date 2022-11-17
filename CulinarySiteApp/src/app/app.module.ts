@@ -25,17 +25,8 @@ import { RecipeOrganicMatterService } from './services/recipe-organic-matter.ser
 import { AuthService } from './services/auth.service';
 
 import { AppComponent } from './app.component';
-import { AddressListComponent } from './address/address-list/address-list.component';
-import { AddressEditComponent } from './address/address-edit/address-edit.component';
-//import { AddressCreateComponent } from './address/address-create/address-create.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { AuthorListComponent } from './author/author-list/author-list.component';
-import { AuthorCreateComponent } from './author/author-create/author-create.component';
-import { AuthorEditComponent } from './author/author-edit/author-edit.component';
-import { BookListComponent } from './book/book-list/book-list.component';
-import { BookEditComponent } from './book/book-edit/book-edit.component';
-import { BookCreateComponent } from './book/book-create/book-create.component';
 import { CookingStageListComponent } from './cooking-stage/cooking-stage-list/cooking-stage-list.component';
 import { CookingStageCreateComponent } from './cooking-stage/cooking-stage-create/cooking-stage-create.component';
 import { CookingStageEditComponent } from './cooking-stage/cooking-stage-edit/cooking-stage-edit.component';
@@ -54,9 +45,7 @@ import { EpisodeCreateComponent } from './episode/episode-create/episode-create.
 import { EpisodeEditComponent } from './episode/episode-edit/episode-edit.component';
 import { CernovicComponent } from './cernovic/cernovic.component';
 import { RecipeLibraryComponent } from './recipe-library/recipe-library.component';
-import { BookLibraryComponent } from './book-library/book-library.component';
 import { RestaurantLibraryComponent } from './restaurant-library/restaurant-library.component';
-import { BookDetailComponent } from './book/book-detail/book-detail.component';
 import { DishDetailComponent } from './dish/dish-detail/dish-detail.component';
 import { TelephoneCreateComponent } from './telephone/telephone-create/telephone-create.component';
 import { TelephoneEditComponent } from './telephone/telephone-edit/telephone-edit.component';
@@ -71,14 +60,11 @@ import { EpisodeDetailComponent } from './episode/episode-detail/episode-detail.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EpisodesLibraryComponent } from './episodes-library/episodes-library.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { CommonModule } from '@angular/common';
 
 //import { AppRoutingModule } from './app-routing.module';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'address', component: AddressListComponent },
-  { path: 'editAddress/:id', component: AddressEditComponent },
 
   {
     path: 'createAddress',
@@ -88,17 +74,81 @@ const appRoutes: Routes = [
       ),
   },
 
-  // { path: 'createAddress', component: AddressCreateComponent },
-  { path: 'author', component: AuthorListComponent },
-  { path: 'createAuthor', component: AuthorCreateComponent },
-  { path: 'editAuthor/:id', component: AuthorEditComponent },
-  { path: 'book', component: BookListComponent },
-  { path: 'editBook/:id', component: BookEditComponent },
+  {
+    path: 'editAddress',
+    loadChildren: () =>
+      import('./address/address-edit/address-edit.module').then(
+        (m) => m.AddressEditModule
+      ),
+  },
+
+  {
+    path: 'address',
+    loadChildren: () =>
+      import('./address/address-list/address-list.module').then(
+        (m) => m.AddressListModule
+      ),
+  },
+
+  {
+    path: 'createAuthor',
+    loadChildren: () =>
+      import('./author/author-create/author-create.module').then(
+        (m) => m.AuthorCreateModule
+      ),
+  },
+
+  {
+    path: 'editAuthor',
+    loadChildren: () =>
+      import('./author/author-edit/author-edit.module').then(
+        (m) => m.AuthorEditModule
+      ),
+  },
+
+  {
+    path: 'author',
+    loadChildren: () =>
+      import('./author/author-list/author-list.module').then(
+        (m) => m.AuthorListModule
+      ),
+  },
 
   {
     path: 'createBook',
-    component: BookCreateComponent,
+    loadChildren: () =>
+      import('./book/book-create/book-create.module').then(
+        (m) => m.BookCreateModule
+      ),
     canActivate: [AuthGuardService],
+  },
+
+  {
+    path: 'book',
+    loadChildren: () =>
+      import('./book/book-list/book-list.module').then((m) => m.BookListModule),
+  },
+
+  {
+    path: 'book',
+    loadChildren: () =>
+      import('./book/book-detail/book-detail.module').then(
+        (m) => m.BookDetailModule
+      ),
+  },
+
+  {
+    path: 'editBook',
+    loadChildren: () =>
+      import('./book/book-edit/book-edit.module').then((m) => m.BookEditModule),
+  },
+
+  {
+    path: 'bookLibrary',
+    loadChildren: () =>
+      import('./book-library/book-library.module').then(
+        (m) => m.BookLibraryModule
+      ),
   },
 
   { path: 'cookingStage', component: CookingStageListComponent },
@@ -118,10 +168,7 @@ const appRoutes: Routes = [
   { path: 'createEpisode', component: EpisodeCreateComponent },
   { path: 'editEpisode/:id', component: EpisodeEditComponent },
   { path: 'recipeLibrary', component: RecipeLibraryComponent },
-  { path: 'bookLibrary', component: BookLibraryComponent },
   { path: 'restaurantLibrary', component: RestaurantLibraryComponent },
-  // { path: 'episodesLibrary', component: EpisodesLibraryComponent },
-  { path: 'book/:id', component: BookDetailComponent },
   { path: 'dish/:id', component: DishDetailComponent },
   { path: 'telephone', component: TelephoneListComponent },
   { path: 'editTelephone/:id', component: TelephoneEditComponent },
@@ -140,17 +187,17 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    AddressListComponent,
-    AddressEditComponent,
+    //AddressListComponent,
+    //  AddressEditComponent,
     //AddressCreateComponent,
     NavMenuComponent,
     HomeComponent,
-    AuthorListComponent,
-    AuthorCreateComponent,
-    AuthorEditComponent,
-    BookListComponent,
-    BookEditComponent,
-    BookCreateComponent,
+    // AuthorListComponent,
+    // AuthorCreateComponent,
+    //AuthorEditComponent,
+    // BookListComponent,
+    // BookEditComponent,
+    //BookCreateComponent,
     CookingStageListComponent,
     CookingStageCreateComponent,
     CookingStageEditComponent,
@@ -169,9 +216,9 @@ const appRoutes: Routes = [
     EpisodeEditComponent,
     CernovicComponent,
     RecipeLibraryComponent,
-    BookLibraryComponent,
+    // BookLibraryComponent,
     RestaurantLibraryComponent,
-    BookDetailComponent,
+    // BookDetailComponent,
     DishDetailComponent,
     TelephoneCreateComponent,
     TelephoneEditComponent,

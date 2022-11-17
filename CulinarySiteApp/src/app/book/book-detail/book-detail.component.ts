@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IBookDetailModel } from 'src/app/interfaces/book/book-detail-model.interface';
@@ -14,9 +13,8 @@ export class BookDetailComponent implements OnInit {
   id: number;
   bookDetailModel: BookDetailModel = new BookDetailModel();
   constructor(
-    private bookService: BookService,
-    activeRoute: ActivatedRoute,
-    private http: HttpClient
+    private readonly bookService: BookService,
+    activeRoute: ActivatedRoute
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
   }

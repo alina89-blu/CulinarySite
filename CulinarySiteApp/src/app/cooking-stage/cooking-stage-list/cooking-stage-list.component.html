@@ -1,7 +1,6 @@
 <div class="set-padding">
   <br />
   <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Найти</mat-label>
     <br />
     <input
       type="text"
@@ -10,6 +9,7 @@
       (ngModelChange)="filterData()"
       placeholder="Поиск"
     />
+    <span><mat-icon>search</mat-icon> </span>
   </mat-form-field>
   <table
     mat-table

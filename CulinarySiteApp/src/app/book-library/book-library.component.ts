@@ -10,7 +10,7 @@ import { BookDetailListModel } from '../viewmodels/book/book-detail-list-model.c
 })
 export class BookLibraryComponent implements OnInit {
   public books: BookDetailListModel[] = [];
-  constructor(private bookService: BookService) {}
+  constructor(private readonly bookService: BookService) {}
 
   public ngOnInit(): void {
     this.getBookDetailList();

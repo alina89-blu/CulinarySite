@@ -21,7 +21,7 @@ export class BookListComponent implements OnInit {
   dataSource: IBookDetailListModel[];
   displayedColumns: string[] = ['number', 'name', 'year', 'author', 'action'];
 
-  constructor(private bookService: BookService) {}
+  constructor(private readonly bookService: BookService) {}
 
   public ngOnInit(): void {
     this.loadBooks();

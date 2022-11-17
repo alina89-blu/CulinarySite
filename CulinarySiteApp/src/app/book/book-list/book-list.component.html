@@ -1,14 +1,15 @@
 <div class="Pad" role="main">
   <div class="mat-elevation-z8">
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Filter</mat-label>
       <br />
       <input
         type="text"
         matInput
         [(ngModel)]="filterValue"
         (ngModelChange)="filterData()"
+        placeholder="Поиск"
       />
+      <span><mat-icon>search</mat-icon> </span>
     </mat-form-field>
 
     <table

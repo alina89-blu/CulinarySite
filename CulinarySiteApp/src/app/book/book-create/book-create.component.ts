@@ -18,11 +18,15 @@ export class BookCreateComponent implements OnInit {
   public bookForm: FormGroup;
 
   constructor(
-    private bookService: BookService,
-    private router: Router,
-    private authorService: AuthorService,
-    private fb: FormBuilder
-  ) {
+    private readonly bookService: BookService,
+    private readonly router: Router,
+    private readonly authorService: AuthorService,
+    private readonly fb: FormBuilder
+  ) {}
+
+  public ngOnInit(): void {
+    this.getAuthorList();
+
     this.bookForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(5)]],
       creationYear: ['', [Validators.required, Validators.min(1990)]],
@@ -30,10 +34,6 @@ export class BookCreateComponent implements OnInit {
       imageUrl: ['', Validators.required],
       authorId: ['', Validators.required],
     });
-  }
-
-  public ngOnInit(): void {
-    this.getAuthorList();
   }
 
   public getAuthorList(): void {

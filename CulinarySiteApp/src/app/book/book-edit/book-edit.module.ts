@@ -1,23 +1,25 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddressEditComponent } from './address-edit.component';
-import { AddressEditRoutingModule } from './address-edit-routing.module';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { BookEditRoutingModule } from './book-edit-routing.module';
+import { BookEditComponent } from './book-edit.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [AddressEditComponent],
+  declarations: [BookEditComponent],
   imports: [
-    AddressEditRoutingModule,
+    BookEditRoutingModule,
     CommonModule,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     ReactiveFormsModule,
   ],
-  exports: [AddressEditComponent],
+  exports: [BookEditComponent],
 })
-export class AddressEditModule {}
+export class BookEditModule {}
