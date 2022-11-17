@@ -10,8 +10,9 @@ import { BookDetailModel } from 'src/app/viewmodels/book/book-detail-model.class
   styleUrls: ['./book-detail.component.css'],
 })
 export class BookDetailComponent implements OnInit {
-  id: number;
-  bookDetailModel: BookDetailModel = new BookDetailModel();
+  private id: number;
+  public bookDetailModel: BookDetailModel = new BookDetailModel();
+
   constructor(
     private readonly bookService: BookService,
     activeRoute: ActivatedRoute

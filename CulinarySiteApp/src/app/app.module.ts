@@ -26,11 +26,22 @@ import { HomeComponent } from './home/home.component';
 import { CookingStageListComponent } from './cooking-stage/cooking-stage-list/cooking-stage-list.component';
 import { CookingStageEditComponent } from './cooking-stage/cooking-stage-edit/cooking-stage-edit.component';
 
+import { CookingStageListModule } from './cooking-stage/cooking-stage-list/cooking-stage-list.module';
+
+import { CookingStageEditModule } from './cooking-stage/cooking-stage-edit/cooking-stage-edit.module';
+
 import { DishListComponent } from './dish/dish-list/dish-list.component';
+
+import { DishListModule } from './dish/dish-list/dish-list.module';
+import { DishListModel } from './viewmodels/dish/dish-list-model.class';
 import { DishCreateComponent } from './dish/dish-create/dish-create.component';
+import { DishCreateModule } from './dish/dish-create/dish-create.module';
 import { DishEditComponent } from './dish/dish-edit/dish-edit.component';
+import { DishEditModule } from './dish/dish-edit/dish-edit.module';
 import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component';
 import { RecipeCreateComponent } from './recipe/recipe-create/recipe-create.component';
+
+import { RecipeCreateModule } from './recipe/recipe-create/recipe-create.module';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
 import { RecipeDetailComponent } from './recipe/recipe-detail/recipe-detail.component';
 
@@ -38,6 +49,8 @@ import { CernovicComponent } from './cernovic/cernovic.component';
 import { RecipeLibraryComponent } from './recipe-library/recipe-library.component';
 import { RestaurantLibraryComponent } from './restaurant-library/restaurant-library.component';
 import { DishDetailComponent } from './dish/dish-detail/dish-detail.component';
+
+import { DishDetailModule } from './dish/dish-detail/dish-detail.module';
 import { TelephoneCreateComponent } from './telephone/telephone-create/telephone-create.component';
 import { TelephoneEditComponent } from './telephone/telephone-edit/telephone-edit.component';
 import { TelephoneListComponent } from './telephone/telephone-list/telephone-list.component';
@@ -148,20 +161,65 @@ const appRoutes: Routes = [
       ).then((m) => m.CookingStageCreateModule),
   },
 
-  { path: 'cookingStage', component: CookingStageListComponent },
-  { path: 'editCookingStage/:id', component: CookingStageEditComponent },
+  {
+    path: 'editCookingStage',
+    loadChildren: () =>
+      import(
+        './cooking-stage/cooking-stage-edit/cooking-stage-edit.module'
+      ).then((m) => m.CookingStageEditModule),
+  },
 
-  { path: 'dish', component: DishListComponent },
-  { path: 'createDish', component: DishCreateComponent },
-  { path: 'editDish/:id', component: DishEditComponent },
+  {
+    path: 'cookingStage',
+    loadChildren: () =>
+      import(
+        './cooking-stage/cooking-stage-list/cooking-stage-list.module'
+      ).then((m) => m.CookingStageListModule),
+  },
+
+  {
+    path: 'createDish',
+    loadChildren: () =>
+      import('./dish/dish-create/dish-create.module').then(
+        (m) => m.DishCreateModule
+      ),
+  },
+
+  {
+    path: 'dish',
+    loadChildren: () =>
+      import('./dish/dish-list/dish-list.module').then((m) => m.DishListModule),
+  },
+
+  {
+    path: 'dish',
+    loadChildren: () =>
+      import('./dish/dish-detail/dish-detail.module').then(
+        (m) => m.DishDetailModule
+      ),
+  },
+
+  {
+    path: 'editDish',
+    loadChildren: () =>
+      import('./dish/dish-edit/dish-edit.module').then((m) => m.DishEditModule),
+  },
+
+  {
+    path: 'createRecipe',
+    loadChildren: () =>
+      import('./recipe/recipe-create/recipe-create.module').then(
+        (m) => m.RecipeCreateModule
+      ),
+  },
+
   { path: 'recipe', component: RecipeListComponent },
-  { path: 'createRecipe', component: RecipeCreateComponent },
   { path: 'editRecipe/:id', component: RecipeEditComponent },
   { path: 'recipe/:id', component: RecipeDetailComponent },
 
   { path: 'recipeLibrary', component: RecipeLibraryComponent },
   { path: 'restaurantLibrary', component: RestaurantLibraryComponent },
-  { path: 'dish/:id', component: DishDetailComponent },
+
   { path: 'telephone', component: TelephoneListComponent },
   { path: 'editTelephone/:id', component: TelephoneEditComponent },
   { path: 'createTelephone', component: TelephoneCreateComponent },
@@ -178,35 +236,17 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    //AddressListComponent,
-    //  AddressEditComponent,
-    //AddressCreateComponent,
     NavMenuComponent,
     HomeComponent,
-    // AuthorListComponent,
-    // AuthorCreateComponent,
-    //AuthorEditComponent,
-    // BookListComponent,
-    // BookEditComponent,
-    //BookCreateComponent,
-    CookingStageListComponent,
-    // CookingStageCreateComponent,
-    CookingStageEditComponent,
 
-    DishListComponent,
-    DishCreateComponent,
-    DishEditComponent,
     RecipeListComponent,
-    RecipeCreateComponent,
+    //RecipeCreateComponent,
     RecipeEditComponent,
     RecipeDetailComponent,
 
     CernovicComponent,
     RecipeLibraryComponent,
-    // BookLibraryComponent,
     RestaurantLibraryComponent,
-    // BookDetailComponent,
-    DishDetailComponent,
     TelephoneCreateComponent,
     TelephoneEditComponent,
     TelephoneListComponent,

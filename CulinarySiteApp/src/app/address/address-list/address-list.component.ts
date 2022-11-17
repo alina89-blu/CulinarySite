@@ -11,9 +11,9 @@ import { MatTableDataSource } from '@angular/material/table';
   providers: [AddressService],
 })
 export class AddressListComponent implements OnInit {
-  addresses: AddressListModel[] = [];
-  displayedColumns: string[] = ['id', 'name', 'action'];
-  dataSource: MatTableDataSource<IAddressListModel>;
+  public addresses: AddressListModel[] = [];
+  public displayedColumns: string[] = ['id', 'name', 'action'];
+  public dataSource: MatTableDataSource<IAddressListModel>;
 
   constructor(private readonly addressService: AddressService) {}
 
@@ -32,7 +32,7 @@ export class AddressListComponent implements OnInit {
       });
   }
 
-  public deleteAddress(id: number) {
+  public deleteAddress(id: number): void {
     this.addressService.delete(id).subscribe(() => this.getAddressList());
   }
 }

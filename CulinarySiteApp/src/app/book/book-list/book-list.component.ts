@@ -17,9 +17,14 @@ export class BookListComponent implements OnInit {
   public isAscending: boolean = true;
   public currentPage: number = 1;
   public pageSizeOptions: number[] = [3, 5, 10, 25];
-
-  dataSource: IBookDetailListModel[];
-  displayedColumns: string[] = ['number', 'name', 'year', 'author', 'action'];
+  public dataSource: IBookDetailListModel[];
+  public displayedColumns: string[] = [
+    'number',
+    'name',
+    'year',
+    'author',
+    'action',
+  ];
 
   constructor(private readonly bookService: BookService) {}
 
@@ -27,7 +32,7 @@ export class BookListComponent implements OnInit {
     this.loadBooks();
   }
 
-  public loadBooks() {
+  public loadBooks(): void {
     this.bookService
       .getPagedBooks(
         this.currentPage,
@@ -42,14 +47,14 @@ export class BookListComponent implements OnInit {
       });
   }
 
-  public pageChanged(event: PageEvent) {
+  public pageChanged(event: PageEvent): void {
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex + 1;
 
     this.loadBooks();
   }
 
-  public deleteBook(id: number) {
+  public deleteBook(id: number): void {
     this.bookService.deleteBook(id).subscribe(() => {
       this.currentPage = 1;
 
@@ -63,7 +68,7 @@ export class BookListComponent implements OnInit {
     this.loadBooks();
   }
 
-  public sortData(sort: Sort) {
+  public sortData(sort: Sort): void {
     this.isAscending = sort.direction === 'asc';
     this.activeColumn = sort.active;
 

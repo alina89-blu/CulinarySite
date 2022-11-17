@@ -15,7 +15,6 @@ export class DishEditComponent implements OnInit {
   private id: number;
   public updateDishModel: UpdateDishModel = new UpdateDishModel();
   public dishForm: FormGroup;
-
   public dishCategories: DishCategory[] = [
     DishCategory.Блины,
     DishCategory.ВторыеБлюда,
@@ -31,16 +30,12 @@ export class DishEditComponent implements OnInit {
   ];
 
   constructor(
-    private dishService: DishService,
-    private router: Router,
-    activeRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private readonly dishService: DishService,
+    private readonly router: Router,
+    private readonly fb: FormBuilder,
+    activeRoute: ActivatedRoute
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
-    this.dishForm = this.fb.group({
-      category: ['', Validators.required],
-      imageUrl: ['', Validators.required],
-    });
   }
 
   public ngOnInit(): void {
@@ -52,6 +47,11 @@ export class DishEditComponent implements OnInit {
             (this.updateDishModel = new UpdateDishModel(data))
         );
     }
+
+    this.dishForm = this.fb.group({
+      category: ['', Validators.required],
+      imageUrl: ['', Validators.required],
+    });
   }
 
   public updateDish(): void {

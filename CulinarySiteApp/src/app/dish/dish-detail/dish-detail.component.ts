@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IDishDetailModel } from 'src/app/interfaces/dish/dish-detail-model.interface';
@@ -11,13 +10,12 @@ import { DishDetailModel } from 'src/app/viewmodels/dish/dish-detail-model.class
   styleUrls: ['./dish-detail.component.css'],
 })
 export class DishDetailComponent implements OnInit {
-  id: number;
-  dishDetailModel: DishDetailModel = new DishDetailModel();
+  private id: number;
+  public dishDetailModel: DishDetailModel = new DishDetailModel();
 
   constructor(
-    private dishService: DishService,
-    activeRoute: ActivatedRoute,
-    private http: HttpClient
+    private readonly dishService: DishService,
+    activeRoute: ActivatedRoute
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
   }

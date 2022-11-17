@@ -11,10 +11,10 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class DishListComponent implements OnInit {
   public dishes: DishListModel[] = [];
-  displayedColumns: string[] = ['id', 'category', 'image', 'actions'];
-  dataSource: MatTableDataSource<IDishListModel>;
+  public displayedColumns: string[] = ['id', 'category', 'image', 'actions'];
+  public dataSource: MatTableDataSource<IDishListModel>;
 
-  constructor(private dishService: DishService) {}
+  constructor(private readonly dishService: DishService) {}
 
   public ngOnInit(): void {
     this.getDishDetailList();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DishService } from 'src/app/services/dish.service';
 import { DishCategory } from 'src/app/enums/dish-category.enum';
@@ -10,10 +10,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './dish-create.component.html',
   styleUrls: ['./dish-create.component.css'],
 })
-export class DishCreateComponent {
+export class DishCreateComponent implements OnInit {
   public createDishModel: CreateDishModel = new CreateDishModel();
   public dishForm: FormGroup;
-
   public dishCategories: DishCategory[] = [
     DishCategory.Блины,
     DishCategory.ВторыеБлюда,
@@ -27,11 +26,14 @@ export class DishCreateComponent {
     DishCategory.Супы,
     DishCategory.ТортыИПирожные,
   ];
+
   constructor(
-    private dishService: DishService,
-    private router: Router,
-    private fb: FormBuilder
-  ) {
+    private readonly dishService: DishService,
+    private readonly router: Router,
+    private readonly fb: FormBuilder
+  ) {}
+
+  public ngOnInit(): void {
     this.dishForm = this.fb.group({
       category: ['', Validators.required],
       imageUrl: ['', Validators.required],

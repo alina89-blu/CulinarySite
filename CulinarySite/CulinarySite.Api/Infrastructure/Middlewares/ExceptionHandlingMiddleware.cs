@@ -45,7 +45,7 @@ namespace CulinarySite.Api.Infrastructure.Middlewares
             return context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
-                Message = ex.Message + "@@@"
+                Message = ex.Message
             }
             .ToString());
         }

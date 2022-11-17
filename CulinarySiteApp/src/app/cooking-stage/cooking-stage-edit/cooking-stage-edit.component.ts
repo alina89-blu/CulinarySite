@@ -17,22 +17,17 @@ export class CookingStageEditComponent implements OnInit {
   private id: number;
   public updateCookingStageModel: UpdateCookingStageModel =
     new UpdateCookingStageModel();
-  recipes: RecipeModel[] = [];
+  public recipes: RecipeModel[] = [];
   public cookingStageForm: FormGroup;
 
   constructor(
-    private cookingStageService: CookingStageService,
-    private recipeService: RecipeService,
-    private router: Router,
-    activeRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private readonly cookingStageService: CookingStageService,
+    private readonly recipeService: RecipeService,
+    private readonly router: Router,
+    private readonly fb: FormBuilder,
+    activeRoute: ActivatedRoute
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
-    this.cookingStageForm = this.fb.group({
-      content: ['', Validators.required],
-      imageUrl: [''],
-      recipeId: ['', Validators.required],
-    });
   }
 
   public ngOnInit(): void {
@@ -44,10 +39,17 @@ export class CookingStageEditComponent implements OnInit {
             (this.updateCookingStageModel = new UpdateCookingStageModel(data))
         );
     }
+
     this.getRecipeList();
+
+    this.cookingStageForm = this.fb.group({
+      content: ['', Validators.required],
+      imageUrl: [''],
+      recipeId: ['', Validators.required],
+    });
   }
 
-  public getRecipeList() {
+  public getRecipeList(): void {
     this.recipeService
       .getRecipeList()
       .subscribe(
