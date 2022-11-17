@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CulinarySite.Dal.Migrations
 {
     [DbContext(typeof(CulinarySiteDbContext))]
-    [Migration("20221116181327_AddRoleC")]
-    partial class AddRoleC
+    [Migration("20221116181327_AddRole")]
+    partial class AddRole
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

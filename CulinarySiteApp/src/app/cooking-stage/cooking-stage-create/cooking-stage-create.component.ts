@@ -19,20 +19,20 @@ export class CookingStageCreateComponent implements OnInit {
   public cookingStageForm: FormGroup;
 
   constructor(
-    private cookingStageService: CookingStageService,
-    private recipeService: RecipeService,
-    private router: Router,
-    private fb: FormBuilder
-  ) {
+    private readonly cookingStageService: CookingStageService,
+    private readonly recipeService: RecipeService,
+    private readonly router: Router,
+    private readonly fb: FormBuilder
+  ) {}
+
+  public ngOnInit(): void {
+    this.getRecipeList();
+
     this.cookingStageForm = this.fb.group({
       content: ['', Validators.required],
       imageUrl: [''],
       recipeId: ['', Validators.required],
     });
-  }
-
-  public ngOnInit(): void {
-    this.getRecipeList();
   }
 
   public createCookingStage(): void {

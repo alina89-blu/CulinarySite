@@ -2,7 +2,7 @@
 
 namespace CulinarySite.Dal.Migrations
 {
-    public partial class AddRoleC : Migration
+    public partial class AddRole : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
