@@ -17,9 +17,8 @@ export class RecipeListComponent implements OnInit {
   public isAscending: boolean = true;
   public currentPage: number = 1;
   public pageSizeOptions: number[] = [3, 5, 10, 25];
-
-  dataSource: IRecipeListModel[];
-  displayedColumns: string[] = [
+  public dataSource: IRecipeListModel[];
+  public displayedColumns: string[] = [
     'id',
     'name',
     'servingsNumber',
@@ -31,13 +30,13 @@ export class RecipeListComponent implements OnInit {
     'actions',
   ];
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(private readonly recipeService: RecipeService) {}
 
   public ngOnInit(): void {
     this.loadRecipes();
   }
 
-  public loadRecipes() {
+  public loadRecipes(): void {
     this.recipeService
       .getPagedRecipes(
         this.currentPage,
@@ -52,14 +51,14 @@ export class RecipeListComponent implements OnInit {
       });
   }
 
-  public pageChanged(event: PageEvent) {
+  public pageChanged(event: PageEvent): void {
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex + 1;
 
     this.loadRecipes();
   }
 
-  public deleteRecipe(id: number) {
+  public deleteRecipe(id: number): void {
     this.recipeService.deleteRecipe(id).subscribe(() => {
       this.currentPage = 1;
 
@@ -73,7 +72,7 @@ export class RecipeListComponent implements OnInit {
     this.loadRecipes();
   }
 
-  public sortData(sort: Sort) {
+  public sortData(sort: Sort): void {
     this.isAscending = sort.direction === 'asc';
     this.activeColumn = sort.active;
 

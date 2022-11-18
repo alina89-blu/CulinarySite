@@ -11,10 +11,10 @@ import { RestaurantListModel } from 'src/app/viewmodels/restaurant/restaurant-li
 })
 export class RestaurantListComponent implements OnInit {
   public restaurants: RestaurantListModel[] = [];
-  displayedColumns: string[] = ['id', 'name', 'address', 'actions'];
-  dataSource: MatTableDataSource<IRestaurantListModel>;
+  public displayedColumns: string[] = ['id', 'name', 'address', 'actions'];
+  public dataSource: MatTableDataSource<IRestaurantListModel>;
 
-  constructor(private restaurantService: RestaurantService) {}
+  constructor(private readonly restaurantService: RestaurantService) {}
 
   public ngOnInit(): void {
     this.getRestaurantDetailList();

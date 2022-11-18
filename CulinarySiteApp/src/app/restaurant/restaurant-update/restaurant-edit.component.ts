@@ -21,18 +21,13 @@ export class RestaurantEditComponent implements OnInit {
   public restaurantForm: FormGroup;
 
   constructor(
-    private restaurantService: RestaurantService,
-    private addressService: AddressService,
-    private router: Router,
-    activeRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private readonly restaurantService: RestaurantService,
+    private readonly addressService: AddressService,
+    private readonly router: Router,
+    private readonly fb: FormBuilder,
+    activeRoute: ActivatedRoute
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
-
-    this.restaurantForm = this.fb.group({
-      name: ['', Validators.required],
-      addressId: ['', Validators.required],
-    });
   }
 
   public ngOnInit(): void {
@@ -44,7 +39,13 @@ export class RestaurantEditComponent implements OnInit {
             (this.updateRestaurantModel = new UpdateRestaurantModel(data))
         );
     }
+
     this.getAddressList();
+
+    this.restaurantForm = this.fb.group({
+      name: ['', Validators.required],
+      addressId: ['', Validators.required],
+    });
   }
 
   public getAddressList(): void {

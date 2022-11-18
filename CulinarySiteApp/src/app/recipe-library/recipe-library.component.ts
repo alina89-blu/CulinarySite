@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IDishListModel } from '../interfaces/dish/dish-list-model.interface';
-import { IRecipeListModel } from '../interfaces/recipe/recipe-list-model.interface';
 import { DishService } from '../services/dish.service';
-import { RecipeService } from '../services/recipe.service';
 import { DishListModel } from '../viewmodels/dish/dish-list-model.class';
-import { RecipeListModel } from '../viewmodels/recipe/recipe-list-model.class';
 
 @Component({
   selector: 'app-recipe-library',
@@ -13,7 +10,8 @@ import { RecipeListModel } from '../viewmodels/recipe/recipe-list-model.class';
 })
 export class RecipeLibraryComponent implements OnInit {
   public dishes: DishListModel[] = [];
-  constructor(private dishService: DishService) {}
+
+  constructor(private readonly dishService: DishService) {}
 
   public ngOnInit(): void {
     this.getDishDetailList();

@@ -11,7 +11,7 @@ import { RestaurantListModel } from '../viewmodels/restaurant/restaurant-list-mo
 export class RestaurantLibraryComponent implements OnInit {
   public restaurants: RestaurantListModel[] = [];
 
-  constructor(private restaurantService: RestaurantService) {}
+  constructor(private readonly restaurantService: RestaurantService) {}
 
   public ngOnInit(): void {
     this.getRestaurantDetailList();

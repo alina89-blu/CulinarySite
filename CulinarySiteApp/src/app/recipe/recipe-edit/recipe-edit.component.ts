@@ -5,8 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DishService } from 'src/app/services/dish.service';
 import { UpdateRecipeModel } from 'src/app/viewmodels/recipe/update-recipe-model.class';
 import { IRecipeDetailModel } from 'src/app/interfaces/recipe/recipe-detail-model.interface';
-import { DishListModel } from 'src/app/viewmodels/dish/dish-list-model.class';
-import { IDishListModel } from 'src/app/interfaces/dish/dish-list-model.interface';
 import { AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import {
   FormBuilder,
@@ -16,9 +14,6 @@ import {
 } from '@angular/forms';
 
 import { FormArray } from '@angular/forms';
-
-import { IngredientService } from 'src/app/services/ingredient.service';
-import { IIngredientListModel } from 'src/app/interfaces/ingredient/ingredient-list-model.interface';
 import { IngredientListModel } from 'src/app/viewmodels/ingredient/ingredient-list-model.class';
 import { AuthorService } from 'src/app/services/author.service';
 import { BookService } from 'src/app/services/book.service';
@@ -26,7 +21,6 @@ import { BookModel } from 'src/app/viewmodels/book/book-model.class';
 import { IBookModel } from 'src/app/interfaces/book/book-model.interface';
 import { Unit } from 'src/app/enums/unit.enum';
 import { CreateIngredientModel } from 'src/app/viewmodels/ingredient/create-ingredient-model.class';
-import { ICreateIngredientModel } from 'src/app/interfaces/ingredient/create-ingredient-model.interface';
 import { AuthorListModel } from 'src/app/viewmodels/author/author-list-model.class';
 import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.interface';
 import { DishModel } from 'src/app/viewmodels/dish/dish-model.class';
@@ -41,7 +35,7 @@ import { IUpdateIngredientModel } from 'src/app/interfaces/ingredient/update-ing
 export class RecipeEditComponent implements OnInit, AfterViewChecked {
   private id: number;
   public updateRecipeModel: UpdateRecipeModel = new UpdateRecipeModel();
-  difficultyLevels: DifficultyLevel[] = [
+  public difficultyLevels: DifficultyLevel[] = [
     DifficultyLevel.Лёгкий,
     DifficultyLevel['Очень Лёгкий'],
     DifficultyLevel.Средний,
@@ -58,25 +52,43 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
     Unit.Штука,
   ];
   public dishes: DishModel[] = [];
-
   public authors: AuthorListModel[] = [];
   public books: BookModel[] = [];
-
   public myForm: FormGroup;
   public ingredients: IngredientListModel[] = [];
 
   constructor(
-    private recipeService: RecipeService,
-    private dishService: DishService,
-    private router: Router,
-    activeRoute: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private ingredientService: IngredientService,
-    private authorService: AuthorService,
-    private bookService: BookService,
-    private readonly changeDetectorRef: ChangeDetectorRef
+    private readonly recipeService: RecipeService,
+    private readonly dishService: DishService,
+    private readonly router: Router,
+    private readonly formBuilder: FormBuilder,
+    private readonly authorService: AuthorService,
+    private readonly bookService: BookService,
+    private readonly changeDetectorRef: ChangeDetectorRef,
+    activeRoute: ActivatedRoute
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
+  }
+
+  public ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
+  }
+  public ngOnInit(): void {
+    if (this.id) {
+      this.recipeService
+        .getRecipe(this.id, true)
+        .subscribe((data: IRecipeDetailModel) => {
+          this.updateRecipeModel = new UpdateRecipeModel(data);
+          this.myForm.setValue({
+            ingredients: this.updateRecipeModel.ingredients,
+          });
+        });
+    }
+
+    this.getDishList();
+    this.getAuthorList();
+    this.getBookList();
+
     this.myForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
 
@@ -99,28 +111,6 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
         }),
       ]),
     });
-    //   this.updateRecipeModel.ingredients = [new CreateIngredientModel()];
-  }
-
-  public ngAfterViewChecked(): void {
-    this.changeDetectorRef.detectChanges();
-  }
-  public ngOnInit(): void {
-    if (this.id) {
-      this.recipeService
-        .getRecipe(this.id, true)
-        .subscribe((data: IRecipeDetailModel) => {
-          this.updateRecipeModel = new UpdateRecipeModel(data);
-          this.myForm.setValue({
-            ingredients: this.updateRecipeModel.ingredients,
-          });
-        });
-    }
-    this.getDishList();
-
-    //this.getIngredientList();
-    this.getAuthorList();
-    this.getBookList();
 
     /*  this.myForm.patchValue({
       ingredients: this.updateRecipeModel.ingredients,
@@ -146,21 +136,6 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
     return formArray;
   }
 
-  public updateRecipe(): void {
-    this.recipeService
-      .updateRecipe(this.updateRecipeModel)
-      .subscribe(() => this.router.navigateByUrl('recipe'));
-  }
-
-  public getDishList(): void {
-    this.dishService
-      .getDishList()
-      .subscribe(
-        (data: IDishModel[]) =>
-          (this.dishes = data.map((x) => new DishModel(x)))
-      );
-  }
-
   public getIngredientsFormsControls(): FormArray {
     return this.myForm.controls['ingredients'] as FormArray;
   }
@@ -182,15 +157,6 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
     return group;
   }
 
-  /*public getIngredientList(): void {
-    this.ingredientService
-      .getIngredientList()
-      .subscribe(
-        (data: IIngredientListModel[]) =>
-          (this.ingredients = data.map((x) => new IngredientListModel(x)))
-      );
-  }*/
-
   public getBookList(): void {
     this.bookService
       .getBookList()
@@ -206,5 +172,20 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
         (data: IAuthorListModel[]) =>
           (this.authors = data.map((x) => new AuthorListModel(x)))
       );
+  }
+
+  public getDishList(): void {
+    this.dishService
+      .getDishList()
+      .subscribe(
+        (data: IDishModel[]) =>
+          (this.dishes = data.map((x) => new DishModel(x)))
+      );
+  }
+
+  public updateRecipe(): void {
+    this.recipeService
+      .updateRecipe(this.updateRecipeModel)
+      .subscribe(() => this.router.navigateByUrl('recipe'));
   }
 }

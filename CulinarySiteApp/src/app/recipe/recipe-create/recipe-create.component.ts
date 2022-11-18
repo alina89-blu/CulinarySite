@@ -29,8 +29,6 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
   public dishes: DishModel[] = [];
   public authors: AuthorListModel[] = [];
   public books: BookModel[] = [];
-  // name = new FormControl('', Validators.required); //
-
   public difficultyLevels: DifficultyLevel[] = [
     DifficultyLevel.Лёгкий,
     DifficultyLevel['Очень Лёгкий'],
@@ -38,7 +36,6 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
     DifficultyLevel['Выше cреднего'],
     DifficultyLevel.Сложный,
   ];
-
   public units: Unit[] = [
     Unit.Грамм,
     Unit.Калории,
@@ -48,7 +45,6 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
     Unit.Миллилитр,
     Unit.Штука,
   ];
-
   public organicMatters: OrganicMatterName[] = [
     OrganicMatterName.Calories,
     OrganicMatterName.Carbohydrates,
@@ -58,13 +54,19 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
   ];
   public myForm: FormGroup;
   constructor(
-    private recipeService: RecipeService,
-    private dishService: DishService,
-    private authorService: AuthorService,
-    private bookService: BookService,
-    private router: Router,
+    private readonly recipeService: RecipeService,
+    private readonly dishService: DishService,
+    private readonly authorService: AuthorService,
+    private readonly bookService: BookService,
+    private readonly router: Router,
     private readonly changeDetectorRef: ChangeDetectorRef
-  ) {
+  ) {}
+
+  public ngOnInit(): void {
+    this.getDishList();
+    this.getAuthorList();
+    this.getBookList();
+
     this.myForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
       servingsNumber: new FormControl('', [
@@ -140,20 +142,8 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
     return group;
   }
 
-  public ngOnInit(): void {
-    this.getDishList();
-    this.getAuthorList();
-    this.getBookList();
-  }
-
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();
-  }
-
-  public createRecipe(): void {
-    this.recipeService
-      .createRecipe(this.createRecipeModel)
-      .subscribe(() => this.router.navigateByUrl('recipe'));
   }
 
   public getDishList(): void {
@@ -186,16 +176,13 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
     this.getIngredientsFormsControls().removeAt(index);
   }
 
-  /*getIngredientsFormsControls()
-                .controls[i].get('ingredientName')
-                ?.hasError('required')*/
-
   public deleteOrganicMatter(index: number) {
     this.getOrganicMattersFormsControls().removeAt(index);
   }
 
-  /*public submit() {
-    //console.log(this.myForm);
-    this.createRecipe();
-  }*/
+  public createRecipe(): void {
+    this.recipeService
+      .createRecipe(this.createRecipeModel)
+      .subscribe(() => this.router.navigateByUrl('recipe'));
+  }
 }

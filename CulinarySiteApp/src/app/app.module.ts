@@ -23,40 +23,31 @@ import { AuthService } from './services/auth.service';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CookingStageListComponent } from './cooking-stage/cooking-stage-list/cooking-stage-list.component';
-import { CookingStageEditComponent } from './cooking-stage/cooking-stage-edit/cooking-stage-edit.component';
 
-import { CookingStageListModule } from './cooking-stage/cooking-stage-list/cooking-stage-list.module';
-
-import { CookingStageEditModule } from './cooking-stage/cooking-stage-edit/cooking-stage-edit.module';
-
-import { DishListComponent } from './dish/dish-list/dish-list.component';
-
-import { DishListModule } from './dish/dish-list/dish-list.module';
-import { DishListModel } from './viewmodels/dish/dish-list-model.class';
-import { DishCreateComponent } from './dish/dish-create/dish-create.component';
-import { DishCreateModule } from './dish/dish-create/dish-create.module';
-import { DishEditComponent } from './dish/dish-edit/dish-edit.component';
-import { DishEditModule } from './dish/dish-edit/dish-edit.module';
 import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component';
-import { RecipeCreateComponent } from './recipe/recipe-create/recipe-create.component';
 
-import { RecipeCreateModule } from './recipe/recipe-create/recipe-create.module';
+import { RecipeListModule } from './recipe/recipe-list/recipe-list.module';
+
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
-import { RecipeDetailComponent } from './recipe/recipe-detail/recipe-detail.component';
 
 import { CernovicComponent } from './cernovic/cernovic.component';
 import { RecipeLibraryComponent } from './recipe-library/recipe-library.component';
-import { RestaurantLibraryComponent } from './restaurant-library/restaurant-library.component';
-import { DishDetailComponent } from './dish/dish-detail/dish-detail.component';
 
-import { DishDetailModule } from './dish/dish-detail/dish-detail.module';
+import { RestaurantEditModule } from './restaurant/restaurant-update/restaurant-edit.module';
+
+import { RecipeLibraryModule } from './recipe-library/recipe-library.module';
+import { RestaurantLibraryComponent } from './restaurant-library/restaurant-library.component';
+import { RestaurantLibraryModule } from './restaurant-library/restaurant-library.module';
+
 import { TelephoneCreateComponent } from './telephone/telephone-create/telephone-create.component';
 import { TelephoneEditComponent } from './telephone/telephone-edit/telephone-edit.component';
 import { TelephoneListComponent } from './telephone/telephone-list/telephone-list.component';
 import { RestaurantCreateComponent } from './restaurant/restaurant-create/restaurant-create.component';
+
+import { RestaurantCreateModule } from './restaurant/restaurant-create/restaurant-create.module';
 import { RestaurantEditComponent } from './restaurant/restaurant-update/restaurant-edit.component';
 import { RestaurantListComponent } from './restaurant/restaurant-list/restaurant-list.component';
+
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -213,19 +204,74 @@ const appRoutes: Routes = [
       ),
   },
 
-  { path: 'recipe', component: RecipeListComponent },
-  { path: 'editRecipe/:id', component: RecipeEditComponent },
-  { path: 'recipe/:id', component: RecipeDetailComponent },
+  {
+    path: 'recipe',
+    loadChildren: () =>
+      import('./recipe/recipe-list/recipe-list.module').then(
+        (m) => m.RecipeListModule
+      ),
+  },
 
-  { path: 'recipeLibrary', component: RecipeLibraryComponent },
-  { path: 'restaurantLibrary', component: RestaurantLibraryComponent },
+  {
+    path: 'recipe',
+    loadChildren: () =>
+      import('./recipe/recipe-detail/recipe-detail.module').then(
+        (m) => m.RecipeDetailModule
+      ),
+  },
+
+  {
+    path: 'editRecipe',
+    loadChildren: () =>
+      import('./recipe/recipe-edit/recipe-edit.module').then(
+        (m) => m.RecipeEditModule
+      ),
+  },
+
+  {
+    path: 'recipeLibrary',
+    loadChildren: () =>
+      import('./recipe-library/recipe-library.module').then(
+        (m) => m.RecipeLibraryModule
+      ),
+  },
+
+  {
+    path: 'createRestaurant',
+    loadChildren: () =>
+      import('./restaurant/restaurant-create/restaurant-create.module').then(
+        (m) => m.RestaurantCreateModule
+      ),
+  },
+
+  {
+    path: 'restaurant',
+    loadChildren: () =>
+      import('./restaurant/restaurant-list/restaurant-list.module').then(
+        (m) => m.RestaurantListModule
+      ),
+  },
+
+  {
+    path: 'editRestaurant',
+    loadChildren: () =>
+      import('./restaurant/restaurant-update/restaurant-edit.module').then(
+        (m) => m.RestaurantEditModule
+      ),
+  },
+
+  {
+    path: 'restaurantLibrary',
+    loadChildren: () =>
+      import('./restaurant-library/restaurant-library.module').then(
+        (m) => m.RestaurantLibraryModule
+      ),
+  },
 
   { path: 'telephone', component: TelephoneListComponent },
   { path: 'editTelephone/:id', component: TelephoneEditComponent },
   { path: 'createTelephone', component: TelephoneCreateComponent },
-  { path: 'restaurant', component: RestaurantListComponent },
-  { path: 'editRestaurant/:id', component: RestaurantEditComponent },
-  { path: 'createRestaurant', component: RestaurantCreateComponent },
+
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'cernovic', component: CernovicComponent },
@@ -239,20 +285,20 @@ const appRoutes: Routes = [
     NavMenuComponent,
     HomeComponent,
 
-    RecipeListComponent,
+    //RecipeListComponent,
     //RecipeCreateComponent,
-    RecipeEditComponent,
-    RecipeDetailComponent,
+    // RecipeEditComponent,
+    // RecipeDetailComponent,
 
     CernovicComponent,
-    RecipeLibraryComponent,
-    RestaurantLibraryComponent,
+    //RecipeLibraryComponent,
+    // RestaurantLibraryComponent,
     TelephoneCreateComponent,
     TelephoneEditComponent,
     TelephoneListComponent,
-    RestaurantCreateComponent,
-    RestaurantEditComponent,
-    RestaurantListComponent,
+    //  RestaurantCreateComponent,
+    //RestaurantEditComponent,
+    //RestaurantListComponent,
     LoginComponent,
     RegisterComponent,
   ],

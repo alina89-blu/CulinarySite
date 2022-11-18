@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IDishListModel } from 'src/app/interfaces/dish/dish-list-model.interface';
@@ -14,15 +13,14 @@ import { RecipeDetailModel } from 'src/app/viewmodels/recipe/recipe-detail-model
   styleUrls: ['./recipe-detail.component.css'],
 })
 export class RecipeDetailComponent implements OnInit {
-  id: number;
-  recipeDetailModel: RecipeDetailModel = new RecipeDetailModel();
-  dishes: DishListModel[] = [];
+  private id: number;
+  public recipeDetailModel: RecipeDetailModel = new RecipeDetailModel();
+  public dishes: DishListModel[] = [];
 
   constructor(
-    private recipeService: RecipeService,
-    activeRoute: ActivatedRoute,
-    private http: HttpClient,
-    private dishService: DishService
+    private readonly recipeService: RecipeService,
+    private readonly dishService: DishService,
+    activeRoute: ActivatedRoute
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
   }

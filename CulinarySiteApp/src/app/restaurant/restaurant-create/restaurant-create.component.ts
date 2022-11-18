@@ -19,19 +19,19 @@ export class RestaurantCreateComponent implements OnInit {
   public restaurantForm: FormGroup;
 
   constructor(
-    private restaurantService: RestaurantService,
-    private router: Router,
-    private addressService: AddressService,
-    private fb: FormBuilder
-  ) {
+    private readonly restaurantService: RestaurantService,
+    private readonly router: Router,
+    private readonly addressService: AddressService,
+    private readonly fb: FormBuilder
+  ) {}
+
+  public ngOnInit(): void {
+    this.getAddressList();
+
     this.restaurantForm = this.fb.group({
       name: ['', Validators.required],
       addressId: ['', Validators.required],
     });
-  }
-
-  public ngOnInit(): void {
-    this.getAddressList();
   }
 
   public getAddressList(): void {
