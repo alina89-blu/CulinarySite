@@ -96,7 +96,7 @@ const appRoutes: Routes = [
   },
 
   {
-    path: 'book',
+    path: 'bookDetail',
     loadChildren: () =>
       import('./book/book-detail/book-detail.module').then(
         (m) => m.BookDetailModule
@@ -156,7 +156,7 @@ const appRoutes: Routes = [
   },
 
   {
-    path: 'dish',
+    path: 'dishDetail',
     loadChildren: () =>
       import('./dish/dish-detail/dish-detail.module').then(
         (m) => m.DishDetailModule
@@ -186,7 +186,7 @@ const appRoutes: Routes = [
   },
 
   {
-    path: 'recipe',
+    path: 'recipeDetail',
     loadChildren: () =>
       import('./recipe/recipe-detail/recipe-detail.module').then(
         (m) => m.RecipeDetailModule

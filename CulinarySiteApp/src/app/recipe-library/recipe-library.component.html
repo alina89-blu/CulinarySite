@@ -25,7 +25,7 @@
       *ngFor="let dish of dishes; let idx = index"
       class="hover-image-scale"
     >
-      <a [routerLink]="['/dish', dish.dishId]"
+      <a [routerLink]="['/dishDetail', dish.dishId]"
         ><img
           src="{{ dish.imageUrl }}"
           alt="not found"
