@@ -6,6 +6,7 @@ using CulinarySite.Common.ViewModels.CookingStage;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using CulinarySite.Common.Pagination;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -37,6 +38,7 @@ namespace CulinarySite.Api.Controllers
             return cookingStageDetailModel;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public void CreateCookingStage(CreateCookingStageModel createCookingStageModel)
         {
@@ -44,6 +46,7 @@ namespace CulinarySite.Api.Controllers
             _cookingStageService.CreateCookingStage(createCookingStageDto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut]
         public void UpdateCookingStage(UpdateCookingStageModel updateCookingStageModel)
         {
@@ -51,6 +54,7 @@ namespace CulinarySite.Api.Controllers
             _cookingStageService.UpdateCookingStage(updateCookingStageDto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public void DeleteCookingStage(int id)
         {

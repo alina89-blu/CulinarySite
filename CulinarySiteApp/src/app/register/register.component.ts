@@ -10,19 +10,20 @@ import { AuthService } from '../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   public registerForm: FormGroup;
+
   constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {
+    private readonly fb: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly router: Router
+  ) {}
+
+  public ngOnInit(): void {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
-
-  public ngOnInit(): void {}
 
   public register(): void {
     this.authService.register(this.registerForm.value).subscribe(() => {

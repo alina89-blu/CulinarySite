@@ -5,6 +5,7 @@ using CulinarySite.Bll.Interfaces;
 using CulinarySite.Common.ViewModels.Author;
 using CulinarySite.Common.Dtos.Author;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -35,6 +36,7 @@ namespace CulinarySite.Api.Controllers
             return authorDetailModel;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public void CreateAuthor(CreateAuthorModel createAuthorModel)
         {
@@ -43,6 +45,7 @@ namespace CulinarySite.Api.Controllers
 
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut]
         public void UpdateAuthor(UpdateAuthorModel updateAuthorModel)
         {
@@ -50,6 +53,7 @@ namespace CulinarySite.Api.Controllers
             _authorService.UpdateAuthor(updateAuthorDto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public void DeleteAuthor(int id)
         {

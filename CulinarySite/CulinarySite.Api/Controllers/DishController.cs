@@ -5,6 +5,7 @@ using CulinarySite.Common.ViewModels.Dish;
 using CulinarySite.Common.Dtos.Dish;
 using CulinarySite.Bll.Interfaces;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -45,6 +46,7 @@ namespace CulinarySite.Api.Controllers
             return dishDetailModel;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public void CreateDish(CreateDishModel createDishModel)
         {
@@ -52,6 +54,7 @@ namespace CulinarySite.Api.Controllers
             _dishService.CreateDish(createDishDto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut]
         public void UpdateDish(UpdateDishModel updateDishModel)
         {
@@ -59,6 +62,7 @@ namespace CulinarySite.Api.Controllers
             _dishService.UpdateDish(updateDishDto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public void DeleteDish(int id)
         {

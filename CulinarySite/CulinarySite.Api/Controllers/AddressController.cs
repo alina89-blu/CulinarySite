@@ -37,7 +37,7 @@ namespace CulinarySite.Api.Controllers
             return addressDetailModel;
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public void CreateAddress(CreateAddressModel createAddressModel)
         {
@@ -53,7 +53,7 @@ namespace CulinarySite.Api.Controllers
             _addressService.UpdateAddress(updateAddressDto);
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public void DeleteAddress(int id)
         {

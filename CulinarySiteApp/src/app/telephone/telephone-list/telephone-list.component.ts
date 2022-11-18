@@ -10,11 +10,16 @@ import { TelephoneListModel } from 'src/app/viewmodels/telephone/telephone-list-
   styleUrls: ['./telephone-list.component.css'],
 })
 export class TelephoneListComponent implements OnInit {
-  telephones: TelephoneListModel[] = [];
-  displayedColumns: string[] = ['id', 'number', 'restaurantName', 'actions'];
-  dataSource: MatTableDataSource<ITelephoneListModel>;
+  public telephones: TelephoneListModel[] = [];
+  public displayedColumns: string[] = [
+    'id',
+    'number',
+    'restaurantName',
+    'actions',
+  ];
+  public dataSource: MatTableDataSource<ITelephoneListModel>;
 
-  constructor(private telephoneService: TelephoneService) {}
+  constructor(private readonly telephoneService: TelephoneService) {}
 
   public ngOnInit(): void {
     this.getTelephoneList();

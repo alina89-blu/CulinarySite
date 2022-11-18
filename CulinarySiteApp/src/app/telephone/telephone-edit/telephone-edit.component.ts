@@ -21,18 +21,13 @@ export class TelephoneEditComponent implements OnInit {
   public telephoneForm: FormGroup;
 
   constructor(
-    private telephoneService: TelephoneService,
-    private restaurantService: RestaurantService,
-    private router: Router,
-    activeRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private readonly telephoneService: TelephoneService,
+    private readonly restaurantService: RestaurantService,
+    private readonly router: Router,
+    private readonly fb: FormBuilder,
+    activeRoute: ActivatedRoute
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
-
-    this.telephoneForm = this.fb.group({
-      number: ['', Validators.required],
-      restaurantId: ['', Validators.required],
-    });
   }
 
   public ngOnInit(): void {
@@ -44,7 +39,13 @@ export class TelephoneEditComponent implements OnInit {
             (this.updateTelephoneModel = new UpdateTelephoneModel(data))
         );
     }
+
     this.getRestaurantList();
+
+    this.telephoneForm = this.fb.group({
+      number: ['', Validators.required],
+      restaurantId: ['', Validators.required],
+    });
   }
 
   public getRestaurantList(): void {

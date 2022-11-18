@@ -5,6 +5,7 @@ using CulinarySite.Common.Dtos.Telephone;
 using CulinarySite.Common.ViewModels.Telephone;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -36,6 +37,7 @@ namespace CulinarySite.Api.Controllers
             return telephoneDetailModel;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public void CreateTelephone(CreateTelephoneModel createTelephoneModel)
         {
@@ -43,6 +45,7 @@ namespace CulinarySite.Api.Controllers
             _telephoneService.CreateTelephone(createTelephoneDto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut]
         public void UpdateTelephone(UpdateTelephoneModel updateTelephoneModel)
         {
@@ -50,6 +53,7 @@ namespace CulinarySite.Api.Controllers
             _telephoneService.UpdateTelephone(updateTelephoneDto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public void DeleteTelephone(int id)
         {

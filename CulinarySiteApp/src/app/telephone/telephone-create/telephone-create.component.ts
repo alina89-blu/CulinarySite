@@ -19,19 +19,19 @@ export class TelephoneCreateComponent implements OnInit {
   public restaurants: RestaurantModel[] = [];
 
   constructor(
-    private telephoneService: TelephoneService,
-    private restaurantService: RestaurantService,
-    private router: Router,
-    private fb: FormBuilder
-  ) {
+    private readonly telephoneService: TelephoneService,
+    private readonly restaurantService: RestaurantService,
+    private readonly router: Router,
+    private readonly fb: FormBuilder
+  ) {}
+
+  public ngOnInit(): void {
+    this.getRestaurantList();
+
     this.telephoneForm = this.fb.group({
       number: ['', Validators.required],
       restaurantId: ['', Validators.required],
     });
-  }
-
-  public ngOnInit(): void {
-    this.getRestaurantList();
   }
 
   public getRestaurantList(): void {

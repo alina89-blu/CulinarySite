@@ -10,19 +10,20 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
+
   constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {
+    private readonly fb: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly router: Router
+  ) {}
+
+  public ngOnInit(): void {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', Validators.required],
     });
     console.log(this.loginForm);
   }
-
-  public ngOnInit(): void {}
 
   public login(): void {
     this.authService.login(this.loginForm.value).subscribe((data) => {

@@ -49,6 +49,7 @@ namespace CulinarySite.Api.Controllers
             return recipeDetailModel;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public void CreateRecipe(CreateRecipeModel createRecipeModel)
         {
@@ -56,6 +57,7 @@ namespace CulinarySite.Api.Controllers
             _recipeService.CreateRecipe(createRecipeDto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut]
         public void UpdateRecipe(UpdateRecipeModel updateRecipeModel)
         {
@@ -63,6 +65,7 @@ namespace CulinarySite.Api.Controllers
             _recipeService.UpdateRecipe(updateRecipeDto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public void DeleteRecipe(int id)
         {

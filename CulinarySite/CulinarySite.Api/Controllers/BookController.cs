@@ -47,6 +47,7 @@ namespace CulinarySite.Api.Controllers
             return bookDetailModel;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public void CreateBook(CreateBookModel createBookModel)
         {
@@ -54,6 +55,7 @@ namespace CulinarySite.Api.Controllers
             _bookService.CreateBook(createBookDto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut]
         public void UpdateBook(UpdateBookModel updateBookModel)
         {
@@ -61,7 +63,7 @@ namespace CulinarySite.Api.Controllers
             _bookService.UpdateBook(updateBookDto);
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]      
         [HttpDelete("{id}")]
         public void DeleteBook(int id)
         {

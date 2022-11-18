@@ -5,6 +5,7 @@ using CulinarySite.Common.ViewModels.Ingredient;
 using CulinarySite.Common.Dtos.Ingredient;
 using CulinarySite.Bll.Interfaces;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -36,6 +37,7 @@ namespace CulinarySite.Api.Controllers
             return ingredientDetailModel;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public void CreateIngredient(CreateIngredientModel createIngredientModel)
         {
@@ -43,6 +45,7 @@ namespace CulinarySite.Api.Controllers
             _ingredientService.CreateIngredient(createIngredientDto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut]
         public void UpdateIngredient(UpdateIngredientModel updateIngredientModel)
         {
@@ -50,6 +53,7 @@ namespace CulinarySite.Api.Controllers
             _ingredientService.UpdateIngredient(updateIngredientDto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public void DeleteIngredient(int id)
         {

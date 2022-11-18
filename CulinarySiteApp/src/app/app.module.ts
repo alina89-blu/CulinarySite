@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AddressService } from './services/address.service';
 import { AuthorService } from './services/author.service';
@@ -19,40 +20,12 @@ import { RestaurantService } from './services/restaurant.service';
 import { TagService } from './services/tag.service';
 import { TelephoneService } from './services/telephone.service';
 import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-
-import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component';
-
-import { RecipeListModule } from './recipe/recipe-list/recipe-list.module';
-
-import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
-
-import { CernovicComponent } from './cernovic/cernovic.component';
-import { RecipeLibraryComponent } from './recipe-library/recipe-library.component';
-
-import { RestaurantEditModule } from './restaurant/restaurant-update/restaurant-edit.module';
-
-import { RecipeLibraryModule } from './recipe-library/recipe-library.module';
-import { RestaurantLibraryComponent } from './restaurant-library/restaurant-library.component';
-import { RestaurantLibraryModule } from './restaurant-library/restaurant-library.module';
-
-import { TelephoneCreateComponent } from './telephone/telephone-create/telephone-create.component';
-import { TelephoneEditComponent } from './telephone/telephone-edit/telephone-edit.component';
-import { TelephoneListComponent } from './telephone/telephone-list/telephone-list.component';
-import { RestaurantCreateComponent } from './restaurant/restaurant-create/restaurant-create.component';
-
-import { RestaurantCreateModule } from './restaurant/restaurant-create/restaurant-create.module';
-import { RestaurantEditComponent } from './restaurant/restaurant-update/restaurant-edit.component';
-import { RestaurantListComponent } from './restaurant/restaurant-list/restaurant-list.component';
-
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { AuthGuardService } from './services/auth-guard.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TokenInterceptorService } from './services/token-interceptor.service';
 
 //import { AppRoutingModule } from './app-routing.module';
 
@@ -268,46 +241,50 @@ const appRoutes: Routes = [
       ),
   },
 
-  { path: 'telephone', component: TelephoneListComponent },
-  { path: 'editTelephone/:id', component: TelephoneEditComponent },
-  { path: 'createTelephone', component: TelephoneCreateComponent },
+  {
+    path: 'createTelephone',
+    loadChildren: () =>
+      import('./telephone/telephone-create/telephone-create.module').then(
+        (m) => m.TelephoneCreateModule
+      ),
+  },
 
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'cernovic', component: CernovicComponent },
+  {
+    path: 'editTelephone',
+    loadChildren: () =>
+      import('./telephone/telephone-edit/telephone-edit.module').then(
+        (m) => m.TelephoneEditModule
+      ),
+  },
 
-  //
+  {
+    path: 'telephone',
+    loadChildren: () =>
+      import('./telephone/telephone-list/telephone-list.module').then(
+        (m) => m.TelephoneListModule
+      ),
+  },
+
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginModule),
+  },
+
+  {
+    path: 'register',
+    loadChildren: () =>
+      import('./register/register.module').then((m) => m.RegisterModule),
+  },
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-
-    //RecipeListComponent,
-    //RecipeCreateComponent,
-    // RecipeEditComponent,
-    // RecipeDetailComponent,
-
-    CernovicComponent,
-    //RecipeLibraryComponent,
-    // RestaurantLibraryComponent,
-    TelephoneCreateComponent,
-    TelephoneEditComponent,
-    TelephoneListComponent,
-    //  RestaurantCreateComponent,
-    //RestaurantEditComponent,
-    //RestaurantListComponent,
-    LoginComponent,
-    RegisterComponent,
-  ],
+  declarations: [AppComponent, NavMenuComponent, HomeComponent],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    //ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     ReactiveFormsModule,
     MaterialModule,
     BrowserAnimationsModule,

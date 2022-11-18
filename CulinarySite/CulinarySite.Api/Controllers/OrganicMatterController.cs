@@ -5,6 +5,7 @@ using CulinarySite.Common.ViewModels.OrganicMatter;
 using CulinarySite.Common.Dtos.OrganicMatter;
 using CulinarySite.Bll.Interfaces;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CulinarySite.Api.Controllers
 {
@@ -36,6 +37,7 @@ namespace CulinarySite.Api.Controllers
             return organicMatterDetailModel;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public void CreateOrganicMatter(CreateOrganicMatterModel createOrganicMatterModel)
         {
@@ -43,6 +45,7 @@ namespace CulinarySite.Api.Controllers
             _organicMatterService.CreateOrganicMatter(createOrganicMatterDto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut]
         public void UpdateOrganicMatter(UpdateOrganicMatterModel updateOrganicMatterModel)
         {
@@ -50,6 +53,7 @@ namespace CulinarySite.Api.Controllers
             _organicMatterService.UpdateOrganicMatter(updateOrganicMatterDto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public void DeleteOrganicMatter(int id)
         {
