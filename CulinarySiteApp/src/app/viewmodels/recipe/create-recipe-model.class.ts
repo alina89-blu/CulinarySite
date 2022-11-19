@@ -3,7 +3,6 @@ import { ICreateRecipeModel } from 'src/app/interfaces/recipe/create-recipe-mode
 import { CreateCookingStageModel } from '../cooking-stage/create-cooking-stage-model.class';
 import { CreateIngredientModel } from '../ingredient/create-ingredient-model.class';
 import { CreateOrganicMatterModel } from '../organic-matter/create-organic-matter-model.class';
-import { CreateTagModel } from '../tag/create-tag-model.class';
 
 export class CreateRecipeModel {
   public name: string;
@@ -17,7 +16,6 @@ export class CreateRecipeModel {
   public ingredients: CreateIngredientModel[];
   public organicMatters: CreateOrganicMatterModel[];
   public cookingStages: CreateCookingStageModel[];
-  public tags: CreateTagModel[];
   public imageUrl: string;
 
   constructor(public createRecipeModel?: ICreateRecipeModel) {
@@ -33,7 +31,6 @@ export class CreateRecipeModel {
       this.ingredients = createRecipeModel.ingredients;
       this.organicMatters = createRecipeModel.organicMatters;
       this.cookingStages = createRecipeModel.cookingStages;
-      this.tags = createRecipeModel.tags;
       this.imageUrl = createRecipeModel.imageUrl;
     }
   }

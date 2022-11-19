@@ -30,10 +30,7 @@ namespace CulinarySite.Dal.EntityConfigurations
             builder.HasMany(x => x.OrganicMatters)
                 .WithMany(x => x.Recipes)
                 .UsingEntity(j => j.ToTable("OrganicMatterRecipe"));
-
-            builder.HasMany(x => x.Tags)
-                .WithMany(x => x.Recipes)
-                .UsingEntity(j => j.ToTable("RecipeTag"));
+            
         }
     }
 }

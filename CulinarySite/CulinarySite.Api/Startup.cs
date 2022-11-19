@@ -48,16 +48,12 @@ namespace CulinarySite.Api
             services.AddScoped(typeof(IAuthorService), typeof(AuthorService));
             services.AddScoped(typeof(IBookService), typeof(BookService));
             services.AddScoped(typeof(ICommentService), typeof(CommentService));
-            services.AddScoped(typeof(ICookingStageService), typeof(CookingStageService));
-            services.AddScoped(typeof(ICulinaryChannelService), typeof(CulinaryChannelService));
-            services.AddScoped(typeof(IDishService), typeof(DishService));
-            services.AddScoped(typeof(IEpisodeService), typeof(EpisodeService));
+            services.AddScoped(typeof(ICookingStageService), typeof(CookingStageService));          
+            services.AddScoped(typeof(IDishService), typeof(DishService));           
             services.AddScoped(typeof(IIngredientService), typeof(IngredientService));
             services.AddScoped(typeof(IOrganicMatterService), typeof(OrganicMatterService));
             services.AddScoped(typeof(IRecipeService), typeof(RecipeService));
-            services.AddScoped(typeof(IRestaurantService), typeof(RestaurantService));
-            services.AddScoped(typeof(ISubscriberService), typeof(SubscriberService));
-            services.AddScoped(typeof(ITagService), typeof(TagService));
+            services.AddScoped(typeof(IRestaurantService), typeof(RestaurantService));            
             services.AddScoped(typeof(ITelephoneService), typeof(TelephoneService));
             services.AddSwaggerGen();
         }

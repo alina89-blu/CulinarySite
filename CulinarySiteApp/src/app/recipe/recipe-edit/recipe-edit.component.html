@@ -265,7 +265,7 @@
           <input
             type="text"
             matInput
-            formControlName="name"
+            formControlName="ingredientName"
             [(ngModel)]="updateRecipeModel.ingredients[i].name"
             placeholder="Название"
           />
@@ -275,7 +275,7 @@
           <mat-label>Единица измерения</mat-label>
           <br />
           <mat-select
-            formControlName="unit"
+            formControlName="ingredientUnit"
             [(ngModel)]="updateRecipeModel.ingredients[i].unit"
             placeholder="Категория блюда"
           >
@@ -291,7 +291,7 @@
           <input
             type="number"
             matInput
-            formControlName="quantity"
+            formControlName="ingredientQuantity"
             [(ngModel)]="updateRecipeModel.ingredients[i].quantity"
             placeholder="Количество"
           />

@@ -53,8 +53,8 @@ namespace CulinarySite.Bll.Services
             {
                 comment = _commentReadOnlyRepository.GetItemWithInclude(
                 x => x.Id == id,
-                x => x.Restaurants,
-                x => x.Subscriber);
+                x => x.Restaurants
+                );
 
                 commentDetailDto = _mapper.Map<CommentDetailDto>(comment);
 
@@ -75,9 +75,7 @@ namespace CulinarySite.Bll.Services
 
             if (withRelated)
             {
-                comments = _commentReadOnlyRepository.GetItemListWithInclude(
-                x => x.Restaurants,
-                x => x.Subscriber);
+                comments = _commentReadOnlyRepository.GetItemListWithInclude(x => x.Restaurants);
 
                 commentListDtos = comments.Select(x => _mapper.Map<CommentListDto>(x));
                 

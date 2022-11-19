@@ -4,15 +4,11 @@ using CulinarySite.Common.Dtos.Author;
 using CulinarySite.Common.Dtos.Book;
 using CulinarySite.Common.Dtos.Comment;
 using CulinarySite.Common.Dtos.CookingStage;
-using CulinarySite.Common.Dtos.CulinaryChannel;
 using CulinarySite.Common.Dtos.Dish;
-using CulinarySite.Common.Dtos.Episode;
 using CulinarySite.Common.Dtos.Ingredient;
 using CulinarySite.Common.Dtos.OrganicMatter;
 using CulinarySite.Common.Dtos.Recipe;
 using CulinarySite.Common.Dtos.Restaurant;
-using CulinarySite.Common.Dtos.Subscriber;
-using CulinarySite.Common.Dtos.Tag;
 using CulinarySite.Common.Dtos.Telephone;
 using CulinarySite.Domain.Entities;
 
@@ -58,8 +54,6 @@ namespace CulinarySite.Bll.AutoMapperProfiles
                 .ForPath(dest => dest.Author.Name, opt => opt.MapFrom(src => src.AuthorName))
                 .ReverseMap();
 
-
-
             CreateMap<CreateCookingStageDto, CookingStage>().ReverseMap();
             CreateMap<UpdateCookingStageDto, CookingStage>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CookingStageId)).ReverseMap();
@@ -75,21 +69,6 @@ namespace CulinarySite.Bll.AutoMapperProfiles
             CreateMap<CookingStageDetailDto, CookingStage>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CookingStageId)).ReverseMap();
 
-
-            CreateMap<CreateCulinaryChannelDto, CulinaryChannel>().ReverseMap();
-            CreateMap<UpdateCulinaryChannelDto, CulinaryChannel>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CulinaryChannelId)).ReverseMap();
-
-            CreateMap<CulinaryChannelDetailDto, CulinaryChannel>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CulinaryChannelId)).ReverseMap();
-
-            CreateMap<CulinaryChannelListDto, CulinaryChannel>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CulinaryChannelId)).ReverseMap();
-
-            CreateMap<CulinaryChannelDto, CulinaryChannel>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CulinaryChannelId)).ReverseMap();
-
-
             CreateMap<CreateDishDto, Dish>().ReverseMap();
             CreateMap<UpdateDishDto, Dish>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DishId)).ReverseMap();
@@ -102,21 +81,6 @@ namespace CulinarySite.Bll.AutoMapperProfiles
 
             CreateMap<DishDto, Dish>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.DishId)).ReverseMap();
-
-
-            CreateMap<CreateEpisodeDto, Episode>().ReverseMap();
-            CreateMap<UpdateEpisodeDto, Episode>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.EpisodeId)).ReverseMap();
-
-            CreateMap<EpisodeDetailDto, Episode>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.EpisodeId)).ReverseMap();
-
-            CreateMap<EpisodeListDto, Episode>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.EpisodeId))
-                .ForPath(dest => dest.CulinaryChannel.Name, opt => opt.MapFrom(src => src.CulinaryChannelName))
-                .ReverseMap();
-
-
 
             CreateMap<CreateIngredientDto, Ingredient>().ReverseMap();
             CreateMap<UpdateIngredientDto, Ingredient>()
@@ -145,21 +109,6 @@ namespace CulinarySite.Bll.AutoMapperProfiles
             CreateMap<OrganicMatterListDto, OrganicMatter>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.OrganicMatterId)).ReverseMap();
 
-
-            CreateMap<CreateTagDto, Tag>().ReverseMap();
-            CreateMap<UpdateTagDto, Tag>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TagId)).ReverseMap();
-
-            CreateMap<TagDetailDto, Tag>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TagId)).ReverseMap();
-
-            CreateMap<TagListDto, Tag>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TagId)).ReverseMap();
-
-            CreateMap<TagDto, Tag>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TagId)).ReverseMap();
-
-
             CreateMap<CreateRecipeDto, Recipe>().ReverseMap();
 
             CreateMap<UpdateRecipeDto, Recipe>()
@@ -181,8 +130,6 @@ namespace CulinarySite.Bll.AutoMapperProfiles
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RecipeId))
                 .ReverseMap();
 
-
-
             CreateMap<CreateRestaurantDto, Restaurant>().ReverseMap();
             CreateMap<UpdateRestaurantDto, Restaurant>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RestaurantId)).ReverseMap();
@@ -198,7 +145,6 @@ namespace CulinarySite.Bll.AutoMapperProfiles
                 .ForPath(dest => dest.Address.Name, opt => opt.MapFrom(src => src.AddressName))
                 .ReverseMap();
 
-
             CreateMap<CreateTelephoneDto, Telephone>().ReverseMap();
             CreateMap<UpdateTelephoneDto, Telephone>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TelephoneId)).ReverseMap();
@@ -213,19 +159,7 @@ namespace CulinarySite.Bll.AutoMapperProfiles
 
             CreateMap<TelephoneDto, Telephone>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.TelephoneId)).ReverseMap();
-
-
-            CreateMap<CreateSubscriberDto, Subscriber>().ReverseMap();
-            CreateMap<UpdateSubscriberDto, Subscriber>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.SubscriberId)).ReverseMap();
-
-            CreateMap<SubscriberDetailDto, Subscriber>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.SubscriberId)).ReverseMap();
-
-            CreateMap<SubscriberListDto, Subscriber>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.SubscriberId)).ReverseMap();
-
-
+           
             CreateMap<CreateCommentDto, Comment>().ReverseMap();
             CreateMap<UpdateCommentDto, Comment>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CommentId)).ReverseMap();
@@ -233,8 +167,7 @@ namespace CulinarySite.Bll.AutoMapperProfiles
             CreateMap<CommentDetailDto, Comment>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CommentId)).ReverseMap();
 
-            CreateMap<CommentListDto, Comment>()
-                .ForPath(dest => dest.Subscriber.Name, opt => opt.MapFrom(src => src.SubscriberName))
+            CreateMap<CommentListDto, Comment>()                
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CommentId)).ReverseMap();
         }
     }

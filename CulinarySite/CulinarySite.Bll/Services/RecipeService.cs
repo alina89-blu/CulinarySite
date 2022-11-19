@@ -92,8 +92,7 @@ namespace CulinarySite.Bll.Services
                     x => x.Book,
                     x => x.Ingredients,
                     x => x.OrganicMatters,
-                    x => x.CookingStages,
-                    x => x.Tags
+                    x => x.CookingStages                    
                     );
                 recipeListDtos = recipes.Select(x => _mapper.Map<RecipeListDto>(x));
 
@@ -128,8 +127,7 @@ namespace CulinarySite.Bll.Services
                     x => x.Book,
                     x => x.Ingredients,
                     x => x.OrganicMatters,
-                    x => x.CookingStages,
-                    x => x.Tags
+                    x => x.CookingStages                    
                    );
 
                 recipeDetailDto = _mapper.Map<RecipeDetailDto>(recipe);

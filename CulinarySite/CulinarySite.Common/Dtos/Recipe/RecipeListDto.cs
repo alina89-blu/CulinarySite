@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using CulinarySite.Common.Dtos.CookingStage;
 using CulinarySite.Common.Dtos.Ingredient;
 using CulinarySite.Common.Dtos.OrganicMatter;
-using CulinarySite.Common.Dtos.Tag;
 
 namespace CulinarySite.Common.Dtos.Recipe
 {
@@ -21,7 +20,6 @@ namespace CulinarySite.Common.Dtos.Recipe
         public List<IngredientDto> Ingredients { get; set; } = new List<IngredientDto>();
         public List<OrganicMatterDto> OrganicMatters { get; set; } = new List<OrganicMatterDto>();
         public List<CookingStageDto> CookingStages { get; set; } = new List<CookingStageDto>();
-        public List<TagDto> Tags { get; set; } = new List<TagDto>();
         public string ImageUrl { get; set; }
     }
 }

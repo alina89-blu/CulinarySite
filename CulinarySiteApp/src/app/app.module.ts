@@ -4,8 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+//import { AppRoutingModule } from './app-routing.module';
 
 import { AddressService } from './services/address.service';
 import { AuthorService } from './services/author.service';
@@ -17,7 +21,6 @@ import { IngredientService } from './services/ingredient.service';
 import { OrganicMatterService } from './services/organic-matter.service';
 import { RecipeService } from './services/recipe.service';
 import { RestaurantService } from './services/restaurant.service';
-import { TagService } from './services/tag.service';
 import { TelephoneService } from './services/telephone.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -26,8 +29,6 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-
-//import { AppRoutingModule } from './app-routing.module';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -286,7 +287,10 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
-    MaterialModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
     BrowserAnimationsModule,
     // AppRoutingModule,
   ],
@@ -301,7 +305,6 @@ const appRoutes: Routes = [
     OrganicMatterService,
     RecipeService,
     RestaurantService,
-    TagService,
     TelephoneService,
     AuthService,
     AuthGuardService,

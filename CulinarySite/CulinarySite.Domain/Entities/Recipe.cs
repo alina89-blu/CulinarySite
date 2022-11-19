@@ -12,8 +12,7 @@ namespace CulinarySite.Domain.Entities
         public string Content { get; set; } 
         public List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
         public List<OrganicMatter> OrganicMatters { get; set; } = new List<OrganicMatter>();              
-        public List<CookingStage> CookingStages { get; set; } = new List<CookingStage>();
-        public List<Tag> Tags { get; set; } = new List<Tag>();
+        public List<CookingStage> CookingStages { get; set; } = new List<CookingStage>();        
         public int AuthorId { get; set; }
         public Author Author { get; set; }
         public int? BookId { get; set; }

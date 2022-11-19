@@ -3,7 +3,6 @@ import { IRecipeDetailModel } from 'src/app/interfaces/recipe/recipe-detail-mode
 import { CookingStageModel } from '../cooking-stage/cooking-stage-model.class';
 import { IngredientModel } from '../ingredient/ingredient-model.class';
 import { OrganicMatterModel } from '../organic-matter/organic-matter-model.class';
-import { TagModel } from '../tag/tag-model.class';
 
 export class RecipeDetailModel {
   public recipeId: number;
@@ -18,7 +17,6 @@ export class RecipeDetailModel {
   public ingredients: IngredientModel[];
   public organicMatters: OrganicMatterModel[];
   public cookingStages: CookingStageModel[];
-  public tags: TagModel[];
   public imageUrl: string;
 
   constructor(public recipeDetailModel?: IRecipeDetailModel) {
@@ -35,7 +33,6 @@ export class RecipeDetailModel {
       this.ingredients = recipeDetailModel.ingredients;
       this.organicMatters = recipeDetailModel.organicMatters;
       this.cookingStages = recipeDetailModel.cookingStages;
-      this.tags = recipeDetailModel.tags;
       this.imageUrl = recipeDetailModel.imageUrl;
     }
   }

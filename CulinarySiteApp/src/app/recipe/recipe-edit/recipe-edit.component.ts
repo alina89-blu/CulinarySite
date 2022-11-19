@@ -79,11 +79,21 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
         .getRecipe(this.id, true)
         .subscribe((data: IRecipeDetailModel) => {
           this.updateRecipeModel = new UpdateRecipeModel(data);
-          this.myForm.setValue({
-            ingredients: this.updateRecipeModel.ingredients,
-          });
         });
     }
+
+    /*  this.myForm.setValue({
+      ingredients: this.updateRecipeModel.ingredients,
+    });*/
+
+    /*  this.myForm.patchValue({
+      ingredients: this.updateRecipeModel.ingredients,
+    });*/
+
+    /*this.myForm.setControl(
+      'ingredients',
+      this.setExistingIngredients(this.updateRecipeModel.ingredients)
+    );*/
 
     this.getDishList();
     this.getAuthorList();
@@ -91,7 +101,6 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
 
     this.myForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-
       servingsNumber: new FormControl('', [
         Validators.required,
         Validators.min(1),
@@ -105,31 +114,24 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
       dishId: new FormControl('', Validators.required),
       ingredients: new FormArray([
         new FormGroup({
-          name: new FormControl('', Validators.required),
-          unit: new FormControl('', Validators.required),
-          quantity: new FormControl('', Validators.required),
+          ingredientName: new FormControl('', Validators.required),
+          ingredientUnit: new FormControl('', Validators.required),
+          ingredientQuantity: new FormControl('', Validators.required),
         }),
       ]),
     });
-
-    /*  this.myForm.patchValue({
-      ingredients: this.updateRecipeModel.ingredients,
-    });*/
-
-    /* this.myForm.setControl(
-      'ingredients',
-      this.setExistingBooks(this.updateRecipeModel.ingredients)
-    );*/
   }
 
-  setExistingBooks(ingredients: IUpdateIngredientModel[]): FormArray {
+  public setExistingIngredients(
+    ingredients: IUpdateIngredientModel[]
+  ): FormArray {
     const formArray = new FormArray([]);
-    ingredients.forEach((s) => {
+    ingredients.forEach((ingredient) => {
       formArray.push(
         this.formBuilder.group({
-          name: s.name,
-          unit: s.unit,
-          quantity: s.quantity,
+          ingredientName: ingredient.name,
+          ingredientUnit: ingredient.unit,
+          ingredientQuantity: ingredient.quantity,
         })
       );
     });
@@ -150,9 +152,9 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
 
   public createNewIngredient(): FormGroup {
     const group = new FormGroup({
-      name: new FormControl('', Validators.required),
-      unit: new FormControl('', Validators.required),
-      quantity: new FormControl('', Validators.required),
+      ingredientName: new FormControl('', Validators.required),
+      ingredientUnit: new FormControl('', Validators.required),
+      ingredientQuantity: new FormControl('', Validators.required),
     });
     return group;
   }

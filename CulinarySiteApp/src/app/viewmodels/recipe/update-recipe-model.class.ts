@@ -4,7 +4,6 @@ import { IUpdateRecipeModel } from 'src/app/interfaces/recipe/update-recipe-mode
 import { UpdateCookingStageModel } from '../cooking-stage/update-cooking-stage-model.class';
 import { UpdateIngredientModel } from '../ingredient/update-ingredient-model.class';
 import { UpdateOrganicMatterModel } from '../organic-matter/update-organic-matter-model.class';
-import { UpdateTagModel } from '../tag/update-tag-model.class';
 
 export class UpdateRecipeModel {
   public recipeId: number;
@@ -19,7 +18,6 @@ export class UpdateRecipeModel {
   public ingredients: UpdateIngredientModel[];
   public organicMatters: UpdateOrganicMatterModel[];
   public cookingStages: UpdateCookingStageModel[];
-  public tags: UpdateTagModel[];
   public imageUrl: string;
 
   constructor(
@@ -38,7 +36,6 @@ export class UpdateRecipeModel {
       this.ingredients = updateRecipeModel.ingredients;
       this.organicMatters = updateRecipeModel.organicMatters;
       this.cookingStages = updateRecipeModel.cookingStages;
-      this.tags = updateRecipeModel.tags;
       this.imageUrl = updateRecipeModel.imageUrl;
     }
   }

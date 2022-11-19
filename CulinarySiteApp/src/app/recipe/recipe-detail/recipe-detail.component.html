@@ -3,7 +3,9 @@
     <span><a [routerLink]="['']">Главная >> </a> </span>
     <span *ngFor="let dish of dishes">
       <span *ngIf="dish.dishId == recipeDetailModel.dishId">
-        <a [routerLink]="['/dish', dish.dishId]">{{ dish.category }} >> </a>
+        <a [routerLink]="['/dishDetail', dish.dishId]"
+          >{{ dish.category }} >>
+        </a>
       </span>
     </span>
     <span>
