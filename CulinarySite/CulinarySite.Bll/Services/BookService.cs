@@ -133,3 +133,19 @@ namespace CulinarySite.Bll.Services
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+/*    private Expression<Func<Book, bool>>  func(string filter)
+    {
+        return b => b.Name.Contains(filter);
+
+    }*/

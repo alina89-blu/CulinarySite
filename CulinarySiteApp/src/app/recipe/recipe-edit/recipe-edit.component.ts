@@ -5,34 +5,29 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DishService } from 'src/app/services/dish.service';
 import { UpdateRecipeModel } from 'src/app/viewmodels/recipe/update-recipe-model.class';
 import { IRecipeDetailModel } from 'src/app/interfaces/recipe/recipe-detail-model.interface';
-import { AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-
-import { FormArray } from '@angular/forms';
 import { IngredientListModel } from 'src/app/viewmodels/ingredient/ingredient-list-model.class';
 import { AuthorService } from 'src/app/services/author.service';
 import { BookService } from 'src/app/services/book.service';
 import { BookModel } from 'src/app/viewmodels/book/book-model.class';
 import { IBookModel } from 'src/app/interfaces/book/book-model.interface';
 import { Unit } from 'src/app/enums/unit.enum';
-import { CreateIngredientModel } from 'src/app/viewmodels/ingredient/create-ingredient-model.class';
 import { AuthorListModel } from 'src/app/viewmodels/author/author-list-model.class';
 import { IAuthorListModel } from 'src/app/interfaces/author/author-list-model.interface';
 import { DishModel } from 'src/app/viewmodels/dish/dish-model.class';
 import { IDishModel } from 'src/app/interfaces/dish/dish-model.interface';
-import { IUpdateIngredientModel } from 'src/app/interfaces/ingredient/update-ingredient-model.interface';
 
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.css'],
 })
-export class RecipeEditComponent implements OnInit, AfterViewChecked {
+export class RecipeEditComponent implements OnInit {
   private id: number;
   public updateRecipeModel: UpdateRecipeModel = new UpdateRecipeModel();
   public difficultyLevels: DifficultyLevel[] = [
@@ -55,7 +50,6 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
   public authors: AuthorListModel[] = [];
   public books: BookModel[] = [];
   public myForm: FormGroup;
-  public ingredients: IngredientListModel[] = [];
 
   constructor(
     private readonly recipeService: RecipeService,
@@ -64,15 +58,11 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
     private readonly formBuilder: FormBuilder,
     private readonly authorService: AuthorService,
     private readonly bookService: BookService,
-    private readonly changeDetectorRef: ChangeDetectorRef,
     activeRoute: ActivatedRoute
   ) {
     this.id = Number.parseInt(activeRoute.snapshot.params['id']);
   }
 
-  public ngAfterViewChecked(): void {
-    this.changeDetectorRef.detectChanges();
-  }
   public ngOnInit(): void {
     if (this.id) {
       this.recipeService
@@ -81,19 +71,6 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
           this.updateRecipeModel = new UpdateRecipeModel(data);
         });
     }
-
-    /*  this.myForm.setValue({
-      ingredients: this.updateRecipeModel.ingredients,
-    });*/
-
-    /*  this.myForm.patchValue({
-      ingredients: this.updateRecipeModel.ingredients,
-    });*/
-
-    /*this.myForm.setControl(
-      'ingredients',
-      this.setExistingIngredients(this.updateRecipeModel.ingredients)
-    );*/
 
     this.getDishList();
     this.getAuthorList();
@@ -112,51 +89,7 @@ export class RecipeEditComponent implements OnInit, AfterViewChecked {
       authorId: new FormControl('', Validators.required),
       bookId: new FormControl('', Validators.required),
       dishId: new FormControl('', Validators.required),
-      ingredients: new FormArray([
-        new FormGroup({
-          ingredientName: new FormControl('', Validators.required),
-          ingredientUnit: new FormControl('', Validators.required),
-          ingredientQuantity: new FormControl('', Validators.required),
-        }),
-      ]),
     });
-  }
-
-  public setExistingIngredients(
-    ingredients: IUpdateIngredientModel[]
-  ): FormArray {
-    const formArray = new FormArray([]);
-    ingredients.forEach((ingredient) => {
-      formArray.push(
-        this.formBuilder.group({
-          ingredientName: ingredient.name,
-          ingredientUnit: ingredient.unit,
-          ingredientQuantity: ingredient.quantity,
-        })
-      );
-    });
-    return formArray;
-  }
-
-  public getIngredientsFormsControls(): FormArray {
-    return this.myForm.controls['ingredients'] as FormArray;
-  }
-
-  public addIngredient(): void {
-    (<FormArray>this.myForm.controls['ingredients']).push(
-      this.createNewIngredient()
-    );
-
-    this.updateRecipeModel.ingredients.push(new CreateIngredientModel());
-  }
-
-  public createNewIngredient(): FormGroup {
-    const group = new FormGroup({
-      ingredientName: new FormControl('', Validators.required),
-      ingredientUnit: new FormControl('', Validators.required),
-      ingredientQuantity: new FormControl('', Validators.required),
-    });
-    return group;
   }
 
   public getBookList(): void {

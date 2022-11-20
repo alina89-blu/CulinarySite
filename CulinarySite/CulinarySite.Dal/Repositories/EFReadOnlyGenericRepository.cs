@@ -67,13 +67,13 @@ namespace CulinarySite.Dal.Repositories
         }
 
         public PagedList<TEntity> GetPagedItems(IQueryable<TEntity> query, PagingParameters pagingParameters, Dictionary<string, Expression<Func<TEntity, object>>> orderMappings, List<Func<string, Expression<Func<TEntity, bool>>>> filterMappings)
-        {
-            query = ApplyOrdering(query, pagingParameters, orderMappings);
-
+        {           
             if (pagingParameters.FilterValue != null)
             {
                 query = this.ApplyFilters(query, filterMappings, pagingParameters.FilterValue);
             }
+
+            query = ApplyOrdering(query, pagingParameters, orderMappings);
 
             return new PagedList<TEntity>(query, pagingParameters);
         }

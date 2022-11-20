@@ -32,8 +32,7 @@ namespace CulinarySite.Bll.Services
         private readonly List<Func<string, Expression<Func<Recipe, bool>>>> _filterMappings = new()
         {
             filter => r => r.Name.Contains(filter),
-            filter => r => r.ServingsNumber.ToString().Contains(filter),
-            filter => r => r.CookingTime.ToString().Contains(filter),
+            filter => r => r.ServingsNumber.ToString().Contains(filter),            
             filter => r => r.DifficultyLevel.Contains(filter),
             filter => r => r.Dish.Category.Contains(filter),
             filter => r => r.Author.Name.Contains(filter),
