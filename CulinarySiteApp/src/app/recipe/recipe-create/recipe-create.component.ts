@@ -172,14 +172,6 @@ export class RecipeCreateComponent implements OnInit, AfterViewChecked {
       );
   }
 
-  public deleteIngredient(index: number) {
-    this.getIngredientsFormsControls().removeAt(index);
-  }
-
-  public deleteOrganicMatter(index: number) {
-    this.getOrganicMattersFormsControls().removeAt(index);
-  }
-
   public createRecipe(): void {
     this.recipeService
       .createRecipe(this.createRecipeModel)

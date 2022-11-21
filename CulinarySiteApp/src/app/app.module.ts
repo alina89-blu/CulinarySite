@@ -9,7 +9,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-//import { AppRoutingModule } from './app-routing.module';
 
 import { AddressService } from './services/address.service';
 import { AuthorService } from './services/author.service';
@@ -292,7 +291,6 @@ const appRoutes: Routes = [
     MatMenuModule,
     MatButtonModule,
     BrowserAnimationsModule,
-    // AppRoutingModule,
   ],
   providers: [
     AddressService,
