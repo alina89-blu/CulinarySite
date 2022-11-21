@@ -21,8 +21,7 @@ namespace CulinarySite.Dal.Repositories
         }
 
         public IEnumerable<TEntity> GetItemList()
-        {
-            // return _dbSet.AsNoTracking().ToList();
+        {            
             return _dbSet.AsNoTracking();
         }
 
